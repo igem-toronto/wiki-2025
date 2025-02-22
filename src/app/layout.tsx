@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "iGem Toronto",
-  description: "University of Toronto iGem Team 2025",
+  title: "iGEM Toronto",
+  description: "University of Toronto iGEM Team 2025",
 };
 
 export default function RootLayout({
