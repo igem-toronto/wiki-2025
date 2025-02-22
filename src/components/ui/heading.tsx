@@ -22,6 +22,7 @@ const headingVariants = cva(
 export interface HeadingProps
   extends React.HTMLAttributes<HTMLDivElement>,
     VariantProps<typeof headingVariants> {
+  children: string
 }
 
 const Heading: React.FC<HeadingProps> = (
@@ -29,6 +30,7 @@ const Heading: React.FC<HeadingProps> = (
     return (
       <div
         className={cn(headingVariants({ level, className }))}
+        id={children.toLowerCase().replaceAll(' ', '-')}
         {...props}
       >
         {children}
