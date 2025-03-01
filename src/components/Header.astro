@@ -2,7 +2,20 @@
 ---
 
 <header>
-  iGEM Toronto 2025
+  <a href="/">
+    <p>
+      iGEM Toronto 2025
+    </p>
+  </a>
+  <nav>
+    <ul>
+      <li>
+        <a href="description">
+          Description  
+        </a>
+      </li>
+    </ul>
+  </nav>
 </header>
 
 <style>
@@ -10,7 +23,38 @@
     width: 100%;
     background-color: #de3910;
     color: #dcfaf6;
-    font-size: 45pt;
-    padding: 0.5em;
+    padding: 5px 40px;
+    display: flex;
+    gap: 30px;
+    align-items: center;
+  }
+
+  p {
+    font-size: 25pt;
+    transition-duration: 200ms;
+  }
+
+  p:hover {
+    color: #0a0678;
+    transform: scale(1.05);
+  }
+
+  ul {
+    list-style: none;
+    display: flex;
+    flex-direction: row;
+  }
+
+  a {
+    color: #dcfaf6;
+    font-size: 15pt;
+  }
+
+  li {
+    transition-duration: 200ms;
+  }
+
+  li:hover {
+    transform: scale(1.2);
   }
 </style>

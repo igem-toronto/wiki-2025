@@ -13,18 +13,22 @@ import Header from "@/components/Header.astro";
 		<title>iGEM Toronto 2025</title>
 	</head>
 	<body>
-    <Header />
-    <article>
-      <nav>
-        <slot name="sidebar" />
-      </nav>
-      <main>
-        <div class="content-wrapper">
-          <slot name="main"/>
-        </div>
-      </main>
-    </article>
-    <Footer />
+    <div>
+      <div>
+        <Header />
+        <article>
+          <nav>
+            <slot name="sidebar" />
+          </nav>
+          <main>
+            <div class="content-wrapper">
+              <slot name="main"/>
+            </div>
+          </main>
+        </article>
+      </div>
+      <Footer />
+    </div>
 	</body>
 </html>
 
@@ -49,5 +53,13 @@ import Header from "@/components/Header.astro";
 
   .content-wrapper {
     max-width: 80ch;
+  }
+
+  body > div {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
 </style>
