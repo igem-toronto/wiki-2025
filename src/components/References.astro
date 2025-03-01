@@ -1,0 +1,28 @@
+---
+type Props = {
+  citations: string[]
+}
+
+const { citations } = Astro.props
+---
+
+<div class="references">
+  <h2>
+    References
+  </h2>
+  <ul>
+    {
+      citations.map(c =>
+        <li>
+          {c}
+        </li>
+      )
+    }
+  </ul>
+</div>
+
+<style>
+  .references {
+    margin-top: 60px;
+  }
+</style>

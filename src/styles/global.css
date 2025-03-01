@@ -1,0 +1,40 @@
+html {
+  scroll-behavior: smooth
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+h1 {
+  text-align: center;
+  border-bottom: 4px solid #e0872d;
+  margin: 40px none 30px;
+  padding-bottom: 10px;
+  font-size: 30pt;
+}
+
+h2 {
+  border-bottom: 2px solid #e0872d;
+  max-width: 30ch;
+  margin: 40px none 30px;
+  padding-bottom: 10px;
+  font-size: 20pt;
+}
+
+h3 {
+  margin: 30px auto 20px;
+  font-size: 16pt;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

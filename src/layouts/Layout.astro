@@ -1,0 +1,53 @@
+---
+import Footer from "@/components/Footer.astro";
+import Header from "@/components/Header.astro";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		<title>iGEM Toronto 2025</title>
+	</head>
+	<body>
+    <Header />
+    <article>
+      <nav>
+        <slot name="sidebar" />
+      </nav>
+      <main>
+        <div class="content-wrapper">
+          <slot name="main"/>
+        </div>
+      </main>
+    </article>
+    <Footer />
+	</body>
+</html>
+
+<style>
+  article {
+    display: flex;
+    gap: 20px;
+    padding: auto 12px;
+    width: 100%;
+  }
+
+  article nav {
+    flex: 1;
+    position: relative;
+  }
+
+  article main {
+    flex: 3;
+    text-align: justify;
+    padding: 60px 0px;
+  }
+
+  .content-wrapper {
+    max-width: 80ch;
+  }
+</style>

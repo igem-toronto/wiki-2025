@@ -1,0 +1,49 @@
+---
+type Props = {
+  headings: { text: string, depth: number, slug: string }[]
+}
+
+const { headings } = Astro.props
+---
+
+<ul>
+  {headings.filter(h => h.depth > 1).map(heading =>
+    <li class={`level-${heading.depth - 1}`}>
+      <a href={`#${heading.slug}`}>
+        {heading.text}
+      </a>
+    </li>
+  )}
+</ul>
+
+<style>
+  ul {
+    position: sticky;
+    margin-top: 80px;
+    top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 5pt;
+    list-style: none;
+  }
+
+  .level-1 {
+    font-size: 14pt;
+    font-weight: bold;
+    transition-duration: 300ms;
+  }
+
+  .level-1:hover {
+    margin-left: 4pt;
+  }
+
+  .level-2 {
+    font-size: 14pt;
+    margin-left: 10pt;
+    transition-duration: 300ms;
+  }
+
+  .level-2:hover {
+    margin-left: 14pt;
+  }
+</style>

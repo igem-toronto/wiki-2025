@@ -1,0 +1,17 @@
+{
+  "name": "wiki",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^4.1.0",
+    "astro": "^5.4.1",
+    "astro-relative-links": "^0.4.2",
+    "lucide-astro": "^0.473.0"
+  }
+}
