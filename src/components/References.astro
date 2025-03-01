@@ -13,7 +13,7 @@ const { citations } = Astro.props
   <ul>
     {
       citations.map(c =>
-        <li>
+        <li id={`citation-${c}`}>
           {c}
         </li>
       )

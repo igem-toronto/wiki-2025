@@ -38,3 +38,11 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.citation {
+  color: #8328eb;
+}
+
+.citation:hover {
+  text-decoration: underline;
+}

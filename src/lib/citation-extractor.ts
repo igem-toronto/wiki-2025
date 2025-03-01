@@ -3,61 +3,74 @@ import type { Plugin } from 'unified';
 import type { Root, Text, Element } from 'hast';
 import type { VFile } from 'vfile';
 
+const interleave = <T>(arr: T[], x: T): T[] => arr.flatMap(e => [e, x]).slice(0, -1)
+
 const rehypeCitations: Plugin<[], Root> = () => {
   return (tree, file: VFile) => {
     const citations: string[] = []
     visit(tree, 'text', (node: Text, index, parent) => {
-      if (!parent || typeof node.value !== 'string') return;
+      if (!parent || typeof node.value !== 'string' || typeof index !== 'number') return;
 
-      const regex = /@(\w+)/g;
-      const matches = [...node.value.matchAll(regex)];
+      const regex = /(\s@\w+)+/g;  
+      const groups = [...node.value.matchAll(regex)]
+      let lastIndex = 0;
+      const newChildren: (Text | Element)[] = []
 
+      for (const group of groups) {
+        const matchIndex = group.index ?? 0;
 
-      if (matches.length > 0 && index !== null) {
-        const newChildren: (Text | Element)[] = [];
-        let lastIndex = 0;
+        if (matchIndex > lastIndex) {
+          newChildren.push({
+            type: 'text',
+            value: node.value.slice(lastIndex, matchIndex),
+          });
+        }
 
-        matches.forEach(match => {
-          const [fullMatch, citationKey] = match;
-          const matchIndex = match.index ?? 0;
+        const fullMatch = group[0]
+        const individualParts = fullMatch.trim().split(/\s+/)
+        
+        const aChildren: (Text | Element)[] = []
 
-          // Add preceding text as a separate node
-          if (matchIndex > lastIndex) {
-            newChildren.push({
-              type: 'text',
-              value: node.value.slice(lastIndex, matchIndex),
-            });
-          }
+        for (const match of individualParts) {
+          const citationKey = match.slice(1)
 
-          let index = citations.indexOf(citationKey)
-          if (index === -1) {
+          let index = citations.indexOf(citationKey) + 1
+          if (index === 0) {
             citations.push(citationKey)
             index = citations.length
           }
 
-          // Add citation element
-          newChildren.push({
+          aChildren.push({
             type: 'element',
-            tagName: 'span',
-            properties: { className: ['citation'] },
-            children: [{ type: 'text', value: `[${index}]` }],
-          });
+            tagName: 'a',
+            properties: { href: `#citation-${citationKey}`, className: ['citation'] },
+            children: [{ type: 'text', value: `${index}` }],
+          })
+        }
 
-          lastIndex = matchIndex + fullMatch.length;
+        newChildren.push({
+          type: 'element',
+          tagName: 'sup',
+          properties: {},
+          children: ([] as (Text | Element)[]).concat(
+            [{ type: 'text', value:'['}],
+            interleave(aChildren, { type: 'text', value: ', ' }),
+            [{ type: 'text', value:']'}]
+          ),
+        })
+        
+        lastIndex = matchIndex + fullMatch.length;
+      }
+
+      if (lastIndex < node.value.length) {
+        newChildren.push({
+          type: 'text',
+          value: node.value.slice(lastIndex),
         });
-
-        // Add remaining text
-        if (lastIndex < node.value.length) {
-          newChildren.push({
-            type: 'text',
-            value: node.value.slice(lastIndex),
-          });
-        }
-
-        // Replace text node with new elements
-        if (index) {
-          parent.children.splice(index, 1, ...newChildren);
-        }
+      }
+      
+      if (newChildren.length > 0) {
+        parent.children.splice(index, 1, ...newChildren);
       }
 
       return CONTINUE
