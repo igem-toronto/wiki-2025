@@ -13,15 +13,15 @@ import Header from "@/components/Header.astro";
 		<title>iGEM Toronto 2025</title>
 	</head>
 	<body>
-    <div>
-      <div>
+    <div class="win-h-screen flex flex-col justify-between">
+      <div class="mb-20">
         <Header />
-        <article>
-          <nav>
+        <article class="py-4 mt-12 flex gap-12">
+          <nav class="flex-[1]">
             <slot name="sidebar" />
           </nav>
-          <main>
-            <div class="content-wrapper">
+          <main class="text-justify flex-[3]">
+            <div class="max-w-[80ch]">
               <slot name="main"/>
             </div>
           </main>
@@ -31,35 +31,3 @@ import Header from "@/components/Header.astro";
     </div>
 	</body>
 </html>
-
-<style>
-  article {
-    display: flex;
-    gap: 20px;
-    padding: auto 12px;
-    width: 100%;
-  }
-
-  article nav {
-    flex: 1;
-    position: relative;
-  }
-
-  article main {
-    flex: 3;
-    text-align: justify;
-    padding: 60px 0px;
-  }
-
-  .content-wrapper {
-    max-width: 80ch;
-  }
-
-  body > div {
-    width: 100vw;
-    min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-  }
-</style>

@@ -1,48 +1,40 @@
+@import "tailwindcss";
+
+@theme {
+  --color-primary-bg: #de3910;
+  --color-primary-fg: #dcfaf6;
+  --color-secondary-fg: #8328eb;
+  --font-primary: Verdana, Geneva, Tahoma, sans-serif;
+}
+
 html {
-  scroll-behavior: smooth
+  @apply scroll-smooth;
 }
 
 body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  font-family: Verdana, Geneva, Tahoma, sans-serif;
-}
-
-* {
-  box-sizing: border-box;
+  @apply font-primary;
 }
 
 h1 {
-  text-align: center;
-  border-bottom: 4px solid #e0872d;
-  margin: 40px none 30px;
-  padding-bottom: 10px;
-  font-size: 30pt;
+  @apply text-3xl pb-2 text-center mt-5 mb-12 border-b-primary-bg border-b-4;
 }
 
 h2 {
-  border-bottom: 2px solid #e0872d;
-  max-width: 30ch;
-  margin: 40px none 30px;
-  padding-bottom: 10px;
-  font-size: 20pt;
+  @apply text-2xl pb-1 mt-5 mb-2 border-b-primary-bg border-b-2 max-w-[30ch];
 }
 
 h3 {
-  margin: 30px auto 20px;
-  font-size: 16pt;
+  @apply text-lg font-semibold mt-5 mb-2;
 }
 
-a {
-  text-decoration: none;
-  color: black;
+p {
+  @apply mt-2 mb-8;
 }
 
 .citation {
-  color: #8328eb;
+  @apply text-secondary-fg;
 }
 
-.citation:hover {
-  text-decoration: underline;
+a:hover {
+  @apply underline;
 }

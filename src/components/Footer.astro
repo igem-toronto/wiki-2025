@@ -3,84 +3,28 @@ import { Instagram, Mail } from "lucide-astro";
 
 ---
 
-<footer>
-  <div>
-    <div class="contact">
-      <a href="https://igem.skule.ca">
+<footer class="w-full p-16 pb-32 flex justify-center bg-primary-bg text-primary-fg">
+  <div class="flex flex-col items-center gap-12">
+    <div class="flex flex-row gap-12 items-center">
+      <a href="https://igem.skule.ca" class="hover:scale-110 duration-200">
         <img src="https://static.igem.wiki/teams/4615/wiki/graphics/igem-toronto.png" />
       </a>
-      <div>
-        <a href="https://instagram.com/igemtoronto">
+      <div class="flex flex-col justify-center">
+        <a href="https://instagram.com/igemtoronto" class="hover:scale-110 duration-200">
           <Instagram size={64} />
         </a>
-        <a href="mailto:igem@g.skule.ca">
+        <a href="mailto:igem@g.skule.ca" class="hover:scale-110 duration-200">
           <Mail size={64} />
         </a>
       </div>
     </div>
-    <div class="links">
-      <p>
-        This work is licensed under <a href='https://creativecommons.org/licenses/by/4.0/'>CC BY 4.0</a> 
-      </p>
-      <p>
-        Check out the source repository on <a href='https://github.com/igem-toronto/wiki-2025'>GitHub</a>
-      </p>
+    <div class="flex flex-col items-center gap-5">
+      <div>
+        This work is licensed under <a href='https://creativecommons.org/licenses/by/4.0/' class="text-secondary-fg">CC BY 4.0</a> 
+      </div>
+      <div>
+        Check out the source repository on <a href='https://github.com/igem-toronto/wiki-2025' class="text-secondary-fg">GitHub</a>
+      </div>
     </div>
   </div>
 </footer>
-
-<style>
-  footer {
-    width: 100%;
-    background-color: #de3910;
-    color: #dcfaf6;
-    padding: 40px;
-    padding-bottom: 100px;
-    display: flex;
-    justify-content: center;
-  }
-
-  p a {
-    color: #0a0678;
-  }
-
-  .contact a {
-    color: #dcfaf6;
-    transition-duration: 200ms;
-  }
-
-  .contact a:hover {
-    transform: scale(1.1);
-  }
-
-  .contact {
-    display: flex;
-    flex-direction: row;
-    gap: 50px;
-    align-items: center;
-  }
-
-  .contact div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-
-  .links {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 10px;
-  }
-
-  footer > div {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-  }
-
-  footer p {
-    margin: 0;
-  }
-</style>
