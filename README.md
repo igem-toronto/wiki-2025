@@ -1,48 +1,28 @@
-# Astro Starter Kit: Basics
+# iGEM Toronto 2025 wiki
+This project contains the code to generate the wiki site for the iGEM Toronto submission in the 2025 iGEM competition.
 
-```sh
-npm create astro@latest -- --template basics
-```
 
-[![Open in StackBlitz](https://developer.stackblitz.com/img/open_in_stackblitz.svg)](https://stackblitz.com/github/withastro/astro/tree/latest/examples/basics)
-[![Open with CodeSandbox](https://assets.codesandbox.io/github/button-edit-lime.svg)](https://codesandbox.io/p/sandbox/github/withastro/astro/tree/latest/examples/basics)
-[![Open in GitHub Codespaces](https://github.com/codespaces/badge.svg)](https://codespaces.new/withastro/astro?devcontainer_path=.devcontainer/basics/devcontainer.json)
+## Technology Overview
+- [astro](https://astro.build) as the main framework tying everything together
+- [rehype](https://github.com/rehypejs/rehype) to convert markdown articles to html inside astro
+- [tailwindcss](https://tailwindcss.com/) to make styling a responsive website simpler
 
-> 🧑‍🚀 **Seasoned astronaut?** Delete this file. Have fun!
+Furthermore, we built custom plugins to add:
+- A citation system, partially inspired by [rehype-citation](https://github.com/timlrx/rehype-citation)
+- Team page generation from a CSV export
 
-![just-the-basics](https://github.com/withastro/astro/assets/2244813/a0a5533c-a856-4198-8470-2d67b1d7c554)
 
-## 🚀 Project Structure
+## Setup
+1. Ensure you have [node](https://nodejs.org/en), we recommend an LTS version, 18+
+2. Clone this repo
+3. Install the dependencies (`npm install`)
 
-Inside of your Astro project, you'll see the following folders and files:
 
-```text
-/
-├── public/
-│   └── favicon.svg
-├── src/
-│   ├── layouts/
-│   │   └── Layout.astro
-│   └── pages/
-│       └── index.astro
-└── package.json
-```
+## Running
+1. Run `npm run dev`. The `astro` development server should start up.
+2. Click the link in the console, or paste it in your browser
+3. Wiki should be available to you
 
-To learn more about the folder structure of an Astro project, refer to [our guide on project structure](https://docs.astro.build/en/basics/project-structure/).
 
-## 🧞 Commands
-
-All commands are run from the root of the project, from a terminal:
-
-| Command                   | Action                                           |
-| :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
-
-## 👀 Want to learn more?
-
-Feel free to check [our documentation](https://docs.astro.build) or jump into our [Discord server](https://astro.build/chat).
+## Wiki Software Contributors
+- Henrik S. Zimmermann (Web Lead, iGEM Toronto 2023-2025) [GitHub](https://github.com/HenrikSZ) [LinkedIn](https://www.linkedin.com/in/henrikszimmermann/)
