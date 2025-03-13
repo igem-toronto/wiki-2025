@@ -10,10 +10,15 @@
   },
   "dependencies": {
     "@astrojs/mdx": "^4.1.0",
+    "@citation-js/core": "^0.7.18",
+    "@citation-js/plugin-bibtex": "^0.7.18",
+    "@citation-js/plugin-csl": "^0.7.18",
     "@tailwindcss/vite": "^4.0.9",
     "astro": "^5.4.1",
     "astro-relative-links": "^0.4.2",
+    "biblatex-csl-converter": "^3.0.1",
     "lucide-astro": "^0.473.0",
+    "node-html-parser": "^7.0.1",
     "tailwindcss": "^4.0.9"
   }
 }

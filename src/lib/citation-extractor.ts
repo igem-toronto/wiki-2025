@@ -1,9 +1,43 @@
 import { CONTINUE, visit } from 'unist-util-visit';
+import { parse } from 'node-html-parser'
+// @ts-ignore
+import { Cite } from "@citation-js/core"
+import '@citation-js/plugin-csl'
+import '@citation-js/plugin-bibtex'
+// @ts-ignore
+import fs from 'fs'
 import type { Plugin } from 'unified';
 import type { Root, Text, Element } from 'hast';
 import type { VFile } from 'vfile';
+import type { BibliographyEntry } from './types';
+
 
 const interleave = <T>(arr: T[], x: T): T[] => arr.flatMap(e => [e, x]).slice(0, -1)
+
+
+const createBibliography = (citations: string[]): BibliographyEntry[] => {
+  const bibtexContent = fs.readFileSync("./bibliography.bib")
+  const parser = new Cite(bibtexContent.toString())
+  const bibliography = parser.format('bibliography', {
+    format: 'html',
+    template: 'apa',
+    lang: 'en-CA',
+  })
+
+  const parsed = parse(bibliography)
+  return citations.map((key, index) => {
+    const entry = parsed.querySelector(`.csl-entry[data-csl-entry-id=${key}]`)
+    if (!entry) {
+      throw new Error(`Key ${key} not found in the bibtex file`)
+    }
+
+    return {
+      html: entry.toString(),
+      citationKey: key,
+      index: index + 1,
+    }
+  })
+}
 
 const rehypeCitations: Plugin<[], Root> = () => {
   return (tree, file: VFile) => {
@@ -77,7 +111,7 @@ const rehypeCitations: Plugin<[], Root> = () => {
     });
 
     // @ts-ignore
-    file.data.astro.frontmatter.citations = citations
+    file.data.astro.frontmatter.bibliography = createBibliography(citations)
   };
 };
 

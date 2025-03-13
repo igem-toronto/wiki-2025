@@ -1,22 +1,27 @@
 ---
+import type { BibliographyEntry } from '@/lib/types'
+
 type Props = {
-  citations: string[]
+  bibliography: BibliographyEntry[]
 }
 
-const { citations } = Astro.props
+const { bibliography } = Astro.props
 ---
 
 <div class="mt-24">
   <h2>
     References
   </h2>
-  <ul>
+  <div class="flex flex-col gap-2 mt-4">
     {
-      citations.map(c =>
-        <li id={`citation-${c}`}>
-          {c}
-        </li>
+      bibliography.map(entry =>
+        <div id={`citation-${entry.citationKey}`} class="flex gap-2">
+          <div>
+            [{entry.index}]
+          </div>
+          <div set:html={entry.html} />
+        </div>
       )
     }
-  </ul>
+  </div>
 </div>
