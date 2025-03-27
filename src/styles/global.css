@@ -1,9 +1,15 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary-bg: #de3910;
-  --color-primary-fg: #dcfaf6;
-  --color-secondary-fg: #8328eb;
+  --color-primary-bg-100: #e36646;
+  --color-primary-bg-500: #de3910;
+  --color-primary-bg-900: #ab2a0a;
+  --color-primary-fg-100: #82f5e5;
+  --color-primary-fg-500: #dcfaf6;
+  --color-primary-fg-900: #f2f7f7;
+  --color-secondary-fg-100: #c299f2;
+  --color-secondary-fg-500: #8328eb;
+  --color-secondary-fg-900: #6608d1;
   --font-primary: Verdana, Geneva, Tahoma, sans-serif;
 }
 
@@ -16,11 +22,11 @@ body {
 }
 
 h1 {
-  @apply text-3xl pb-2 text-center mt-5 mb-12 border-b-primary-bg border-b-4;
+  @apply text-3xl pb-2 text-center mt-5 mb-12 border-b-primary-bg-500 border-b-4;
 }
 
 h2 {
-  @apply text-2xl pb-1 mt-5 mb-2 border-b-primary-bg border-b-2 max-w-[30ch];
+  @apply text-2xl pb-1 mt-5 mb-2 border-b-primary-bg-500 border-b-2 max-w-[30ch];
 }
 
 h3 {
@@ -32,7 +38,7 @@ p {
 }
 
 .citation {
-  @apply text-secondary-fg;
+  @apply text-secondary-fg-500;
 }
 
 a:hover {
