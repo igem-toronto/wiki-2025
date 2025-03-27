@@ -1,0 +1,12 @@
+---
+type Props = {
+  color: string
+}
+
+const { color } = Astro.props
+---
+
+<div class="flex w-full justify-between items-center">
+  {color.slice('bg-'.length)}
+  <div class={`h-20 w-20 ${color} border-black border-2 rounded-md`} />
+</div>
