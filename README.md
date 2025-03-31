@@ -6,8 +6,8 @@ This repository **MUST** contain all coding assets to generate your team's wiki
 (HTML, CSS, JavaScript, TypeScript, Python, etc).
 
 Images, photos, icons and fonts **MUST** be stored on `static.igem.wiki` using
-[tools.igem.org](https://tools.igem.org), and Videos **must** be embedded
-from [iGEM Video Universe](https://video.igem.org).
+[tools.igem.org](https://tools.igem.org), and Videos **must** be embedded from
+[iGEM Video Universe](https://video.igem.org).
 
 For up-to-date requirements, resources, help and guidance, visit
 [competition.igem.org/deliverables/team-wiki](https://competition.igem.org/deliverables/team-wiki).
@@ -19,11 +19,12 @@ You should probably only edit the files inside folders `static`, `wiki` and
 
 1. Open the Web IDE
 2. Make the changes on the files you wish:
-    - For the menu, change the file [menu.html](wiki/menu.html)
-    - For the layout, change the file [base.html](wiki/base.html)
-    - For the pages, change the corresponding file in the foler [docs](docs)
+   - For the menu, change the file [menu.html](wiki/menu.html)
+   - For the layout, change the file [base.html](wiki/base.html)
+   - For the pages, change the corresponding file in the foler [docs](docs)
 3. Review the changes you made
-4. Once you are done, save the changes by **committing** them to the _main branch_ of the repository
+4. Once you are done, save the changes by **committing** them to the _main
+   branch_ of the repository
 5. An automated script will build, test and deploy your wiki, which should take
    less than 30 seconds.
 

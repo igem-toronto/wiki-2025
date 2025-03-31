@@ -1,21 +1,21 @@
-## What should this page contain?
+## What Should this Page Contain?
 
----
+Provide comprehensive, step-by-step protocols for all experiments conducted.
+Include a list of materials, reagents, and equipment used. Specify
+concentrations, volumes, incubation times, temperatures, and other critical
+parameters. Document any modifications or optimizations made to standard
+protocols.
 
-Describe the research, experiments, and protocols you used in your iGEM project.
-These should be detailed enough for another team to repeat your experiments.
+Explain the purpose of each experiment and its relevance to your project goals.
+Describe the experimental design, including controls and replicates. Provide a
+clear rationale for the chosen methods and approaches.
 
-If you made Parts this year, please remember to put all information,
-characterization, and measurement data on the Part's Main Page on the
-[Registry](https://parts.igem.org/Main_Page).
+Document any troubleshooting steps taken and optimizations made during the
+experimental process. Share any lessons learned that could benefit future teams.
 
 ## Inspirations
 
----
-
--   [2019 Nantes](https://2019.igem.org/Team:Nantes/Experiments)
--   [2019 TU Eindhoven](https://2019.igem.org/Team:TU_Eindhoven/Experiments)
--   [2019 Mingdao](https://2019.igem.org/Team:Mingdao/Demonstrate)
--   [2020 Amsterdam](https://2020.igem.org/Team:Amsterdam/Experiments)
--   [2020 NCTU Formosa](https://2020.igem.org/Team:NCTU_Formosa/Experiments)
--   [2020 USAFA](https://2020.igem.org/Team:USAFA/Experiments)
+- [2024 Heidelberg](https://2024.igem.wiki/heidelberg/experiments)
+- [2024 Marburg](https://2024.igem.wiki/marburg/experiments)
+- [2024 EPFL](https://2024.igem.wiki/epfl/experiments)
+- [2023 Estonia-TUIT](https://2023.igem.wiki/estonia-tuit/experiments)

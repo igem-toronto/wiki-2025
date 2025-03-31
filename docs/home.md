@@ -1,62 +1,61 @@
-## Before you start
+## Essential First Steps
 
----
+Familiarize yourself with the official iGEM competition rules, policies, and
+judging criteria:
 
-Please read the following pages:
+- Carefully review
+  the [Wiki Requirements page](https://competition.igem.org/deliverables/team-wiki) to
+  ensure your wiki meets all necessary standards for judging and awards.
+- Understand the criteria and required wiki pages for Gold, Silver, and Bronze
+  Medals on the [Medals page](https://competition.igem.org/judging/medals).
+- Explore the various Project Prizes and their corresponding wiki requirements
+  on
+  the [Project Prizes Page](https://competition.igem.org/judging/project-prizes).
+- Discover the eligibility criteria and wiki requirements for Special Prizes on
+  the [Special Prizes Page](https://competition.igem.org/judging/special-prizes).
 
-- <a href="https://competition.igem.org/deliverables/team-wiki" target="_blank">Wiki
-  Requirements page</a>
-- <a href="https://competition.igem.org/judging/pages-for-awards" target="_blank">Standard
-  URL Pages for Awards</a>
+## Building Your Wiki
 
-## Styling your wiki
+- **Content First, Design Second**: Focus on clearly documenting your project,
+  research, and activities. Design can be refined later.
+- **Navigation is Key**: Structure your wiki with clear and intuitive
+  navigation. Visitors should easily find information.
+- **Accessibility Matters**: Use readable fonts, appropriate color contrast, and
+  ensure your wiki is mobile-friendly.
+- **Media Optimization**: Compress images and videos to reduce file sizes and
+  improve loading times.
+- **Document Early & Often**: Start documenting your project from day one. Don't
+  wait until the Wiki Freeze.
+- **Prepare for Deadlines**: Stay up-to-date with important deadlines and events
+  by checking
+  the [iGEM Competition Calendar](https://competition.igem.org/calendar).
 
-------------------------------------------------------------------------
+## Tips for Success
 
-Feel free to customize the page styling according to your preferences, or you can simply leave the style as it is. It's
-wise to focus on a clear content first, and on a clean design later.
-
-Be cautious with the size of the assets like images, videos, and more, that you put in your wiki. Large file sizes can
-hinder the presentation of wikis due to slow internet connections. Remember to compress large files before uploading
-them to iGEM servers.
-
-This default wiki meets the requirements, enhances navigability, and provides a user-friendly experience for visitors.
-You should not feel obligated to go beyond the provided styling.
-
-## Tips
-
----
-
-This wiki will be your team's first interaction with the rest of the world, so
-here are a few tips to help you get started:
-
-- State your accomplishments! Tell people what you have achieved from the
-  start.
-- Be clear about what you are doing and how you plan to do this.
-- You have a global audience! Consider the different backgrounds that your
-  users come from.
-- Make sure information is easy to find; nothing should be more than 3 clicks
-  away.
-- Avoid using very small fonts and low contrast colors; information should be
-  easy to read.
-- Start documenting your project as early as possible; don't leave anything to
-  the last minute before the Wiki Freeze. For a complete list of deadlines
-  visit the
-  <a href="https://competition.igem.org/calendar" target="_blank">iGEM
-  Competition calendar</a>
-- Have lots of fun!
+- **Clearly Define Your Project**: Explain your project's goals, methodology,
+  and expected outcomes in a clear and concise manner.
+- **Show Your Progress**: Regularly update your wiki with your team's progress,
+  experiments, and results.
+- **Engage Your Audience**: Consider your global audience and use language that
+  is accessible to everyone.
+- **Human Practices & Safety**: Thoroughly document your team's human practices
+  activities and safety considerations.
+- **Collaborate & Share**: Highlight collaborations with other teams and
+  institutions.
+- **Have Fun and Learn!** iGEM is a unique opportunity to learn, grow, and
+  contribute to synthetic biology.
 
 ## Inspiration
 
----
-
 You can also view other team wikis for inspiration! Here are some examples:
 
-- [2022 DTU-Denmark](https://2022.igem.wiki/dtu-denmark)
-- [2022 Virginia](https://2022.igem.wiki/virginia)
-- [2022 Crete](https://2022.igem.wiki/crete)
-- [2022 Estonia_TUIT](https://2022.igem.wiki/estonia-tuit)
-- [2022 AshesiGhana](https://2022.igem.wiki/ashesighana)
-- [2021 SDU-Denmark](https://2021.igem.org/Team:SDU-Denmark)
-- [2020 XMU China](https://2020.igem.org/Team:XMU-China)
-- [2020 TAS Taipei](https://2020.igem.org/Team:TAS_Taipei)
+- [2024 JU-Krakow](https://2024.igem.wiki/ju-krakow)
+- [2024 GEMS-Taiwan](https://2024.igem.wiki/gems-taiwan)
+- [2024 Heidelberg](https://2024.igem.wiki/heidelberg)
+- [2024 Marburg](https://2024.igem.wiki/marburg)
+- [2024 Sydney-Australia](https://2024.igem.wiki/sydney-australia)
+- [2024 Toulouse-INSA-UPS](https://2024.igem.wiki/toulouse-insa-ups)
+- [2024 BNDS-China](https://2024.igem.wiki/bnds-china)
+- [2024 Vilnius-Lithuania](https://2024.igem.wiki/vilnius-lithuania)
+- [2024 BNUZH-China](https://2024.igem.wiki/bnuzh-china)
+- [2024 XMU-China](https://2024.igem.wiki/xmu-china)

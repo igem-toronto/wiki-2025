@@ -1,24 +1,24 @@
 #### Best Education
 
-How have you developed new opportunities to include more people in shaping synthetic biology? Innovative educational
-tools and outreach activities have the ability to establish a two-way dialogue with new communities by discussing public
-values and the science behind synthetic biology. Document your approach and what was learned by everyone involved to
-compete for this award.
+Innovative educational tools and outreach activities have the ability to
+establish a two-way dialogue with new communities by discussing public values
+and the science behind synthetic biology. How have you developed new
+opportunities to include more people in shaping synthetic biology? Education
+activities do not have to be directly related to your project but may look at
+wider issues of iGEM or synthetic biology. Education activities must promote
+scientific learning and avoid simply proselytizing or marketing synthetic
+biology and/or iGEM. Document your approach, and what was learned by everyone
+involved, to compete for this award.
 
-To compete for the Best Education prize, select the prize on
-the [judging form](https://competition.igem.org/deliverables/judging-form) and describe your work on this page.
-
-------------------------------------------------------------------------
-
-Please see the [2024 Awards Page](https://competition.igem.org/judging/awards) for more information.
+Visit
+the [Special Prizes page](https://competition.igem.org/judging/special-prizes) for
+more information.
 
 ## Inspirations
 
----
-
-- [2020 CCA San Diego](https://2020.igem.org/Team:CCA_San_Diego/Education)
-- [2020 Lambert GA](https://2020.igem.org/Team:Lambert_GA/Education)
-- [2020 Stanford](https://2020.igem.org/Team:Stanford/Education)
-- [2020 Waseda](https://2020.igem.org/Team:Waseda/Education)
-- [2020 Fudan](https://2020.igem.org/Team:Fudan/Education)
-- [2020 Toulouse INSA UPS](https://2020.igem.org/Team:Toulouse_INSA-UPS/Education)
+- [2024 CityU-HongKong](https://2024.igem.wiki/cityu-hongkong/education)
+- [2024 CJUH-JLU-China](https://2024.igem.wiki/cjuh-jlu-china/education)
+- [2024 Keystone](https://2024.igem.wiki/keystone/education)
+- [2024 Stanford](https://2024.igem.wiki/stanford/education)
+- [2024 GEMS-Taiwan](https://2024.igem.wiki/gems-taiwan/education)
+- [2024 Heidelberg](https://2024.igem.wiki/heidelberg/education)

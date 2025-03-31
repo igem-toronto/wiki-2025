@@ -1,94 +1,87 @@
 {%
-    set pages =
-    {
-    "/": "Welcome to iGEM 2024! Your team has been approved and you are ready to start the iGEM season!",
-    "/attributions": "In the iGEM Competition, we celebrate student effort and achievement. The Attributions form helps the judges differentiate between what students accomplished from how their external collaborators supported them. Therefore, teams must clearly explain on the standard Project Attributions form what work they have conducted by themselves and what has been done by others.",
-    "/contribution": "Make a useful contribution for future iGEM teams. Use this page to document that contribution.",
-    "/description": "Describe how and why you chose your iGEM project.",
-    "/education": "Innovative educational tools and outreach activities have the ability to establish a two-way dialogue with new communities by discussing public values and the science behind synthetic biology.",
-    "/engineering": "Demonstrate engineering success in a technical aspect of your project by going through at least one iteration of the engineering design cycle. This achievement should be distinct from your Contribution for Bronze.",
-    "/entrepreneurship": "The entrepreneurship prize recognizes exceptional effort to build a business case and commercialize an iGEM project.",
-    "/experiments": "Describe the research, experiments, and protocols you used in your iGEM project.",
-    "/hardware": "Hardware in iGEM should make synthetic biology based on standard parts easier, faster, better, or more accessible to our community.",
-    "/human-practices": "We ask every team to think deeply and creatively about whether their project is responsible and good for the world. Consider how the world affects your work and how your work affects the world.",
-    "/inclusivity": "Every individual, regardless of background or experience, should have an equal opportunity to engage with scientific knowledge and technological development.",
-    "/measurement": "Synthetic Biology needs great measurement approaches for characterizing parts, and efficient new methods for characterizing many parts at once. Describe your measurement approaches on this page.",
-    "/model": "Explain your model's assumptions, data, parameters, and results in a way that anyone could understand.",
-    "/notebook": "Document the dates you worked on your project. This should be a detailed account of the work done each day for your project.",
-    "/plant": "This award is designed to celebrate exemplary work done in plant synthetic biology.",
-    "/results": "You can describe the results of your project and your future plans here.",
-    "/safety": "Describe all the safety issues of your project.",
-    "/software": "Software in iGEM should make synthetic biology based on standard parts easier, faster, better or more accessible to our community.",
-    "/sustainable": "Describe how you have evaluated your project ideas against one or more of the SDGs.",
-    "/team": "On this page you can introduce your team members, instructors, and advisors."
-    }
+  set pages =
+  {
+  "/": "Welcome to iGEM 2025! Your team has been approved and you are ready to start the iGEM season!",
+  "/attributions": "Accurate attribution is essential in the iGEM Competition. It ensures that the judges can properly assess your team's contributions and recognize the support provided by external collaborators. This page is dedicated to fulfilling the Attributions requirement for judging.",
+  "/contribution": "Make a useful contribution for future iGEM teams and document it on this page.",
+  "/description": "Describe how and why you chose your iGEM project.",
+  "/education": "Innovative educational tools and outreach activities have the ability to establish a two-way dialogue with new communities by discussing public values and the science behind synthetic biology.",
+  "/engineering": "Demonstrate engineering success in a technical aspect of your project by going through at least one iteration of the engineering design cycle.",
+  "/entrepreneurship": "The entrepreneurship prize recognizes exceptional effort to build a business case and commercialize an iGEM project.",
+  "/experiments": "Describe the research, experiments, and protocols you used in your project. It is designed to provide sufficient information for other teams to replicate our work.",
+  "/hardware": "Hardware in iGEM should make synthetic biology based on standard parts easier, faster, better, or more accessible to our community.",
+  "/human-practices": "We ask every team to think deeply and creatively about whether their project is responsible and good for the world. Consider how the world affects your work and how your work affects the world.",
+  "/inclusivity": "The Inclusivity Award recognizes exceptional efforts to include people with diverse identities in scientific research. Who is allowed to have a voice in iGEM, synthetic biology, and science more broadly? How have you developed new opportunities to eliminate barriers and allow more people to contribute to, participate in, and/or be represented by these communities? To compete for this prize, activities do not have to be directly related to your team’s project. Document your approach, how you improved inclusivity, and what was learned.",
+  "/measurement": "Synthetic Biology needs great measurement approaches for characterizing parts, and efficient new methods for characterizing many parts at once. Describe your measurement approaches on this page.",
+  "/members": "This page is dedicated to introducing the individuals who made our iGEM project possible. Here, you'll find information about our team members, instructors, and advisors.",
+  "/model": "Explain your model's assumptions, data, parameters, and results in a way that anyone could understand.",
+  "/notebook": "This serves as a chronological record of your team's progress throughout the season. It documents your daily activities, experiments, discussions, and decisions.",
+  "/plant": "This award is designed to celebrate exemplary work done in plant synthetic biology.",
+  "/results": "Present the results of your project, along with a detailed analysis and discussion of their significance. Also outline future plans and reflections on the impact of your project.",
+  "/safety-and-security": "Detail the safety and security considerations of your project, adressing potential risks and outlining the measures taken to mitigate them.",
+  "/software": "Software in iGEM should make synthetic biology based on standard parts easier, faster, better or more accessible to our community.",
+  "/sustainability": "Describe how you have evaluated your project ideas against one or more of the SDGs."
+  }
 %}
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-        <!-- Required meta tags -->
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-            rel="icon"
-            href="https://static.igem.wiki/common/icons/favicons/igem-2022.svg"
-        />
-        <link
-            rel="license"
-            href="https://creativecommons.org/licenses/by/4.0/"
-        />
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="icon"
+      href="https://static.igem.wiki/common/icons/favicons/igem-2022.svg"
+    />
+    <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
 
-        <!-- Bootstrap CSS -->
-        <link
-            href="{{ url_for('static', filename = 'bootstrap.min.css') }}"
-            rel="stylesheet"
-        />
+    <!-- Bootstrap CSS -->
+    <link
+      href="{{ url_for('static', filename = 'bootstrap.min.css') }}"
+      rel="stylesheet"
+    />
 
-        <!-- Custom CSS -->
-        <link
-            href="{{ url_for('static', filename = 'style.css') }}"
-            rel="stylesheet"
-        />
+    <!-- Custom CSS -->
+    <link
+      href="{{ url_for('static', filename = 'style.css') }}"
+      rel="stylesheet"
+    />
 
-        <title>{{ title }} | TeamName - iGEM 2024</title>
-    </head>
-    <body>
-        <!-- Navigation -->
-        {% include 'menu.html' %}
+    <title>{{ title }} | TeamName - iGEM 2025</title>
+  </head>
+  <body>
+    <!-- Navigation -->
+    {% include 'menu.html' %}
 
-        <!-- Header -->
-        <header class="bg-hero py-5 mb-5">
-            <div class="container h-100">
-                <div class="row h-100 align-items-center">
-                    <div class="col-lg-12">
-                        <h1 class="display-4 text-white mt-5 mb-2">
-                            {{ title }}
-                        </h1>
-                        <p class="lead mb-5 text-white-50">
-                            {{ pages.get(request.path) }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </header>
-
-        <!-- Page Content -->
-        <div class="container content">
-            <div class="row">
-                <div class="col-12">
-                    {# <div class="col-12 col-lg-10 offset-lg-1"> #}
-                    {% if md_content %}
-                        {{ md_content | safe }}
-                    {% endif %}
-                </div>
-            </div>
-            {% block page_content %}{% endblock %}
+    <!-- Header -->
+    <header class="bg-hero py-5 mb-5">
+      <div class="container h-100">
+        <div class="row h-100 align-items-center">
+          <div class="col-lg-12">
+            <h1 class="display-4 text-white mt-5 mb-2">{{ title }}</h1>
+            <p class="lead mb-5 text-white-50">{{ pages.get(request.path) }}</p>
+          </div>
         </div>
+      </div>
+    </header>
 
-        <!-- Footer: MUST mention license AND have a link to team wiki's repository on gitlab.igem.org -->
-        {% include 'footer.html' %}
+    <!-- Page Content -->
+    <div class="container content">
+      <div class="row">
+        <div class="col-12">
+          {# <div class="col-12 col-lg-10 offset-lg-1"> #}
+          {% if md_content %}
+            {{ md_content | safe }}
+          {% endif %}
+        </div>
+      </div>
+      {% block page_content %}{% endblock %}
+    </div>
 
-        <!-- Bootstrap Bundle with Popper -->
-        <script src="{{ url_for('static', filename = 'bootstrap.bundle.min.js') }}"></script>
-    </body>
+    <!-- Footer: MUST mention license AND have a link to team wiki's repository on gitlab.igem.org -->
+    {% include 'footer.html' %}
+
+    <!-- Bootstrap Bundle with Popper -->
+    <script src="{{ url_for('static', filename = 'bootstrap.bundle.min.js') }}"></script>
+  </body>
 </html>

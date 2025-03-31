@@ -1,47 +1,41 @@
-#### Bronze Medal Criterion \#3
+#### Bronze Medal Criterion \#1: Wiki
 
 Describe how and why you chose your iGEM project.
 
----
+Visit the [Medals page](https://competition.igem.org/judging/medals) for more
+information.
 
-Please see the [2024 Medals Page](https://competition.igem.org/judging/medals)
-for more information.
+## What Should this Page Contain?
 
-## What should this page contain?
-
----
-
--   A clear and concise description of your project.
--   A detailed explanation of why your team chose to work on this particular
-    project.
--   References and sources to document your research.
--   Use illustrations and other visual resources to explain your project.
+- Explain the problem your project addresses and its potential impact.
+- Provide a clear and concise summary of your project's goals and objectives.
+- Detail the specific reasons why your team chose this project.
+- Explain the inspiration behind your project, including any prior research or
+  real-world problems that motivated your team.
+- Use illustrations, diagrams, and other visual aids to enhance understanding.
+- Include relevant scientific background, technical details, and experimental
+  approaches.
 
 ## Inspirations
 
----
+- [2024 Heidelberg](https://2024.igem.wiki/heidelberg/description)
+- [2024 Marburg](https://2024.igem.wiki/marburg/description)
+- [2024 EPFL](https://2024.igem.wiki/epfl/description)
+- [2024 JU-Krakow](https://2024.igem.wiki/ju-krakow/description)
+- [2024 UToronto](https://2024.igem.wiki/utoronto/description)
+- [2023 Estonia-TUIT](https://2023.igem.wiki/estonia-tuit/description)
 
--   [2022 DTU-Denmark](https://2022.igem.wiki/dtu-denmark/description)
--   [2019 ITESO Guadalajara](https://2019.igem.org/Team:ITESO_Guadalajara/Description)
--   [2020 Technion Israel](https://2020.igem.org/Team:Technion-Israel/Description)
--   [2020 Botchan Lab Tokyo](https://2020.igem.org/Team:Botchan_Lab_Tokyo/Description)
--   [2020 St Andrews](https://2020.igem.org/Team:St_Andrews/Description)
--   [2020 MIT](https://2020.igem.org/Team:MIT/Description)
+## Tips for Success
 
-## Some advice
-
----
-
-We encourage you to put up a lot of information and content on your wiki, but we
-also encourage you to include summaries as much as possible. If you think of the
-sections in your project description as the sections in a publication, you
-should try to be concise, accurate, and unambiguous in your achievements. Your
-Project Description should include more information than your project abstract.
+- While providing detailed information, strive for clarity and conciseness.
+- Use summaries and subheadings to organize your content.
+- Utilize visuals to enhance understanding and engagement.
+- Document your research process and sources thoroughly.
 
 ## References
 
----
+Cite all relevant research papers, scientific articles, and other sources that
+informed your project.
 
-iGEM teams are encouraged to record references you use during the course of your
-research. They should be posted somewhere on your wiki so that judges and other
-visitors can see how you thought about your project and what works inspired you.
+Create a dedicated "References" section at the end of the page, and use a
+consistent citation style.

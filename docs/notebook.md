@@ -1,20 +1,17 @@
-## What should this page contain?
+## What Should this Page Contain?
 
----
-
--   Chronological notes of what your team is doing.
--   Brief descriptions of daily important events.
--   Pictures of your progress.
--   Mention who participated in what task.
+- Record all activities in chronological order, with each entry clearly dated.
+- Provide sufficient detail for each activity, including:
+  - Purpose of the activity.
+  - Methods and procedures used.
+  - Results obtained.
+  - Observations and notes.
+- Document all experiments, protocols, data analysis, meetings, brainstorming
+  sessions, and other project-related activities.
+- Include photos, videos, and diagrams to illustrate your progress.
+- Indicate which team members participated in each activity.
 
 ## Inspirations
 
----
-
--   [2018 Munich](http://2018.igem.org/Team:Munich/Notebook)
--   [2019 Georgia State](https://2019.igem.org/Team:Georgia_State/Notebook)
--   [2019 Newcastle](https://2019.igem.org/Team:Newcastle/Notebook)
--   [2020 IISER Pune India](https://2020.igem.org/Team:IISER-Pune-India/Notebook)
--   [2020 Lund](https://2020.igem.org/Team:Lund/Notebook)
--   [2020 NOVA LxPortugal](https://2020.igem.org/Team:NOVA_LxPortugal/Notebook)
--   [2020 RDFZ China](https://2020.igem.org/Team:RDFZ-China/NoteBook)
+- [2024 EPFL](https://2024.igem.wiki/epfl/notebook)
+- [2024 JU-Krakow](https://2024.igem.wiki/ju-krakow/notebook)

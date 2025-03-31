@@ -1,15 +1,32 @@
-Teams must use the standard Attributions form. To meet the attributions requirement, you must display the standard form
-on your Wiki by following the instructions
-here: [Project Attribution page](https://competition.igem.org/deliverables/project-attribution).
-
 #### Bronze Medal Criterion \#2
 
-Describe what work your team members did and what other people did for your project.
+Describe what work your team members did and what other people did for your
+project using the standardized Project Attributions Form.
 
-The form that has been embedded in an iframe in this page shows your team's Project Attribution form. This page must
-keep the form as it is.
+Visit the [Medals page](https://competition.igem.org/judging/medals) for more
+information.
 
-If you use a different website framework, make sure to embed the right URL for your team's form.
+## What Should this Page Contain?
+
+- The standard navigation menu of your wiki
+- The standard footer of your wiki
+- The embedded iframe containing your standardized team's Project Attribution
+  form.
+- Nothing else
+
+## Tips for Success
+
+Teams must use the official Attributions form. This form clearly delineates the
+work conducted by your team members and the support received from others.
+Carefully review the instructions and requirements of this deliverable on
+the [Project Attribution page](https://competition.igem.org/deliverables/project-attribution).
+Please note:
+
+- Teams must use the standard form. Do not create your own form.
+- The standard Attributions Form must be filled out completely, accurately and
+  honestly.
+- For the best results, we recommend teams start filling out the Attributions
+  Form early in the season and updating it often.
 
 <!-- !!! LEAVE THE IFRAME CODE BELOW AS IT IS, THE ATTRIBUTION FORM OF YOUR TEAM !!! -->
 <!-- !!! WILL BE DISPLAYED ON THIS PAGE. DO NOT REMOVE IT, OTHERWISE YOU RISK OF !!! -->
