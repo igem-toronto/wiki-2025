@@ -18,6 +18,8 @@
     "astro-relative-links": "^0.4.2",
     "lucide-astro": "^0.483.0",
     "node-html-parser": "^7.0.1",
+    "rehype-katex": "^7.0.1",
+    "remark-math": "^6.0.0",
     "tailwindcss": "^4.0.17"
   }
 }
