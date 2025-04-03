@@ -1,0 +1,16 @@
+---
+import '@/styles/global.css'
+import { Content, getHeadings, frontmatter } from '@/content/software.mdx'
+import Layout from '@/layouts/Layout.astro'
+import Sidebar from '@/components/Sidebar.astro'
+import References from '@/components/References.astro'
+---
+
+<Layout>
+  <Sidebar headings={getHeadings()} slot="sidebar" />
+  <div slot="main">
+    <Content />
+
+    <References bibliography={frontmatter.bibliography} />
+  </div>
+</Layout>
