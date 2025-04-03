@@ -4,9 +4,6 @@ on:
   push:
     branches:
       - main  # Change this if your main branch has a different name
-  pull_request:
-    branches:
-      - main
 
   # Allows running the workflow manually
   workflow_dispatch:
