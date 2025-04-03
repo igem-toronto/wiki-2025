@@ -13,11 +13,11 @@
     "@citation-js/core": "^0.7.18",
     "@citation-js/plugin-bibtex": "^0.7.18",
     "@citation-js/plugin-csl": "^0.7.18",
-    "@tailwindcss/vite": "^4.0.14",
-    "astro": "^5.5.3",
+    "@tailwindcss/vite": "^4.0.17",
+    "astro": "^5.5.5",
     "astro-relative-links": "^0.4.2",
     "lucide-astro": "^0.483.0",
     "node-html-parser": "^7.0.1",
-    "tailwindcss": "^4.0.14"
+    "tailwindcss": "^4.0.17"
   }
 }
