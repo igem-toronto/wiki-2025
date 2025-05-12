@@ -1,15 +1,140 @@
 ---
 import '@/styles/global.css'
 import Layout from '@/layouts/Layout.astro';
+import TeamCard from '../components/TeamCard.astro';
 ---
 
 <Layout>
-  <div class="flex flex-col min-h-screen justify-between">
-    <div>
+  <div slot="main">
+    <h1 class="text-10xl font-bold text-center mb-4">Meet the team!</h1>
+    <h4 class="text-center mb-8">Co-Presidents</h4>
 
+    <!-- co pres -->
+    <div class="flex flex-wrap justify-center gap-6">
+      <TeamCard
+        name="John Doe"
+        position="Co-President"
+        image="/favicon/apple-touch-icon.png"
+        description="John is a passionate leader with a background in synthetic biology. He loves to explore new ideas and push the boundaries of science."
+        width="w-1/5"
+        height="h-51.2"
+      />
+      <TeamCard
+        name="Jane Smith"
+        position="Co-President"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/5"
+        height="h-51.2"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Co-President"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/5"
+        height="h-51.2"
+      />
     </div>
-    <footer class="flex w-full justify-center p-6">
-      To be added
-    </footer>
+    <!-- wet lab -->
+    <h4 class="text-center mb-8">Wet Lab</h4>
+
+    <div class="flex flex-wrap justify-center gap-6">
+      <TeamCard
+        name="John Doe"
+        position="Wet Lab Lead"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+        height="h-42.6"
+      />
+      <TeamCard
+        name="Jane Smith"
+        position="Wet Lab Lead"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+    </div>
+    <div class="flex flex-wrap justify-center gap-6">
+      <TeamCard
+        name="John Doe"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+        height="h-42.6"
+      />
+      <TeamCard
+        name="Jane Smith"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+    </div>
+    <div class="flex flex-wrap justify-center gap-6">
+      <TeamCard
+        name="John Doe"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+        height="h-42.6"
+      />
+      <TeamCard
+        name="Jane Smith"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+      <TeamCard
+        name="Alice Johnson"
+        position="Wet Lab"
+        image="/favicon/apple-touch-icon.png"
+        width="w-1/6"
+      />
+    </div>
   </div>
 </Layout>

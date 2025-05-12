@@ -1,0 +1,37 @@
+---
+const { name, position, image, linkedin, email, width, height, description } = Astro.props;
+---
+
+<div x-data="{ open: false }" class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white ${width}`}>
+  <img src={image} alt={`${name}'s photo`} class={`rounded-md w-full object-cover ${height}`} @click="open = true" />
+
+  <div class="mt-4">
+    <h5 class="font-semibold">{name}</h5>
+    <p2 class="text-white bg-primary-bg-500 px-3 py-1 inline-block rounded-full mt-1">{position}</p2>
+
+    <div class="flex justify-center gap-4 mt-4">
+      {linkedin && (
+        <a href={linkedin} target="_blank" aria-label="LinkedIn">
+          <img src="/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+        </a>
+      )}
+      {email && (
+        <a href={`mailto:${email}`} aria-label="Email">
+          <img src="/icons/email.svg" alt="Email" class="w-6 h-6" />
+        </a>
+      )}
+    </div>
+  </div>
+
+  <!-- Modal with transparent black tint -->
+  <div x-show="open" x-cloak class="fixed inset-0 flex justify-center items-center z-50" style="background-color: rgba(0, 0, 0, 0.5);" x-transition>
+    <div class="bg-white p-8 rounded-lg max-w-xl w-full">
+      <h3 class="text-xl font-semibold mb-4">Description</h3>
+      <p class="mb-4">{description}</p>
+      <button @click="open = false" class="bg-primary-bg-500 text-white px-4 py-2 rounded-md hover:bg-primary-bg-600">
+        Close
+      </button>
+    </div>
+  </div>
+</div>
+
