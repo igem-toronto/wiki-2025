@@ -26,23 +26,31 @@ body {
 }
 
 h1 {
-  @apply font-headings text-3xl pb-2 text-center mt-5 mb-12 border-b-primary-bg-500 border-b-4;
+  @apply font-headings text-6xl pb-2 text-center mt-5 mb-12 border-b-primary-bg-500 border-b-4;
 }
 
 h2 {
-  @apply font-headings text-2xl pb-1 mt-5 mb-2 border-b-primary-bg-500 border-b-2 max-w-[30ch];
+  @apply font-headings text-5xl pb-1 mt-5 mb-2 border-b-primary-bg-500 border-b-2 max-w-[30ch];
 }
 
 h3 {
-  @apply font-headings text-xl font-semibold mt-5 mb-2;
+  @apply font-headings text-4xl font-semibold mt-5 mb-2;
 }
 
-h4, h5, h6 {
-  @apply font-headings text-lg font-semibold mt-5 mb-2;
+h4 {
+  @apply font-headings text-3xl font-semibold mt-5 mb-2;
+}
+
+h5, h6 {
+  @apply font-headings text-2xl font-semibold mt-5 mb-2;
 }
 
 p {
-  @apply mt-2 mb-8;
+  @apply text-xl mt-2 mb-8;
+}
+
+p2 {
+  @apply text-sm mt-2 mb-8;
 }
 
 .citation {
