@@ -1,7 +1,9 @@
 ---
 import '@/styles/global.css'
 import Layout from '@/layouts/Layout.astro';
-import TeamCard from '../components/TeamCard.astro';
+import PresTeamCard from '../components/PresTeamCard.astro';
+import ColourMemberCard from '../components/ColourMemberCard.astro';
+import WhiteMemberCard from '../components/WhiteMemberCard.astro';
 ---
 
 <Layout>
@@ -10,8 +12,8 @@ import TeamCard from '../components/TeamCard.astro';
     <h4 class="text-center mb-8">Co-Presidents</h4>
 
     <!-- co pres -->
-    <div class="flex flex-wrap justify-center gap-6">
-      <TeamCard
+    <div class="flex flex-wrap justify-center gap-6 mb-4">
+      <PresTeamCard
         name="John Doe"
         description="John is a passionate leader with a background in synthetic biology. He loves to explore new ideas and push the boundaries of science."
         image="/favicon/apple-touch-icon.png"
@@ -20,126 +22,145 @@ import TeamCard from '../components/TeamCard.astro';
           email:"abbyabby.lui@gmail.com",
           website: "https://2024.igem.wiki/utoronto/description.html"}}
         position="Co-President"
-        width="w-1/5"
-        height="h-51.2"
 
       />
-      <TeamCard
+      <PresTeamCard
         name="Jane Smith"
         position="Co-President"
         image="/favicon/apple-touch-icon.png"
-        width="w-1/5"
-        height="h-51.2"
       />
-      <TeamCard
+      <PresTeamCard
         name="Alice Johnson"
         position="Co-President"
         image="/favicon/apple-touch-icon.png"
-        width="w-1/5"
-        height="h-51.2"
       />
     </div>
+
     <!-- wet lab -->
-    <h4 class="text-center mb-8">Wet Lab</h4>
-
-    <div class="flex flex-wrap justify-center gap-6">
-      <TeamCard
-        name="John Doe"
-        position="Wet Lab Lead"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-        height="h-42.6"
-      />
-      <TeamCard
-        name="Jane Smith"
-        position="Wet Lab Lead"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
+    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg ">
+      <h4 class="text-white text-center mb-8">Wet Lab</h4>   
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        <ColourMemberCard
+          name="John Doe"
+          position="Wet Lab Lead"
+          image="/favicon/apple-touch-icon.png"
+          contact={{
+            linkedin: "https://www.linkedin.com/in/johndoe",
+            email:"abbyabby.lui@gmail.com",
+            website: "https://2024.igem.wiki/utoronto/description.html"}}
+        />
+        <ColourMemberCard
+          name="Jane Smith"
+          position="Wet Lab Lead"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <ColourMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <ColourMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <ColourMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        <ColourMemberCard
+          name="John Doe"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <ColourMemberCard
+          name="Jane Smith"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <ColourMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <ColourMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <ColourMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+      </div>
     </div>
-    <div class="flex flex-wrap justify-center gap-6">
-      <TeamCard
-        name="John Doe"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-        height="h-42.6"
-      />
-      <TeamCard
-        name="Jane Smith"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
+    <!-- Dry lab -->
+    <div class=" bg-opacity-50 p-4 rounded-lg ">
+      <h4 class="text-center mb-8">Dry Lab</h4>   
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        <WhiteMemberCard
+          name="John Doe"
+          position="Wet Lab Lead"
+          image="/favicon/apple-touch-icon.png"
+          contact={{
+            linkedin: "https://www.linkedin.com/in/johndoe",
+            email:"abbyabby.lui@gmail.com",
+            website: "https://2024.igem.wiki/utoronto/description.html"}}
+        />
+        <WhiteMemberCard
+          name="Jane Smith"
+          position="Wet Lab Lead"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <WhiteMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <WhiteMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <WhiteMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+      </div>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        <WhiteMemberCard
+          name="John Doe"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <WhiteMemberCard
+          name="Jane Smith"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <WhiteMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <WhiteMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+        <WhiteMemberCard
+          name="Alice Johnson"
+          position="Wet Lab"
+          image="/favicon/apple-touch-icon.png"
+        />
+      </div>
     </div>
-    <div class="flex flex-wrap justify-center gap-6">
-      <TeamCard
-        name="John Doe"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-        height="h-42.6"
-      />
-      <TeamCard
-        name="Jane Smith"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-      <TeamCard
-        name="Alice Johnson"
-        position="Wet Lab"
-        image="/favicon/apple-touch-icon.png"
-        width="w-1/6"
-      />
-    </div>
+    
+    
   </div>
 </Layout>

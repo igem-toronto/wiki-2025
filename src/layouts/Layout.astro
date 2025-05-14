@@ -26,7 +26,7 @@ import Header from "@/components/Header.astro";
           <nav class="flex-[1]" style={!Astro.slots.sidebar ? 'display: none;' : ''}>
             <slot name="sidebar" />
           </nav>
-          <main class={`${Astro.slots.sidebar ? 'flex-[3]' : 'w-full max-w-[120ch]'}`}>
+          <main class={`mb-4 ${Astro.slots.sidebar ? 'flex-[3]' : 'w-full max-w-[120ch]'}`}>
             <div>
               <slot name="main" />
             </div>

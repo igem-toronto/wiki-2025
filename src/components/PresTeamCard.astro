@@ -1,9 +1,9 @@
 ---
-const { name, description, image, contact, position, width, height } = Astro.props;
+const { name, description, image, contact, position } = Astro.props;
 ---
 
-<div x-data="{ open: false }" class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white ${width}`}>
-  <img src={image} alt={`${name}'s photo`} class={`rounded-md w-full object-cover ${height}`} @click="open = true" />
+<div x-data="{ open: false }" class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white w-1/5`}>
+  <img src={image} alt={`${name}'s photo`} class={`rounded-md w-full object-cover "h-51.2"`} @click="open = true" />
 
   <div class="mt-4">
     <h5 class="font-semibold">{name}</h5>
