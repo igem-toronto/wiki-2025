@@ -13,11 +13,16 @@ import TeamCard from '../components/TeamCard.astro';
     <div class="flex flex-wrap justify-center gap-6">
       <TeamCard
         name="John Doe"
-        position="Co-President"
-        image="/favicon/apple-touch-icon.png"
         description="John is a passionate leader with a background in synthetic biology. He loves to explore new ideas and push the boundaries of science."
+        image="/favicon/apple-touch-icon.png"
+        contact={{
+          linkedin: "https://www.linkedin.com/in/johndoe",
+          email:"abbyabby.lui@gmail.com",
+          website: "https://2024.igem.wiki/utoronto/description.html"}}
+        position="Co-President"
         width="w-1/5"
         height="h-51.2"
+
       />
       <TeamCard
         name="Jane Smith"

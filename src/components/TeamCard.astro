@@ -1,5 +1,5 @@
 ---
-const { name, position, image, linkedin, email, width, height, description } = Astro.props;
+const { name, description, image, contact, position, width, height } = Astro.props;
 ---
 
 <div x-data="{ open: false }" class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white ${width}`}>
@@ -7,17 +7,22 @@ const { name, position, image, linkedin, email, width, height, description } = A
 
   <div class="mt-4">
     <h5 class="font-semibold">{name}</h5>
-    <p2 class="text-white bg-primary-bg-500 px-3 py-1 inline-block rounded-full mt-1">{position}</p2>
+    <span class="text-white bg-primary-bg-500 px-3 py-1 inline-block rounded-full mt-1">{position}</span>
 
-    <div class="flex justify-center gap-4 mt-4">
-      {linkedin && (
-        <a href={linkedin} target="_blank" aria-label="LinkedIn">
-          <img src="/icons/linkedin.svg" alt="LinkedIn" class="w-6 h-6" />
+    <div class="flex justify-start gap-4 mt-3">
+      {contact?.linkedin && (
+        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
+          <img src="/favicon/linkedin.png" alt="LinkedIn" class="w-6 h-6 hover:scale-110 transition-transform" />
         </a>
       )}
-      {email && (
-        <a href={`mailto:${email}`} aria-label="Email">
-          <img src="/icons/email.svg" alt="Email" class="w-6 h-6" />
+      {contact?.email && (
+        <a href={`mailto:${contact.email}`} aria-label="Email">
+          <img src="/favicon/email.png" alt="Email" class="w-6 h-6 hover:scale-110 transition-transform" />
+        </a>
+      )}
+      {contact?.website && (
+        <a href={contact.website.startsWith('http') ? contact.website : `https://${contact.website}`} target="_blank" rel="noopener noreferrer" aria-label="Personal Website">
+          <img src="/favicon/website.png" alt="Website" class="w-6 h-6 hover:scale-110 transition-transform" />
         </a>
       )}
     </div>
@@ -34,4 +39,3 @@ const { name, position, image, linkedin, email, width, height, description } = A
     </div>
   </div>
 </div>
-
