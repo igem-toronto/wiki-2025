@@ -46,11 +46,7 @@ h5, h6 {
 }
 
 p {
-  @apply text-xl mt-2 mb-8;
-}
-
-p2 {
-  @apply text-sm mt-2 mb-8;
+  @apply mt-2 mb-8 text-justify;
 }
 
 .citation {

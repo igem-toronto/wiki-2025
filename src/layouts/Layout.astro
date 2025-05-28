@@ -22,16 +22,7 @@ import Header from "@/components/Header.astro";
       <div class="mb-20">
         <Header />
 
-        <article class={`py-4 mt-12 flex gap-12 ${!Astro.slots.sidebar ? 'justify-center' : ''}`}>
-          <nav class="flex-[1]" style={!Astro.slots.sidebar ? 'display: none;' : ''}>
-            <slot name="sidebar" />
-          </nav>
-          <main class={`mb-4 ${Astro.slots.sidebar ? 'flex-[3]' : 'w-full max-w-[120ch]'}`}>
-            <div>
-              <slot name="main" />
-            </div>
-          </main>
-        </article>
+        <slot name="content" />
 
       </div>
       <Footer />

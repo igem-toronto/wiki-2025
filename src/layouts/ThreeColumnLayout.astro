@@ -1,0 +1,18 @@
+---
+import Layout from "@/layouts/Layout.astro";
+---
+
+<Layout>
+  <article slot="content" class="py-4 mt-12 flex gap-12 justify-center">
+    <nav class="flex-1">
+      <slot name="sidebar" />
+    </nav>
+    <main class="max-w-[90ch]">
+      <slot name="main" />
+    </main>
+    <div class="flex-1">
+      <slot name="right" />
+    </div>
+  </article>
+</Layout>
+
