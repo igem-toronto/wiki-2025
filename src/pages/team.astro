@@ -4,163 +4,217 @@ import Layout from '@/layouts/Layout.astro';
 import PresTeamCard from '../components/PresTeamCard.astro';
 import ColourMemberCard from '../components/ColourMemberCard.astro';
 import WhiteMemberCard from '../components/WhiteMemberCard.astro';
+import { parse } from 'csv-parse/sync';
+
+async function csv_to_json() {
+  const response = await fetch("https://docs.google.com/spreadsheets/d/1ka_LcPMf5qNfsNNYSSbXgu-1niyEUkUJg8oVA4Xzppk/gviz/tq?tqx=out:csv&sheet=Sheet1");
+  const csv_data = await response.text();
+
+  const team = parse(csv_data, {
+    columns: ['name', 'role', 'description', 'imageSrc', 'linkedIn', 'email', 'website', 'unused'],
+    from_line: 2, 
+    skip_empty_lines: true,
+    on_record: (member) => {
+      
+      const contact = {
+        
+        linkedin: member.linkedIn,
+        email: member.email,
+        website: member.website
+   
+      };
+
+      return {
+        name: member.name,
+        role: member.role,
+        description: member.description,
+        imageSrc: 'https://static.igem.wiki/teams/5230/headshots/plasmid-placeholder.png',
+        contact: contact, 
+      };
+    }
+  });
+
+  return team;
+
+}
+
+const team = await csv_to_json();
+
+const co_presidents = team.filter(m => m.role.toLowerCase().includes('president'));
+const wet_lab_members = team.filter(m => m.role.toLowerCase().includes('wet lab'));
+const dry_lab_members = team.filter(m => m.role.toLowerCase().includes('dry lab'));
+const hardware_members = team.filter(m => m.role.toLowerCase().includes('hardware'));
+const finance_members = team.filter(m => m.role.toLowerCase().includes('finance'));
+const ent_members = team.filter(m => m.role.toLowerCase().includes('entrepreneurship'));
+const hp_members = team.filter(m => m.role.toLowerCase().includes('human practices'));
+const outreach_members = team.filter(m => m.role.toLowerCase().includes('outreach'));
+const wiki_members = team.filter(m => m.role.toLowerCase().includes('wiki'));
+
 ---
 
 <Layout>
   <div slot="main">
     <h1 class="text-10xl font-bold text-center mb-4">Meet the team!</h1>
+
     <h4 class="text-center mb-8">Co-Presidents</h4>
-
-    <!-- co pres -->
     <div class="flex flex-wrap justify-center gap-6 mb-4">
-      <PresTeamCard
-        name="John Doe"
-        description="John is a passionate leader with a background in synthetic biology. He loves to explore new ideas and push the boundaries of science."
-        image="/favicon/apple-touch-icon.png"
-        contact={{
-          linkedin: "https://www.linkedin.com/in/johndoe",
-          email:"abbyabby.lui@gmail.com",
-          website: "https://2024.igem.wiki/utoronto/description.html"}}
-        position="Co-President"
-
-      />
-      <PresTeamCard
-        name="Jane Smith"
-        position="Co-President"
-        image="/favicon/apple-touch-icon.png"
-      />
-      <PresTeamCard
-        name="Alice Johnson"
-        position="Co-President"
-        image="/favicon/apple-touch-icon.png"
-      />
+      {co_presidents.map(member => (
+        <PresTeamCard
+          name={member.name}
+          description={member.description}
+          image={member.imageSrc}
+          contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          position="Co-President"
+        />
+      ))}
     </div>
 
-    <!-- wet lab -->
-    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg ">
-      <h4 class="text-white text-center mb-8">Wet Lab</h4>   
+    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-white text-center mb-8">Wet Lab</h4>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
-        <ColourMemberCard
-          name="John Doe"
-          position="Wet Lab Lead"
-          image="/favicon/apple-touch-icon.png"
-          contact={{
-            linkedin: "https://www.linkedin.com/in/johndoe",
-            email:"abbyabby.lui@gmail.com",
-            website: "https://2024.igem.wiki/utoronto/description.html"}}
-        />
-        <ColourMemberCard
-          name="Jane Smith"
-          position="Wet Lab Lead"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <ColourMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <ColourMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <ColourMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-      </div>
-      <div class="flex flex-wrap justify-center gap-6 mb-4">
-        <ColourMemberCard
-          name="John Doe"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <ColourMemberCard
-          name="Jane Smith"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <ColourMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <ColourMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <ColourMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
+        {wet_lab_members.map(member => (
+          <ColourMemberCard
+            name={member.name}
+            description={member.description}
+            position=member.role
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
       </div>
     </div>
-    <!-- Dry lab -->
-    <div class=" bg-opacity-50 p-4 rounded-lg ">
-      <h4 class="text-center mb-8">Dry Lab</h4>   
+
+    <div class="bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-center mb-8">Dry Lab</h4>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
-        <WhiteMemberCard
-          name="John Doe"
-          position="Wet Lab Lead"
-          image="/favicon/apple-touch-icon.png"
-          contact={{
-            linkedin: "https://www.linkedin.com/in/johndoe",
-            email:"abbyabby.lui@gmail.com",
-            website: "https://2024.igem.wiki/utoronto/description.html"}}
-        />
-        <WhiteMemberCard
-          name="Jane Smith"
-          position="Wet Lab Lead"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <WhiteMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <WhiteMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <WhiteMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-      </div>
-      <div class="flex flex-wrap justify-center gap-6 mb-4">
-        <WhiteMemberCard
-          name="John Doe"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <WhiteMemberCard
-          name="Jane Smith"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <WhiteMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <WhiteMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
-        <WhiteMemberCard
-          name="Alice Johnson"
-          position="Wet Lab"
-          image="/favicon/apple-touch-icon.png"
-        />
+        {dry_lab_members.map(member => (
+          <WhiteMemberCard
+            name={member.name}
+            description={member.description}
+            position={member.role}
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
       </div>
     </div>
-    
-    
+
+    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-white text-center mb-8">Hardware</h4>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        {hardware_members.map(member => (
+          <ColourMemberCard
+            name={member.name}
+            description={member.description}
+            position={member.role}
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
+      </div>
+    </div>
+
+      <div class="bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-center mb-8">Finance</h4>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        {finance_members.map(member => (
+          <WhiteMemberCard
+            name={member.name}
+            description={member.description}
+            position={member.role}
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-white text-center mb-8">Entrepreneurship</h4>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        {ent_members.map(member => (
+          <ColourMemberCard
+            name={member.name}
+            description={member.description}
+            position={member.role}
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-center mb-8">Human Practices</h4>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        {hp_members.map(member => (
+          <WhiteMemberCard
+            name={member.name}
+            description={member.description}
+            position={member.role}
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
+      </div>
+    </div>
+
+    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-white text-center mb-8">Outreach</h4>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        {outreach_members.map(member => (
+          <ColourMemberCard
+            name={member.name}
+            description={member.description}
+            position={member.role}
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
+      </div>
+    </div>
+
+ <div class="bg-opacity-50 p-4 rounded-lg">
+      <h4 class="text-center mb-8">Wiki</h4>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        {wiki_members.map(member => (
+          <WhiteMemberCard
+            name={member.name}
+            description={member.description}
+            position={member.role}
+            image={member.imageSrc}
+            contact={{
+            linkedin: member.contact.linkedin,
+            email: member.contact.email,
+            website: member.contact.website}}
+          />
+        ))}
+      </div>
+    </div>
+
   </div>
 </Layout>
