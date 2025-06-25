@@ -1,4 +1,4 @@
-# iGEM TeamName Wiki
+# Team Toronto 2025 Wiki
 
 The main language used to write wikis in this repository is `Markdown`.
 
@@ -76,8 +76,8 @@ To work locally with this project, follow the steps below:
 #### Install
 
 ```bash
-git clone https://gitlab.igem.org/templates/wiki-frozen-flask-markdown.git
-cd wiki-frozen-flask-markdown
+git clone https://gitlab.igem.org/2025/toronto.git
+cd toronto
 python3 -m venv venv
 . venv/bin/activate # on Linux, MacOS; or
 . venv\Scripts\activate # on Windows
