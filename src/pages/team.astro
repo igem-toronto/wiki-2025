@@ -6,7 +6,11 @@ import Layout from '@/layouts/Layout.astro';
 const { parse } = require('csv-parse/sync');
 
 async function csv_to_json() {
-  const response = await fetch("https://docs.google.com/spreadsheets/d/1ka_LcPMf5qNfsNNYSSbXgu-1niyEUkUJg8oVA4Xzppk/gviz/tq?tqx=out:csv&sheet=Sheet1");
+  
+  const DEFAULT_IMAGE_URL = 'https://static.igem.wiki/teams/5230/headshots/plasmid-placeholder.png';
+  const TEAM_SHEET_URL = "https://docs.google.com/spreadsheets/d/1ka_LcPMf5qNfsNNYSSbXgu-1niyEUkUJg8oVA4Xzppk/gviz/tq?tqx=out:csv&sheet=Sheet1";
+  
+  const response = await fetch(TEAM_SHEET_URL);
   const csv_data = await response.text();
 
   const team = parse(csv_data, {
@@ -27,7 +31,7 @@ async function csv_to_json() {
         name: member.name,
         role: member.role,
         description: member.description,
-        imageSrc: 'https://static.igem.wiki/teams/5230/headshots/plasmid-placeholder.png',
+        imageSrc: DEFAULT_IMAGE_URL,
         contact: contact, 
       };
     }
