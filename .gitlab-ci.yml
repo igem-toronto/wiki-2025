@@ -5,9 +5,11 @@ pages:
   script:
     - npm install
     - npm run build
+    - rm -r public
+    - mv dist public
   artifacts:
     paths:
-      - dist
+      - public
   rules:
     - if: $CI_COMMIT_BRANCH != $CI_DEFAULT_BRANCH
       when: never # No runners will run on branches other than main
