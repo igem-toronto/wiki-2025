@@ -37,7 +37,7 @@ const createBibliography = (citations: string[]): BibliographyEntry[] => {
     const ref = entry.toString();
     let reference;
     if (hyperlink != null) {
-      let link = "<a href=\"" + hyperlink[0] + "\">" + hyperlink[0] + "</a>";
+      let link = `<a href="${hyperlink[0]}" target="_blank" rel="noopener noreferrer" style="text-decoration: underline; color: #1a0dab;">${hyperlink[0]}</a>`;
       reference = ref.slice(0, link_index) + link + ref.slice(link_index + hyperlink[0].length);
     } else {
       reference = ref;
