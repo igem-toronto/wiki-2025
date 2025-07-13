@@ -1,101 +1,108 @@
 <div class="relative">
   <!-- Toggle Button (mobile only) -->
-  <button id="menu-toggle" class="text-2xl cursor-pointer bg-transparent border-none lg:hidden">
-    ☰
+  <button id="menu-toggle" class="text-2xl cursor-pointer bg-transparent border-none z-50 relative">
+    <span id="menu-icon">☰</span>
   </button>
+
 
   <!-- Dropdown Menu -->
   <div id="dropdown-menu"
-       class="absolute left-0 top-full hidden flex-col lg:flex lg:flex-row lg:static lg:w-auto lg:p-0 bg-white border border-gray-300 shadow-md z-50 p-4 text-black w-64 lg:bg-transparent lg:border-none lg:shadow-none">
-    <ul class="list-none p-0 m-0 flex flex-col lg:flex-row lg:space-x-6 text-left lg:text-left w-full">
+      class="fixed inset-0 top-12 hidden bg-black/50 z-50 flex flex-col items-start p-8 text-white backdrop-blur-sm lg:max-h-[50vh]">
+    <div class="w-full flex flex-col lg:flex-row lg:justify-between gap-8">
+      <div class=" text-left font-semibold flex flex-col gap-2 w-full lg:w-1/4">
+        <a href="home">Home</a>
+      </div>
 
-      <!-- Home -->
-      <li><a href="home" class="block p-2 lg:p-0">Home</a></li>
 
       <!-- Collapsible: Research -->
-      <li class="relative group">
-        <button class="w-full text-left text-lg font-semibold text-gray-800 uppercase bg-gray-200 p-2 rounded-md lg:bg-transparent lg:p-0 lg:text-sm lg:font-normal lg:uppercase lg:hover:underline"
-                data-target="research-menu">
-          Research
-        </button>
-        <ul id="research-menu"
-            class="space-y-2 mt-2 hidden pl-4 lg:absolute lg:left-0 lg:top-full lg:bg-white lg:border lg:shadow-md lg:w-48 lg:p-2 lg:space-y-1 lg:mt-0 group-hover:block">
-          <li><a href="description" class="block">Description</a></li>
-          <li><a href="wetlab" class="block">Wetlab</a></li>
-          <li><a href="model" class="block">Model</a></li>
-          <li><a href="software" class="block">Software</a></li>
-          <li><a href="hardware" class="block">Hardware</a></li>
+      <div class="flex flex-col gap-2 w-full lg:w-1/4">
+        <button class="w-full text-left font-semibold" data-target="research-menu">Research</button>
+        <ul id="research-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
+          <li><a href="description">Description</a></li>
+          <li><a href="wetlab">Wetlab</a></li>
+          <li><a href="model">Model</a></li>
+          <li><a href="software">Software</a></li>
+          <li><a href="hardware">Hardware</a></li>
         </ul>
-      </li>
+      </div>
 
       <!-- Collapsible: Support -->
-      <li class="relative group">
-        <button class="w-full text-left text-lg font-semibold text-gray-800 uppercase bg-gray-200 p-2 rounded-md lg:bg-transparent lg:p-0 lg:text-sm lg:font-normal lg:uppercase lg:hover:underline"
-                data-target="support-menu">
-          Support
-        </button>
-        <ul id="support-menu"
-            class="space-y-2 mt-2 hidden pl-4 lg:absolute lg:left-0 lg:top-full lg:bg-white lg:border lg:shadow-md lg:w-48 lg:p-2 lg:space-y-1 lg:mt-0 group-hover:block">
-          <li><a href="finance" class="block">Finance</a></li>
-          <li><a href="outreach" class="block">Outreach</a></li>
-          <li><a href="sponsors" class="block">Sponsors</a></li>
+      <div class="flex flex-col gap-2 w-full lg:w-1/4">
+        <button class="w-full text-left font-semibold" data-target="support-menu">Support</button>
+        <ul id="support-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
+          <li><a href="finance">Finance</a></li>
+          <li><a href="outreach">Outreach</a></li>
+          <li><a href="sponsors">Sponsors</a></li>
         </ul>
-      </li>
+      </div>
 
-      <!-- Collapsible: Team -->
-      <li class="relative group">
-        <button class="w-full text-left text-lg font-semibold text-gray-800 uppercase bg-gray-200 p-2 rounded-md lg:bg-transparent lg:p-0 lg:text-sm lg:font-normal lg:uppercase lg:hover:underline"
-                data-target="team-menu">
-          Team
-        </button>
-        <ul id="team-menu"
-            class="space-y-2 mt-2 hidden pl-4 lg:absolute lg:left-0 lg:top-full lg:bg-white lg:border lg:shadow-md lg:w-48 lg:p-2 lg:space-y-1 lg:mt-0 group-hover:block">
-          <li><a href="team" class="block">Team</a></li>
-          <li><a href="attributions" class="block">Attributions</a></li>
-          <li><a href="contribution" class="block">Contribution</a></li>
+      <!-- Team -->
+      <div class="flex flex-col gap-2 w-full lg:w-1/4">
+        <button class="w-full text-left font-semibold" data-target="team-menu">Team</button>
+        <ul id="team-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
+          <li><a href="team">Team</a></li>
+          <li><a href="attributions">Attributions</a></li>
+          <li><a href="contribution">Contribution</a></li>
         </ul>
-      </li>
+      </div>
 
-      <!-- Collapsible: Other -->
-      <li class="relative group">
-        <button class="w-full text-left text-lg font-semibold text-gray-800 uppercase bg-gray-200 p-2 rounded-md lg:bg-transparent lg:p-0 lg:text-sm lg:font-normal lg:uppercase lg:hover:underline"
-                data-target="other-menu">
-          Other
-        </button>
-        <ul id="other-menu"
-            class="space-y-2 mt-2 hidden pl-4 lg:absolute lg:left-0 lg:top-full lg:bg-white lg:border lg:shadow-md lg:w-48 lg:p-2 lg:space-y-1 lg:mt-0 group-hover:block">
-          <li><a href="human_practice" class="block">Human Practice</a></li>
-          <li><a href="entrepreneurship" class="block">Entrepreneurship</a></li>
-          <li><a href="wiki" class="block">Wiki</a></li>
+      <!-- Other -->
+      <div class="flex flex-col gap-2 w-full lg:w-1/4">
+        <button class="w-full text-left font-semibold" data-target="other-menu">Other</button>
+        <ul id="other-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
+          <li><a href="human_practice">Human Practice</a></li>
+          <li><a href="entrepreneurship">Entrepreneurship</a></li>
+          <li><a href="wiki">Wiki</a></li>
         </ul>
-      </li>
-
-    </ul>
+      </div>
+    </div>
   </div>
+
 </div>
 
 <!-- JavaScript -->
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.getElementById('menu-toggle');
-    const menu = document.getElementById('dropdown-menu');
+  const toggle = document.getElementById('menu-toggle');
+  const menu = document.getElementById('dropdown-menu');
+  const icon = document.getElementById('menu-icon');
 
-    toggle?.addEventListener('click', () => {
-      menu?.classList.toggle('hidden');
-    });
+  toggle?.addEventListener('click', () => {
+    if (!menu || !icon) return;
+    
+    const isHidden = menu.classList.contains('hidden');
 
-    // Enable collapsible behavior only on small screens
-    const mediaQuery = window.matchMedia('(max-width: 1023px)');
-    document.querySelectorAll('button[data-target]').forEach(button => {
-      const targetId = button.getAttribute('data-target');
-      const submenu = document.getElementById(targetId);
+    if (isHidden) {
+      menu.classList.remove('hidden');
+      menu.classList.add('slide-in-left');
+      icon.textContent = '✕';
+    } else {
+      menu.classList.remove('slide-in-left');
+      menu.classList.add('slide-out-left');
+      icon.textContent = '☰';
 
-      button.addEventListener('click', (e) => {
-        if (mediaQuery.matches) {
-          e.preventDefault();
-          submenu?.classList.toggle('hidden');
-        }
+      // After animation ends, hide the menu
+      menu.addEventListener('animationend', function handler() {
+        menu.classList.add('hidden');
+        menu.classList.remove('slide-out-left');
+        menu.removeEventListener('animationend', handler);
       });
+    }
+  });
+
+  const mediaQuery = window.matchMedia('(max-width: 1024px)');
+  document.querySelectorAll('button[data-target]').forEach(button => {
+    const targetId = button.getAttribute('data-target');
+    if (!targetId) return;
+    const submenu = document.getElementById(targetId);
+
+    button.addEventListener('click', (e) => {
+      if (!mediaQuery.matches) return; 
+      e.preventDefault();
+      submenu?.classList.toggle('hidden');
     });
   });
+
+});
+
 </script>
