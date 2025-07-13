@@ -17,7 +17,7 @@
       <!-- Collapsible: Research -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
         <button class="w-full text-left font-semibold" data-target="research-menu">Research</button>
-        <ul id="research-menu" class="hidden lg:flex mt-2 pl-4 flex-col gap-2">
+        <ul id="research-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
           <li><a href="description">Description</a></li>
           <li><a href="wetlab">Wetlab</a></li>
           <li><a href="model">Model</a></li>
@@ -29,7 +29,7 @@
       <!-- Collapsible: Support -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
         <button class="w-full text-left font-semibold" data-target="support-menu">Support</button>
-        <ul id="support-menu" class="hidden lg:flex mt-2 pl-4 flex-col gap-2">
+        <ul id="support-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
           <li><a href="finance">Finance</a></li>
           <li><a href="outreach">Outreach</a></li>
           <li><a href="sponsors">Sponsors</a></li>
@@ -39,7 +39,7 @@
       <!-- Team -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
         <button class="w-full text-left font-semibold" data-target="team-menu">Team</button>
-        <ul id="team-menu" class="hidden lg:flex mt-2 pl-4 flex-col gap-2">
+        <ul id="team-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
           <li><a href="team">Team</a></li>
           <li><a href="attributions">Attributions</a></li>
           <li><a href="contribution">Contribution</a></li>
@@ -49,7 +49,7 @@
       <!-- Other -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
         <button class="w-full text-left font-semibold" data-target="other-menu">Other</button>
-        <ul id="other-menu" class="hidden lg:flex mt-2 pl-4 flex-col gap-2">
+        <ul id="other-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
           <li><a href="human_practice">Human Practice</a></li>
           <li><a href="entrepreneurship">Entrepreneurship</a></li>
           <li><a href="wiki">Wiki</a></li>
@@ -69,22 +69,35 @@
 
   toggle?.addEventListener('click', () => {
     if (!menu || !icon) return;
-    menu.classList.toggle('hidden');
-    if (menu.classList.contains('hidden')) {
-      icon.textContent = '☰';
-    } else {
+    
+    const isHidden = menu.classList.contains('hidden');
+
+    if (isHidden) {
+      menu.classList.remove('hidden');
+      menu.classList.add('slide-in-left');
       icon.textContent = '✕';
+    } else {
+      menu.classList.remove('slide-in-left');
+      menu.classList.add('slide-out-left');
+      icon.textContent = '☰';
+
+      // After animation ends, hide the menu
+      menu.addEventListener('animationend', function handler() {
+        menu.classList.add('hidden');
+        menu.classList.remove('slide-out-left');
+        menu.removeEventListener('animationend', handler);
+      });
     }
   });
 
-  const mediaQuery = window.matchMedia('(max-width: 1023px)');
+  const mediaQuery = window.matchMedia('(max-width: 1024px)');
   document.querySelectorAll('button[data-target]').forEach(button => {
     const targetId = button.getAttribute('data-target');
     if (!targetId) return;
     const submenu = document.getElementById(targetId);
 
     button.addEventListener('click', (e) => {
-      if (!mediaQuery.matches) return; // ← Only allow toggle on mobile
+      if (!mediaQuery.matches) return; 
       e.preventDefault();
       submenu?.classList.toggle('hidden');
     });
