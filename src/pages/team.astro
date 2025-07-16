@@ -52,8 +52,46 @@ const wiki_members = team.filter(m => m.role.toLowerCase().includes('wiki'));
 
 ---
 
+const { parse } = require('csv-parse/sync');
+
+async function csv_to_json() {
+  
+  const DEFAULT_IMAGE_URL = 'https://static.igem.wiki/teams/5230/headshots/plasmid-placeholder.png';
+  const TEAM_SHEET_URL = "https://docs.google.com/spreadsheets/d/1ka_LcPMf5qNfsNNYSSbXgu-1niyEUkUJg8oVA4Xzppk/gviz/tq?tqx=out:csv&sheet=Sheet1";
+  
+  const response = await fetch(TEAM_SHEET_URL);
+  const csv_data = await response.text();
+
+  const team = parse(csv_data, {
+    columns: ['name', 'role', 'description', 'imageSrc', 'linkedIn', 'email', 'website', 'unused'],
+    from_line: 2, 
+    skip_empty_lines: true,
+    on_record: (member) => {
+      
+      const contact = {
+        
+        linkedin: member.linkedIn,
+        email: member.email,
+        website: member.website
+   
+      };
+
+      return {
+        name: member.name,
+        role: member.role,
+        description: member.description,
+        imageSrc: DEFAULT_IMAGE_URL,
+        contact: contact, 
+      };
+    }
+  });
+}
+
+csv_to_json();
+
+
 <Layout>
-  <div slot="main">
+  <div slot="content" class="px-64 my-16">
     <h1 class="text-10xl font-bold text-center mb-4">Meet the team!</h1>
 
     <h4 class="text-center mb-8">Co-Presidents</h4>
