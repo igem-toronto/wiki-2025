@@ -4,8 +4,6 @@ import { Content, getHeadings, frontmatter } from '@/content/description.mdx'
 import Sidebar from '@/components/Sidebar.astro'
 import References from '@/components/References.astro'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
-import Figure from '../components/Figure.astro';
-import myImage from '../assets/dog.png';
 ---
 
 
@@ -14,18 +12,6 @@ import myImage from '../assets/dog.png';
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <div slot="main">
     <Content />
-    <Figure
-      src={myImage}
-      alt="A happy dog"
-      caption="Figure 1: my dog. original size"
-    />
-    <Figure
-      src={myImage}
-      alt="A happy dog"
-      caption="Figure 2: my dog. w500, h300"
-      width={500}
-      height={300}
-    />
     <References bibliography={frontmatter.bibliography} />
     
   </div>
