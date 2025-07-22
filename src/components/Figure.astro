@@ -22,7 +22,7 @@ const {
 } = Astro.props;
 ---
 
-<figure class={className}>
+<figure class={`flex flex-col items-center justify-center w-fit ${className}`}>
   <Image
     src={src}
     alt={alt}
@@ -33,3 +33,4 @@ const {
   />
   {caption && <figcaption class="text-sm text-center mt-2 text-gray-600">{caption}</figcaption>}
 </figure>
+
