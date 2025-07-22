@@ -6,13 +6,10 @@ import References from '@/components/References.astro'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 ---
 
-
-
 <ThreeColumnLayout>
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <div slot="main">
     <Content />
     <References bibliography={frontmatter.bibliography} />
-    
   </div>
 </ThreeColumnLayout>
