@@ -1,0 +1,35 @@
+---
+import { Image } from 'astro:assets';
+
+export interface Props {
+  src: ImageMetadata;  // This comes from an imported image
+  alt: string;
+  caption?: string;
+  width?: number;
+  height?: number;
+  sizes?: string;
+  className?: string;
+}
+
+const {
+  src,
+  alt,
+  caption,
+  width = 800,
+  height = 600,
+  sizes = "100vw",
+  className = ""
+} = Astro.props;
+---
+
+<figure class={className}>
+  <Image
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    sizes={sizes}
+    class="rounded"
+  />
+  {caption && <figcaption class="text-sm text-center mt-2 text-gray-600">{caption}</figcaption>}
+</figure>
