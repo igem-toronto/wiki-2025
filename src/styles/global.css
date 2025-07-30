@@ -1,6 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap');
 @import "tailwindcss";
+
+@font-face {
+  font-family: "Open Sans";
+  src: url('https://static.igem.wiki/teams/5708/fonts/lato-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
+
+@font-face {
+  font-family: "Lato";
+  src: url('https://static.igem.wiki/teams/5708/fonts/opensans-regular.ttf') format('truetype');
+  font-style: normal;
+  font-weight: 400;
+}
 
 @theme {
   --color-primary-bg-100: #e36646;
@@ -41,7 +53,8 @@ h4 {
   @apply font-headings text-3xl font-semibold mt-5 mb-2;
 }
 
-h5, h6 {
+h5,
+h6 {
   @apply font-headings text-2xl font-semibold mt-5 mb-2;
 }
 
@@ -55,34 +68,4 @@ p {
 
 a:hover {
   @apply underline;
-}
-
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.slide-in-left {
-  animation: slideInFromLeft 0.3s ease forwards;
-}
-
-@keyframes slideOutToLeft {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-.slide-out-left {
-  animation: slideOutToLeft 0.3s ease forwards;
 }
