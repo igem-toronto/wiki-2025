@@ -17,7 +17,7 @@ const classForLevel = (level: number) => {
 ---
 
 <div class="sticky top-20 w-full flex flex-col items-end">
-  <ul class="px-2 flex flex-col gap-1 my-12 border-l-2 border-amber-800">
+  <ul class="px-2 flex flex-col gap-1 my-12 border-l-2 border-primary-fg-900">
     {headings.filter(h => h.depth > 1).map(heading =>
       <li class={classForLevel(heading.depth)}>
         <a href={`#${heading.slug}`}>
