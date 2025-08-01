@@ -1,9 +1,11 @@
 ---
 import { Instagram, Mail } from "lucide-astro";
 
+const { bg = "" } = Astro.props;
+
 ---
 
-<footer class="w-full p-16 pb-32 flex justify-center bg-primary-bg-500 text-primary-fg-500">
+<footer class="w-full p-16 pb-32 flex justify-center text-primary-fg-500" style={`background: ${bg};`}>
   <div class="flex flex-col items-center gap-12">
     <div class="flex flex-row gap-12 items-center">
       <a href="https://igem.skule.ca" class="hover:scale-110 duration-200">
@@ -21,13 +23,13 @@ import { Instagram, Mail } from "lucide-astro";
     <div class="flex flex-col items-center gap-5">
       <div>
         This work is licensed under
-        <a href='https://creativecommons.org/licenses/by/4.0/' class="text-secondary-fg-100">
+        <a href='https://creativecommons.org/licenses/by/4.0/' class="text-primary-fg-100">
           CC BY 4.0
         </a> 
       </div>
       <div>
         Check out the source repository on
-        <a href='https://github.com/igem-toronto/wiki-2025' class="text-secondary-fg-100">
+        <a href='https://github.com/igem-toronto/wiki-2025' class="text-primary-fg-100">
           GitHub
         </a>
       </div>

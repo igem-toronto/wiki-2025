@@ -53,8 +53,8 @@ const wiki_members = team.filter(m => m.role.toLowerCase().includes('wiki'));
 ---
 
 <Layout>
-  <div slot="content" class="px-64 my-16">
-    <h1 class="text-10xl font-bold text-center mb-4">Meet the team!</h1>
+  <div slot="content" class="px-64 special-gradient-wrapper">
+    <h1 class="text-10xl font-bold text-white text-center mb-4">Meet the team!</h1>
 
     <h4 class="text-center mb-8">Co-Presidents</h4>
     <div class="flex flex-wrap justify-center gap-6 mb-4">
@@ -72,7 +72,7 @@ const wiki_members = team.filter(m => m.role.toLowerCase().includes('wiki'));
       ))}
     </div>
 
-    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg">
       <h4 class="text-white text-center mb-8">Wet Lab</h4>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {wet_lab_members.map(member => (
@@ -108,7 +108,7 @@ const wiki_members = team.filter(m => m.role.toLowerCase().includes('wiki'));
       </div>
     </div>
 
-    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg">
       <h4 class="text-white text-center mb-8">Hardware</h4>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {hardware_members.map(member => (
@@ -144,7 +144,7 @@ const wiki_members = team.filter(m => m.role.toLowerCase().includes('wiki'));
       </div>
     </div>
 
-    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg">
       <h4 class="text-white text-center mb-8">Entrepreneurship</h4>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {ent_members.map(member => (
@@ -180,7 +180,7 @@ const wiki_members = team.filter(m => m.role.toLowerCase().includes('wiki'));
       </div>
     </div>
 
-    <div class="bg-primary-bg-500 bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg">
       <h4 class="text-white text-center mb-8">Outreach</h4>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {outreach_members.map(member => (
