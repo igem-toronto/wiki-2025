@@ -2,7 +2,40 @@
 import '@/styles/global.css'
 import ColourSample from '@/components/ColourSample.astro';
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro';
+
 ---
+<style>
+</style>
+
+<script>
+  const section = document.querySelector("#circle-section");
+  const img = document.querySelector(".circle-img") as HTMLImageElement;
+
+  window.addEventListener("scroll", () => {
+    if (!section || !img) return;
+
+    const DIAMETER = 1000;
+
+    const rect = section.getBoundingClientRect();
+    const windowHeight = window.innerHeight;
+
+    const targetHeight = windowHeight / 2;
+
+    const x = Math.min(Math.max(rect.top - targetHeight, - DIAMETER / 2), DIAMETER / 2);
+    const angle = Math.acos(x / (DIAMETER / 2));
+    const degrees = angle * (180 / Math.PI);
+
+    const rotationAngle = -90 + degrees;
+
+    img.style.transform =
+      `
+        translate(-50%, -50%)
+        rotate(${rotationAngle}deg)
+        translateX(${DIAMETER / 2}px)
+      `;
+  });
+
+</script>
 
 <ThreeColumnLayout>
   <div slot="main">
@@ -66,6 +99,9 @@ import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro';
       <ColourSample color='bg-secondary-fg-900' />
       <ColourSample color='bg-secondary-fg-500' />
       <ColourSample color='bg-secondary-fg-100' />
+    </div>
+    <div class="h-[500pt] bg-amber-200 w-full relative" id="circle-section">
+      <img class="animated circle-img" src="https://static.igem.wiki/teams/4615/wiki/graphics/igem-toronto.png">
     </div>
   </div>
 </ThreeColumnLayout>
