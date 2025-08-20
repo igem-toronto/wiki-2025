@@ -1,4 +1,6 @@
 @import "tailwindcss";
+@import "tailwindcss-intersect";
+@config "../../tailwind.config.js";
 
 @font-face {
   font-family: "Open Sans";
