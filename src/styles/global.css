@@ -89,21 +89,32 @@ a:hover {
   @apply underline;
 }
 
-.nav-button {
-  transition: all 0.3s ease-in-out;
-  cursor: pointer;
-  font-weight: bold;
-  text-transform: uppercase;
-  border: transparent;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+@keyframes slideInFromLeft {
+  0% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-.nav-button:hover {
-  background-color: #f6e79f;
-  color: black;
-  font-weight: bold;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  transform: scale(1.05);
+.slide-in-left {
+  animation: slideInFromLeft 0.3s ease forwards;
+}
+
+@keyframes slideOutToLeft {
+  0% {
+    transform: translateX(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+}
+
+.slide-out-left {
+  animation: slideOutToLeft 0.3s ease forwards;
 }
