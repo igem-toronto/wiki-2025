@@ -10,9 +10,12 @@ import remarkMath from 'remark-math';
 import rehypeKatex from 'rehype-katex';
 import rehypeClassNames from 'rehype-class-names';
 
+import react from '@astrojs/react';
+
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [relativeLinks(), mdx()],
+  integrations: [relativeLinks(), react(), mdx()],
 
   vite: {
     plugins: [tailwindcss()]
