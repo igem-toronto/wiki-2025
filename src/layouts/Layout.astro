@@ -2,6 +2,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import IntersectObserver from '@/components/IntersectObserver.jsx';
 ---
 
 <!doctype html>
@@ -36,7 +37,8 @@ import Header from "@/components/Header.astro";
       <Footer />
     </div>
 
-     <script defer src="https://unpkg.com/tailwindcss-intersect@2.x.x/dist/observer.min.js"></script>
+    <IntersectObserver client:load />
+
   
   </body>
 </html>
