@@ -17,19 +17,38 @@
 }
 
 @theme {
-  --color-primary-bg-100: #e36646;
-  --color-primary-bg-500: #de3910;
-  --color-primary-bg-900: #ab2a0a;
-  --color-primary-fg-100: #f2f7f7;
-  --color-primary-fg-500: #dcfaf6;
-  --color-primary-fg-900: #82f5e5;
-  --color-secondary-fg-100: #c299f2;
+  --color-primary-bg-100: #bec4c6;
+  --color-primary-bg-500: #498da1;
+  --color-primary-bg-900: #264d63;
+  --color-primary-fg-100: #ffde85;
+  --color-primary-fg-500: #ffffff;
+  --color-primary-fg-900: #ecb240;
+  --color-secondary-fg-100: #498da1;
   --color-secondary-fg-500: #8328eb;
   --color-secondary-fg-900: #6608d1;
   --font-primary: "Open Sans", "sans-serif";
   --font-headings: "Lato", "sans-serif";
 }
 
+header {
+  background: var(--color-primary-bg-900)
+}
+
+.special-gradient-wrapper {
+  background: linear-gradient(180deg,
+      var(--color-primary-bg-900),
+      var(--color-primary-bg-500),
+      var(--color-primary-bg-500));
+  min-height: 100vh;
+  padding: 4rem;
+}
+
+footer {
+  background: linear-gradient(180deg,
+      #ffffff,
+      #498da1,
+      #264d63);
+}
 
 html {
   @apply scroll-smooth;
@@ -40,11 +59,11 @@ body {
 }
 
 h1 {
-  @apply font-headings text-6xl pb-2 text-center mt-5 mb-12 border-b-primary-bg-500 border-b-4;
+  @apply font-headings text-6xl pb-2 text-center mt-5 mb-12 border-b-primary-fg-900 border-b-4;
 }
 
 h2 {
-  @apply font-headings text-5xl pb-1 mt-5 mb-2 border-b-primary-bg-500 border-b-2 max-w-[30ch];
+  @apply font-headings text-5xl pb-1 mt-5 mb-2 border-b-primary-fg-900 border-b-2 max-w-[30ch];
 }
 
 h3 {
@@ -52,7 +71,7 @@ h3 {
 }
 
 h4 {
-  @apply font-headings text-3xl font-semibold mt-5 mb-2;
+  @apply font-headings text-3xl text-white font-semibold mt-5 mb-2;
 }
 
 h5,
