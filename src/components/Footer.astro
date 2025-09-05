@@ -1,33 +1,39 @@
 ---
-import { Instagram, Mail } from "lucide-astro";
+import { Instagram, Mail, Youtube } from "lucide-astro";
+
+const { bg = "" } = Astro.props;
 
 ---
-
-<footer class="w-full p-16 pb-32 flex justify-center bg-primary-bg-500 text-primary-fg-500">
-  <div class="flex flex-col items-center gap-12">
-    <div class="flex flex-row gap-12 items-center">
+  
+<footer class="w-full p-10 pl-20 pb-16 flex flex-start bg-primary-bg-500 text-primary-fg-500">
+  <div class="flex flex-col items-left gap-2">
+    <div class="flex flex-row gap-5 items-center">
       <a href="https://igem.skule.ca" class="hover:scale-110 duration-200">
-        <img src="https://static.igem.wiki/teams/4615/wiki/graphics/igem-toronto.png" />
+        <img src="https://static.igem.wiki/teams/5708/images/igemto.webp" class="w-auto h-13" />
       </a>
-      <div class="flex flex-col justify-center">
+      <div class="flex flex-row gap-2 items-center">
+      
         <a href="https://instagram.com/igemtoronto" class="hover:scale-110 duration-200">
-          <Instagram size={64} />
+          <Instagram size={38} />
         </a>
         <a href="mailto:igem@g.skule.ca" class="hover:scale-110 duration-200">
-          <Mail size={64} />
+          <Mail size={47} />
+        </a>
+        <a href="https://www.youtube.com/@iGEMFoundation" class="hover:scale-110 duration-200">
+          <Youtube size={55} />
         </a>
       </div>
     </div>
-    <div class="flex flex-col items-center gap-5">
+    <div class="flex flex-col items-left gap-1 text-xs">
       <div>
         This work is licensed under
-        <a href='https://creativecommons.org/licenses/by/4.0/' class="text-secondary-fg-100">
+        <a href='https://creativecommons.org/licenses/by/4.0/' class="text-primary-fg-100">
           CC BY 4.0
         </a> 
       </div>
       <div>
         Check out the source repository on
-        <a href='https://github.com/igem-toronto/wiki-2025' class="text-secondary-fg-100">
+        <a href='https://github.com/igem-toronto/wiki-2025' class="text-primary-fg-100">
           GitHub
         </a>
       </div>
