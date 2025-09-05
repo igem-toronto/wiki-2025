@@ -2,6 +2,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
+import IntersectObserver from '@/components/IntersectObserver.jsx';
 
 const { footerBg = "" } = Astro.props;
 ---
@@ -23,10 +24,13 @@ const { footerBg = "" } = Astro.props;
     <div class="min-h-screen flex flex-col justify-between">
         
         <Header />
-
         <slot name="content" />
 
       <Footer bg={footerBg} />
     </div>
+
+    <IntersectObserver client:load />
+
+  
   </body>
 </html>
