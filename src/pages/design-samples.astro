@@ -1,10 +1,10 @@
 ---
 import '@/styles/global.css'
-import Layout from '@/layouts/Layout.astro';
 import ColourSample from '@/components/ColourSample.astro';
+import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro';
 ---
 
-<Layout>
+<ThreeColumnLayout>
   <div slot="main">
     <h1>
       This is the first heading
@@ -68,4 +68,4 @@ import ColourSample from '@/components/ColourSample.astro';
       <ColourSample color='bg-secondary-fg-100' />
     </div>
   </div>
-</Layout>
+</ThreeColumnLayout>
