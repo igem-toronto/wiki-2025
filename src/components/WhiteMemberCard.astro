@@ -1,44 +1,96 @@
 ---
 const { name, description, image, contact, position } = Astro.props;
-const roles = position.split(',').map(role => role.trim());
+const roles = position.split(",").map((role) => role.trim());
 ---
 
-<div x-data="{ open: false }" class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white w-1/6 bg-white`}>
-  <img src={image} alt={`${name}'s photo`} class={`rounded-md w-full object-cover h-42.6`} @click="open = true" />
+<div
+  x-data="{ open: false }"
+  class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white w-1/6 bg-white`}
+>
+  <div @click="open = true">
+    <img
+      src={image}
+      alt={`${name}'s photo`}
+      class={`rounded-md w-full object-cover h-42.6`}
+    />
 
-  <div class="mt-4">
-    <h5 class="font-semibold text-center">{name}</h5>
-    {roles.map(role => (
-  <span class="block text-white bg-primary-fg-900 px-3 py-1 rounded-full text-sm mb-2 text-center">
-    {role}
-  </span>
-    ))}
+    <div class="mt-4">
+      <h5 class="font-semibold text-center">{name}</h5>
+      {
+        roles.map((role) => (
+          <span class="block text-white bg-primary-fg-900 px-3 py-1 rounded-full text-sm mb-2 text-center">
+            {role}
+          </span>
+        ))
+      }
 
-    <div class="flex justify-start gap-4 mt-3">
-      {contact?.linkedin && (
-        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <img src="/favicon/linkedin.png" alt="LinkedIn" class="w-6 h-6 hover:scale-110 transition-transform" />
-        </a>
-      )}
-      {contact?.email && (
-        <a href={`mailto:${contact.email}`} aria-label="Email">
-          <img src="/favicon/email.png" alt="Email" class="w-6 h-6 hover:scale-110 transition-transform" />
-        </a>
-      )}
-      {contact?.website && (
-        <a href={contact.website.startsWith('http') ? contact.website : `https://${contact.website}`} target="_blank" rel="noopener noreferrer" aria-label="Personal Website">
-          <img src="/favicon/website.png" alt="Website" class="w-6 h-6 hover:scale-110 transition-transform" />
-        </a>
-      )}
+      <div class="flex justify-start gap-4 mt-3">
+        {
+          contact?.linkedin && (
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <img
+                src="/favicon/linkedin.png"
+                alt="LinkedIn"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+        {
+          contact?.email && (
+            <a href={`mailto:${contact.email}`} aria-label="Email">
+              <img
+                src="/favicon/email.png"
+                alt="Email"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+        {
+          contact?.website && (
+            <a
+              href={
+                contact.website.startsWith("http")
+                  ? contact.website
+                  : `https://${contact.website}`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Personal Website"
+            >
+              <img
+                src="/favicon/website.png"
+                alt="Website"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+      </div>
     </div>
   </div>
 
   <!-- Modal with transparent black tint -->
-  <div x-show="open" x-cloak class="fixed inset-0 flex justify-center items-center z-50" style="background-color: rgba(0, 0, 0, 0.5);" x-transition>
+  <div
+    x-show="open"
+    x-cloak
+    class="fixed inset-0 flex justify-center items-center z-50"
+    style="background-color: rgba(0, 0, 0, 0.5);"
+    x-transition
+  >
     <div class="bg-white p-8 rounded-lg max-w-xl w-full">
       <h3 class="text-xl font-semibold mb-4">Description</h3>
       <p class="mb-4">{description}</p>
-      <button @click="open = false" class="bg-primary-bg-500 text-white px-4 py-2 rounded-md hover:bg-primary-bg-600">
+      <button
+        @click="open = false"
+        class="bg-primary-bg-500 text-white px-4 py-2 rounded-md hover:bg-primary-bg-600"
+      >
         Close
       </button>
     </div>
