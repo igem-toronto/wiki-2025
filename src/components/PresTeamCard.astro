@@ -2,38 +2,91 @@
 const { name, description, image, contact, position } = Astro.props;
 ---
 
-<div x-data="{ open: false }" class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white w-1/5`}>
-  <img src={image} alt={`${name}'s photo`} class={`rounded-md w-full object-cover "h-51.2"`} @click="open = true" />
+<div
+  x-data="{ open: false }"
+  class={`rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-white w-1/5`}
+>
+  <div @click="open = true">
+    <img
+      src={image}
+      alt={`${name}'s photo`}
+      class={`rounded-md w-full object-cover "h-51.2"`}
+    />
 
-  <div class="mt-4">
-    <h5 class="font-semibold">{name}</h5>
-    <span class="text-white bg-primary-bg-500 px-3 py-1 inline-block rounded-full mt-1">{position}</span>
+    <div class="mt-4">
+      <h5 class="font-semibold">{name}</h5>
+      <span
+        class="text-white bg-primary-bg-500 px-3 py-1 inline-block rounded-full mt-1"
+        >{position}</span
+      >
 
-    <div class="flex justify-start gap-4 mt-3">
-      {contact?.linkedin && (
-        <a href={contact.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-          <img src="/favicon/linkedin.png" alt="LinkedIn" class="w-6 h-6 hover:scale-110 transition-transform" />
-        </a>
-      )}
-      {contact?.email && (
-        <a href={`mailto:${contact.email}`} aria-label="Email">
-          <img src="/favicon/email.png" alt="Email" class="w-6 h-6 hover:scale-110 transition-transform" />
-        </a>
-      )}
-      {contact?.website && (
-        <a href={contact.website.startsWith('http') ? contact.website : `https://${contact.website}`} target="_blank" rel="noopener noreferrer" aria-label="Personal Website">
-          <img src="/favicon/website.png" alt="Website" class="w-6 h-6 hover:scale-110 transition-transform" />
-        </a>
-      )}
+      <div class="flex justify-start gap-4 mt-3">
+        {
+          contact?.linkedin && (
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <img
+                src="/favicon/linkedin.png"
+                alt="LinkedIn"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+        {
+          contact?.email && (
+            <a href={`mailto:${contact.email}`} aria-label="Email">
+              <img
+                src="/favicon/email.png"
+                alt="Email"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+        {
+          contact?.website && (
+            <a
+              href={
+                contact.website.startsWith("http")
+                  ? contact.website
+                  : `https://${contact.website}`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Personal Website"
+            >
+              <img
+                src="/favicon/website.png"
+                alt="Website"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+      </div>
     </div>
   </div>
 
   <!-- Modal with transparent black tint -->
-  <div x-show="open" x-cloak class="fixed inset-0 flex justify-center items-center z-50" style="background-color: rgba(0, 0, 0, 0.5);" x-transition>
+  <div
+    x-show="open"
+    x-cloak
+    class="fixed inset-0 flex justify-center items-center z-50"
+    style="background-color: rgba(0, 0, 0, 0.5);"
+    x-transition
+  >
     <div class="bg-white p-8 rounded-lg max-w-xl w-full">
       <h3 class="text-xl font-semibold mb-4">Description</h3>
       <p class="mb-4">{description}</p>
-      <button @click="open = false" class="bg-primary-bg-500 text-white px-4 py-2 rounded-md hover:bg-primary-bg-600">
+      <button
+        @click="open = false"
+        class="bg-primary-bg-500 text-white px-4 py-2 rounded-md hover:bg-primary-bg-600"
+      >
         Close
       </button>
     </div>
