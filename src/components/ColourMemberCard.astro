@@ -3,7 +3,7 @@ const { name, description, image, contact, position } = Astro.props;
 const roles = position.split(',').map(role => role.trim());
 ---
 
-<div x-data="{ open: false }" class={`bg-primary-bg-500 rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-primary-bg-500 w-1/6`}>
+<div x-data="{ open: false }" class={`bg-primary-bg-500 rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-primary-bg-500 w-auto md:w-1/6`}>
   <img src={image} alt={`${name}'s photo`} class={`rounded-md w-full object-cover h-42.6`} @click="open = true" />
 
 <div class="mt-4">
