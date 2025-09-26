@@ -1,22 +1,28 @@
 <div class="relative">
   <!-- Toggle Button (mobile only) -->
-  <button id="menu-toggle" class="text-2xl cursor-pointer bg-transparent border-none z-50 relative">
+  <button
+    id="menu-toggle"
+    class="text-2xl cursor-pointer bg-transparent border-none z-50 relative"
+  >
     <span id="menu-icon">☰</span>
   </button>
 
-
   <!-- Dropdown Menu -->
-  <div id="dropdown-menu"
-      class="fixed inset-0 top-12 hidden bg-black/50 z-50 flex flex-col items-start p-8 text-white backdrop-blur-sm lg:max-h-[50vh]">
+  <div
+    id="dropdown-menu"
+    class="fixed inset-0 top-17.5 hidden bg-black/50 z-50 flex flex-col items-start p-8 text-white backdrop-blur-sm lg:max-h-[50vh]"
+  >
     <div class="w-full flex flex-col lg:flex-row lg:justify-between gap-8">
-      <div class=" text-left font-semibold flex flex-col gap-2 w-full lg:w-1/4">
+      <div class="text-left font-semibold flex flex-col gap-2 w-full lg:w-1/4">
         <a href="home">Home</a>
       </div>
 
-
       <!-- Collapsible: Research -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
-        <button class="w-full text-left font-semibold" data-target="research-menu">Research</button>
+        <button
+          class="w-full text-left font-semibold"
+          data-target="research-menu">Research</button
+        >
         <ul id="research-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
           <li><a href="description">Description</a></li>
           <li><a href="wetlab">Wetlab</a></li>
@@ -28,16 +34,22 @@
 
       <!-- Collapsible: Support -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
-        <button class="w-full text-left font-semibold" data-target="support-menu">Support</button>
+        <button
+          class="w-full text-left font-semibold"
+          data-target="support-menu">Support</button
+        >
         <ul id="support-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
-          <li><a href="finance">Finance</a></li>
-          <li><a href="outreach">Outreach</a></li>
+          <li><a href="/finance">Finance</a></li>
+          <li><a href="/outreach">Outreach</a></li>
+          <li><a href="/wiki">Wiki & Web</a></li>
         </ul>
       </div>
 
       <!-- Team -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
-        <button class="w-full text-left font-semibold" data-target="team-menu">Team</button>
+        <button class="w-full text-left font-semibold" data-target="team-menu"
+          >Team</button
+        >
         <ul id="team-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
           <li><a href="team">Team</a></li>
           <li><a href="attributions">Attributions</a></li>
@@ -47,7 +59,9 @@
 
       <!-- Other -->
       <div class="flex flex-col gap-2 w-full lg:w-1/4">
-        <button class="w-full text-left font-semibold" data-target="other-menu">Other</button>
+        <button class="w-full text-left font-semibold" data-target="other-menu"
+          >Other</button
+        >
         <ul id="other-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
           <li><a href="human_practice">Human Practice</a></li>
           <li><a href="entrepreneurship">Entrepreneurship</a></li>
@@ -56,52 +70,49 @@
       </div>
     </div>
   </div>
-
 </div>
 
 <!-- JavaScript -->
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-  const toggle = document.getElementById('menu-toggle');
-  const menu = document.getElementById('dropdown-menu');
-  const icon = document.getElementById('menu-icon');
+  document.addEventListener("DOMContentLoaded", () => {
+    const toggle = document.getElementById("menu-toggle");
+    const menu = document.getElementById("dropdown-menu");
+    const icon = document.getElementById("menu-icon");
 
-  toggle?.addEventListener('click', () => {
-    if (!menu || !icon) return;
-    
-    const isHidden = menu.classList.contains('hidden');
+    toggle?.addEventListener("click", () => {
+      if (!menu || !icon) return;
 
-    if (isHidden) {
-      menu.classList.remove('hidden');
-      menu.classList.add('slide-in-left');
-      icon.textContent = '✕';
-    } else {
-      menu.classList.remove('slide-in-left');
-      menu.classList.add('slide-out-left');
-      icon.textContent = '☰';
+      const isHidden = menu.classList.contains("hidden");
 
-      // After animation ends, hide the menu
-      menu.addEventListener('animationend', function handler() {
-        menu.classList.add('hidden');
-        menu.classList.remove('slide-out-left');
-        menu.removeEventListener('animationend', handler);
+      if (isHidden) {
+        menu.classList.remove("hidden");
+        menu.classList.add("slide-in-left");
+        icon.textContent = "✕";
+      } else {
+        menu.classList.remove("slide-in-left");
+        menu.classList.add("slide-out-left");
+        icon.textContent = "☰";
+
+        // After animation ends, hide the menu
+        menu.addEventListener("animationend", function handler() {
+          menu.classList.add("hidden");
+          menu.classList.remove("slide-out-left");
+          menu.removeEventListener("animationend", handler);
+        });
+      }
+    });
+
+    const mediaQuery = window.matchMedia("(max-width: 1024px)");
+    document.querySelectorAll("button[data-target]").forEach((button) => {
+      const targetId = button.getAttribute("data-target");
+      if (!targetId) return;
+      const submenu = document.getElementById(targetId);
+
+      button.addEventListener("click", (e) => {
+        if (!mediaQuery.matches) return;
+        e.preventDefault();
+        submenu?.classList.toggle("hidden");
       });
-    }
-  });
-
-  const mediaQuery = window.matchMedia('(max-width: 1024px)');
-  document.querySelectorAll('button[data-target]').forEach(button => {
-    const targetId = button.getAttribute('data-target');
-    if (!targetId) return;
-    const submenu = document.getElementById(targetId);
-
-    button.addEventListener('click', (e) => {
-      if (!mediaQuery.matches) return; 
-      e.preventDefault();
-      submenu?.classList.toggle('hidden');
     });
   });
-
-});
-
 </script>
