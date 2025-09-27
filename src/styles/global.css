@@ -20,34 +20,14 @@
   --color-primary-bg-100: #bec4c6;
   --color-primary-bg-500: #498da1;
   --color-primary-bg-900: #264d63;
-  --color-primary-fg-100: #ffde85;
-  --color-primary-fg-500: #ffffff;
+  --color-primary-fg-100: #ffffff;
+  --color-primary-fg-500: #ffde85;
   --color-primary-fg-900: #ecb240;
   --color-secondary-fg-100: #498da1;
   --color-secondary-fg-500: #8328eb;
   --color-secondary-fg-900: #6608d1;
   --font-primary: "Open Sans", "sans-serif";
   --font-headings: "Lato", "sans-serif";
-}
-
-header {
-  background: var(--color-primary-bg-900)
-}
-
-.special-gradient-wrapper {
-  background: linear-gradient(180deg,
-      var(--color-primary-bg-900),
-      var(--color-primary-bg-500),
-      var(--color-primary-bg-500));
-  min-height: 100vh;
-  padding: 4rem;
-}
-
-footer {
-  background: linear-gradient(180deg,
-      #ffffff,
-      #498da1,
-      #264d63);
 }
 
 html {
@@ -91,32 +71,3 @@ a:hover {
   @apply underline;
 }
 
-@keyframes slideInFromLeft {
-  0% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-  100% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-.slide-in-left {
-  animation: slideInFromLeft 0.3s ease forwards;
-}
-
-@keyframes slideOutToLeft {
-  0% {
-    transform: translateX(0);
-    opacity: 1;
-  }
-  100% {
-    transform: translateX(-100%);
-    opacity: 0;
-  }
-}
-
-.slide-out-left {
-  animation: slideOutToLeft 0.3s ease forwards;
-}
