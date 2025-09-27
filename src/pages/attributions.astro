@@ -4,23 +4,23 @@ import Layout from '@/layouts/Layout.astro';
 ---
 
 <Layout>
- <div slot="content" class="w-full mt-4 px-64 py-16">
-  <h1>Attributions</h1>
-  <script type="text/javascript">
-    // Listen to size change and update form height
-    window.addEventListener('message', function (e) {
-      const {type, data} = JSON.parse(e.data);
-      if (type === 'igem-attribution-form') {
-        const element = document.getElementById('igem-attribution-form')
-        element.style.height = data + 50 +'px'
-      }
-    });
-  </script>
-  <iframe
-    style="width: 100%"
-    id="igem-attribution-form"
-    src="https://teams.igem.org/wiki/5708/attributions"
-  >
-  </iframe>
-
+  <div slot="content" class="w-full mt-4 px-64 py-16">
+    <h1>Attributions</h1>
+    <script type="text/javascript">
+      // Listen to size change and update form height
+      window.addEventListener('message', function (e) {
+        const {type, data} = JSON.parse(e.data);
+        if (type === 'igem-attribution-form') {
+          const element = document.getElementById('igem-attribution-form')
+          element.style.height = data + 50 +'px'
+        }
+      });
+    </script>
+    <iframe
+      style="width: 100%"
+      id="igem-attribution-form"
+      src="https://teams.igem.org/wiki/5708/attributions"
+    >
+    </iframe>
+  </div>
 </Layout>
