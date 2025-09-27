@@ -1,5 +1,40 @@
+---
+import PageLink from "./PageLink.astro";
+---
+
+<style>
+  @keyframes slideInFromLeft {
+    0% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+    100% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+  }
+
+  .slide-in-left {
+    animation: slideInFromLeft 0.3s ease forwards;
+  }
+
+  @keyframes slideOutToLeft {
+    0% {
+      transform: translateX(0);
+      opacity: 1;
+    }
+    100% {
+      transform: translateX(-100%);
+      opacity: 0;
+    }
+  }
+
+  .slide-out-left {
+    animation: slideOutToLeft 0.3s ease forwards;
+  }
+</style>
+
 <div class="relative">
-  <!-- Toggle Button (mobile only) -->
   <button
     id="menu-toggle"
     class="text-2xl cursor-pointer bg-transparent border-none z-50 relative"
@@ -10,11 +45,12 @@
   <!-- Dropdown Menu -->
   <div
     id="dropdown-menu"
-    class="fixed inset-0 top-17.5 hidden bg-black/50 z-50 flex flex-col items-start p-8 text-white backdrop-blur-sm lg:max-h-[50vh]"
+    class="fixed inset-0 top-17.5 hidden flex z-50 flex-col items-start p-8 text-white backdrop-blur-sm
+      bg-linear-to-b to-20% from-primary-bg-900  to-primary-bg-900/70"
   >
     <div class="w-full flex flex-col lg:flex-row lg:justify-between gap-8">
       <div class="text-left font-semibold flex flex-col gap-2 w-full lg:w-1/4">
-        <a href="home">Home</a>
+        <a href="/">Home</a>
       </div>
 
       <!-- Collapsible: Research -->
@@ -24,11 +60,11 @@
           data-target="research-menu">Research</button
         >
         <ul id="research-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
-          <li><a href="description">Description</a></li>
-          <li><a href="wetlab">Wetlab</a></li>
-          <li><a href="model">Model</a></li>
-          <li><a href="software">Software</a></li>
-          <li><a href="hardware">Hardware</a></li>
+          <li><PageLink href="/description" text="Description" /></li>
+          <li><PageLink href="/wetlab" text="Wetlab" /></li>
+          <li><PageLink href="/model" text="Model" /></li>
+          <li><PageLink href="/software" text="Software" /></li>
+          <li><PageLink href="/hardware" text="Hardware" /></li>
         </ul>
       </div>
 
@@ -39,9 +75,9 @@
           data-target="support-menu">Support</button
         >
         <ul id="support-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
-          <li><a href="/finance">Finance</a></li>
-          <li><a href="/outreach">Outreach</a></li>
-          <li><a href="/wiki">Wiki & Web</a></li>
+          <li><PageLink href="/finance" text="Finance" /></li>
+          <li><PageLink href="/outreach" text="Outreach" /></li>
+          <li><PageLink href="/wiki" text="Wiki & Web" /></li>
         </ul>
       </div>
 
@@ -51,9 +87,9 @@
           >Team</button
         >
         <ul id="team-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
-          <li><a href="team">Team</a></li>
-          <li><a href="attributions">Attributions</a></li>
-          <li><a href="contribution">Contribution</a></li>
+          <li><PageLink href="/team" text="Team" /></li>
+          <li><PageLink href="/attributions" text="Attributions" /></li>
+          <li><PageLink href="/contribution" text="Contribution" /></li>
         </ul>
       </div>
 
@@ -63,9 +99,9 @@
           >Other</button
         >
         <ul id="other-menu" class="hidden lg:flex mt-2 pl-8 flex-col gap-2">
-          <li><a href="human_practice">Human Practice</a></li>
-          <li><a href="entrepreneurship">Entrepreneurship</a></li>
-          <li><a href="wiki">Wiki</a></li>
+          <li><PageLink href="/human_practice" text="Human Practice" /></li>
+          <li><PageLink href="/entrepreneurship" text="Entrepreneurship" /></li>
+          <li><PageLink href="/wiki" text="Wiki" /></li>
         </ul>
       </div>
     </div>

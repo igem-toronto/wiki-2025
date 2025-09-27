@@ -3,14 +3,15 @@ import { Instagram, Mail, Youtube } from "lucide-astro";
 
 ---
   
-<footer class="w-full p-10 pl-20 pb-16 flex lg:flex-row flex-col flex-start bg-primary-bg-500 text-primary-fg-500 items-center">
+<footer class="
+    w-full p-10 pl-20 pb-16 flex lg:flex-row flex-col flex-start text-primary-fg-500 items-center
+    bg-linear-to-b via-60% to-90% from-white via-primary-bg-500 to-primary-bg-900">
   <div class="flex flex-col items-left gap-2">
     <div class="flex flex-row gap-5 items-center">
       <a href="https://igem.skule.ca" class="hover:scale-110 duration-200">
         <img src="https://static.igem.wiki/teams/5708/images/igemto.webp" class="w-auto h-13" />
       </a>
-      <div class="flex flex-row gap-2 items-center">
-      
+      <div class="flex flex-row gap-2 items-center text-primary-fg-100">
         <a href="https://instagram.com/igemtoronto" class="hover:scale-110 duration-200">
           <Instagram size={38} />
         </a>
@@ -37,7 +38,7 @@ import { Instagram, Mail, Youtube } from "lucide-astro";
       </div>
     </div>
   </div>
-  <div>
-    <img src="https://static.igem.wiki/teams/5708/finance/footer-logos.webp" class="w-auto h-64 ml-0 lg:ml-20" />
+  <div class="ml-0 lg:ml-20">
+    <img src="https://static.igem.wiki/teams/5708/finance/footer-logos.webp" class="w-auto h-64" />
   </div>
 </footer>
