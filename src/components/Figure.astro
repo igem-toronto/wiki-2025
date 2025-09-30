@@ -22,15 +22,16 @@ const {
 } = Astro.props;
 ---
 
-<figure class={`flex flex-col items-center justify-center w-fit ${className}`}>
-  <Image
-    src={src}
-    alt={alt}
-    width={width}
-    height={height}
-    sizes={sizes}
-    class="rounded"
-  />
-  {caption && <figcaption class="text-sm text-center mt-2 text-gray-600">{caption}</figcaption>}
-</figure>
-
+<div class="w-full flex justify-center my-8 p-4 rounded-xl shadow-lg">
+  <figure class={`flex flex-col items-center justify-center w-fit ${className}`}>
+    <Image
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      sizes={sizes}
+      class="rounded"
+    />
+    {caption && <figcaption class="text-sm text-center mt-2 text-gray-600">{caption}</figcaption>}
+  </figure>
+</div>
