@@ -3,8 +3,147 @@ import '@/styles/global.css'
 import Layout from '@/layouts/Layout.astro';
 ---
 
+<script>
+  const animationContainer = document.getElementById('animation-container');
+  const pillImage = document.getElementById('pill') as HTMLImageElement;
+  const mystiphageLogo = document.getElementById('mystiphage-logo') as HTMLImageElement;
+  if (!animationContainer || !pillImage || !mystiphageLogo) {
+    throw new Error('Animation container, pill image or mystiphage logo not found');
+  }
+  const animationContext = {
+    x: animationContainer.clientLeft,
+    y: animationContainer.clientTop,
+    width: animationContainer.clientWidth,
+    height: animationContainer.clientHeight,
+    animationProgress: 0,
+    pillState: 'hidden', // 'hidden', 'closed', 'open', 'hidden-end'
+  }
+
+  const phages = [];
+
+  const createPhage = (x: number, y: number) => {
+    const img = document.createElement('img');
+    img.src = 'https://static.igem.wiki/teams/5708/home/phage-collection.webp';
+    img.height = 150;
+    img.width = 150;
+    img.style.position = 'fixed';
+    img.style.top = `${y}px`;
+    img.style.left = `${x}px`;
+
+    document.body.appendChild(img);
+
+    const direction = Math.random() * 2 * Math.PI;
+    const directionX = Math.cos(direction);
+    const directionY = Math.sin(direction);
+
+    return {
+      element: img,
+      x,
+      y,
+      directionX,
+      directionY,
+      life: 500,
+      speed: Math.random() * 8 + 5,
+    };
+  }
+
+  const explodePhages = () => {
+    mystiphageLogo.classList.add('scale-100');
+    mystiphageLogo.classList.remove('scale-0');
+    const x = pillImage.x + pillImage.width / 2;
+    const y = pillImage.y + pillImage.height / 2;
+
+    for (let i = 0; i < 50; i++) {
+      phages.push(createPhage(x, y));
+    }
+
+    const animatePhage = () => {
+      phages.forEach((phage, index) => {
+        phage.x += phage.directionX * phage.speed;
+        phage.y += phage.directionY * phage.speed;
+        phage.life -= 1;
+        phage.element.style.top = `${phage.y}px`;
+        phage.element.style.left = `${phage.x}px`;
+        if (phage.life <= 0) {
+          document.body.removeChild(phage.element);
+          phages.splice(index, 1);
+        }
+      });
+      if (phages.length > 0) {
+        requestAnimationFrame(animatePhage);
+      }
+    }
+
+    requestAnimationFrame(animatePhage);
+  }
+
+  const animatePill = () => {
+    const top = animationContext.height * animationContext.animationProgress;
+    pillImage.style.top = `${top}px`;
+    switch (animationContext.pillState) {
+      case 'hidden':
+        if (animationContext.animationProgress > 0.05) {
+          pillImage.classList.add('opacity-100');
+          pillImage.classList.remove('opacity-0');
+          pillImage.width = animationContext.width * 0.15;
+          animationContext.pillState = 'closed';
+        }
+        break;
+      case 'closed':
+        if (animationContext.animationProgress >= 0.6) {
+          pillImage.src = 'https://static.igem.wiki/teams/5708/home/pill-open.webp';
+          animationContext.pillState = 'open';
+        }
+        if (animationContext.animationProgress < 0.05) {
+          pillImage.classList.add('opacity-0');
+          pillImage.classList.remove('opacity-100');
+          animationContext.pillState = 'hidden';
+        }
+        break;
+      case 'open':
+        if (animationContext.animationProgress < 0.6) {
+          pillImage.src = 'https://static.igem.wiki/teams/5708/home/pill-closed.webp';
+          animationContext.pillState = 'closed';
+        }
+        if (animationContext.animationProgress >= 0.8) {
+          pillImage.classList.add('opacity-0');
+          pillImage.classList.remove('opacity-100');
+          animationContext.pillState = 'hidden-end';
+          explodePhages();
+        }
+        break;
+      case 'hidden-end':
+        if (animationContext.animationProgress < 0.8) {
+          pillImage.classList.add('opacity-100');
+          pillImage.classList.remove('opacity-0');
+          animationContext.pillState = 'open';
+        }
+        break;
+    }
+  }
+  const animate = () => {
+    console.log(animationContext.animationProgress);
+    animatePill();
+  }
+  document.addEventListener('scroll', () => {
+    const rect = animationContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top <= windowHeight / 2) {
+      const newProgress = (windowHeight / 2 - rect.top) / (windowHeight / 2 + rect.height);
+      animationContext.animationProgress = Math.min(Math.max(newProgress, 0), 1);
+    }
+    animate();
+  })
+</script>
+
 <Layout>
   <div slot="content">
-    <img src="https://static.igem.wiki/teams/5708/images/mystiphage.webp" class="w-auto h-48 mx-auto my-10" />
+    <div class="flex justify-center w-screen my-16 relative" id="animation-container">
+      <img src="https://static.igem.wiki/teams/5708/home/background.webp" class="w-1/2" />
+      <img src="https://static.igem.wiki/teams/5708/home/pill-closed.webp" class="absolute opacity-0 duration-100" id="pill" />
+    </div>
+    <div class="flex justify-center w-screen my-16 relative">
+      <img src="https://static.igem.wiki/teams/5708/images/mystiphage.webp" class="scale-0 duration-2000" id="mystiphage-logo" />
+    </div>
   </div>
 </Layout>
