@@ -7,71 +7,73 @@ const roles = position.split(",").map((role) => role.trim());
   x-data="{ open: false }"
   class={`bg-primary-bg-500 rounded-lg overflow-hidden transition-shadow hover:shadow-2xl border-15 border-primary-bg-500 w-auto md:w-1/6`}
 >
-  <img
-    src={image}
-    alt={`${name}'s photo`}
-    class={`rounded-md w-full object-cover h-42.6`}
-    @click="open = true"
-  />
+  <div @click="open = true">
+    <img
+      src={image}
+      alt={`${name}'s photo`}
+      class={`rounded-md w-full object-cover h-42.6`}
+      @click="open = true"
+    />
 
-  <div class="mt-4">
-    <h5 class="text-white font-semibold text-center">{name}</h5>
-    {
-      roles.map((role) => (
-        <span class="block text-primary-bg-500 bg-white px-3 py-1 rounded-full text-sm mb-2 text-center">
-          {role}
-        </span>
-      ))
-    }
+    <div class="mt-4">
+      <h5 class="text-white font-semibold text-center">{name}</h5>
+      {
+        roles.map((role) => (
+          <span class="block text-primary-bg-500 bg-white px-3 py-1 rounded-full text-sm mb-2 text-center">
+            {role}
+          </span>
+        ))
+      }
 
-    <div class="flex justify-start gap-4 mt-3">
-      {
-        contact?.linkedin && (
-          <a
-            href={contact.linkedin}
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="LinkedIn"
-          >
-            <img
-              src="/favicon/linkedin.png"
-              alt="LinkedIn"
-              class="w-6 h-6 hover:scale-110 transition-transform"
-            />
-          </a>
-        )
-      }
-      {
-        contact?.email && (
-          <a href={`mailto:${contact.email}`} aria-label="Email">
-            <img
-              src="/favicon/email.png"
-              alt="Email"
-              class="w-6 h-6 hover:scale-110 transition-transform"
-            />
-          </a>
-        )
-      }
-      {
-        contact?.website && (
-          <a
-            href={
-              contact.website.startsWith("http")
-                ? contact.website
-                : `https://${contact.website}`
-            }
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Personal Website"
-          >
-            <img
-              src="/favicon/website.png"
-              alt="Website"
-              class="w-6 h-6 hover:scale-110 transition-transform"
-            />
-          </a>
-        )
-      }
+      <div class="flex justify-start gap-4 mt-3">
+        {
+          contact?.linkedin && (
+            <a
+              href={contact.linkedin}
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="LinkedIn"
+            >
+              <img
+                src="/favicon/linkedin.png"
+                alt="LinkedIn"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+        {
+          contact?.email && (
+            <a href={`mailto:${contact.email}`} aria-label="Email">
+              <img
+                src="/favicon/email.png"
+                alt="Email"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+        {
+          contact?.website && (
+            <a
+              href={
+                contact.website.startsWith("http")
+                  ? contact.website
+                  : `https://${contact.website}`
+              }
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="Personal Website"
+            >
+              <img
+                src="/favicon/website.png"
+                alt="Website"
+                class="w-6 h-6 hover:scale-110 transition-transform"
+              />
+            </a>
+          )
+        }
+      </div>
     </div>
   </div>
 
