@@ -19,7 +19,15 @@ import Layout from '@/layouts/Layout.astro';
     pillState: 'hidden', // 'hidden', 'closed', 'open', 'hidden-end'
   }
 
-  const phages = [];
+  const phages: {
+    element: HTMLImageElement;
+    x: number;
+    y: number;
+    directionX: number;
+    directionY: number;
+    life: number;
+    speed: number;
+  }[] = [];
 
   const createPhage = (x: number, y: number) => {
     const img = document.createElement('img');
@@ -122,7 +130,7 @@ import Layout from '@/layouts/Layout.astro';
     }
   }
   const animate = () => {
-    console.log(animationContext.animationProgress);
+    // console.log(animationContext.animationProgress);
     animatePill();
   }
   document.addEventListener('scroll', () => {
@@ -132,7 +140,7 @@ import Layout from '@/layouts/Layout.astro';
       const newProgress = (windowHeight / 2 - rect.top) / (windowHeight / 2 + rect.height);
       animationContext.animationProgress = Math.min(Math.max(newProgress, 0), 1);
     }
-    animate();
+    requestAnimationFrame(animate);
   })
 </script>
 
