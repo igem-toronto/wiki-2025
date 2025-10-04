@@ -35,6 +35,33 @@ import Layout from '@/layouts/Layout.astro';
     side: 'left',
   }];
 
+  const PATH = [{
+    progress: 0, x: 0.28,
+  },{
+    progress: 0.06, x: 0.28,
+  }, {
+    progress: 0.125, x: 0.30,
+  }, {
+    progress: 0.245, x: 0.55,
+  }, {
+    progress: 0.41, x: 0.4,
+  }, {
+    progress: 0.43, x: 0.3,
+  }, {
+    progress: 0.48, x: 0.28,
+  }, {
+    progress: 0.53, x: 0.30,
+  }, {
+    progress: 0.59, x: 0.57,
+  }, {
+    progress: 0.62, x: 0.57,
+  }, {
+    progress: 0.71, x: 0.42,
+  }, {
+    progress: 1,
+    x: 0.42,
+  }]
+
   const animationContext = {
     x: animationContainer.clientLeft,
     y: animationContainer.clientTop,
@@ -112,10 +139,20 @@ import Layout from '@/layouts/Layout.astro';
 
   const animatePill = () => {
     const top = animationContext.height * animationContext.animationProgress;
+    const nextPathIndex = PATH.findIndex(p => p.progress > animationContext.animationProgress);
+    const progressBetweenPoints = 
+      (animationContext.animationProgress - PATH[nextPathIndex - 1].progress)
+      / (PATH[nextPathIndex].progress - PATH[nextPathIndex - 1].progress);
+    const left =
+      (PATH[nextPathIndex - 1].x
+      + (PATH[nextPathIndex].x - PATH[nextPathIndex - 1].x) * progressBetweenPoints);
+
     pillImage.style.top = `${top}px`;
+    pillImage.style.left = `${left * animationContext.width}px`;
+
     switch (animationContext.pillState) {
       case 'hidden':
-        if (animationContext.animationProgress > 0.05) {
+        if (animationContext.animationProgress > 0.1) {
           pillImage.classList.add('opacity-100');
           pillImage.classList.remove('opacity-0');
           pillImage.width = animationContext.width * 0.15;
@@ -127,7 +164,7 @@ import Layout from '@/layouts/Layout.astro';
           pillImage.src = 'https://static.igem.wiki/teams/5708/home/pill-open.webp';
           animationContext.pillState = 'open';
         }
-        if (animationContext.animationProgress < 0.05) {
+        if (animationContext.animationProgress < 0.1) {
           pillImage.classList.add('opacity-0');
           pillImage.classList.remove('opacity-100');
           animationContext.pillState = 'hidden';
@@ -177,7 +214,7 @@ import Layout from '@/layouts/Layout.astro';
   }
 
   const animate = () => {
-    // console.log(animationContext.animationProgress);
+    console.log(animationContext.animationProgress);
     animatePill();
     animateTextBoxes();
   }
