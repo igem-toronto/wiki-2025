@@ -7,9 +7,34 @@ import Layout from '@/layouts/Layout.astro';
   const animationContainer = document.getElementById('animation-container');
   const pillImage = document.getElementById('pill') as HTMLImageElement;
   const mystiphageLogo = document.getElementById('mystiphage-logo') as HTMLImageElement;
+
   if (!animationContainer || !pillImage || !mystiphageLogo) {
     throw new Error('Animation container, pill image or mystiphage logo not found');
   }
+
+  const textBoxes: {
+    element: HTMLElement | null;
+    startProgress: number;
+    isDisplayed: boolean;
+    side: 'left' | 'right';
+  }[] = [{
+    element: document.getElementById('text-box-1'),
+    startProgress: 0.22,
+    isDisplayed: false,
+    side: 'left',
+  }, {
+    element: document.getElementById('text-box-2'),
+    startProgress: 0.3,
+    isDisplayed: false,
+    side: 'right',
+  },
+  {
+    element: document.getElementById('text-box-3'),
+    startProgress: 0.6,
+    isDisplayed: false,
+    side: 'left',
+  }];
+
   const animationContext = {
     x: animationContainer.clientLeft,
     y: animationContainer.clientTop,
@@ -129,9 +154,32 @@ import Layout from '@/layouts/Layout.astro';
         break;
     }
   }
+
+  const animateTextBoxes = () => {
+    textBoxes.forEach((textBox) => {
+      let classToAdd = 'left-[10%]';
+      let classToRemove = 'left-[-30%]';
+      if (textBox.side === 'right') {
+        classToAdd = 'right-[10%]';
+        classToRemove = 'right-[-30%]';
+      }
+      if (animationContext.animationProgress >= textBox.startProgress && !textBox.isDisplayed) {
+        textBox.element?.classList.add(classToAdd);
+        textBox.element?.classList.remove(classToRemove);
+        textBox.isDisplayed = true;
+        console.log(textBox.element?.classList)
+      } else if (animationContext.animationProgress < textBox.startProgress && textBox.isDisplayed) {
+        textBox.element?.classList.add(classToRemove);
+        textBox.element?.classList.remove(classToAdd);
+        textBox.isDisplayed = false;
+      }
+    });
+  }
+
   const animate = () => {
     // console.log(animationContext.animationProgress);
     animatePill();
+    animateTextBoxes();
   }
   document.addEventListener('scroll', () => {
     const rect = animationContainer.getBoundingClientRect();
@@ -149,6 +197,33 @@ import Layout from '@/layouts/Layout.astro';
     <div class="flex justify-center w-screen my-16 relative" id="animation-container">
       <img src="https://static.igem.wiki/teams/5708/home/background.webp" class="w-1/2" />
       <img src="https://static.igem.wiki/teams/5708/home/pill-closed.webp" class="absolute opacity-0 duration-100" id="pill" />
+      <div class="absolute top-[30%] w-[30%] left-[-30%] duration-500 text-2xl" id="text-box-1">
+        Text 1
+        This is some sample text to demonstrate the layout.
+        Text 2
+        This is some sample text to demonstrate the layout.
+        Text 3
+        This is some sample text to demonstrate the layout.
+        This is some sample text to demonstrate the layout.
+      </div>
+      <div class="absolute top-[40%] w-[30%] right-[-30%] duration-500 text-2xl" id="text-box-2">
+        Text 1
+        This is some sample text to demonstrate the layout.
+        Text 2
+        This is some sample text to demonstrate the layout.
+        Text 3
+        This is some sample text to demonstrate the layout.
+        This is some sample text to demonstrate the layout.
+      </div>
+      <div class="absolute top-[65%] w-[30%] left-[-30%] duration-500 text-2xl" id="text-box-3">
+        Text 1
+        This is some sample text to demonstrate the layout.
+        Text 2
+        This is some sample text to demonstrate the layout.
+        Text 3
+        This is some sample text to demonstrate the layout.
+        This is some sample text to demonstrate the layout.
+      </div>
     </div>
     <div class="flex justify-center w-screen my-16 relative">
       <img src="https://static.igem.wiki/teams/5708/images/mystiphage.webp" class="scale-0 duration-2000" id="mystiphage-logo" />
