@@ -1,6 +1,6 @@
 ---
-const { name, description, image, contact, position } = Astro.props;
-const roles = position.split(",").map((role) => role.trim());
+const { name, description, image, contact, roles = [] } = Astro.props;
+// const roles = position.split(",").map((role) => role.trim());
 ---
 
 <div

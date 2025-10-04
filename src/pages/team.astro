@@ -8,7 +8,8 @@ import { parse } from "csv-parse/sync";
 
 type TeamMember = {
   name: string;
-  role: string;
+  roles: string[];
+  primaryRole: string;
   description: string;
   imageSrc: string;
   contact: {
@@ -45,9 +46,14 @@ async function csvToJson(): Promise<TeamMember[]> {
         website: member.website,
       };
 
+      const roles = member.role
+        ? member.role.split(",").map((r) => r.trim())
+        : [];
+
       return {
         name: member.name,
-        role: member.role,
+        roles,
+        primaryRole: roles[0] || "",
         description: member.description,
         imageSrc:
           member.photo && member.photo.trim() !== ""
@@ -64,30 +70,32 @@ async function csvToJson(): Promise<TeamMember[]> {
 const team = await csvToJson();
 
 const co_presidents = team.filter((m) =>
-  m.role.toLowerCase().includes("president")
+  m.primaryRole.toLowerCase().includes("president")
 );
 const wet_lab_members = team.filter((m) =>
-  m.role.toLowerCase().includes("wet lab")
+  m.primaryRole.toLowerCase().includes("wet lab")
 );
 const dry_lab_members = team.filter((m) =>
-  m.role.toLowerCase().includes("dry lab")
+  m.primaryRole.toLowerCase().includes("dry lab")
 );
 const hardware_members = team.filter((m) =>
-  m.role.toLowerCase().includes("hardware")
+  m.primaryRole.toLowerCase().includes("hardware")
 );
 const finance_members = team.filter((m) =>
-  m.role.toLowerCase().includes("finance")
+  m.primaryRole.toLowerCase().includes("finance")
 );
 const ent_members = team.filter((m) =>
-  m.role.toLowerCase().includes("entrepreneurship")
+  m.primaryRole.toLowerCase().includes("entrepreneurship")
 );
 const hp_members = team.filter((m) =>
-  m.role.toLowerCase().includes("human practices")
+  m.primaryRole.toLowerCase().includes("human practices")
 );
 const outreach_members = team.filter((m) =>
-  m.role.toLowerCase().includes("outreach")
+  m.primaryRole.toLowerCase().includes("outreach")
 );
-const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
+const wiki_members = team.filter((m) =>
+  m.primaryRole.toLowerCase().includes("wiki")
+);
 ---
 
 <Layout footerBg="linear-gradient(180deg, #498da1, #bec4c6, #bec4c6)">
@@ -109,7 +117,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
               email: member.contact.email,
               website: member.contact.website,
             }}
-            position="Co-President"
+            roles={member.roles}
           />
         ))
       }
@@ -123,7 +131,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <ColourMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
@@ -144,7 +152,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <WhiteMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
@@ -165,7 +173,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <ColourMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
@@ -186,7 +194,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <WhiteMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
@@ -207,7 +215,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <ColourMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
@@ -228,7 +236,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <WhiteMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
@@ -249,7 +257,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <ColourMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
@@ -270,7 +278,7 @@ const wiki_members = team.filter((m) => m.role.toLowerCase().includes("wiki"));
             <WhiteMemberCard
               name={member.name}
               description={member.description}
-              position={member.role}
+              roles={member.roles}
               image={member.imageSrc}
               contact={{
                 linkedin: member.contact.linkedin,
