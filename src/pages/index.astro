@@ -232,16 +232,36 @@ import Layout from '@/layouts/Layout.astro';
     }
     requestAnimationFrame(animate);
   })
-
+  addEventListener('resize', () => {
+    const rect = animationContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top <= windowHeight / 2) {
+      const newProgress = (windowHeight / 2 - rect.top) / (windowHeight / 2 + rect.height);
+      animationContext.animationProgress = Math.min(Math.max(newProgress, 0), 1);
+    }
+    animationContext.x = animationContainer.clientLeft;
+    animationContext.y = animationContainer.clientTop;
+    animationContext.width = animationContainer.clientWidth;
+    animationContext.height = animationContainer.clientHeight;
+    pillImage.width = animationContext.width * PILL_RELATION_TO_SCREEN;
+    console.log('resize');
+    requestAnimationFrame(animate);
+  })
   pillImage.width = animationContext.width * PILL_RELATION_TO_SCREEN;
+
 </script>
 
 <Layout>
   <div slot="content">
     <div class="flex justify-center w-screen my-16 relative" id="animation-container">
       <img src="https://static.igem.wiki/teams/5708/home/background.webp" class="w-1/2" />
-      <img src="https://static.igem.wiki/teams/5708/home/pill-closed.webp" class="absolute opacity-0 duration-100" id="pill" />
-      <div class="absolute top-[30%] w-[30%] left-[-30%] duration-500 text-2xl" id="text-box-1">
+      <img
+        src="https://static.igem.wiki/teams/5708/home/pill-closed.webp"
+        class="absolute opacity-0 duration-100"
+        id="pill" />
+      <div
+        class="absolute top-[30%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-1">
         Text 1
         This is some sample text to demonstrate the layout.
         Text 2
@@ -250,7 +270,9 @@ import Layout from '@/layouts/Layout.astro';
         This is some sample text to demonstrate the layout.
         This is some sample text to demonstrate the layout.
       </div>
-      <div class="absolute top-[40%] w-[30%] right-[-30%] duration-500 text-2xl" id="text-box-2">
+      <div
+        class="absolute top-[40%] w-[30%] right-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-2">
         Text 1
         This is some sample text to demonstrate the layout.
         Text 2
@@ -259,7 +281,9 @@ import Layout from '@/layouts/Layout.astro';
         This is some sample text to demonstrate the layout.
         This is some sample text to demonstrate the layout.
       </div>
-      <div class="absolute top-[65%] w-[30%] left-[-30%] duration-500 text-2xl" id="text-box-3">
+      <div
+        class="absolute top-[65%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-3">
         Text 1
         This is some sample text to demonstrate the layout.
         Text 2
@@ -270,7 +294,10 @@ import Layout from '@/layouts/Layout.astro';
       </div>
     </div>
     <div class="flex justify-center w-screen my-16 relative">
-      <img src="https://static.igem.wiki/teams/5708/images/mystiphage.webp" class="scale-0 duration-2000" id="mystiphage-logo" />
+      <img
+        src="https://static.igem.wiki/teams/5708/images/mystiphage.webp"
+        class="scale-0 duration-2000"
+        id="mystiphage-logo" />
     </div>
   </div>
 </Layout>
