@@ -94,7 +94,7 @@ import Layout from '@/layouts/Layout.astro';
 
   const createPhage = (x: number, y: number) => {
     const img = document.createElement('img');
-    img.src = 'https://static.igem.wiki/teams/5708/home/phage.webp';
+    img.src = 'https://static.igem.wiki/teams/5708/home/phage-cropped.webp';
     img.height = PHAGE_RELATION_TO_SCREEN * animationContext.height;
     img.width = PHAGE_RELATION_TO_SCREEN * animationContext.height;
     img.style.position = 'fixed';
@@ -310,6 +310,34 @@ import Layout from '@/layouts/Layout.astro';
         class="scale-0 duration-1000 w-full lg:w-1/2"
         id="mystiphage-logo" />
       <div data-text="generating phage therapies at the speed of AI" class="text-xl lg:text-2xl font-bold">
+      </div>
+    </div>
+    <div class="flex w-screen justify-center mb-48">
+      <div class="relative w-[40rem] h-[40rem]">
+        <a href="/model">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/model-cropped.webp"
+            class="absolute w-1/2 left-0 top-0 rotate-[0deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/experiments">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/wet-lab-cropped.webp"
+            class="absolute w-[49%] right-[1.7%] top-[-2.6%] rotate-[84deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/hardware">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/hardware-cropped.webp"
+            class="absolute w-[42%] bottom-[7%] right-[-10.8%] rotate-[159deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/entrepreneurship">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/entrepreneurship-cropped.webp"
+            class="absolute w-[44.5%] bottom-[-22.3%] left-[29.6%] rotate-[-133deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/human-practices">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/human-practices-cropped.webp"
+            class="absolute w-[43%] bottom-[9%] left-[-6%] rotate-[-63deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/description">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/project-description-cropped.webp"
+            class="absolute w-[34%] bottom-[27%] left-[35%] hover:scale-110 z-20 cursor-pointer duration-200" />
+        </a>
       </div>
     </div>
   </div>
