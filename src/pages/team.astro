@@ -96,6 +96,9 @@ const outreach_members = team.filter((m) =>
 const wiki_members = team.filter((m) =>
   m.primaryRole.toLowerCase().includes("wiki")
 );
+const advisor = team.filter((m) =>
+  m.primaryRole.toLowerCase().includes("advisor")
+);
 ---
 
 <Layout footerBg="linear-gradient(180deg, #498da1, #bec4c6, #bec4c6)">
@@ -276,6 +279,27 @@ const wiki_members = team.filter((m) =>
         {
           wiki_members.map((member) => (
             <WhiteMemberCard
+              name={member.name}
+              description={member.description}
+              roles={member.roles}
+              image={member.imageSrc}
+              contact={{
+                linkedin: member.contact.linkedin,
+                email: member.contact.email,
+                website: member.contact.website,
+              }}
+            />
+          ))
+        }
+      </div>
+    </div>
+
+    <div class="bg-opacity-50 p-4 rounded-lg">
+      <h5 class="text-center">Advisors</h5>
+      <div class="flex flex-wrap justify-center gap-6 mb-4">
+        {
+          advisor.map((member) => (
+            <ColourMemberCard
               name={member.name}
               description={member.description}
               roles={member.roles}
