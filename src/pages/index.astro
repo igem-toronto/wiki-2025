@@ -9,6 +9,7 @@ import Layout from '@/layouts/Layout.astro';
   const animationContainer = document.getElementById('animation-container');
   const pillImage = document.getElementById('pill') as HTMLImageElement;
   const mystiphageLogo = document.getElementById('mystiphage-logo') as HTMLImageElement;
+  const slogan = document.querySelector('[data-text]') as HTMLDivElement;
 
   if (!animationContainer || !pillImage || !mystiphageLogo) {
     throw new Error('Animation container, pill image or mystiphage logo not found');
@@ -21,17 +22,22 @@ import Layout from '@/layouts/Layout.astro';
     side: 'left' | 'right';
   }[] = [{
     element: document.getElementById('text-box-1'),
+    startProgress: 0.1,
+    isDisplayed: false,
+    side: 'right',
+  },{
+    element: document.getElementById('text-box-2'),
     startProgress: 0.22,
     isDisplayed: false,
     side: 'left',
   }, {
-    element: document.getElementById('text-box-2'),
+    element: document.getElementById('text-box-3'),
     startProgress: 0.3,
     isDisplayed: false,
     side: 'right',
   },
   {
-    element: document.getElementById('text-box-3'),
+    element: document.getElementById('text-box-4'),
     startProgress: 0.6,
     isDisplayed: false,
     side: 'left',
@@ -88,7 +94,7 @@ import Layout from '@/layouts/Layout.astro';
 
   const createPhage = (x: number, y: number) => {
     const img = document.createElement('img');
-    img.src = 'https://static.igem.wiki/teams/5708/home/phage-collection.webp';
+    img.src = 'https://static.igem.wiki/teams/5708/home/phage.webp';
     img.height = PHAGE_RELATION_TO_SCREEN * animationContext.height;
     img.width = PHAGE_RELATION_TO_SCREEN * animationContext.height;
     img.style.position = 'fixed';
@@ -112,9 +118,24 @@ import Layout from '@/layouts/Layout.astro';
     };
   }
 
-  const explodePhages = () => {
+  const showLogoWithSlogan = () => {
     mystiphageLogo.classList.add('scale-100');
     mystiphageLogo.classList.remove('scale-0');
+    if (slogan) {
+      setTimeout(() => {
+        let index = 0;
+        const timer = setInterval(() => requestAnimationFrame(() => {
+          if (index >= slogan.dataset.text!.length) {
+            clearInterval(timer);
+          }
+          slogan.innerText = slogan.dataset.text!.substring(0, index++);
+        }), Math.floor(1200 / slogan.dataset.text!.length));
+      }, 500);
+    }
+  }
+
+  const explodePhages = () => {
+    showLogoWithSlogan();
     const x = pillImage.x + pillImage.width / 2 - (PHAGE_RELATION_TO_SCREEN * animationContext.height / 2);
     const y = pillImage.y + pillImage.height / 2 - (PHAGE_RELATION_TO_SCREEN * animationContext.height / 2);
 
@@ -260,44 +281,36 @@ import Layout from '@/layouts/Layout.astro';
         class="absolute opacity-0 duration-100"
         id="pill" />
       <div
-        class="absolute top-[30%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
+        class="absolute top-[10%] w-[30%] right-[-30%] duration-500 text-lg lg:text-2xl"
         id="text-box-1">
-        Text 1
-        This is some sample text to demonstrate the layout.
-        Text 2
-        This is some sample text to demonstrate the layout.
-        Text 3
-        This is some sample text to demonstrate the layout.
-        This is some sample text to demonstrate the layout.
+        By 2050, antibiotic resistance (AMR) might cause ~40 million deaths globally.
       </div>
       <div
-        class="absolute top-[40%] w-[30%] right-[-30%] duration-500 text-lg lg:text-2xl"
+        class="absolute top-[30%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
         id="text-box-2">
-        Text 1
-        This is some sample text to demonstrate the layout.
-        Text 2
-        This is some sample text to demonstrate the layout.
-        Text 3
-        This is some sample text to demonstrate the layout.
-        This is some sample text to demonstrate the layout.
+        Phage therapy is a promising solution, but finding the right phage for a
+        given infection (called phage matching) can take months – far too long for
+        critically ill patients.
       </div>
       <div
-        class="absolute top-[65%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
+        class="absolute top-[45%] w-[30%] right-[-30%] duration-500 text-lg lg:text-2xl"
         id="text-box-3">
-        Text 1
-        This is some sample text to demonstrate the layout.
-        Text 2
-        This is some sample text to demonstrate the layout.
-        Text 3
-        This is some sample text to demonstrate the layout.
-        This is some sample text to demonstrate the layout.
+        At this rate, phage therapy won’t scale to the millions of future infections
+        where antibiotics might fail.
+      </div>
+      <div
+        class="absolute top-[68%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-4">
+        But what if phage matching could take hours instead? Introducing…
       </div>
     </div>
-    <div class="flex justify-center w-screen my-16 relative">
+    <div class="flex flex-col items-center w-screen mb-48 px-4 relative">
       <img
         src="https://static.igem.wiki/teams/5708/images/mystiphage.webp"
-        class="scale-0 duration-2000"
+        class="scale-0 duration-1000 w-full lg:w-1/2"
         id="mystiphage-logo" />
+      <div data-text="generating phage therapies at the speed of AI" class="text-xl lg:text-2xl font-bold">
+      </div>
     </div>
   </div>
 </Layout>
