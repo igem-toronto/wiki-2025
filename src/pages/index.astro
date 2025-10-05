@@ -3,8 +3,342 @@ import '@/styles/global.css'
 import Layout from '@/layouts/Layout.astro';
 ---
 
+<script>
+  const PILL_RELATION_TO_SCREEN = 0.15;
+  const PHAGE_RELATION_TO_SCREEN = 0.05;
+  const animationContainer = document.getElementById('animation-container');
+  const pillImage = document.getElementById('pill') as HTMLImageElement;
+  const mystiphageLogo = document.getElementById('mystiphage-logo') as HTMLImageElement;
+  const slogan = document.querySelector('[data-text]') as HTMLDivElement;
+
+  if (!animationContainer || !pillImage || !mystiphageLogo) {
+    throw new Error('Animation container, pill image or mystiphage logo not found');
+  }
+
+  const textBoxes: {
+    element: HTMLElement | null;
+    startProgress: number;
+    isDisplayed: boolean;
+    side: 'left' | 'right';
+  }[] = [{
+    element: document.getElementById('text-box-1'),
+    startProgress: 0.1,
+    isDisplayed: false,
+    side: 'right',
+  },{
+    element: document.getElementById('text-box-2'),
+    startProgress: 0.22,
+    isDisplayed: false,
+    side: 'left',
+  }, {
+    element: document.getElementById('text-box-3'),
+    startProgress: 0.3,
+    isDisplayed: false,
+    side: 'right',
+  },
+  {
+    element: document.getElementById('text-box-4'),
+    startProgress: 0.6,
+    isDisplayed: false,
+    side: 'left',
+  }];
+
+  const PATH = [{
+    progress: 0, x: 0.355,
+  },{
+    progress: 0.06, x: 0.355,
+  }, {
+    progress: 0.125, x: 0.375,
+  }, {
+    progress: 0.235, x: 0.6,
+  }, {
+    progress: 0.27, x: 0.6,
+  }, {
+    progress: 0.41, x: 0.475,
+  }, {
+    progress: 0.43, x: 0.375,
+  }, {
+    progress: 0.48, x: 0.355,
+  }, {
+    progress: 0.51, x: 0.355,
+  }, {
+    progress: 0.53, x: 0.375,
+  }, {
+    progress: 0.59, x: 0.645,
+  }, {
+    progress: 0.64, x: 0.645,
+  }, {
+    progress: 0.69, x: 0.5,
+  }, {
+    progress: 1, x: 0.5,
+  }]
+
+  const animationContext = {
+    x: animationContainer.clientLeft,
+    y: animationContainer.clientTop,
+    width: animationContainer.clientWidth,
+    height: animationContainer.clientHeight,
+    animationProgress: 0,
+    pillState: 'hidden', // 'hidden', 'closed', 'open', 'hidden-end'
+  }
+
+  const phages: {
+    element: HTMLImageElement;
+    x: number;
+    y: number;
+    directionX: number;
+    directionY: number;
+    life: number;
+    speed: number;
+  }[] = [];
+
+  const createPhage = (x: number, y: number) => {
+    const img = document.createElement('img');
+    img.src = 'https://static.igem.wiki/teams/5708/home/phage-cropped.webp';
+    img.height = PHAGE_RELATION_TO_SCREEN * animationContext.height;
+    img.width = PHAGE_RELATION_TO_SCREEN * animationContext.height;
+    img.style.position = 'fixed';
+    img.style.top = `${y}px`;
+    img.style.left = `${x}px`;
+
+    document.body.appendChild(img);
+
+    const direction = Math.random() * 2 * Math.PI;
+    const directionX = Math.cos(direction);
+    const directionY = Math.sin(direction);
+
+    return {
+      element: img,
+      x,
+      y,
+      directionX,
+      directionY,
+      life: 500,
+      speed: Math.random() * 8 + 5,
+    };
+  }
+
+  const showLogoWithSlogan = () => {
+    mystiphageLogo.classList.add('scale-100');
+    mystiphageLogo.classList.remove('scale-0');
+    if (slogan) {
+      setTimeout(() => {
+        let index = 0;
+        const timer = setInterval(() => requestAnimationFrame(() => {
+          if (index >= slogan.dataset.text!.length) {
+            clearInterval(timer);
+          }
+          slogan.innerText = slogan.dataset.text!.substring(0, index++);
+        }), Math.floor(1200 / slogan.dataset.text!.length));
+      }, 500);
+    }
+  }
+
+  const explodePhages = () => {
+    showLogoWithSlogan();
+    const x = pillImage.x + pillImage.width / 2 - (PHAGE_RELATION_TO_SCREEN * animationContext.height / 2);
+    const y = pillImage.y + pillImage.height / 2 - (PHAGE_RELATION_TO_SCREEN * animationContext.height / 2);
+
+    for (let i = 0; i < 50; i++) {
+      phages.push(createPhage(x, y));
+    }
+
+    const animatePhage = () => {
+      phages.forEach((phage, index) => {
+        phage.x += phage.directionX * phage.speed;
+        phage.y += phage.directionY * phage.speed;
+        phage.life -= 1;
+        phage.element.style.top = `${phage.y}px`;
+        phage.element.style.left = `${phage.x}px`;
+        if (phage.life <= 0) {
+          document.body.removeChild(phage.element);
+          phages.splice(index, 1);
+        }
+      });
+      if (phages.length > 0) {
+        requestAnimationFrame(animatePhage);
+      }
+    }
+
+    requestAnimationFrame(animatePhage);
+  }
+
+  const animatePill = () => {
+    const top = animationContext.height * animationContext.animationProgress;
+    const nextPathIndex = PATH.findIndex(p => p.progress > animationContext.animationProgress);
+    const progressBetweenPoints = 
+      (animationContext.animationProgress - PATH[nextPathIndex - 1].progress)
+      / (PATH[nextPathIndex].progress - PATH[nextPathIndex - 1].progress);
+    const left =
+      (PATH[nextPathIndex - 1].x
+      + (PATH[nextPathIndex].x - PATH[nextPathIndex - 1].x) * progressBetweenPoints)
+      - (PILL_RELATION_TO_SCREEN / 2);
+
+    pillImage.style.top = `${top}px`;
+    pillImage.style.left = `${left * animationContext.width}px`;
+
+    switch (animationContext.pillState) {
+      case 'hidden':
+        if (animationContext.animationProgress > 0.1) {
+          pillImage.classList.add('opacity-100');
+          pillImage.classList.remove('opacity-0');
+          animationContext.pillState = 'closed';
+        }
+        break;
+      case 'closed':
+        if (animationContext.animationProgress >= 0.6) {
+          pillImage.src = 'https://static.igem.wiki/teams/5708/home/pill-open.webp';
+          animationContext.pillState = 'open';
+        }
+        if (animationContext.animationProgress < 0.1) {
+          pillImage.classList.add('opacity-0');
+          pillImage.classList.remove('opacity-100');
+          animationContext.pillState = 'hidden';
+        }
+        break;
+      case 'open':
+        if (animationContext.animationProgress < 0.6) {
+          pillImage.src = 'https://static.igem.wiki/teams/5708/home/pill-closed.webp';
+          animationContext.pillState = 'closed';
+        }
+        if (animationContext.animationProgress >= 0.8) {
+          pillImage.classList.add('opacity-0');
+          pillImage.classList.remove('opacity-100');
+          animationContext.pillState = 'hidden-end';
+          explodePhages();
+        }
+        break;
+      case 'hidden-end':
+        if (animationContext.animationProgress < 0.8) {
+          pillImage.classList.add('opacity-100');
+          pillImage.classList.remove('opacity-0');
+          animationContext.pillState = 'open';
+        }
+        break;
+    }
+  }
+
+  const animateTextBoxes = () => {
+    textBoxes.forEach((textBox) => {
+      let classToAdd = 'left-[10%]';
+      let classToRemove = 'left-[-30%]';
+      if (textBox.side === 'right') {
+        classToAdd = 'right-[10%]';
+        classToRemove = 'right-[-30%]';
+      }
+      if (animationContext.animationProgress >= textBox.startProgress && !textBox.isDisplayed) {
+        textBox.element?.classList.add(classToAdd);
+        textBox.element?.classList.remove(classToRemove);
+        textBox.isDisplayed = true;
+        console.log(textBox.element?.classList)
+      } else if (animationContext.animationProgress < textBox.startProgress && textBox.isDisplayed) {
+        textBox.element?.classList.add(classToRemove);
+        textBox.element?.classList.remove(classToAdd);
+        textBox.isDisplayed = false;
+      }
+    });
+  }
+
+  const animate = () => {
+    console.log(animationContext.animationProgress);
+    animatePill();
+    animateTextBoxes();
+  }
+  document.addEventListener('scroll', () => {
+    const rect = animationContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top <= windowHeight / 2) {
+      const newProgress = (windowHeight / 2 - rect.top) / (windowHeight / 2 + rect.height);
+      animationContext.animationProgress = Math.min(Math.max(newProgress, 0), 1);
+    }
+    requestAnimationFrame(animate);
+  })
+  addEventListener('resize', () => {
+    const rect = animationContainer.getBoundingClientRect();
+    const windowHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top <= windowHeight / 2) {
+      const newProgress = (windowHeight / 2 - rect.top) / (windowHeight / 2 + rect.height);
+      animationContext.animationProgress = Math.min(Math.max(newProgress, 0), 1);
+    }
+    animationContext.x = animationContainer.clientLeft;
+    animationContext.y = animationContainer.clientTop;
+    animationContext.width = animationContainer.clientWidth;
+    animationContext.height = animationContainer.clientHeight;
+    pillImage.width = animationContext.width * PILL_RELATION_TO_SCREEN;
+    console.log('resize');
+    requestAnimationFrame(animate);
+  })
+  pillImage.width = animationContext.width * PILL_RELATION_TO_SCREEN;
+
+</script>
+
 <Layout>
   <div slot="content">
-    <img src="https://static.igem.wiki/teams/5708/images/mystiphage.webp" class="w-auto h-48 mx-auto my-10" />
+    <div class="flex justify-center w-screen my-16 relative" id="animation-container">
+      <img src="https://static.igem.wiki/teams/5708/home/background.webp" class="w-1/2" />
+      <img
+        src="https://static.igem.wiki/teams/5708/home/pill-closed.webp"
+        class="absolute opacity-0 duration-100"
+        id="pill" />
+      <div
+        class="absolute top-[10%] w-[30%] right-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-1">
+        By 2050, antibiotic resistance (AMR) might cause ~40 million deaths globally.
+      </div>
+      <div
+        class="absolute top-[30%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-2">
+        Phage therapy is a promising solution, but finding the right phage for a
+        given infection (called phage matching) can take months – far too long for
+        critically ill patients.
+      </div>
+      <div
+        class="absolute top-[45%] w-[30%] right-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-3">
+        At this rate, phage therapy won’t scale to the millions of future infections
+        where antibiotics might fail.
+      </div>
+      <div
+        class="absolute top-[68%] w-[30%] left-[-30%] duration-500 text-lg lg:text-2xl"
+        id="text-box-4">
+        But what if phage matching could take hours instead? Introducing…
+      </div>
+    </div>
+    <div class="flex flex-col items-center w-screen mb-48 px-4 relative">
+      <img
+        src="https://static.igem.wiki/teams/5708/images/mystiphage.webp"
+        class="scale-0 duration-1000 w-full lg:w-1/2"
+        id="mystiphage-logo" />
+      <div data-text="generating phage therapies at the speed of AI" class="text-xl lg:text-2xl font-bold">
+      </div>
+    </div>
+    <div class="flex w-screen justify-center mb-48">
+      <div class="relative w-[40rem] h-[40rem]">
+        <a href="/model">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/model-cropped.webp"
+            class="absolute w-1/2 left-0 top-0 rotate-[0deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/experiments">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/wet-lab-cropped.webp"
+            class="absolute w-[49%] right-[1.7%] top-[-2.6%] rotate-[84deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/hardware">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/hardware-cropped.webp"
+            class="absolute w-[42%] bottom-[7%] right-[-10.8%] rotate-[159deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/entrepreneurship">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/entrepreneurship-cropped.webp"
+            class="absolute w-[44.5%] bottom-[-22.3%] left-[29.6%] rotate-[-133deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/human-practices">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/human-practices-cropped.webp"
+            class="absolute w-[43%] bottom-[9%] left-[-6%] rotate-[-63deg] hover:scale-110 hover:z-10 cursor-pointer duration-200" />
+        </a>
+        <a href="/description">
+          <img src="https://static.igem.wiki/teams/5708/home/menu-wheel/project-description-cropped.webp"
+            class="absolute w-[34%] bottom-[27%] left-[35%] hover:scale-110 z-20 cursor-pointer duration-200" />
+        </a>
+      </div>
+    </div>
   </div>
 </Layout>
