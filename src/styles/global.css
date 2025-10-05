@@ -43,7 +43,7 @@ h1 {
 }
 
 h2 {
-  @apply font-headings text-2xl sm:text-4xl pb-2 mt-5 mb-2 border-b-primary-fg-900 border-b-2 max-w-[30ch];
+  @apply font-headings text-2xl sm:text-4xl pb-2 mt-5 mb-2 border-b-primary-fg-900 border-b-2 max-w-[40ch];
 }
 
 h3 {
