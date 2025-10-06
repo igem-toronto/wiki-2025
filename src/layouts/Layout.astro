@@ -21,6 +21,7 @@ import IntersectObserver from '@/components/IntersectObserver.tsx';
     <div class="min-h-screen flex flex-col justify-between">
         
         <Header />
+        <slot name="extra-navigation" />
         <slot name="content" />
 
       <Footer />
