@@ -9,6 +9,7 @@
     "astro": "astro"
   },
   "dependencies": {
+    "@astrojs/alpinejs": "^0.4.9",
     "@astrojs/mdx": "^4.3.6",
     "@astrojs/react": "^4.4.0",
     "@citation-js/core": "^0.7.18",

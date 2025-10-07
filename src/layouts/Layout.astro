@@ -1,7 +1,6 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import IntersectObserver from "@/components/IntersectObserver.tsx";
 ---
 
 <!doctype html>
@@ -26,11 +25,6 @@ import IntersectObserver from "@/components/IntersectObserver.tsx";
       sizes="16x16"
       href="favicon/favicon-16x16.png"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
-      rel="stylesheet"
-    />
-    <!-- <script src="https://unpkg.com/alpinejs" defer></script> -->
 
     <meta name="generator" content={Astro.generator} />
     <title>iGEM Toronto 2025</title>
@@ -43,7 +37,6 @@ import IntersectObserver from "@/components/IntersectObserver.tsx";
       <Footer />
     </div>
 
-    <IntersectObserver client:load />
-    <script type="module" src="/src/scripts/Alpine.js"></script>
+    <script src="../scripts/IntersectObserver.ts"></script>
   </body>
 </html>

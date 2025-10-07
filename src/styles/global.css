@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tailwindcss-intersect";
+@import "katex/dist/katex.min.css";
 @config "../../tailwind.config.js";
 
 @font-face {
