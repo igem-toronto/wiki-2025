@@ -1,7 +1,7 @@
 ---
 import Footer from "@/components/Footer.astro";
 import Header from "@/components/Header.astro";
-import IntersectObserver from '@/components/IntersectObserver.tsx';
+import IntersectObserver from "@/components/IntersectObserver.tsx";
 ---
 
 <!doctype html>
@@ -9,25 +9,41 @@ import IntersectObserver from '@/components/IntersectObserver.tsx';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
-    <link rel="apple-touch-icon" sizes="180x180" href="favicon/apple-touch-icon.png">
-    <link rel="icon" type="image/png" sizes="32x32" href="favicon/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="favicon/favicon-16x16.png">
-    <link href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css" rel="stylesheet">
-    <script src="https://unpkg.com/alpinejs" defer></script>
+    <link
+      rel="apple-touch-icon"
+      sizes="180x180"
+      href="favicon/apple-touch-icon.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="favicon/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="favicon/favicon-16x16.png"
+    />
+    <link
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css"
+      rel="stylesheet"
+    />
+    <!-- <script src="https://unpkg.com/alpinejs" defer></script> -->
+
     <meta name="generator" content={Astro.generator} />
     <title>iGEM Toronto 2025</title>
   </head>
   <body>
     <div class="min-h-screen flex flex-col justify-between">
-        
-        <Header />
-        <slot name="content" />
+      <Header />
+      <slot name="content" />
 
       <Footer />
     </div>
 
     <IntersectObserver client:load />
-
-  
+    <script type="module" src="/src/scripts/Alpine.js"></script>
   </body>
 </html>
