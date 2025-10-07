@@ -2,6 +2,8 @@
 author: Henrik S. Zimmermann
 ---
 
+import PdfEmbed from '@/components/PdfEmbed.astro';
+
 # Sponsors
 ## Gold Sponsors
 <div class="flex flex-wrap gap-12 justify-center my-8">
@@ -22,11 +24,7 @@ author: Henrik S. Zimmermann
 </div>
 
 ## Sponsorship Package
-<iframe
+<PdfEmbed
   src="https://static.igem.wiki/teams/5708/finance/igem-toronto-2025-sponsorship-package.pdf"
-  height="500px"
-  width="100%"
-  title="Your Document Title"
-  >
-    Your browser doesn't support iframes.
-</iframe>
+  title="iGEM Toronto 2025 Sponsorship Package"
+/>

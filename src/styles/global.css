@@ -44,19 +44,19 @@ h1 {
 }
 
 h2 {
-  @apply font-headings text-2xl sm:text-4xl pb-2 mt-5 mb-2 border-b-primary-fg-900 border-b-2 max-w-[40ch];
+  @apply font-headings text-2xl sm:text-4xl pb-2pt-4 mt-5 mb-2 border-b-primary-fg-900 border-b-2 max-w-[40ch];
 }
 
 h3 {
-  @apply font-headings text-xl sm:text-3xl font-semibold mt-5 mb-2;
+  @apply font-headings text-xl sm:text-3xl font-semibold mt-5 mb-2 pt-4;
 }
 
 h4 {
-  @apply font-headings text-lg sm:text-2xl text-white font-semibold mt-5 mb-2;
+  @apply font-headings text-lg sm:text-2xl font-semibold mt-5 mb-2;
 }
 
 h5 {
-  @apply font-headings text-xl sm:text-2xl text-black font-semibold mt-5 mb-2;
+  @apply font-headings text-xl sm:text-2xl font-semibold mt-5 mb-2;
 }
 
 h6 {
@@ -64,7 +64,7 @@ h6 {
 }
 
 p {
-  @apply mt-2 mb-8 text-justify;
+  @apply mt-2 mb-6 text-justify;
 }
 
 .citation {

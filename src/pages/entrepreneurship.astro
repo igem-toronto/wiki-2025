@@ -1,9 +1,7 @@
 ---
 import '@/styles/global.css'
 import { Content, getHeadings, frontmatter } from '@/content/entrepreneurship.mdx'
-import Layout from '@/layouts/Layout.astro'
 import Sidebar from '@/components/Sidebar.astro'
-import References from '@/components/References.astro'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 ---
 
@@ -11,7 +9,5 @@ import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <div slot="main">
     <Content />
-
-    <References bibliography={frontmatter.bibliography} />
   </div>
 </ThreeColumnLayout>
