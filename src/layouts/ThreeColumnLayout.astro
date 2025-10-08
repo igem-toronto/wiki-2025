@@ -5,9 +5,6 @@ const headerIconSrc = Astro.props['headerIconSrc']
 ---
 
 <Layout>
-  <div slot="extra-navigation" class="w-full flex px-10">
-    <slot name="extra-navigation" />
-  </div>
   <div slot="content" class="relative">
     <img
       alt="Header Background" class="absolute w-[40vw] right-0 -z-20 hidden lg:block"
@@ -18,8 +15,8 @@ const headerIconSrc = Astro.props['headerIconSrc']
         <img class="w-full" src={headerIconSrc} alt="Header Icon" />
       </div>
     }
-    <div class="w-full flex mt-32">
-      <div class="p-10 bg-white/70 rounded-lg">
+    <div class="w-full flex justify-center mt-32">
+      <div class="p-4 bg-white/70 rounded-lg">
         <slot name="extra-navigation" />
       </div>
     </div>
