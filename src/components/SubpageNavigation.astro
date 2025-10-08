@@ -3,11 +3,12 @@ const { links: extractedLinks, current } = Astro.props
 const links = extractedLinks as { text: string; href: string }[]
 ---
 
-<nav class="flex flex-wrap gap-6">
+<nav class="flex flex-wrap gap-6 justify-center">
   {links.map(link => (
     <a href={link.href} class={`
       text-primary-fg-100
       text-xl
+      text-center
       rounded-lg px-6 py-2 hover:scale-110 duration-200
       ${current === link.text ? 'bg-secondary-fg-500' : 'bg-primary-bg-500 '}`}>
         {link.text}
