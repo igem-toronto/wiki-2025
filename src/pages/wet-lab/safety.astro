@@ -1,8 +1,9 @@
 ---
 import '@/styles/global.css'
-import { Content, getHeadings, frontmatter } from '@/content/wet-lab/index.mdx'
+import { Content, getHeadings, frontmatter } from '@/content/wetlab.mdx'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 import Sidebar from '@/components/Sidebar.astro'
+import References from '@/components/References.astro'
 import SubpageNavigation from '@/components/SubpageNavigation.astro'
 ---
 
@@ -21,5 +22,7 @@ import SubpageNavigation from '@/components/SubpageNavigation.astro'
   />
   <div slot="main">
     <Content />
+
+    <References bibliography={frontmatter.bibliography} />
   </div>
 </ThreeColumnLayout>
