@@ -5,14 +5,21 @@ const headerIconSrc = Astro.props['headerIconSrc']
 ---
 
 <Layout>
-  <div slot="extra-navigation" class="w-full flex justify-center">
-    <slot name="extra-navigation" />
-  </div>
   <div slot="content" class="relative">
-     <img
-        alt="Logo" class="absolute w-[40vw] right-0 -z-20 hidden lg:block"
-        src="https://static.igem.wiki/teams/5708/headericons/header-background-cropped.webp"
+    <img
+      alt="Header Background" class="absolute w-[40vw] right-0 -z-20 hidden lg:block"
+      src="https://static.igem.wiki/teams/5708/headericons/header-background-cropped.webp"
       />
+    { headerIconSrc &&
+      <div class="absolute w-[20vw] right-[8vw] -z-20 top-[8vw]">
+        <img class="w-full" src={headerIconSrc} alt="Header Icon" />
+      </div>
+    }
+    <div class="w-full flex justify-center mt-32">
+      <div class="p-4 bg-white/70 rounded-lg">
+        <slot name="extra-navigation" />
+      </div>
+    </div>
     <article class="py-4 mt-32 mb-32 flex gap-12 justify-center">
       <nav class="xl:flex-[1] flex-[4] hidden lg:block">
         <slot name="sidebar" />
@@ -21,11 +28,7 @@ const headerIconSrc = Astro.props['headerIconSrc']
         <slot name="main" />
       </main>
       <div class="flex-1 hidden lg:block relative">
-        { headerIconSrc &&
-          <div class="hidden xl:block w-full top-15">
-            <img class="w-full" src={headerIconSrc} alt="Header Icon" />
-          </div>
-        }
+        
       </div>
     </article>
   </div>
