@@ -1,0 +1,236 @@
+import Figure from '@/components/Figure.astro'
+
+# Results
+## Phage Spotting
+To validate the phage–host receptor panel used in downstream experiments, we
+performed phage spotting assays in which Lambda, HK97, P2 and Mu were spotted
+onto _E. coli_ strains that differ only in outer-membrane receptor or LPS
+composition. In this spot assay, small volumes of phage lysate are applied to
+a confluent bacterial lawn and lytic infection produces clear zones (plaques)
+where bacteria are killed; the presence, number, and size of plaques reflect
+phage infectivity on that host. Each phage was tested on its cognate target
+strain and on control strains lacking the presumed receptor (ΔLamB or ΔOmpC)
+or expressing a truncated R1 LPS.
+
+The results in Fig. 1 below confirm the expected phenotype – the WT
+protein-binding phages (Lambda and HK97) have high spotting efficiency towards
+the LamB receptor (ΔOmpC) and none towards OmpC receptor (ΔlamB), and the WT
+glycan-binding phages (P2 and Mu) have high spotting efficiency towards the
+K12 LPS and much less so towards the truncated R1 LPS. This validates our
+positive control for the phage spotting, and that these receptor types are
+ suitable for examining how RBP swapping might change host specificity.
+
+<Figure
+  src={"https://static.igem.wiki/teams/5708/wetlab/results5.webp"}
+  alt="Figure 1 Phage spotting results"
+  caption="Figure 1: Lambda, HK97, P2 and Mu phages spotted on E. coli strains with different receptors or LPS." />
+<small>
+  The wild-type protein binding phages Lambda and HK97 had high spotting
+  efficiency in the OmpC knock-out _E. coli_, and low efficiency in lamB
+  knock-out _E. coli._ Similarly, the wild-type glycan-binding phages P2
+  and Mu had high spotting efficiency in _E. coli_ expressing the K12 LPS,
+  and low efficiency against _E. coli_ expressing the truncated R1 LPS.
+</small>
+
+## sgRNA Validation
+
+To assess activity of candidate single-guide RNAs (sgRNAs) against our phages,
+we performed Cas-dependent plaque-reduction spot assays. Bacterial lawns were
+co-transformed with tCas9 or I-C plasmids expressing a Cas protein and either
+a sgRNA or an empty sgRNA cassette (empty vector, EV). The tCas9 plasmid
+expresses _S. pyogenes_ Cas9, regulated by the arabinose-inducible PBAD
+promoter. I-C expresses a cascade (multiprotein complex) comprised of Cas5c,
+Cas7c, Cas3, and Cas8c proteins. Expression is regulated by the rhamnose-inducible
+promoter system (RhaSR-PrhaBAD). 
+
+Upon Cas-protein induction, a functional sgRNA was expected to prevent plaque
+formation by its cognate phage while leaving non-target phages unaffected. Results
+and interpretation of these assays is shown in Figs. 2 and 3 below.
+
+<Figure 
+  src={"https://static.igem.wiki/teams/5708/wetlab/results4.webp"}
+  alt="Figure 2 Phage spotting test of P2 phage with tCas9 plasmid with and without Cas9 induction and sgRNA."
+  caption="Figure 2: Phage spotting test of P2 phage with tCas9 plasmid with and without Cas9 induction and sgRNA." />
+<small>
+  P2 phages were spotted on _E. coli_ K12, which were transformed with tCas9,
+  which inducibly expresses Cas9, and either a sgRNA for a specific phage or an
+  empty sgRNA cassette (empty vector, EV). We expect plaque formation in all
+  conditions (uninduced P2 EV, P2-1; induced P2 EV) except for induced P2-1,
+  where Cas9 is expressed and the sgRNA is present.
+</small>
+
+<Figure 
+  src={"https://static.igem.wiki/teams/5708/wetlab/results3.webp"}
+  alt="Figure 3 Phage spotting test of various phages with IC plasmid with various sgRNAs."
+  caption="Figure 3: Phage spotting test of various phages with IC plasmid with various sgRNAs." />
+<small>
+  P2, Mu, and HK97 phages were spotted on _E. coli_ K12, which were transformed
+  with the pCas3Rh plasmid, which inducibly expresses the Type I-C CRISPR-Cas
+  components and either a sgRNA for a specific phage or an empty sgRNA cassette
+  (empty vector, EV). We expect plaque formation in all uninduced and EV conditions.
+  When Cas expression is induced and the sgRNA is present, we expect reduced plaque
+  formation. Note: Mup49 and Mup52 refer to two different RBDs for the Mu phage.
+</small>
+
+Plaques were smaller and fainter in Cas-induced and sgRNA-present conditions than
+EV or uninduced conditions in both tCas9 and IC plasmid systems, indicating that
+Cas expression and sgRNA targeting may have partially interfered with phage
+replication. However, the spotting efficiency was lower than the average spotting
+efficiency for all phages overall for all conditions, including controls. This
+suggests that the bacteria are behaving abnormally under induction conditions,
+since we expect robust plaque formation in uninduced and empty-vector controls.
+
+The inconsistent results from tCas9 and IC plasmids prompted us to test other
+Cas-protein and sgRNA expression vectors, leading us to select pCas9 and pCRISPR.
+pCas9 expresses S. pyogenes Cas9 (SpyCas9) under a constitutive promoter, and
+pCRISPR is a compatible sgRNA expression plasmid with an independent origin of
+replication and antibiotic resistance marker. The results of the subsequent
+testing are shown in Figs. 4 & 5 below.
+
+<Figure 
+  src={"https://static.igem.wiki/teams/5708/wetlab/results2.webp"}
+  alt="Figure 4 Phage spotting test of various phages with pCas9 plasmid with various sgRNAs."
+  caption="Figure 4: Phage spotting test of various phages with pCas9 plasmid with various sgRNAs." />
+<small>
+  Lambda, HK97, P2, and Mu phages were spotted on _E. coli K12_, which were
+  transformed with pCas9 expressing Cas9, and either a sgRNA for a specific phage
+  or an empty sgRNA cassette (empty vector, EV). We expect all phages to form
+  plaques except for the phage being targeted by the gRNA. Mup49 & Mup52 are used
+  to denote two different RBDs of the wild-type Mu phage. Results indicate that all
+  sgRNAs did not inhibit plaque formation.
+</small>
+
+In a subsequent experiment, pCas9 was co-transformed with another plasmid, pCRISPR,
+in _E. coli_ K12; here, the plasmid expressing Cas machinery was separated from the
+sgRNA expression vector, shown in Fig. 5 below. 
+
+<Figure 
+  src={"https://static.igem.wiki/teams/5708/wetlab/results1.webp"}
+  alt="Figure 5 Phage spotting test of various phages with pCas9 plasmid and orthogonal sgRNA expression in pCRISPR plasmid."
+  caption="Figure 5: Phage spotting test of various phages with pCas9 plasmid and orthogonal sgRNA expression in pCRISPR plasmid." />
+<small>
+  Lambda, HK97, P2, and Mu phages were spotted on E. coli K12, which were
+  co-transformed with pCas9 (expressing Cas9 with an empty sgRNA cassette) and
+  either pCRISPR with a sgRNA for a specific phage or an empty sgRNA cassette
+  (empty vector, EV). We expect all phages to form plaques except for the phage
+  being targeted by the sgRNA. Mup49 & Mup52 are used to denote two different
+  RBDs of the wild-type Mu phage. Positive control 1 and 2 are sgRNA targeting
+  K12 that were previously validated in the Davidson Lab. Results indicate that
+  all sgRNAs did not inhibit plaque formation. However, since positive controls
+  1 & 2 also did not show reduction in plaque formation, we interpret this as
+  systemic error in the experimental setup, which leads us to new avenues for
+  troubleshooting.
+</small>
+
+These data indicate that while native phage-receptor interactions were robustly
+validated, with protein-binding (Lambda, HK97) and glycan-binding phages (P2, Mu)
+showing the expected host-range patterns, the CRISPR-Cas interference assays did
+not provide reproducible evidence of sgRNA-mediated phage inhibition. Inducible
+tCas9 and Type I-C systems produced smaller, fainter plaques under induction yet
+showed low overall spotting efficiency and loss of expected control phenotypes,
+implicating induction conditions, plasmid burden, or other systemic experimental
+error. That compromised bacterial or phage fitness. As a result, we moved to a
+constitutive pCas9/pCRISPR configuration to decouple Cas and sgRNA expression
+and minimize confounding effects; further investigation will be required to
+conclusively evaluate sgRNA activity.
+
+### Gibson assembly of dry lab-generated RBDs
+Gibson assembly for the dry lab’s first batch of Mu and P2 RBDs was validated
+by Sanger sequencing.
+
+## sgRNA Troubleshooting
+
+We are in the process of troubleshooting our sgRNAs, this time examining
+fundamental parts of our experimental design (such as the types of _E. coli_ K12
+strains we are using) to see where errors might be occurring. We suspect there
+might be issues with our bacterial strain having natural chloramphenicol resistance,
+which would prevent it from uptaking the pCas9 plasmid. By investigating these
+issues and making necessary troubleshooting steps, we hope to have working sgRNAs
+in the coming weeks.
+
+## Gibson Assembly of New RBD Batches
+
+At the time of writing this wiki, we are in the process of ordering and receiving
+new batches of RBDs — batch 1 of generated HK97 and Lambda RBDs (arrived), and
+batch 2 of generated Mu and P2 RBDs (to be ordered). Using existing primers we
+previously ordered, we are ready to complete Gibson Assembly to clone these RBDs
+into pETDuet-1.
+
+We will confirm successful Gibson Assembly of the new RBDs into pETDuet-1 by
+Sanger sequencing.
+
+## Recombination of RBDs Using Validated sgRNAs
+
+Immediately following successful sgRNA validation, we will proceed with
+recombination of our cloned RBDs into lysogenic _E. coli_ K12, validating
+successful swaps via colony PCR with checking primers. Afterwards, we will
+conduct the same phage spotting assay shown in Fig. 1, this time with the
+mutant phages (and wild types as controls). We are working to complete these
+experiments in the coming weeks.
+
+
+## Immediate Future Experiments
+
+To characterize generated RBDs that enable successful phage targeting of
+the above bacterial receptors, we will employ adsorption and growth curve assays.
+These serve to characterize the results of the spotting assay in two ways:
+
+1. **Adsorption assay:** interrogates the binding efficiency of the native and designed RBDs to the bacterial receptor it targets.
+2. **Growth curve assay:** quantifies the phage spotting assay using phage titres, allowing for an objective assessment of lytic efficiency of the bacteriophage of interest.
+    
+
+A one-step growth curve is achieved by inoculating a sensitized bacterial
+culture with the phage of interest and sampling the culture at various time
+points to perform a plaque assay, through which the changes in phage titres
+can be quantified and plotted over the infection time [1].
+
+## Future Directions in Phage RBD Discovery and Optimization
+
+Advances in structural biology will be critical once a working AI-designed RBD
+is identified. **Cryo-electron microscopy (cryo-EM)** is especially well-suited
+to phage tail complexes because it requires no crystals and can image very large
+assemblies in a near-native state. Recent cryo-EM studies routinely achieve
+near-atomic resolution on whole phage particles and tail fibers [2].
+**X-ray crystallography**, by contrast, can deliver the highest atomic detail
+for isolated RBD domains (especially rigid tailspikes), yielding clear
+structures of the binding interface [2].
+
+In practice, both methods are complementary: cryo-EM on the intact phage
+(or tail complex) to visualize overall architecture and cryo-electron tomography
+(cryo-ET) for in situ context, while X-ray diffraction of purified RBD or tailspike
+fragments provides high-resolution models of the receptor-binding site. Together
+these structures (“blueprints”) help explain how the RBD docks to its receptor
+and guide further model design and engineering.
+
+**High-throughput library screening** will let us rapidly test thousands or
+millions of AI-generated RBD variants. For example, one could build a phage-
+or yeast-display library of RBD sequences and perform iterative biopanning
+rounds against the target bacterium or purified receptor. Phage display
+leverages extremely diverse libraries (often >10⁹ variants) and enriches binders
+through repeated selection rounds, quickly winnowing a huge pool down to a few
+strong candidates [3]. Coupling this with deep sequencing or high-content sorting
+allows parallel measurement of many variants’ binding. Approaches like surface
+plasmon resonance, common in antibody engineering, would let us scan the
+AI-designed library at scale and pick out functional RBDs for further
+validation [4].
+
+Finally, **directed evolution** can refine any hits and generate data to
+improve the AI model. In practice, this might mean taking a promising AI-designed
+RBD, introducing diversity (e.g., by error-prone PCR, DNA shuffling, or mutagenesis
+plasmids), and then selecting for tighter binding or broader host range over
+multiple rounds. For example, phage-assisted continuous evolution (PACE) or
+cyclic error-prone phage propagation could iteratively improve binding affinity
+and specificity — analogous to antibody maturation — and have been used to expand
+phage host range by mutating tail fiber proteins [2]. Each round of selection
+generates new sequence–function data, which could be fed back to retrain the AI
+model. In this way, iterative cycles of **design → experimental selection →
+data-driven redesign** would converge on optimized RBDs that both work _in vitro_
+and enrich the training set for future predictions.
+
+## References
+
+1. Dominguez-Mirazo, M. _et al._ (2024). [_Study on bacteriophage one-step growth curves_](https://pmc.ncbi.nlm.nih.gov/articles/PMC11323501/). **PMC11323501**.
+2. [_Cryo-EM and X-ray structural studies on phage RBDs_](https://www.nature.com/articles/srep12913). **Nature Scientific Reports**.
+3. Smith, G. _et al._ (2017). [_Phage display and directed evolution of protein–ligand interactions_](https://pubmed.ncbi.nlm.nih.gov/28667619/). **PubMed 28667619**. 
+4. Liu, J. _et al._ (2015). [_Surface plasmon resonance screening in protein engineering_](https://pmc.ncbi.nlm.nih.gov/articles/PMC10163921/). **PMC10163921**.
+
