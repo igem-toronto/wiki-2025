@@ -3,6 +3,9 @@ import Layout from "@/layouts/Layout.astro";
 ---
 
 <Layout>
+  <div slot="extra-navigation" class="w-full flex justify-center">
+    <slot name="extra-navigation" />
+  </div>
   <article slot="content" class="py-4 mt-12 mb-32 flex gap-12 justify-center">
     <nav class="xl:flex-[1] flex-[4] hidden lg:block">
       <slot name="sidebar" />

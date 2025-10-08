@@ -1,0 +1,22 @@
+---
+import '@/styles/global.css'
+import { Content, getHeadings } from '@/content/human-practices/outro.mdx'
+import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
+import Sidebar from '@/components/Sidebar.astro'
+import SubpageNavigation from '@/components/SubpageNavigation.astro'
+---
+
+<ThreeColumnLayout>
+  <Sidebar headings={getHeadings()} slot="sidebar" />
+  <SubpageNavigation
+    links={[
+      { href: '/human-practices/intro', text: 'Intro' },
+      { href: '/human-practices/outro', text: 'Outro' },
+    ]} 
+    current="Outro"
+    slot="extra-navigation"
+  />
+  <div slot="main">
+    <Content />
+  </div>
+</ThreeColumnLayout>
