@@ -1,0 +1,369 @@
+import PdfEmbed from '@/components/PdfEmbed.astro'
+import Figure from '@/components/Figure.astro'
+
+# Design and Experiments
+This section describes the experimental design and protocols for
+
+1. The sgRNA plasmid cloning process 
+2. The RBD plasmid cloning process 
+3. The RBD swapping workflow
+
+## sgRNA Expression Plasmids
+Four plasmids were tested for sgRNA cloning (as part of an iterative
+troubleshooting cycle, as described in the engineering page). Each plasmid
+contains an antibiotic resistance cassette and supports CRISPR-mediated editing
+through either Cas protein expression or sgRNA expression. pHERD30T-cas9
+(abbreviated tcas9; Addgene 194476) and pCas3cRh (Addgene 133773) plasmids
+express gentamicin resistance (GmR), pCas9 (Addgene 42876) expresses
+chloramphenicol resistance (CmR), and pCRISPR (Addgene 113252) expresses
+ampicillin resistance (AmpR). Notably, pCas9 and pCas3cRh encode Cas nucleases
+(Cas9 and Cas3, respectively), while pCRISPR is dedicated to sgRNA expression
+and requires Cas9 supplied from a companion plasmid (typically pCas9). This is
+shown in Fig. 1 below. Four plasmids were tested for sgRNA cloning (as part of
+an iterative troubleshooting cycle, as described in the engineering page). Each
+plasmid contains an antibiotic resistance cassette and supports CRISPR-mediated
+editing through either Cas protein expression or sgRNA expression. pHERD30T-cas9
+(abbreviated tcas9; Addgene 194476) and pCas3cRh (Addgene 133773) plasmids express
+gentamicin resistance (GmR), pCas9 (Addgene 42876) expresses chloramphenicol
+resistance (CmR), and pCRISPR (Addgene 113252) expresses ampicillin resistance
+(AmpR). Notably, pCas9 and pCas3cRh encode Cas nucleases (Cas9 and Cas3,
+respectively), while pCRISPR is dedicated to sgRNA expression and requires Cas9
+supplied from a companion plasmid (typically pCas9). This is shown in Fig. 1 below.
+
+<Figure
+  src={"https://static.igem.wiki/teams/5708/wetlab/igem-2025-wiki-sgrna-cloning-images-final.webp"}
+  alt="Fig 1. General structure of the sgRNA expression plasmids tested"
+  caption="Fig 1. General structure of the sgRNA expression plasmids tested" />
+
+In general, the cloning processes for inserting the sgRNA sequences into these
+plasmids involved annealing forward (F) and reverse (​R) DNA oligos together
+(both of which code for the sgRNA). Both of these have complimentary overhangs
+to restriction sites within the backbone, allowing them to be easily ligated into
+a given expression plasmid. For certain cloning workflows (tCas9), the F and R
+oligos were first constructed using SOE-PCR and then cloned. For others (pCas3Rh,
+pCas9, pCRISPR), the F and R oligos were ordered as full constructs and then cloned.
+
+## tcas9 sgRNA cloning protocol
+The Forward (F) and Reverse (​R) sgRNA oligos were added to a tube in equal
+molar amounts of DNA to total approximately 100 ng. Milli-Q water was added to
+achieve a total volume of 5 μL. 20 μL of Master Mix A given by the recipe from
+Table 1 was added and the first 10 steps of SOE PCR were run as seen in the SOE
+PCR program listed below. 25 μL of Master Mix B given by the recipe from Table
+1 was added. This mix contains the primers that are needed for the reaction to
+take place. Finally, the SOE PCR program was run to completion and the assembled
+sgRNA was digested with _Nhel-HF_ and PCR cleaned. 
+
+
+|Reagent|Master Mix A|Master Mix B|
+|---|:---:|:---:|
+|Q5 2x Master Mix|12.5 μL| 12.5 μL|
+|10 μM External Forward Primer|0 μL|1.25 μL|
+|10 μM External Reverse Primer|0 μL|1.25 μL|
+|Sterile Milli-Q Water|7.5 μL|10μL|
+
+_Table 1. The Master Mix recipe for SOE PCR._
+
+**SOE PCR Program** (a typical program for a desired product less than 2 kb in size):
+1. 94 °C -  5 min
+2. 94 °C - 30 sec
+3. 60 °C - 1.5 min
+4. 72 °C - 2.5 min
+5. Repeat steps 2-4 10X
+6. Hold at 10 °C - 10 min (window of time to add mix B)
+7. 94 °C - 30 sec
+8. 58 °C - 30 sec
+9. 72 °C - 15 sec
+10. Repeat steps 7-9 35X
+11. Hold at 72 °C - 10 min
+12. Hold at 10 °C indefinitely
+
+## IC-CRISPR sgRNA assembly
+IC-CRISPR refers to the cloning process involving pCas3Rh. Upon preparing the
+sgRNA for ligation, the forward and reverse oligos were annealed and
+phosphorylated, as the sgRNA was ordered single-stranded for cost efficiency.
+The oligo annealing was done in a 1.5 mL microfuge tube with the reagents
+shown in Table 2 below (for a reaction totaling 50 μL).
+
+| Reagent | Volume |
+|---|:---:|
+| Oligo I | 1 μL |
+| Oligo II | 1 μL|
+| 10X T4 Ligase Buffer (NEB) | 5 μL |
+| T4 PNK (NEB) T4 Polynucleotide Kinase | 1 μL |
+| ddH<sub>2</sub>0 | 42 μL |
+
+_Table 2: Reagents and amounts used for annealing IC-CRISPR oligos._
+
+The annealing reaction mix was incubated for 1 hour at 37 °C. Then, 2.5 μL of
+1M NaCl was added to phosphorylate the annealed oligos. 
+
+Upon preparing the pCas3cRh plasmid backbones to receive the insert, the
+pCas3cRh plasmids were liquid cultured with GmR and miniprepped to isolate
+the plasmid. Miniprepping was done following the Monarch® Spin Plasmid
+Miniprep Kit protocols. Then, the plasmid was digested with _BsaI-HF_, a Type
+IIS restriction enzyme for Golden Gate Assembly (GGA). _BsaI_ cuts the plasmid
+1 bp outside from the _BsaI_ restriction site, leaving a 4 bp overhang. The
+digestion protocol used the 50 μL reaction mixture in Table 3.
+
+| Reagent | Volume |
+| --- | :---: |
+| pcas3cRh | X μL (0.5 μg to 2 μg of plasmid) |
+| _BsaI_ | 1 μL (up to 2 μL)|
+| 10X Cutsmart Buffer | 5 μL |
+| ddH<sub>2</sub>O | Y μL (to bring up to 50 μL) |
+
+_Table 3: Reagents and amounts used for digesting the pCas3cRh plasmid._
+
+The reaction mixture was incubated at 37 °C for 1 hour, after which the
+digestion was PCR cleaned using the Monarch® PCR & DNA Cleanup Kit and eluted
+with 30 μL of ddH<sub>2</sub>O. After preparing the sgRNA and plasmid backbone,
+ligation was performed to insert the sgRNA into the plasmid backbone using the
+10 μL ligation mixture in Table 4:
+
+| Reagent | Volume |
+| --- | :---: |
+| _BsaI_ digested pCas3cRh | X μL (~50 ng)|
+| Phosphorylated and annealed oligos | 0.5 μL |
+| T4 DNA buffer | 1 μL |
+| T4 DNA ligase | 0.5 μL |
+| ddH<sub>2</sub>O | Y μL (to bring reaction to 10 μL) |
+
+_Table 4: Reagents and amounts used for the ligation reaction._
+
+Then, the ligation reaction mixture was left to incubate at room temperature
+for 2 hours or at 16 °C overnight.
+
+After the ligation was performed, the recombinant plasmid was transformed into
+DH5α with GmR, liquid cultured, then miniprepped to isolate the cloned plasmid
+before sending it for Sanger sequencing to verify if the assembly was successful.
+
+## pCas9 and pCRISPR sgRNA assembly protocol
+pCas9 and pCRISPR both contain _BsaI_ sites for sgRNA cloning similar to
+pCas3cRh. Therefore, the cloning strategies are similar as well. The forward
+and reverse oligos were annealed and phosphorylated. The oligo annealing was
+done in a 1.5 mL microfuge tube with the reagents in Table 5 for a reaction
+totalling 50 μL.
+
+| Reagent | Volume |
+|---|:---:|
+| Oligo I | 1 μL |
+| Oligo II | 1 μL|
+| 10X T4 Ligase Buffer (NEB) | 5 μL |
+| T4 PNK (NEB) T4 Polynucleotide Kinase | 1 μL |
+| ddH<sub>2</sub>0 | 42 μL |
+
+_Table 5: Reagents and amounts used for annealing IC-CRISPR oligos._
+
+The annealing reaction mix was incubated for 1 hour at 37 °C. Then, 2.5 μL of
+1M NaCl was added to phosphorylate the annealed oligos. 
+
+To prepare pCas9 and pCRISPR for ligation, the plasmid was digested with _BsaI-HF_,
+a Type IIS restriction enzyme for Golden Gate Assembly (GGA). _BsaI_ cuts the
+plasmid 1 bp outside from the _BsaI_ restriction site, leaving a 4 bp overhang.
+The digestion protocol used the 50 μL reaction mixture in Table 6.
+
+| Reagent | Volume |
+| --- | :---: |
+| pcas9/pCRISPR | X μL (0.5 μg to 2 μg of plasmid) |
+| BsaI | 1 μL (up to 2 μL)|
+| 10X Cutsmart Buffer | 5 μL |
+| ddH<sub>2</sub>O | Y μL (to bring up to 50 μL) |
+
+_Table 6: Reagents and amounts used for digesting the pCas3cRh plasmid._
+
+The reaction mixture was incubated at 37 °C for 1 hour, after which the
+digestion was PCR cleaned using the Monarch® PCR & DNA Cleanup Kit and
+eluted with 30 μL of ddH2O.
+
+After preparing the sgRNA and plasmid backbone, ligation was performed to
+insert the sgRNA into the plasmid backbone using the 10 μL ligation mixture in
+Table 4:
+
+| Reagent | Volume |
+| --- | :---: |
+| BsaI digested pCas9/pCRISPR | X μL (~50 ng)|
+| Phosphorylated and annealed oligos | 0.5 μL |
+| T4 DNA buffer | 1 μL |
+| T4 DNA ligase | 0.5 μL |
+| ddH<sub>2</sub>O | Y μL (to bring reaction to 10 μL) |
+
+_Table 7: Reagents and amounts used for the pcas9/pCRISPR ligation reaction._
+
+Then, the ligation reaction mixture was left to incubate at room temperature
+for 2 hours or at 16 °C overnight. 
+
+After the ligation was performed, the cloned plasmid was transformed into DH5α
+with GmR, liquid cultured, then miniprepped to isolate the plasmid before
+sending it for Sanger sequencing to verify if the assembly was successful.
+
+## RBD Plasmid Assembly
+For delivery of the RBD sequences (with homology arms to the prophage) into
+_E. coli_ K12, RBDs synthesized from dry lab were cloned into a plasmid called
+pETDuet-1 (Addgene 71146). We first transformed our pETDuet-1 backbone (~5420 bp)
+into competent _E. coli_ DH5α cells using ampicillin plates and incubated them
+overnight at 37 °C. We then digested the miniprepped samples of pETDuet-1 using
+_NcoI_ and _HindIII_ to linearize our backbone. We then incubated them at 37 °C
+for at least 3 hours. 
+
+| Reagent | Volume |
+| --- | :---: |
+| Miniprepped pETDuet-1 | X μL (~1000 ng) |
+| _HindIII_ | 1 μL |
+| _NcoI_ | 1 μL |
+| Cutsmart buffer | 5 μL |
+| ddH<sub>2</sub>O | Y μL (to bring reaction to 50 μL) |
+
+_Table 8: Reagents and amounts used for the digestion of pETDuet-1._
+
+The resulting fragment from the cut is 74 bp. NcoI and HindIII are both type
+II restriction enzymes that leave sticky ends and 4-nucleotide overhangs,
+allowing us to later integrate our generated RBD inserts from dry lab to
+create our plasmid using Gibson Assembly. These inserts are around 200 bp
+and contain the new RBD sequence, flanked by homology arms (HAs) to the WT
+prophage, which are further flanked by overhangs that match our pETDuet-1
+backbone (for simplicity, these overhangs can also be thought of as
+“plasmid HAs”). 
+
+After digestion, we CIP-treated our digested samples using Quick CIP to remove
+the 5'-phosphate groups from each end of the linearized backbone in order to
+prevent self-ligation from taking place. We then purified our digested samples
+to isolate our linearized pETDuet-1 backbones. After, we used Gibson Assembly
+to integrate our generated RBD inserts into our purified linearized backbones.
+This entire process is shown in Fig. 2 below, and the Gibson Assembly recipe
+is shown in Table 9 below.
+
+<Figure
+  src={"https://static.igem.wiki/teams/5708/wetlab/rbd-plasmid-assembly.webp"}
+  alt="Fig. 2: Gibson Assembly workflow for cloning RBD + HAs into pETDuet-1"
+  caption="Fig. 2: Gibson Assembly workflow for cloning RBD + HAs into pETDuet-1" />
+
+| Reagent | Volume |
+| --- | :---: |
+| Digested pETDuet-1 | X μL (100ng) |
+| RBD insert | Y μL (3x molar equivalent of pETDuet-1 |
+| NEBuilder HiFi DNA Assembly Master Mix | 10 μL |
+| Nuclease-free H<sub>2</sub>O | Z μL (to bring reaction to 20 μL |
+
+_Table 9: Reagents and amounts used for Gibson assembly_
+
+We then took our assembled plasmid with the new RBD inserts and transformed
+them into DH5α, and let the plates incubate overnight at 37 °C. Using the
+transformed cells, we then created liquid cultures and minipreps and ran an
+agarose gel to check if our assembly worked. For a positive result, we would
+expect to see a single band around the 6 kb mark using a 1 kb+ DNA ladder.
+Following confirmation of successful assemblies, we then made glycerol stocks
+of successful transformations and saved the successful minipreps for
+cotransformation and rebooting. 
+
+## RBD Swapping
+
+### Cotransformation
+Once all necessary plasmids are assembled (pETDuet-1 and appropriate sgRNA
+plasmids), we co-transform both into lysogenic _E. coli_ K12 for RBD swapping
+to occur. Following confirmation of the swap with colony PCR, we then induce
+resulting cultures with mitomycin C to “reboot” the new phages. 
+
+To begin, the necessary plasmids are co-transformed into lysogenic _E. coli_
+K12 then plated and selected via selectable markers (i.e. GmR, AmpR, CmR, or
+a combination of multiple depending on the plasmids used). Transformed colonies
+are picked and cultured overnight at 37 °C. We then add 5 mL of culture to 50 mL
+of LB media under selection – throughout this entire process, RBD swapping occurs.
+Following this, we add in 5 μL of mitomycin C once the culture’s OD600 reaches
+approximately 0.4. Mitomycin C is an antibiotic which shocks the cells to activate
+transcription of the integrated phage genome. Cells are grown at 37 °C until the
+culture turns clear – indicating that the phages are active and have lysed the cells
+– after which we add chloroform. We shake the sample at 37 °C for 15 minutes, then
+centrifuge and collect the supernatant for titration and phage spotting.
+
+Looking deeper into the swapping process, the wild type RBD is replaced with our
+generated RBD. Recombination occurs both naturally and Cas-assisted, with the
+sgRNA plasmids acting as counterselection. Specifically, if natural
+recombination doesn’t occur, the Cas protein creates double stranded cuts in
+the phage genome, selecting against K12 cells with WT prophage RBDs. This
+also induces a mechanism similar to homology-directed repair, in which the
+generated RBD is utilized to repair the cut, thus enhancing recombination
+efficiency and ensuring the swap is more likely to be successful. 
+
+To validate whether an RBP swap has successfully occurred, we created checking
+primers to run colony PCR on our co-transformed cells. Primers are designed to
+target both the RBD sequence and DNA outside of the RBD + HA region; this way,
+the bands for the amplified region on a gel is indicative of a successful swap,
+and can be discriminated from off-target binding of the checking primers to RBDs
+integrated in the pETDuet-1 plasmid. We also run colony PCR with primers designed
+to target the wild type RBD as a control. For this specific case, no band will
+appear on this gel for successful swaps.
+
+Fig. 3 below showcases the mechanism behind this process.
+
+<Figure
+  src={"https://static.igem.wiki/teams/5708/wetlab/rbp-recombination-via-hdr.webp"}
+  alt="Fig. 33: RBD swapping and validation process."
+  caption="Fig. 33: RBD swapping and validation process." />
+
+### Phage Spotting
+Phage spotting is the final stage in the experimental workflow. It is done by
+pipetting small droplets (1.5 μL) of the phage solution over a lawn of bacteria
+at 10-fold increasing dilutions. If the bacteriophage is able to lyse the
+bacteria it is being tested against, a large plaque or various small plaques
+will form on the lawn, reflecting both the efficiency at which the phage lyses
+its target, and the concentration at which it is being tested (note: plaques
+are zones of clearance of bacteria on the agar plate). By obtaining a countable
+number of plaques, it is possible to quantify phage titres in plaque-forming
+units per milliliter (PFU/mL).
+
+The goal of the phage spotting assay is to evaluate how host specificity
+changes when wild-type phage RBDs are replaced with dry lab-generated variants.
+We use two glycan-binding phages (Mu and P2) and two protein-binding phages
+(Lambda and HK97), alongside a panel of E. coli strains: K12, BL21, ΔOmpC, and
+ΔLamB. Wild-type Mu and P2 recognize the K12 LPS core, while Lambda and HK97
+recognize the LamB receptor on K12. BL21 instead has a truncated R1-core LPS,
+preventing infection by Mu and P2, while ΔLamB lacks the LamB receptor needed
+for Lambda and HK97 infection. Conversely, ΔOmpC lacks OmpC, which is not
+normally used by wild-type protein-binding phages but is the intended target
+for recombinant Lambda and HK97. Thus, K12 and ΔOmpC serve as positive controls
+for wild-type glycan- and protein-binding phages respectively, while BL21 and
+ΔLamB serve as negative controls. Recombinant phages should switch specificity:
+Mu and P2 to BL21’s truncated R1 LPS, and Lambda and HK97 to the OmpC receptor
+in K12 (see Fig. 4 below).
+
+<Figure
+  src={"https://static.igem.wiki/teams/5708/wetlab/phage-spotting-expected-results-new.webp"}
+  alt="Fig. 4:  Phage spotting expected results."
+  caption="Fig. 4:  Phage spotting expected results." />
+<small>
+  A) The types of glycan-binding and protein-binding phages are depicted with
+  colours corresponding to their sensitized target. Initially, WT phages
+  (purple and blue) are able to target K12 and ΔOmpC, but unable to target
+  BL21 and ΔLamB. After RBD swapping is done on each phage, the recombinant
+  phages (red and green) are unable to infect and lyse their previous targets,
+  but can now target BL21 and ΔLamB, which were previously resistant.
+  B) Expected spotting results on bacterial lawns grown on agar plates. Plates
+  with no plaques indicate no lysis has occurred. Plaques are depicted as
+  circles on the lawn, which indicate that lysis of the bacteria by the
+  corresponding phage has occurred.
+</small>
+
+## Assembly Sequencing
+Successfully transformed bacteria may have one of two plasmids: The original
+vector with no sgRNA insert, or assembled plasmid with sgRNA insert. To verify
+successful cloning of sgRNA inserts into their vectors, we employed Sanger
+sequencing at the insert site in the plasmid. Primers complementary to sites
+surrounding the insert sites were added, and the insert was amplified by a
+mixture of dNTPs and fluorescently labeled terminating ddNTPs, resulting in a
+mixture of PCR products with varying lengths. Capillary electrophoresis with
+fluorescence reading is used to determine the sequence of the amplified insert
+(Eren et. al). Resulting DNA sequences acquired from fluorescence readings are
+aligned against expected vector assemblies and successful sgRNA assembly is
+verified by presence of a 34bp sequence (IC-CRISPR) or 40bp sequence (tCas9) at
+the site of insert analogous to the transformed sgRNA. 
+
+## Lab Notes
+### BioZone and BME Lab Notes
+<PdfEmbed
+  src="https://static.igem.wiki/teams/5708/wetlab/igem-toronto-2025-bme-bz-combined-lab-notes-compressed-compressed.pdf"
+  title="BME and BioZone Lab Notes" />
+
+### MaRS Lab Notes
+<PdfEmbed
+  src="https://static.igem.wiki/teams/5708/wetlab/igem-toronto-mars-lab-notes-final.pdf"
+  title="MaRS Lab Notes" />

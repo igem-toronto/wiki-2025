@@ -32,8 +32,8 @@ import Header from "@/components/Header.astro";
   <body>
     <div class="min-h-screen flex flex-col justify-between">
       <Header />
+      <slot name="extra-navigation" />
       <slot name="content" />
-
       <Footer />
     </div>
 
