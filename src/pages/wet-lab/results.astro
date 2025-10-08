@@ -3,7 +3,6 @@ import '@/styles/global.css'
 import { Content, getHeadings, frontmatter } from '@/content/wetlab.mdx'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 import Sidebar from '@/components/Sidebar.astro'
-import References from '@/components/References.astro'
 import SubpageNavigation from '@/components/SubpageNavigation.astro'
 ---
 
@@ -17,12 +16,10 @@ import SubpageNavigation from '@/components/SubpageNavigation.astro'
       { href: '/wet-lab/parts', text: 'Parts' },
       { href: '/wet-lab/safety', text: 'Safety' },
     ]} 
-    current="Intro"
+    current="Results & Proof of Concept"
     slot="extra-navigation"
   />
   <div slot="main">
     <Content />
-
-    <References bibliography={frontmatter.bibliography} />
   </div>
 </ThreeColumnLayout>
