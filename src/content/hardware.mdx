@@ -1,7 +1,10 @@
+import Figure from "@/components/Figure.astro";
+import PdfEmbed from "@/components/PdfEmbed.astro";
+
 # EVADE - Electroceutical Vehicle for Antimicrobial Delivery
 
 <Figure
-  src="https://static.igem.wiki/teams/5708/hardware/electroceutical-vehicle-for-antimicrobial-delivery-logo.png"
+  src="https://static.igem.wiki/teams/5708/hardware/electroceutical-vehicle-for-antimicrobial-delivery-logo.webp"
   alt="Eradicating resistance at its genetic source through precision phage delivery."
   caption="Eradicating resistance at its genetic source through precision phage delivery."
 />
@@ -59,7 +62,7 @@ An H₂ concentration that is significantly above the normal range is indicative
 
 Antibiotic resistance arises not only in hospitals but also in the broader environment, where reservoirs of antibiotic resistance genes (ARGs) drive the spread of resistant infections. In particular, the gut is a key reservoir of these genes due to its extremely high bacterial density. In both humans and animals, higher ARG levels in the gut correlate with increased pathogen density, and livestock in particular are major contributors @Tan2025ARGsGut, @Kang2021MicroscaleTherapy. Over half of all antibiotics used in agriculture are often unregulated, generating vast ARG reservoirs in animal GI tracts that can spill over into the environment @terKuile2016LowConcentrations. Targeting the gut resistome – one of the most critical sources of resistance genes – is therefore key to controlling the rise of ABR. As such, we envision EVADE as an exploratory preventative strategy against ARG enrichment and spread, generalizable to both humans and animals. By delivering phages and adjuvants directly to one of the most important reservoirs of resistance genes, EVADE strikes at the foundation of antibiotic resistance across human, animal, and environmental health.
 
-EVADE combines AI-modified phages with the emerging field of smart ingestible devices, which use biosensors for condition-specific drug release @Mukherjee2022SmartDevicesSensors. Advances in electronic drug delivery have improved precision and biocompatibility @SomeAuthors2023AdvancedMaterials, making them an ideal platform for targeted phage therapy to ARG hotspots. EVADE bypasses stomach acidity with an enteric coating and conditionally releases its payload in response to intestinal H₂, a metabolite of bacterial fermentation and infection. This ensures that phages (and potentially adjuvants such as quorum-sensing inhibitors or biofilm disruptors) are delivered directly at infection hotspots and sites of ARG enrichment. By concentrating therapies locally at a high multiplicity of infection (MOI) at these sites, EVADE can efficiently clear infections or problematic bacterial pathogens. Stakeholder interviews suggest that targeted phage therapy is particularly useful for fighting infections in less accessible regions of the gut, such as the distal ileum or colon @GoogleDoc2025 – these regions represent key target sites for EVADE.
+EVADE combines AI-modified phages with the emerging field of smart ingestible devices, which use biosensors for condition-specific drug release @Mukherjee2022SmartDevicesSensors. Advances in electronic drug delivery have improved precision and biocompatibility @SomeAuthors2023AdvancedMaterials, making them an ideal platform for targeted phage therapy to ARG hotspots. EVADE bypasses stomach acidity with an enteric coating and conditionally releases its payload in response to intestinal H₂, a metabolite of bacterial fermentation and infection. This ensures that phages (and potentially adjuvants such as quorum-sensing inhibitors or biofilm disruptors) are delivered directly at infection hotspots and sites of ARG enrichment. By concentrating therapies locally at a high multiplicity of infection (MOI) at these sites, EVADE can efficiently clear infections or problematic bacterial pathogens. Stakeholder interviews suggest that targeted phage therapy is particularly useful for fighting infections in less accessible regions of the gut, such as the distal ileum or colon – these regions represent key target sites for EVADE.
 
 ## Device Operation and Technical Details
 
@@ -98,11 +101,11 @@ During transit, the permanent magnet is magnetically attracted to the metal casi
 A small battery is used to provide current to magnetize the electromagnet when drug release is required, and to power the sensing module (including the MCU). All electronics for both the sensing and drug release module are sealed inside of a waterproof, 3D printed capsule designed in CAD software. Mechanical elements, such as the detachable lid and supports for internal components, are also designed and 3D printed in house.
 
 
-  <Figure
-    src="https://static.igem.wiki/teams/5708/hardware/hw-fig4.avif"
-    alt="Figure 4: Pill state before and after detection of bacterial infection with component layout."
-    caption="Figure 4: Pill state before and after detection of bacterial infection with component layout."
-  />
+<Figure
+  src="https://static.igem.wiki/teams/5708/hardware/hw-fig4.avif"
+  alt="Figure 4: Pill state before and after detection of bacterial infection with component layout."
+  caption="Figure 4: Pill state before and after detection of bacterial infection with component layout."
+/>
 
 
 The ‘E-flite 70mAh 1S 3.7V 14C LiPo Battery’ was chosen to supply the high amount of current required by the electromagnet to repel the permanent magnet, as well as the large capacity in a small footprint. The ‘Uxcel 10N Electromagnet’ and ‘Min Ci Neodymium Magnets’ were chosen in tandem to ensure a high attraction between the cap and main capsule body prior to drug release, and to exert a strong magnetic repelling force between each other when drug release is required.
@@ -184,7 +187,7 @@ Exact details surrounding the protocols are broken down in the next sections.
 
 ### Pill Robustness
 
-Transit time through the GI tract ranges from 24 to 72 hrs, depending on diet and metabolism [10]. In order to verify the preservation of our electronics and components within the pill during this time, we test the complete waterproofing of our pill shell design using cobalt chloride paper and a water bath. Cobalt chloride paper is blue when dry and turns pink when moist — which is an indicator of water penetration.
+Transit time through the GI tract ranges from 24 to 72 hrs, depending on diet and metabolism. In order to verify the preservation of our electronics and components within the pill during this time, we test the complete waterproofing of our pill shell design using cobalt chloride paper and a water bath. Cobalt chloride paper is blue when dry and turns pink when moist — which is an indicator of water penetration.
 
 The waterproofing test will be conducted with the pill shell in two states: the full, unreleased state and the half-shell state post phage release. Ideally, 4 tests will be done for both states to ensure consistent and reliable water proofing.
 
@@ -305,103 +308,6 @@ When the release mechanism was triggered, there was an immediate noticeable sepa
   src="https://static.igem.wiki/teams/5708/hardware/hw-fig9.avif"
   alt="Figure 9: Percentage dye release from EVADE capsule prior to and after drug release mechanism activation."
   caption="Figure 9: Percentage dye release from EVADE capsule prior to and after drug release mechanism activation." />
-![Figure 9: Percentage dye release from EVADE capsule prior to and after drug release mechanism activation.](https://static.igem.wiki/teams/5708/hardware/hw-fig9.avif)  
 
 
 # Conclusion/Future Work
-
-
-
-
-
-
-
-
-
-
-
-@article{Tan2025ARGsGut,
-  author  = {Tan, R. and others},
-  title   = {The dissemination, health risks, and mitigation approaches of ARGs in the gut microbiome},
-  journal = {Journal Name},
-  year    = {2025},
-  note    = {pii: S2772416625000464},
-  url     = {https://www.sciencedirect.com/science/article/pii/S2772416625000464?via%3Dihub}
-}
-
-@article{Kang2021MicroscaleTherapy,
-  author  = {Kang, H. and others},
-  title   = {Microscale therapy strategies for something (placeholder)},
-  journal = {Experimental & Molecular Medicine},
-  year    = {2021},
-  volume  = {53},
-  pages   = {1325–1335},  % example
-  doi     = {10.1038/s12276-021-00569-z},
-  url     = {https://www.nature.com/articles/s12276-021-00569-z}
-}
-
-@article{terKuile2016LowConcentrations,
-  author  = {ter Kuile, B. H. and Kraupner, N. and Brul, S.},
-  title   = {The risk of low concentrations of antibiotics in agriculture for resistance in human health care},
-  journal = {FEMS Microbiology Letters},
-  year    = {2016},
-  volume  = {363},
-  number  = {19},
-  pages   = {fnw210},
-  doi     = {10.1093/femsle/fnw210},
-  url     = {https://academic.oup.com/femsle/article/363/19/fnw210/2236218?login=false}
-}
-
-@article{Mukherjee2022SmartDevicesSensors,
-  author  = {Mukherjee, S. and Suleman, S. and Pilloton, R. and Narang, J. and Rani, K.},
-  title   = {State of the art in smart portable, wearable, ingestible and implantable devices for health status monitoring and disease management},
-  journal = {Sensors},
-  year    = {2022},
-  volume  = {22},
-  number  = {11},
-  pages   = {4228},
-  doi     = {10.3390/s22114228},
-  url     = {https://www.mdpi.com/1424-8220/22/11/4228}
-}
-
-@article{SomeAuthors2023AdvancedMaterials,
-  author  = {…},  % fill authors
-  title   = {…},  % fill title
-  journal = {Advanced Healthcare Materials},
-  year    = {2023},
-  volume  = {12},
-  pages   = {e202302969},
-  doi     = {10.1002/adhm.202302969},
-  url     = {https://advanced.onlinelibrary.wiley.com/doi/full/10.1002/adhm.202302969}
-}
-
-@article{SomeAuthors2022FoodChem,
-  author  = {…},  % fill authors
-  title   = {…},  % fill title
-  journal = {Food Chemistry},
-  year    = {2022},
-  volume  = {},
-  pages   = {},
-  doi     = {10.1016/S0168-3659(22)00802-1},
-  url     = {https://www.sciencedirect.com/science/article/pii/S0168365922008021?casa_token=NT5LUSkpwzYAAAAA:NqmbWUIVgpotk3XD-uJbUB_6F_GDbUiW-Z5SwXZQ2H46trqhEumAyQWut3ixjAir0PdPPSjmRmw}
-}
-
-
-@misc{GoogleDoc2025,
-  author  = {Author(s)},
-  title   = {Untitled or title from document},
-  howpublished = {\url{https://docs.google.com/document/d/1DhGqg5HRyzYrBdxR5qIUJD-wE9ZRWvKgW6l0thCLPjI/edit?tab=t.0}},
-  note    = {Accessed: YYYY-MM-DD}
-}
-
-@article{Camilleri2020GastrointestinalTransit,
-  author  = {Camilleri, Michael},
-  title   = {Gastrointestinal transit and motility},
-  journal = {The New England Journal of Medicine},
-  year    = {2020},
-  volume  = {383},      % you may want to check actual volume & pages
-  pages   = {},
-  doi     = {},  % fill actual DOI
-  note    = {Review article}
-}
-
