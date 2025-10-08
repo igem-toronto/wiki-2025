@@ -5,6 +5,8 @@ import PresTeamCard from "../components/PresTeamCard.astro";
 import ColourMemberCard from "../components/ColourMemberCard.astro";
 import WhiteMemberCard from "../components/WhiteMemberCard.astro";
 import { parse } from "csv-parse/sync";
+import fs from "fs";
+import path from "path";
 
 type TeamMember = {
   name: string;
@@ -24,6 +26,9 @@ async function csvToJson(): Promise<TeamMember[]> {
     "https://docs.google.com/spreadsheets/d/1ka_LcPMf5qNfsNNYSSbXgu-1niyEUkUJg8oVA4Xzppk/gviz/tq?tqx=out:csv&sheet=Sheet1"
   );
   const csv_data = await response.text();
+
+  // const csvPath = path.resolve("./src/data/testing.csv");
+  // const csv_data = fs.readFileSync(csvPath, "utf-8");
 
   const team = parse(csv_data, {
     columns: [
@@ -58,7 +63,7 @@ async function csvToJson(): Promise<TeamMember[]> {
         imageSrc:
           member.photo && member.photo.trim() !== ""
             ? member.photo
-            : "https://static.igem.wiki/teams/5230/headshots/plasmid-placeholder.png",
+            : "https://static.igem.wiki/teams/5708/home/phage.webp",
         contact: contact,
       };
     },
