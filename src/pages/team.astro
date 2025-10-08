@@ -73,31 +73,36 @@ const co_presidents = team.filter((m) =>
   m.primaryRole.toLowerCase().includes("president")
 );
 const wet_lab_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("wet lab")
+  m.roles.some((r) => r.toLowerCase().includes("wet lab"))
 );
 const dry_lab_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("dry lab")
-);
-const hardware_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("hardware")
+  m.roles.some((r) => r.toLowerCase().includes("dry lab"))
 );
 const finance_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("finance")
+  m.roles.some((r) => r.toLowerCase().includes("finance"))
+);
+const hardware_members = team.filter((m) =>
+  m.roles.some((r) => r.toLowerCase().includes("hardware"))
 );
 const ent_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("entrepreneurship")
+  m.roles.some((r) => {
+    const role = r.toLowerCase();
+    return (
+      role.includes("entrepreneurship") || role.includes("entrepeneurship")
+    );
+  })
 );
 const hp_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("human practices")
+  m.roles.some((r) => r.toLowerCase().includes("human practices"))
 );
 const outreach_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("outreach")
+  m.roles.some((r) => r.toLowerCase().includes("outreach"))
 );
 const wiki_members = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("wiki")
+  m.roles.some((r) => r.toLowerCase().includes("wiki"))
 );
 const advisor = team.filter((m) =>
-  m.primaryRole.toLowerCase().includes("advisor")
+  m.roles.some((r) => r.toLowerCase().includes("advisor"))
 );
 ---
 
