@@ -6,7 +6,8 @@ import References from '@/components/References.astro'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 ---
 
-<ThreeColumnLayout>
+<ThreeColumnLayout
+  headerIconSrc="https://static.igem.wiki/teams/5708/headericons/description.webp">
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <div slot="main">
     <Content />

@@ -40,7 +40,7 @@ body {
 }
 
 h1 {
-  @apply font-headings text-3xl sm:text-5xl pb-3 text-center mt-5 mb-12 border-b-primary-fg-900 border-b-4;
+  @apply font-headings text-3xl sm:text-5xl pb-3 mt-5 mb-12 border-b-primary-fg-900 border-b-4 inline-block w-[1/2];
 }
 
 h2 {
