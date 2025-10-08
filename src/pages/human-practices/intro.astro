@@ -6,7 +6,8 @@ import Sidebar from '@/components/Sidebar.astro'
 import SubpageNavigation from '@/components/SubpageNavigation.astro'
 ---
 
-<ThreeColumnLayout>
+<ThreeColumnLayout
+    headerIconSrc="https://static.igem.wiki/teams/5708/headericons/human-practices.webp">
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <SubpageNavigation
     links={[
