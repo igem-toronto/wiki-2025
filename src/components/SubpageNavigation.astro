@@ -3,7 +3,7 @@ const { links: extractedLinks, current } = Astro.props
 const links = extractedLinks as { text: string; href: string }[]
 ---
 
-<nav class="flex gap-4 mt-8">
+<nav class="flex gap-4">
   {links.map(link => (
     <a href={link.href} class={`
       text-primary-fg-100
