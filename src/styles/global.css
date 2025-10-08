@@ -75,3 +75,6 @@ a:hover {
   @apply underline;
 }
 
+ol {
+  @apply list-decimal list-inside;
+}
