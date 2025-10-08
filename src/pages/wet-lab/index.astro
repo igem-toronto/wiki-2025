@@ -1,20 +1,22 @@
 ---
 import '@/styles/global.css'
-import { Content, getHeadings } from '@/content/human-practices/intro.mdx'
+import { Content, getHeadings } from '@/content/wet-lab/index.mdx'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 import Sidebar from '@/components/Sidebar.astro'
 import SubpageNavigation from '@/components/SubpageNavigation.astro'
 ---
 
-<ThreeColumnLayout
-    headerIconSrc="https://static.igem.wiki/teams/5708/headericons/human-practices.webp">
+<ThreeColumnLayout>
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <SubpageNavigation
     links={[
-      { href: '/human-practices/intro', text: 'Intro' },
-      { href: '/human-practices/outro', text: 'Outro' },
+      { href: '/wet-lab', text: 'Goals & Purpose' },
+      { href: '/wet-lab/design', text: 'Design & Experiments' },
+      { href: '/wet-lab/results', text: 'Results & Proof of Concept' },
+      { href: '/wet-lab/parts', text: 'Parts' },
+      { href: '/wet-lab/safety', text: 'Safety' },
     ]} 
-    current="Intro"
+    current="Goals & Purpose"
     slot="extra-navigation"
   />
   <div slot="main">

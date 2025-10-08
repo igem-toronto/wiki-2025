@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tailwindcss-intersect";
+@import "katex/dist/katex.min.css";
 @config "../../tailwind.config.js";
 
 @font-face {
@@ -39,28 +40,31 @@ body {
 }
 
 h1 {
-  @apply font-headings text-3xl sm:text-5xl pb-3 text-center mt-5 mb-12 border-b-primary-fg-900 border-b-4;
+  @apply font-headings text-3xl sm:text-5xl pb-3 mt-5 mb-12 border-b-primary-fg-900 border-b-4 inline-block w-[1/2];
 }
 
 h2 {
-  @apply font-headings text-2xl sm:text-4xl pb-2 mt-5 mb-2 border-b-primary-fg-900 border-b-2 max-w-[30ch];
+  @apply font-headings text-2xl sm:text-4xl pb-2 pt-4 mt-5 mb-2 border-b-primary-fg-900 border-b-2 max-w-[40ch];
 }
 
 h3 {
-  @apply font-headings text-xl sm:text-3xl font-semibold mt-5 mb-2;
+  @apply font-headings text-xl sm:text-3xl font-semibold mt-5 mb-2 pt-4;
 }
 
 h4 {
-  @apply font-headings text-lg sm:text-2xl text-white font-semibold mt-5 mb-2;
+  @apply font-headings text-lg sm:text-2xl font-semibold mt-5 mb-2;
 }
 
-h5,
+h5 {
+  @apply font-headings text-xl sm:text-2xl font-semibold mt-5 mb-2;
+}
+
 h6 {
   @apply font-headings text-lg sm:text-2xl font-semibold mt-5 mb-2;
 }
 
 p {
-  @apply mt-2 mb-8 text-justify;
+  @apply mt-2 mb-6 text-justify;
 }
 
 .citation {
@@ -71,3 +75,14 @@ a:hover {
   @apply underline;
 }
 
+ol {
+  @apply list-decimal list-inside;
+}
+
+th {
+  @apply border border-primary-fg-900 px-4 py-2 bg-secondary-fg-900 text-primary-fg-100;
+}
+
+td {
+  @apply border border-primary-bg-900 px-4 py-2;
+}

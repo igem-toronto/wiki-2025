@@ -13,9 +13,12 @@ import rehypeClassNames from 'rehype-class-names';
 import react from '@astrojs/react';
 
 
+import alpinejs from '@astrojs/alpinejs';
+
+
 // https://astro.build/config
 export default defineConfig({
-  integrations: [relativeLinks(), react(), mdx()],
+  integrations: [relativeLinks(), react(), mdx(), alpinejs()],
 
   vite: {
     plugins: [tailwindcss()]

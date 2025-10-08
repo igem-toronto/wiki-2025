@@ -5,7 +5,8 @@ import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 import Sidebar from '@/components/Sidebar.astro'
 ---
 
-<ThreeColumnLayout>
+<ThreeColumnLayout
+  headerIconSrc="https://static.igem.wiki/teams/5708/headericons/wet-lab.webp">
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <div slot="main">
     <Content />
