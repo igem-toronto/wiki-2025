@@ -1,10 +1,13 @@
 ---
 import '@/styles/global.css'
-import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro';
+import { Content, getHeadings } from '@/content/contribution.mdx'
+import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
+import Sidebar from '@/components/Sidebar.astro'
 ---
 
 <ThreeColumnLayout>
+  <Sidebar headings={getHeadings()} slot="sidebar" />
   <div slot="main">
-    To be added
+    <Content />
   </div>
 </ThreeColumnLayout>

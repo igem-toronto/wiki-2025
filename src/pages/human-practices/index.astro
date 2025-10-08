@@ -1,16 +1,14 @@
 ---
 import '@/styles/global.css'
-import { Content, getHeadings, frontmatter } from '@/content/wetlab.mdx'
+import { Content, getHeadings } from '@/content/human-practices/index.mdx'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 import Sidebar from '@/components/Sidebar.astro'
-import References from '@/components/References.astro'
 ---
 
-<ThreeColumnLayout>
+<ThreeColumnLayout
+  headerIconSrc="https://static.igem.wiki/teams/5708/headericons/wet-lab.webp">
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <div slot="main">
     <Content />
-
-    <References bibliography={frontmatter.bibliography} />
   </div>
 </ThreeColumnLayout>

@@ -1,0 +1,23 @@
+---
+import '@/styles/global.css'
+import { Content, getHeadings } from '@/content/human-practices/intro.mdx'
+import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
+import Sidebar from '@/components/Sidebar.astro'
+import SubpageNavigation from '@/components/SubpageNavigation.astro'
+---
+
+<ThreeColumnLayout
+    headerIconSrc="https://static.igem.wiki/teams/5708/headericons/human-practices.webp">
+  <Sidebar headings={getHeadings()} slot="sidebar" />
+  <SubpageNavigation
+    links={[
+      { href: '/human-practices/intro', text: 'Intro' },
+      { href: '/human-practices/outro', text: 'Outro' },
+    ]} 
+    current="Intro"
+    slot="extra-navigation"
+  />
+  <div slot="main">
+    <Content />
+  </div>
+</ThreeColumnLayout>
