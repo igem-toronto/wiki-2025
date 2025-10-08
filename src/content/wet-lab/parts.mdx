@@ -1,0 +1,167 @@
+import Figure from '@/components/Figure.astro';
+
+# Parts Documentation
+The tables below detail all parts used thus far in our project. Each of these
+parts can be thought of as components of higher-level assemblies that enable
+more complex operations within *E. coli* cells.  
+
+In particular:  
+- Each **sgRNA** forms the basis of large CRISPR guide libraries for prophage counterselection and recombineering.  
+- Each **RBD** and their corresponding **homology arms** form the basis of the data that the generative phage bank uses to recommend suitable RBDs (and, by extension, phages) to users.
+
+<Figure
+  src={"https://static.igem.wiki/teams/5708/wetlab/wet-lab-components-pyramid-diagram.webp"}
+  alt="Figure 1 Hierarchical diagram of parts, modules, devices, systems, and assemblies used in our project."
+  caption="Figure 1 Hierarchical diagram of parts, modules, devices, systems, and assemblies used in our project." />
+<small>
+  This framework is inspired by the [McGill iGEM 2023 Parts Documentation](https://2023.igem.wiki/mcgill/parts) [1]
+</small>
+
+## Table 1: Vectors (Backbones) Used for sgRNA and RBD Delivery to E. coli K12
+
+| Title                 | Type    | Short Description                                                                                                                                      |
+| --------------------- | ------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| **pHERD30T**          | Plasmid | Bacterial expression of Cas9 nuclease, tracrRNA, and crRNA guide.                                                                                      |
+| **pCas3cRh**          | Plasmid | Bacterial expression of IC-CRISPR expression system, with crRNA guide.                                                                                 |
+| **pCas3crh-pHERD30T** | Plasmid | All-in-one plasmid with the four I-C system genes cloned downstream of the crRNA site. Rhamnose-inducible system.                                      |
+| **pCRISPR**           | Plasmid | A crRNA expression plasmid for targeting a specific sequence.                                                                                          |
+| **pETDuet-1**         | Plasmid | Contains generated RBD with homology arms for the RBD locus in the phage genome, compatible for co-transformation with CRISPR-Cas expression plasmids. |
+
+## Table 2: sgRNAs Used for RBD Counterselection
+### sgRNAs for Lambda Phage RBD Counterselection
+
+| Number           | Title           | Type   | Short Description                                                                                                            |
+| ---------------- | --------------- | ------ | ---------------------------------------------------------------------------------------------------------------------------- |
+| **BBa_25SVFR5A** | lambda_cas9_2_F | Primer | Forward strand of pCRISPR sgRNA for lambda WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25VPB42N** | lambda_cas9_2_R | Primer | Reverse strand of pCRISPR sgRNA for lambda WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25N96CRU** | lambda_1_F      | Primer | Forward strand of pCas9 sgRNA for lambda WT RBP cleavage.                                                                    |
+| **BBa_25KMKTGF** | lambda_1_R      | Primer | Reverse strand of pCas9 sgRNA for lambda WT RBP cleavage.                                                                    |
+   
+
+### sgRNAs for HK97 Phage RBD Counterselection
+
+| Number           | Title         | Type   | Short Description                                                                                                          |
+| ---------------- | ------------- | ------ | -------------------------------------------------------------------------------------------------------------------------- |
+| **BBa_25MKZ7U1** | HK97_cas9_2_F | Primer | Forward strand of pCRISPR sgRNA for HK97 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25SQP4Y5** | HK97_cas9_2_R | Primer | Reverse strand of pCRISPR sgRNA for HK97 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25WGOFAL** | HK97_1_F      | Primer | Forward strand of pCas9 sgRNA for HK97 WT RBP cleavage.                                                                    |
+| **BBa_25NSVJAR** | HK97_1_R      | Primer | Reverse strand of pCas9 sgRNA for HK97 WT RBP cleavage.  
+
+### sgRNAs for Mu Phage RBD Counterselection
+
+| Number           | Title            | Type   | Short Description                                                                                                             |
+| ---------------- | ---------------- | ------ | ----------------------------------------------------------------------------------------------------------------------------- |
+| **BBa_25YZMMM6** | 1 Mu_Gp49_set1F  | Primer | Forward strand of ICCRISPR sgRNA for Mu WT RBP cleavage.                                                                      |
+| **BBa_25KSL9T3** | 2 Mu_Gp49_set1R  | Primer | Reverse strand of ICCRISPR sgRNA for Mu WT RBP cleavage.                                                                      |
+| **BBa_25KWAZBT** | 3 Mu_Gp49_set2F  | Primer | Forward strand of ICCRISPR sgRNA for Mu WT RBP cleavage.                                                                      |
+| **BBa_25EBREV4** | 4 Mu_Gp49_set2R  | Primer | Reverse strand of ICCRISPR sgRNA for Mu WT RBP cleavage.                                                                      |
+| **BBa_25FLG35K** | 5 Mu_Gp49_set3F  | Primer | Forward strand of ICCRISPR sgRNA for Mu WT RBP cleavage.                                                                      |
+| **BBa_25N3F5SM** | 6 Mu_Gp49_set3R  | Primer | Reverse strand of ICCRISPR sgRNA for Mu WT RBP cleavage.                                                                      |
+| **BBa_25G96OQ1** | 11 Mu_Gp52_set1F | Primer | Forward strand of ICCRISPR sgRNA for Mu GP52 WT RBP cleavage.                                                                 |
+| **BBa_2511CL6U** | 12 Mu_Gp52_set1R | Primer | Reverse strand of ICCRISPR sgRNA for Mu GP52 WT RBP cleavage.                                                                 |
+| **BBa_25BM1ZPI** | 13 Mu_Gp52_set2F | Primer | Forward strand of ICCRISPR sgRNA for Mu GP52 WT RBP cleavage.                                                                 |
+| **BBa_25I8S57L** | 14 Mu_Gp52_set2R | Primer | Reverse strand of ICCRISPR sgRNA for Mu GP52 WT RBP cleavage.                                                                 |
+| **BBa_25ZUKDF1** | Mugp49_1_F       | Primer | Forward strand of pCas9 sgRNA for Mu GP49 WT RBP cleavage.                                                                    |
+| **BBa_257JMD2V** | Mugp49_1_R       | Primer | Reverse strand of pCas9 sgRNA for Mu GP49 WT RBP cleavage.                                                                    |
+| **BBa_25QMSD2W** | Mugp52_1_F       | Primer | Forward strand of pCas9 sgRNA for Mu GP52 WT RBP cleavage.                                                                    |
+| **BBa_25HLLDTM** | Mugp52_1_R       | Primer | Reverse strand of pCas9 sgRNA for Mu GP52 WT RBP cleavage.                                                                    |
+| **BBa_25ZM7LSH** | Mugp49_cas9_2_F  | Primer | Forward strand of pCRISPR sgRNA for Mu GP49 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25MVX00K** | Mugp49_cas9_2_R  | Primer | Reverse strand of pCRISPR sgRNA for Mu GP49 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25YUOYLP** | Mugp52_cas9_2_F  | Primer | Forward strand of pCRISPR sgRNA for Mu GP52 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25UKZTWS** | Mugp52_cas9_2_R  | Primer | Reverse strand of pCRISPR sgRNA for Mu GP52 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+
+### sgRNAs for P2 Phage RBD Counterselection
+
+| Number           | Title             | Type   | Short Description                                                                                                        |
+| ---------------- | ----------------- | ------ | ------------------------------------------------------------------------------------------------------------------------ |
+| **BBa_25VAVDEF** | 7 P2_sgRNA_set1F  | Primer | Forward strand of ICCRISPR sgRNA for P2 WT RBP cleavage.                                                                 |
+| **BBa_25VORT8E** | 8 P2_sgRNA_set1R  | Primer | Reverse strand of ICCRISPR sgRNA for P2 WT RBP cleavage.                                                                 |
+| **BBa_25CWLZ24** | 9 P2_sgRNA_set2F  | Primer | Forward strand of ICCRISPR sgRNA for P2 WT RBP cleavage.                                                                 |
+| **BBa_25O7H6ZZ** | 10 P2_sgRNA_set2R | Primer | Reverse strand of ICCRISPR sgRNA for P2 WT RBP cleavage.                                                                 |
+| **BBa_25TFRND5** | P2_1_F            | Primer | Forward strand of pCas9 sgRNA for P2 WT RBP cleavage.                                                                    |
+| **BBa_25IPJ84H** | P2_1_R            | Primer | Reverse strand of pCas9 sgRNA for P2 WT RBP cleavage.                                                                    |
+| **BBa_25TUTLKJ** | P2_cas9_2_F       | Primer | Forward strand of pCRISPR sgRNA for P2 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+| **BBa_25UFZ72Y** | P2_cas9_2_R       | Primer | Reverse strand of pCRISPR sgRNA for P2 WT RBP cleavage. pCRISPR is being used as a companion for pCas9 in this workflow. |
+
+## Table 3: Phage/pETDuet-1 Homology Arm Collection
+
+### HAs for P2 Phage Swapping
+
+| Number           | Title              | Type              | Short Description              |
+| ---------------- | ------------------ | ----------------- | ------------------------------ |
+| **BBa_25DP4ER5** | P2 5'_Homology arm | Homologous Region | 5' P2 RBD insert homology arm. |
+| **BBa_25CXWX8I** | P2 3'_Homology arm | Homologous Region | 3' P2 RBD insert homology arm. |
+
+### HAs for HK97 Phage Swapping
+
+| Number           | Title                | Type              | Short Description                |
+| ---------------- | -------------------- | ----------------- | -------------------------------- |
+| **BBa_25FGHDVX** | HK97 5'_Homology arm | Homologous Region | 5' HK97 RBD insert homology arm. |
+| **BBa_25AVT94A** | HK97 3'_Homology arm | Homologous Region | 3' HK97 RBD insert homology arm. |
+
+### HAs for Lambda Phage Swapping
+
+| Number           | Title                  | Type              | Short Description                  |
+| ---------------- | ---------------------- | ----------------- | ---------------------------------- |
+| **BBa_25ZWOZ2X** | Lambda 5'_Homology arm | Homologous Region | 5' Lambda RBD insert homology arm. |
+| **BBa_25IP02AV** | Lambda 3'_Homology arm | Homologous Region | 3' Lambda RBD insert homology arm. |
+
+## Table 4: Generated Receptor Binding Domain Collection
+### Generated RBDs for P2 Phage
+
+| Number           | Title    | Type           | Short Description                                                             |
+| ---------------- | -------- | -------------- | ----------------------------------------------------------------------------- |
+| **BBa_25BDXVMP** | P2 RBD_2 | Protein Domain | Batch 1 generated RBD sequence for P2, same length as the WT P2 RBD (225 bp). |
+| **BBa_25YM8GD4** | P2 RBD_8 | Protein Domain | Batch 1 generated RBD sequence for P2, same length as the WT P2 RBD (225 bp). |
+
+### Generated RBDs for HK97 Phage
+
+| Number           | Title      | Type           | Short Description                                                                 |
+| ---------------- | ---------- | -------------- | --------------------------------------------------------------------------------- |
+| **BBa_25D782SA** | HK97 RBD_2 | Protein Domain | Batch 1 generated RBD sequence for HK97, same length as the WT HK97 RBD (330 bp). |
+| **BBa_25QHVNNX** | HK97 RBD_3 | Protein Domain | Batch 1 generated RBD sequence for HK97, same length as the WT HK97 RBD (330 bp). |
+| **BBa_252GAZ08** | HK97 RBD_5 | Protein Domain | Batch 1 generated RBD sequence for HK97, same length as the WT HK97 RBD (330 bp). |
+
+### Generated RBDs for Lambda Phage
+
+| Number           | Title         | Type           | Short Description                                                                     |
+| ---------------- | ------------- | -------------- | ------------------------------------------------------------------------------------- |
+| **BBa_255979JB** | Lambda RBD_1  | Protein Domain | Batch 1 generated RBD sequence for Lambda, same length as the WT Lambda RBD (399 bp). |
+| **BBa_25H4N1YV** | Lambda RBD_15 | Protein Domain | Batch 1 generated RBD sequence for Lambda, same length as the WT Lambda RBD (399 bp). |
+| **BBa_25488QMB** | Lambda RBD_16 | Protein Domain | Batch 1 generated RBD sequence for Lambda, same length as the WT Lambda RBD (399 bp). |
+| **BBa_25VMZMU7** | Lambda RBD_19 | Protein Domain | Batch 1 generated RBD sequence for Lambda, same length as the WT Lambda RBD (399 bp). |
+| **BBa_25NXY6GE** | Lambda RBD_22 | Protein Domain | Batch 1 generated RBD sequence for Lambda, same length as the WT Lambda RBD (399 bp). |
+
+## Table 5: Primers Used for sgRNA Cloning, Gibson Assembly, Colony PCR, and RBD Checking
+### Sequencing Primers
+
+| Number           | Title       | Type   | Short Description                                 |
+| ---------------- | ----------- | ------ | ------------------------------------------------- |
+| **BBa_25Q4XK0E** | pCas9_seq   | Primer | Primer for Sanger sequencing of pCas9 inserts.    |
+| **BBa_25PPNC6Q** | pCRISPR_seq | Primer | Primer for Sanger sequencing of pCas3crh inserts. |
+
+### RBD Checking Primers
+
+| Number           | Title                           | Type   | Short Description                                                                                                                                                                                       |
+| ---------------- | ------------------------------- | ------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **BBa_25P5YRMH** | P2 RBD_2 R checking primer      | Primer | Reverse primer targeting P2 RBD_2. Used to check for P2 RBD_2 in the P2 genome when paired with P2 genome F checking primer.                                                                            |
+| **BBa_25LQLUUJ** | P2 RBD_8 R checking primer      | Primer | Reverse primer targeting P2 RBD_8. Used to check for P2 RBD_8 in the P2 genome when paired with P2 genome F checking primer.                                                                            |
+| **BBa_25FJ9Z00** | P2 wt_RBD R checking primer     | Primer | Reverse primer targeting the P2 WT RBD. Used to check for the P2 WT RBD when paired with P2 genome F checking primer.                                                                                   |
+| **BBa_25POMAHD** | P2 genome F checking primer     | Primer | Forward primer targeting the P2 genome upstream of the sequence homologous to P2 5'_Homology arm. Used to check for an RBD in the P2 genome when paired with a reverse primer targeting a specific RBD. |
+| **BBa_2551JLWJ** | HK97 RBD_2 R checking primer    | Primer | Reverse primer targeting HK97 RBD_2. Used to check for HK97 RBD_2 in the HK97 genome when paired with HK97 genome F checking primer.                                                                    |
+| **BBa_25XRXVMM** | HK97 RBD_3 R checking primer    | Primer | Reverse primer targeting HK97 RBD_3. Used to check for HK97 RBD_3 in the HK97 genome when paired with HK97 genome F checking primer.                                                                    |
+| **BBa_25DRS1ZS** | HK97 RBD_5 R checking primer    | Primer | Reverse primer targeting HK97 RBD_5. Used to check for HK97 RBD_5 in the HK97 genome when paired with HK97 genome F checking primer.                                                                    |
+| **BBa_25V3M31Z** | HK97 wt_RBD R checking primer   | Primer | Reverse primer targeting the HK97 WT RBD. Used to check for HK97 WT RBD in the HK97 genome when paired with HK97 genome F checking primer.                                                              |
+| **BBa_25K1LHYL** | HK97 genome F checking primer   | Primer | Forward primer targeting the HK97 genome upstream of the sequence homologous to HK97 5'_Homology arm. Used to check for an RBD in the HK97 genome when paired with a reverse primer.                    |
+| **BBa_259S1IZM** | Lambda RBD_1 R checking primer  | Primer | Reverse primer targeting Lambda RBD_1. Used to check for Lambda RBD_1 when paired with Lambda genome F checking primer.                                                                                 |
+| **BBa_251VZPHK** | Lambda RBD_15 R checking primer | Primer | Reverse primer targeting Lambda RBD_15. Used to check for Lambda RBD_15 when paired with Lambda genome F checking primer.                                                                               |
+| **BBa_25TWJ1DJ** | Lambda RBD_16 R checking primer | Primer | Reverse primer targeting Lambda RBD_16. Used to check for Lambda RBD_16 when paired with Lambda genome F checking primer.                                                                               |
+| **BBa_25UQ5F7F** | Lambda RBD_19 R checking primer | Primer | Reverse primer targeting Lambda RBD_19. Used to check for Lambda RBD_19 when paired with Lambda genome F checking primer.                                                                               |
+| **BBa_25Z9NGEB** | Lambda RBD_22 R checking primer | Primer | Reverse primer targeting Lambda RBD_22. Used to check for Lambda RBD_22 when paired with Lambda genome F checking primer.                                                                               |
+| **BBa_25NGDB8W** | Lambda wt_RBD R checking primer | Primer | Reverse primer targeting the Lambda WT RBD. Used to check for Lambda WT RBD when paired with Lambda genome F checking primer.                                                                           |
+| **BBa_25MW1CXI** | Lambda genome F checking primer | Primer | Forward primer targeting the Lambda genome upstream of the sequence homologous to Lambda 5'_Homology arm. Used to check for an RBD in the Lambda genome when paired with a reverse primer.              |
+
+## References
+
+1. [McGill iGEM 2023. *Parts Documentation.*](https://2023.igem.wiki/mcgill/parts)
+

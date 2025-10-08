@@ -5,6 +5,8 @@ import PresTeamCard from "../components/PresTeamCard.astro";
 import ColourMemberCard from "../components/ColourMemberCard.astro";
 import WhiteMemberCard from "../components/WhiteMemberCard.astro";
 import { parse } from "csv-parse/sync";
+import fs from "fs";
+import path from "path";
 
 type TeamMember = {
   name: string;
@@ -20,10 +22,8 @@ type TeamMember = {
 };
 
 async function csvToJson(): Promise<TeamMember[]> {
-  const response = await fetch(
-    "https://docs.google.com/spreadsheets/d/1ka_LcPMf5qNfsNNYSSbXgu-1niyEUkUJg8oVA4Xzppk/gviz/tq?tqx=out:csv&sheet=Sheet1"
-  );
-  const csv_data = await response.text();
+  const csvPath = path.resolve("./src/data/team.csv");
+  const csv_data = fs.readFileSync(csvPath, "utf-8");
 
   const team = parse(csv_data, {
     columns: [
@@ -58,7 +58,7 @@ async function csvToJson(): Promise<TeamMember[]> {
         imageSrc:
           member.photo && member.photo.trim() !== ""
             ? member.photo
-            : "https://static.igem.wiki/teams/5230/headshots/plasmid-placeholder.png",
+            : "https://static.igem.wiki/teams/5708/headshot/mystiphage.webp",
         contact: contact,
       };
     },
@@ -126,170 +126,314 @@ const advisor = team.filter((m) =>
       }
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Wet Lab</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          wet_lab_members.map((member) => (
-            <ColourMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          wet_lab_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Dry Lab</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          dry_lab_members.map((member) => (
-            <WhiteMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          dry_lab_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Hardware</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          hardware_members.map((member) => (
-            <ColourMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          hardware_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Finance</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          finance_members.map((member) => (
-            <WhiteMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          finance_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Entrepreneurship</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          ent_members.map((member) => (
-            <ColourMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          ent_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Human Practices</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          hp_members.map((member) => (
-            <WhiteMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          hp_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Outreach</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          outreach_members.map((member) => (
-            <ColourMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          outreach_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
 
-    <div class="bg-opacity-50 p-4 rounded-lg">
+    <div class="bg-opacity-50 p-4 rounded-lg mb-4">
       <h5 class="text-center">Wiki</h5>
       <div class="flex flex-wrap justify-center gap-6 mb-4">
         {
-          wiki_members.map((member) => (
-            <WhiteMemberCard
-              name={member.name}
-              description={member.description}
-              roles={member.roles}
-              image={member.imageSrc}
-              contact={{
-                linkedin: member.contact.linkedin,
-                email: member.contact.email,
-                website: member.contact.website,
-              }}
-            />
-          ))
+          wiki_members.map((member) => {
+            const isLead = member.primaryRole
+              .toLowerCase()
+              .trim()
+              .endsWith("lead");
+            return isLead ? (
+              <ColourMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            ) : (
+              <WhiteMemberCard
+                name={member.name}
+                description={member.description}
+                roles={member.roles}
+                image={member.imageSrc}
+                contact={{
+                  linkedin: member.contact.linkedin,
+                  email: member.contact.email,
+                  website: member.contact.website,
+                }}
+              />
+            );
+          })
         }
       </div>
     </div>
