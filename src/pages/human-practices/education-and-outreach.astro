@@ -1,13 +1,12 @@
 ---
 import '@/styles/global.css'
-import { Content, getHeadings } from '@/content/human-practices/outro.mdx'
+import { Content, getHeadings } from '@/content/human-practices/education-and-outreach.mdx'
 import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
 import Sidebar from '@/components/Sidebar.astro'
 import SubpageNavigation from '@/components/SubpageNavigation.astro'
 ---
 
-<ThreeColumnLayout
-    headerIconSrc="https://static.igem.wiki/teams/5708/headericons/human-practices.webp">
+<ThreeColumnLayout>
   <Sidebar headings={getHeadings()} slot="sidebar" />
   <SubpageNavigation
     links={[
@@ -21,7 +20,7 @@ import SubpageNavigation from '@/components/SubpageNavigation.astro'
       { href: '/human-practices/future-plans', text: 'Future Plans' },
       { href: '/human-practices/outro', text: 'Acknowledgement and Conclusion' },
     ]} 
-    current="Acknowledgement and Conclusion"
+    current="Education & Outreach"
     slot="extra-navigation"
   />
   <div slot="main">

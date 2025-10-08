@@ -1,0 +1,94 @@
+---
+title: Risk Assessment
+---
+
+import SubpageNavigation from '@/components/SubpageNavigation.astro';
+
+# Risk Assessment
+
+The Mystiphage project employs engineered receptor-binding proteins (RBPs) fused to strictly lytic bacteriophages, forming a targeted biotechnological platform designed to eliminate pathogenic bacteria, while maintaining the integrity of microbial communities. While this approach offers a high degree of antibacterial specificity, it presents a range of potential risks: engineered phages could exhibit host range expansion and lead to infection of non-target microbiota. Additionally, exposure to concentrated phage preparations may trigger immunogenic or allergic responses in patients and residual lysogenic elements. If present, this could facilitate horizontal transfer of virulence factors or antibiotic-resistance genes. Furthermore, those same molecular adaptations that enhance therapeutic precision could be exploited for harmful purposes in principle. **A comprehensive risk assessment is therefore important to systematically evaluate each hazard, guide the development of multi-layered mitigation strategies, and ensure compliance with stringent biosecurity frameworks.** In collaboration with our educational supervisors and external biosecurity advisors, we have integrated advanced predictive in silico modeling and procedural safeguards to minimize foreseeable risks, protecting the integrity of our research and the broader public interest.
+
+## Current Risks and How We Minimized It
+
+The following includes risks that we have identified throughout our experimentation and action to prevent it:
+
+### Risk 1 – De Novo Protein Design
+
+Designing receptor-binding proteins (RBPs) from scratch carries the risk that synthetic sequences fail to engage their intended targets. To guard against non-functional designs, we have implemented a multi-stage in silico screening pipeline. Primarily, ESM-3 generates a broad set of candidate RBP sequences. Next, Boltz-2 evaluates each sequence’s predicted folding stability. Promising designs then undergo molecular docking to assess binding affinity against relevant glycan and protein motifs. Finally, a Markov Chain Monte Carlo (MCMC) optimizer iteratively samples and refines the top performers, enriching sequences that balance stability and target engagement. Our layered approach ensures only robust, high-confidence designs proceed to laboratory validation.
+
+### Risk 2 – Modified Phages and Biosafety
+
+Genetically engineered phages pose potential biosafety concerns if they infect off-target bacteria or introduce unintended traits into microbial communities. To minimize these hazards, all work is performed in a Biosafety Level 1 (BSL-1) laboratory using well-characterized, non-pathogenic E. coli strains as hosts. Laboratory personnel adhere to strict safety protocols, including the use of personal protective equipment such as gloves, lab coats, eye protection, and biosafety cabinets. Under no circumstances are engineered phages released into the environment. By incorporating controlled containment, documented strain selection, and rigorous procedural safeguards, iGEM Toronto prevents accidental exposure to skin and ecosystem perturbation.
+
+### Risk 3 - Environmental Persistence and Survival
+
+Our phage constructs are highly sensitive to common environmental stressors, further reducing the chance of unintended spread. Phage infectivity is effectively lost at pH 3 or below, preventing survival in acidic conditions. Exposure to ultraviolet light destroys approximately 90 percent of viable particles within 30 minutes. These inherent fragilities, coupled with our containment measures greatly limit any risk of environmental persistence.
+
+### Risk 4 - Ingestible Capsule
+
+Although future applications may explore oral delivery, our current work is confined entirely to in vitro studies. We do not perform any in vivo testing or experimental release outside the laboratory. All assays and evaluations occur under controlled conditions, ensuring that no live phage ever enters a human or environmental setting at this stage.
+
+### Risk 5 - Ethical Considerations and Dual-Use Potential
+
+While our platform is designed solely for therapeutic development, we recognize its potential misuse for malicious purposes, such as designing toxins or virulence-enhancing agents. To address dual-use concerns, we restrict our scope to non-pathogenic organisms and limit genetic modifications to RBP sequences only. Access to advanced modules, such as Boltz-2 and MCMC refinement, is granted on a need-to-know basis under strict usage agreements. All manuscripts, protocols, and software releases undergo dual-use screening to remove sensitive details, and licenses explicitly prohibit non-therapeutic applications.
+
+### Risk 6 - Patient Sample Governance
+
+When working with bacterial isolates derived from patient samples, we adhere to rigorous governance protocols. Each isolate is de-identified at the point of collection to safeguard patient privacy. Under no circumstance do we collect or store any human genomic data. All procedures involving clinical specimens are covered by institutional ethics approval, and we maintain detailed records of sample origin, handling, and storage in accordance with applicable regulations which remain confidential to personnel of iGEM Toronto.
+
+### Risk 7 - Dual-Use Risk Assessment
+
+We conduct regular assessments to evaluate the potential misuse of our technology—from illicit toxin delivery to covert microbial surveillance. Key safeguards include tiered access controls over sensitive computational tools (e.g., Boltz-2, MCMC), mandatory ethical licensing clauses in all software agreements, and pre-publication reviews to strip methods that could enable harmful applications. Through these measures, we demonstrate our research remains firmly aligned with public health objectives and ethical standards.
+
+## Predicted Risks and Preventions
+
+Below, we outline the key risks we anticipate as phage therapy scales and summarize our research strategies to prevent or minimize each hazard. By combining AI-guided receptor design, high-throughput safety assays, robust biosafety protocols, and stakeholder-informed deployment models, we aim to proactively address these challenges and deliver phage treatments effectively and safely.
+
+### 1\) Off-Target Host Range Expansion
+
+Engineered receptor-binding proteins (RBPs) fused to strictly lytic phages may inadvertently broaden the phage’s natural tropism, resulting in infection of non-target commensal or beneficial bacteria. Such off-target activity can disrupt microbial community structure, leading to dysbiosis, loss of colonization resistance, or emergence of opportunistic pathogens in human hosts or environmental reservoirs. To quantify this risk, we will conduct high-throughput plaque assays against a diverse panel of 60 non-pathogenic strains representing key gut and soil microbiota, confirming no lytic plaques outside our target species. In parallel, we will perform in silico docking simulations using Rosetta to model RBP–receptor interactions and eliminate any RBP variants with predicted affinity (ΔG < –5 kcal/mol) for off-target receptors. Finally, constraining iterative rounds of directed evolution by applying negative selection against non-target strains to minimizing unintended ecological impacts [1][2].
+
+### 2\) Immunogenicity and Allergic Reactions
+
+Although bacteriophages are generally considered safe for human use, repeated exposure to high-titer phage preparations can trigger immunogenic or allergic responses, including type I hypersensitivity (IgE-mediated) and type III immune complex-mediated reactions. Phage capsid proteins may act as novel antigens, adhere to mucosal surfaces, and interact with dendritic cells, potentially inducing pro-inflammatory cytokine release (e.g., IL-6, TNF-α). In addressing this, we will confine all aerosolizable processes to grade-II biosafety cabinets and require team members to don N95 respirators, full-face shields, and impermeable gowns. We will perform enzyme-linked immunosorbent assays (ELISA) using pooled human serum to detect phage-specific IgE and IgG titers, ensuring our final preparations exhibit negligible antigenicity. Implementing a voluntary medical surveillance program, including periodic skin prick tests and respiratory function monitoring will further safeguard personnel against sensitization [3][4].
+
+### 3\) Lysogenic Conversion and Horizontal Gene Transfer
+
+Temperate or lysogenic phages carry integrase and repressor genes that enable genome integration into bacterial hosts, raising the risk of transferring virulence factors or antibiotic-resistance determinants through specialized transduction. Such lysogenic conversion can convert benign bacteria into pathogenic strains and facilitate horizontal gene transfer across microbial communities. To eliminate this hazard, we will select virulent phage backbones, excise any residual integrase and repressor modules as confirmed by long-read sequencing. After, we will screen against the ACLAME database to detect mobile genetic elements. Post-production, treating all bacterial cultures with DNase I and autoclaving them to degrade any free nucleic acids prior to disposal will prevent environmental dissemination of modified genetic material [5][6].
+
+### 4\) Phage Resistance and Bacterial Evolution
+
+Target bacteria can evolve resistance to phage infection via receptor modification, CRISPR-Cas–mediated immunity, or abortive infection systems, potentially leading to treatment failures. Phage-resistant bacteria may develop cross-resistance to other phages, complicating future therapeutic interventions. To counteract this, our library contains multiple RBPs targeting distinct, non-overlapping receptors on the same pathogen, creating a phage cocktail that imposes a higher evolutionary barrier. We will monitor resistance emergence by serial passaging assays and whole-genome sequencing of survivors and adjust RBP combinations accordingly. Lastly, we will integrate anti-CRISPR protein genes into phage genomes to evade bacterial adaptive immunity, reducing the likelihood of rapid resistance development.[7][8].
+
+### 5\) Environmental Persistence and Ecological Disruption
+
+Released phages can persist in aquatic or soil environments, altering native microbial dynamics beyond intended sites of application. Stable phage particles may infect indigenous bacteria and shift nutrient cycles or outcompete native phages. To assess environmental persistence, we can conduct microcosm studies in soil and freshwater simulants by measuring phage titers over time and evaluating impacts on microbial diversity via 16S rRNA amplicon sequencing. Approaching phage therapy from an ecological perspective means engineering phages with synthetic auxotrophy, creating a dependence on non-natural amino acids absent from the environment to ensure they cannot replicate outside controlled settings. We will treat all experimental effluents with UV irradiation and biocidal filtration to inactivate phages prior to release. [9][10].
+
+### 6\) Genetic Stability and Recombination
+
+Genetic instability in engineered phages can lead to loss of desirable traits, reversion to wild-type behavior, or recombination with endogenous phages, potentially creating novel chimeras with unpredictable host ranges. As a result, we will evaluate genomic stability by passing phages for 20 generations in vitro, then perform comparative genomic hybridization to detect mutations or rearrangements. Homology-based recombination hotspots will be removed through codon‐shuffling of RBP genes and deletion of non-essential homology arms. Concurrently, we monitor environmental phage pools for recombinant genotypes using PCR assays targeting unique barcode sequences, ensuring rapid detection of unintended recombinants. [11][12].
+
+### 7\) Endotoxin Contamination and Preparation Purity
+
+Phage lysates derived from Gram-negative bacteria inherently carry lipopolysaccharides (LPS) and can trigger strong inflammatory responses if administered in vivo or encountered by laboratory personnel. Endotoxin contamination poses risks including fever, hypotension, and septic shock in sensitive individuals. To prevent this, we will ensure that our downstream purification incorporates multiple rounds of polyethylene glycol precipitation, cesium chloride gradient ultracentrifugation, and anion-exchange chromatography, achieving endotoxin levels below 0.05 EU/mL as verified by Limulus amebocyte lysate assays. Ultrafiltration and buffer exchange will be used to remove residual bacterial debris, ensuring preparations meet regulatory thresholds for clinical-grade biotherapeutics [13][14] alongside.
+
+### 8\) Biofilm Interaction and Enhanced Bacterial Virulence
+
+Interactions between engineered phages and bacterial biofilms can inadvertently enhance biofilm formation or select for biofilm-embedded phenotypes that are more tolerant to antibiotics. Some RBPs may bind biofilm matrix components, redistributing phages and bacteria in ways that reinforce biofilm structure. To examine this, we will perform static and flow-cell biofilm assays with confocal microscopy, quantifying biomass changes (Crystal Violet staining) and viability of dispersed cells. We will engineer phages to express biofilm-degrading depolymerases alongside lytic functions to ensure efficient matrix penetration and reduce the risk of promoting recalcitrant biofilm communities. [15][16].
+
+### 9\) Manufacturing Scale-Up and Supply Chain Risks
+
+Transitioning from lab-scale to industrial production introduces risks such as cross-contamination between phage batches, variability in potency, and supply chain disruptions for raw materials (e.g., specialized media, synthetic amino acids). We established GMP-inspired standard operating procedures, including dedicated production suites for each phage variant, batch-wise potency assays, and raw material quality audits. In future applications, we can apply electronic lot-tracking systems to provide traceability from reagent receipt through final product formulation, enabling rapid recall if any deviation is detected [17].
+
+### 10\) Regulatory, Ethical, and Public Perception Considerations
+
+Despite sound biosafety measures, public concerns about “designer phages” and genetic engineering can lead to regulatory hurdles or community outlash. Misinformation may fuel ethical debates over dual-use or ecological fears. We proactively engaged stakeholders, patients, environmental groups, and published non-technical safety summaries alongside peer-reviewed articles. Collaborations with institutional review boards and local health authorities would be required to ensure compliance with national and international guidelines (e.g., FDA, EMA, Nagoya Protocol), fostering trust and transparent dialogue [18][19].
+
+### 11\) Data Security and Intellectual Property/Dual Risk Assessment
+
+Although Mystiphage is designed solely for therapeutic use, its engineered components, custom RBPs and payload-delivery scaffolds, pose a dual-use risk: repurposed to infect beneficial or environmental bacteria to introduce harmful genetic elements. To guard against misuse, we house all genome sequences, RBP design files, and high-titer stocks in encrypted, multi-factor-authenticated repositories and apply digital and physical watermarking to every reagent to enable traceability. External sharing of any materials or protocols requires formal approval by our institutional biosafety and biosecurity committees, and we conduct periodic risk–benefit reviews following the National Research Council’s guidelines for responsible biotechnology. A strict tiered-authorization system ensures that only senior investigators and designated biosecurity officers can access high-risk data, with quarterly audits to verify compliance and rapidly detect any unauthorized activity [20].
+
+### 12\) Cybersecurity Measures
+
+Protection of Mystiphage’s digital assets, including phage genomes, RBP design files, and standard operating procedures, is critical to prevent data theft or sabotage that could facilitate malicious engineering. To this end, we would have to maintain all project data on secure servers compliant with NIST SP 800-53 controls, enforce role-based access with quarterly access audits, and conduct semiannual penetration tests in partnership with our institutional IT security office. Data backups follow an air-gapped model, and sensitive files reside in segmented network zones monitored by real-time intrusion detection systems. Together, these measures align with both federal guidelines and ISO/IEC 27001 principles, ensuring rapid breach detection, containment, and recovery while safeguarding both intellectual property and public health interests [21, 22, 23].
+
