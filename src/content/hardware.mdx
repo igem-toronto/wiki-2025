@@ -62,7 +62,10 @@ An H₂ concentration that is significantly above the normal range is indicative
 
 Antibiotic resistance arises not only in hospitals but also in the broader environment, where reservoirs of antibiotic resistance genes (ARGs) drive the spread of resistant infections. In particular, the gut is a key reservoir of these genes due to its extremely high bacterial density. In both humans and animals, higher ARG levels in the gut correlate with increased pathogen density, and livestock in particular are major contributors @Tan2025ARGsGut, @Kang2021MicroscaleTherapy. Over half of all antibiotics used in agriculture are often unregulated, generating vast ARG reservoirs in animal GI tracts that can spill over into the environment @terKuile2016LowConcentrations. Targeting the gut resistome – one of the most critical sources of resistance genes – is therefore key to controlling the rise of ABR. As such, we envision EVADE as an exploratory preventative strategy against ARG enrichment and spread, generalizable to both humans and animals. By delivering phages and adjuvants directly to one of the most important reservoirs of resistance genes, EVADE strikes at the foundation of antibiotic resistance across human, animal, and environmental health.
 
-EVADE combines AI-modified phages with the emerging field of smart ingestible devices, which use biosensors for condition-specific drug release @Mukherjee2022SmartDevicesSensors. Advances in electronic drug delivery have improved precision and biocompatibility @SomeAuthors2023AdvancedMaterials, making them an ideal platform for targeted phage therapy to ARG hotspots. EVADE bypasses stomach acidity with an enteric coating and conditionally releases its payload in response to intestinal H₂, a metabolite of bacterial fermentation and infection. This ensures that phages (and potentially adjuvants such as quorum-sensing inhibitors or biofilm disruptors) are delivered directly at infection hotspots and sites of ARG enrichment. By concentrating therapies locally at a high multiplicity of infection (MOI) at these sites, EVADE can efficiently clear infections or problematic bacterial pathogens. Stakeholder interviews suggest that targeted phage therapy is particularly useful for fighting infections in less accessible regions of the gut, such as the distal ileum or colon – these regions represent key target sites for EVADE.
+EVADE combines AI-modified phages with the emerging field of smart ingestible devices, which use biosensors for condition-specific drug release @Mukherjee2022SmartDevicesSensors. Advances in electronic drug delivery have improved precision and biocompatibility @SomeAuthors2023AdvancedMaterials, making them an ideal platform for targeted phage therapy to ARG hotspots. EVADE bypasses stomach acidity with an enteric coating and conditionally releases its payload in response to intestinal H₂, a metabolite of bacterial fermentation and infection. This ensures that phages (and potentially adjuvants such as quorum-sensing inhibitors or biofilm disruptors) are delivered directly at infection hotspots and sites of ARG enrichment. By concentrating therapies locally at a high multiplicity of infection (MOI) at these sites, EVADE can efficiently clear infections or problematic bacterial pathogens.
+Stakeholder interviews suggest that targeted phage therapy is particularly useful for fighting infections in less accessible regions of the gut, such as the distal ileum or colon – these regions represent key target sites for EVADE
+
+<PdfEmbed src="https://static.igem.wiki/teams/5708/hardware/done-andrei-bogza-interview-notes-2025-09-21.pdf" title="Interview"/>
 
 ## Device Operation and Technical Details
 
@@ -135,7 +138,7 @@ A complete bill of materials and cost estimate for the device is found below. Al
 
 It should be noted that the vast majority of the cost of the capsule comes from the off-the-shelf H₂ sensor. We are continuing to work towards fabricating our own H₂ sensor in house, which would reduce the cost of the device by over 85%.
 
-A complete build guide to assemble the device can be accessed as a pdf below:
+A build guide to assemble the device with the electromagnet can be accessed as a pdf here:
 <PdfEmbed src="https://static.igem.wiki/teams/5708/hardware/em-pill-assembly-instructions.pdf" title="EM pill Assembly Instructions"/>
 
 
@@ -187,16 +190,14 @@ Exact details surrounding the protocols are broken down in the next sections.
 
 ### Pill Robustness
 
-Transit time through the GI tract ranges from 24 to 72 hrs, depending on diet and metabolism. In order to verify the preservation of our electronics and components within the pill during this time, we test the complete waterproofing of our pill shell design using cobalt chloride paper and a water bath. Cobalt chloride paper is blue when dry and turns pink when moist — which is an indicator of water penetration.
+Transit time through the GI tract ranges from 10 to 73 hrs, depending on diet and metabolism @Lee2014GutTransit. In order to verify the preservation of our electronics and components within the pill during this time, we test the complete waterproofing of our pill shell design using cobalt chloride paper and a water bath. Cobalt chloride paper is blue when dry and turns pink when moist — which is an indicator of water penetration.
 
 The waterproofing test will be conducted with the pill shell in two states: the full, unreleased state and the half-shell state post phage release. Ideally, 4 tests will be done for both states to ensure consistent and reliable water proofing.
 
 The entire protocol can be accessed in the PDF embed below: 
-
-A complete build guide to assemble the device can be accessed as a pdf below:
 <PdfEmbed
   src="https://static.igem.wiki/teams/5708/hardware/pill-durability-protocol.pdf"
-  title="EM pill Assembly Instructions" />
+  title="Pill Durability Protocol" />
 
 ### Sensor Reliability: Hydrogen Sensor Testing Protocols
 
@@ -243,7 +244,7 @@ The exact lab protocols are listed in the below PDF:
 
 The pill releases phage contents at set H₂ levels. Testing occurs at various pH levels with controlled H₂ production, validating accurate sensing and timely release.
 
-The exact lab protocols are listed in this the below PDF embed:
+The exact lab protocols are listed in the PDF embedded below:
 <PdfEmbed
   src="https://static.igem.wiki/teams/5708/hardware/bacterial-protocol.pdf"
   title="Lab Protocols" />
@@ -314,4 +315,6 @@ When the release mechanism was triggered, there was an immediate noticeable sepa
 At the time of writing this wiki, we have demonstrated a simple proof of concept of EVADE.
 In the coming weeks, we will be continuing with our experimentation and iterative
 processes to further improve the device and do testing with bacterial cultures.
+
+We hope that our device can be used as a stepping stone to pave the way for future consumable electromechanical devices with a targeted release, increasing the customizability and targetability of treatments.
 
