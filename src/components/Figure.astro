@@ -32,6 +32,16 @@ const {
       sizes={sizes}
       class="rounded"
     />
-    {caption && <figcaption class="text-sm text-center mt-2 text-gray-600">{caption}</figcaption>}
+    {
+      (caption || Astro.slots.has("extended-caption")) &&
+        <figcaption class="text-sm text-center mt-2 text-gray-600">
+          {caption}
+          {
+            Astro.slots.has("extended-caption") && <div class="mt-1 text-xs text-gray-500">
+              <slot name="extended-caption" />
+            </div>
+          }
+        </figcaption>
+    }
   </figure>
 </div>

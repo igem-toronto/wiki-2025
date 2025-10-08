@@ -23,14 +23,15 @@ positive control for the phage spotting, and that these receptor types are
 <Figure
   src={"https://static.igem.wiki/teams/5708/wetlab/results5.webp"}
   alt="Figure 1 Phage spotting results"
-  caption="Figure 1: Lambda, HK97, P2 and Mu phages spotted on E. coli strains with different receptors or LPS." />
-<small>
-  The wild-type protein binding phages Lambda and HK97 had high spotting
-  efficiency in the OmpC knock-out _E. coli_, and low efficiency in lamB
-  knock-out _E. coli._ Similarly, the wild-type glycan-binding phages P2
-  and Mu had high spotting efficiency in _E. coli_ expressing the K12 LPS,
-  and low efficiency against _E. coli_ expressing the truncated R1 LPS.
-</small>
+  caption="Figure 1: Lambda, HK97, P2 and Mu phages spotted on E. coli strains with different receptors or LPS.">
+  <div slot="extended-caption">
+    The wild-type protein binding phages Lambda and HK97 had high spotting
+    efficiency in the OmpC knock-out _E. coli_, and low efficiency in lamB
+    knock-out _E. coli._ Similarly, the wild-type glycan-binding phages P2
+    and Mu had high spotting efficiency in _E. coli_ expressing the K12 LPS,
+    and low efficiency against _E. coli_ expressing the truncated R1 LPS.
+  </div>
+</Figure>
 
 ## sgRNA Validation
 
@@ -50,27 +51,29 @@ and interpretation of these assays is shown in Figs. 2 and 3 below.
 <Figure 
   src={"https://static.igem.wiki/teams/5708/wetlab/results4.webp"}
   alt="Figure 2 Phage spotting test of P2 phage with tCas9 plasmid with and without Cas9 induction and sgRNA."
-  caption="Figure 2: Phage spotting test of P2 phage with tCas9 plasmid with and without Cas9 induction and sgRNA." />
-<small>
-  P2 phages were spotted on _E. coli_ K12, which were transformed with tCas9,
-  which inducibly expresses Cas9, and either a sgRNA for a specific phage or an
-  empty sgRNA cassette (empty vector, EV). We expect plaque formation in all
-  conditions (uninduced P2 EV, P2-1; induced P2 EV) except for induced P2-1,
-  where Cas9 is expressed and the sgRNA is present.
-</small>
+  caption="Figure 2: Phage spotting test of P2 phage with tCas9 plasmid with and without Cas9 induction and sgRNA.">
+  <div slot="extended-caption">
+    P2 phages were spotted on _E. coli_ K12, which were transformed with tCas9,
+    which inducibly expresses Cas9, and either a sgRNA for a specific phage or an
+    empty sgRNA cassette (empty vector, EV). We expect plaque formation in all
+    conditions (uninduced P2 EV, P2-1; induced P2 EV) except for induced P2-1,
+    where Cas9 is expressed and the sgRNA is present.
+  </div>
+</Figure>
 
 <Figure 
   src={"https://static.igem.wiki/teams/5708/wetlab/results3.webp"}
   alt="Figure 3 Phage spotting test of various phages with IC plasmid with various sgRNAs."
-  caption="Figure 3: Phage spotting test of various phages with IC plasmid with various sgRNAs." />
-<small>
-  P2, Mu, and HK97 phages were spotted on _E. coli_ K12, which were transformed
-  with the pCas3Rh plasmid, which inducibly expresses the Type I-C CRISPR-Cas
-  components and either a sgRNA for a specific phage or an empty sgRNA cassette
-  (empty vector, EV). We expect plaque formation in all uninduced and EV conditions.
-  When Cas expression is induced and the sgRNA is present, we expect reduced plaque
-  formation. Note: Mup49 and Mup52 refer to two different RBDs for the Mu phage.
-</small>
+  caption="Figure 3: Phage spotting test of various phages with IC plasmid with various sgRNAs.">
+  <div slot="extended-caption">
+    P2, Mu, and HK97 phages were spotted on _E. coli_ K12, which were transformed
+    with the pCas3Rh plasmid, which inducibly expresses the Type I-C CRISPR-Cas
+    components and either a sgRNA for a specific phage or an empty sgRNA cassette
+    (empty vector, EV). We expect plaque formation in all uninduced and EV conditions.
+    When Cas expression is induced and the sgRNA is present, we expect reduced plaque
+    formation. Note: Mup49 and Mup52 refer to two different RBDs for the Mu phage.
+  </div>
+</Figure>
 
 Plaques were smaller and fainter in Cas-induced and sgRNA-present conditions than
 EV or uninduced conditions in both tCas9 and IC plasmid systems, indicating that
@@ -90,15 +93,16 @@ testing are shown in Figs. 4 & 5 below.
 <Figure 
   src={"https://static.igem.wiki/teams/5708/wetlab/results2.webp"}
   alt="Figure 4 Phage spotting test of various phages with pCas9 plasmid with various sgRNAs."
-  caption="Figure 4: Phage spotting test of various phages with pCas9 plasmid with various sgRNAs." />
-<small>
-  Lambda, HK97, P2, and Mu phages were spotted on _E. coli K12_, which were
-  transformed with pCas9 expressing Cas9, and either a sgRNA for a specific phage
-  or an empty sgRNA cassette (empty vector, EV). We expect all phages to form
-  plaques except for the phage being targeted by the gRNA. Mup49 & Mup52 are used
-  to denote two different RBDs of the wild-type Mu phage. Results indicate that all
-  sgRNAs did not inhibit plaque formation.
-</small>
+  caption="Figure 4: Phage spotting test of various phages with pCas9 plasmid with various sgRNAs.">
+  <div slot="extended-caption">
+    Lambda, HK97, P2, and Mu phages were spotted on _E. coli K12_, which were
+    transformed with pCas9 expressing Cas9, and either a sgRNA for a specific phage
+    or an empty sgRNA cassette (empty vector, EV). We expect all phages to form
+    plaques except for the phage being targeted by the gRNA. Mup49 & Mup52 are used
+    to denote two different RBDs of the wild-type Mu phage. Results indicate that all
+    sgRNAs did not inhibit plaque formation.
+  </div>
+</Figure>
 
 In a subsequent experiment, pCas9 was co-transformed with another plasmid, pCRISPR,
 in _E. coli_ K12; here, the plasmid expressing Cas machinery was separated from the
@@ -107,20 +111,21 @@ sgRNA expression vector, shown in Fig. 5 below.
 <Figure 
   src={"https://static.igem.wiki/teams/5708/wetlab/results1.webp"}
   alt="Figure 5 Phage spotting test of various phages with pCas9 plasmid and orthogonal sgRNA expression in pCRISPR plasmid."
-  caption="Figure 5: Phage spotting test of various phages with pCas9 plasmid and orthogonal sgRNA expression in pCRISPR plasmid." />
-<small>
-  Lambda, HK97, P2, and Mu phages were spotted on E. coli K12, which were
-  co-transformed with pCas9 (expressing Cas9 with an empty sgRNA cassette) and
-  either pCRISPR with a sgRNA for a specific phage or an empty sgRNA cassette
-  (empty vector, EV). We expect all phages to form plaques except for the phage
-  being targeted by the sgRNA. Mup49 & Mup52 are used to denote two different
-  RBDs of the wild-type Mu phage. Positive control 1 and 2 are sgRNA targeting
-  K12 that were previously validated in the Davidson Lab. Results indicate that
-  all sgRNAs did not inhibit plaque formation. However, since positive controls
-  1 & 2 also did not show reduction in plaque formation, we interpret this as
-  systemic error in the experimental setup, which leads us to new avenues for
-  troubleshooting.
-</small>
+  caption="Figure 5: Phage spotting test of various phages with pCas9 plasmid and orthogonal sgRNA expression in pCRISPR plasmid.">
+  <div slot="extended-caption">
+    Lambda, HK97, P2, and Mu phages were spotted on E. coli K12, which were
+    co-transformed with pCas9 (expressing Cas9 with an empty sgRNA cassette) and
+    either pCRISPR with a sgRNA for a specific phage or an empty sgRNA cassette
+    (empty vector, EV). We expect all phages to form plaques except for the phage
+    being targeted by the sgRNA. Mup49 & Mup52 are used to denote two different
+    RBDs of the wild-type Mu phage. Positive control 1 and 2 are sgRNA targeting
+    K12 that were previously validated in the Davidson Lab. Results indicate that
+    all sgRNAs did not inhibit plaque formation. However, since positive controls
+    1 & 2 also did not show reduction in plaque formation, we interpret this as
+    systemic error in the experimental setup, which leads us to new avenues for
+    troubleshooting.
+  </div>
+</Figure>
 
 These data indicate that while native phage-receptor interactions were robustly
 validated, with protein-binding (Lambda, HK97) and glycan-binding phages (P2, Mu)
