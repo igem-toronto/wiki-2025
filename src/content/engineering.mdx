@@ -1,0 +1,153 @@
+import Figure from '@/components/Figure.astro'
+
+# Engineering
+
+The engineering cycle is an essential part of our team’s work towards developing PHORAGER, EVADE, and other parts of our project (such as our business plan). Multiple iGEM Toronto sub teams worked in feedback loops to reach project goals and iterate upon designs. Crucial to this process was constant learning from each iteration
+
+We detail the design-build-test-learn (DBTL) cycles for the dry lab team, the wet lab team, the hardware team, and the entrepreneurship team. An overall diagram of the combined DBTL cycles and their relationships to each other is showcased below (see Fig. 1).
+
+<Figure 
+  src="https://static.igem.wiki/teams/5708/engineering/dbtl-diagram.webp"
+  caption="Fig. 1: Combined DBTL workflow for dry lab, wet lab, hardware, and entrepreneurship work." 
+  alt="Fig. 1: Combined DBTL workflow for dry lab, wet lab, hardware, and entrepreneurship work." 
+/>
+
+## Dry lab -- PHORAGE Pipeline Creation and Validation
+### Iteration 1
+#### Design:
+The initial experimental design aimed to establish a generalized pipeline for
+rapidly screening and selecting RBPs, phages, and glycans through successive
+iterations. The first iteration focused on creating a data curation methodology,
+resulting in a databank of known receptor-binding protein (RBP) sequences along
+with their corresponding binding targets. Major sources included GenBank and
+various phage banks @Li2020GlycobiologyDatabases @RCSB_PDB @Varadi2024AlphaFoldDB @BindingDB @Liu2024PPBAffinity, . Additional data
+incorporated structural information related to bacterial surface receptors.
+
+A key objective of this phase was validation – ensuring the system could generate viable candidates across defined parameters for RBPs and glycans. To this end, initial trials explored different configurations to assess the resource requirements, timelines, and quality of results needed to confirm the pipeline’s reliability. Given their strong relevance to binding affinity prediction, ESM3 and Boltz2 were selected to establish a baseline for evaluation. Candidate sequences were first generated using ESM3 and subsequently tested in silico with Boltz2 to assess structural stability and binding affinity.
+
+#### Build
+The curated sequences were preprocessed by masking the C-terminal receptor-binding domain (RBD) regions to focus generative modeling on these functional segments while preserving surrounding sequence context. Using this approach, ESM3, a transformer-based protein language model, was applied to regenerate and optimize masked RBDs. By sampling masked amino acids based on learned sequence–structure–function relationships, ESM3 explores diverse yet plausible RBD variants guided by the context of the full protein.
+
+Generated sequences were then evaluated with Boltz-2, which jointly predicts 3D protein structure and binding affinity against both wild-type and target receptors. This dual capability provides a ranked list of variants using folding and interface metrics such as ipTM and pTM, offering objective measures of structural plausibility and binding potential. Top outputs were further reviewed for biological relevance and experimental feasibility to ensure suitability for downstream validation.
+
+Together, ESM3 and Boltz-2 form a complementary pipeline: ESM3 generates context-aware sequence variants by capturing evolutionary and structural signals from large protein datasets, while Boltz-2 delivers high-speed, high-accuracy structure and affinity predictions, approaching the rigor of free energy perturbation at over 1000× faster performance. Their integration enables scalable, efficient virtual screening and protein engineering, accelerating discovery and providing robust candidates for experimental testing.
+
+  
+#### Test
+Initial assessments of the generated sequences prompted a deeper investigation into how their scores were produced and how valid they were in the broader context of binding affinities. Multiple iterations using non-uniform inputs revealed a general trend toward higher predicted scores and affinities. At this stage, external laboratory validation was not ideal, so comparisons with preliminary docking studies were conducted instead. These comparisons confirmed the initial assumptions within a limited set of parameter ranges.
+
+#### Learn
+From this iteration, we confirmed that a single-pass generation-to-evaluation pipeline could yield a small set of viable results but was insufficient for efficiently producing high-quality RBPs. While ESM3 and Boltz2 each performed well in providing scoring context and updating sequences with new variants, the absence of feedback between them slowed optimization, and some sequences failed to achieve stable predicted folds. This limitation motivated the development of Iteration 2, which directly integrated Boltz2 feedback into the generative loop through an iterative Markov chain Monte Carlo (MCMC) and simulated annealing approach.
+
+
+### Iteration 2
+
+#### Design
+The second iteration aimed to generate more comprehensive candidates using a standard Markov Chain Monte Carlo (MCMC) pipeline defined by a Metropolis function, with additional simulated annealing steps. Experimental parameters such as temperature, masking positions, and iteration counts were varied to enable repeated runs.
+
+To account for the extended number of epochs, Boltz-2 was integrated into the optimization loop alongside iPTM and binding affinity scores. Each configuration was executed across 1,000 runs, producing updated RBP chains against glycans. In parallel, AlphaFold testing confirmed the distribution of predicted scores. The resulting outputs informed the next selection round, which incorporated ESM3-generated sequences into the feedback loop. With these hallucinatory variants added as new inputs, the algorithm was able to iteratively refine towards RBPs and phages with higher predicted binding affinities.  
+  
+#### Build
+As in the first iteration, sequences were preprocessed by masking C-terminal receptor-binding domain (RBD) regions to prepare them for generative modeling. Additional parameters, such as temperature, were incorporated into the execution build to expand the input space. The Markov Chain was designed to optimize scores and iPTM outputs, with Monte Carlo runs set to terminate early if no major improvements occurred, before moving to the next round.
+
+ESM3 was again configured for masked sequence generation over curated RBD regions, combining fixed and random masking. The resulting variants were evaluated for structure and binding affinity against both wild-type and target receptors. Final outputs consisted of large collections of conditional runs with corresponding best scores, RBP and glycan identifiers, and server configuration records. These results were filtered to select top batches, which were then transferred for validation by other team domains.
+
+  
+#### Test
+Individual tests of screened outputs showed several candidates achieving scores above 0.7 across multiple iterations. The top-performing sequences, incorporating updated chains from the Markov process, were further validated through localized simulations. Experimental validation within a laboratory framework is ongoing.  
+  
+#### Learn
+The primary goal of incorporating MCMC simulations was to efficiently identify parameter combinations that yield the best scores. This addition proved essential for exploring a broader space of RBP sequences without expending excessive resources on repeated low-scoring runs. The next phase focuses on integrating an in silico–in vitro feedback loop, where laboratory-derived outputs are compared with simulation results. This active learning step allows wet-lab data to be fed back into the generative pipeline, guiding the algorithms toward stronger candidates more quickly. Updates will include refinements to coefficient weights, model parameters, and sequence-level attributes, improving the likelihood that generated sequences perform well under real biological conditions.
+  
+## Wet lab -- sgRNA Cloning and Validation
+
+### Iteration 1
+
+#### Design
+We aimed to select for successful recombinants using a CRISPR system targeting wild-type (WT) phages. SpyCas9 on the high-copy plasmid pHERD30T (termed tCas9) was chosen for its availability and reliability. Six 20-nt spacers were designed – two for each RBP in phages Mu and P2. As the plasmid lacked tracrRNA and repeats, we followed a previous protocol to assemble them by annealing long oligos containing these elements and filling gaps with PCR. To simplify cloning, we also ordered dsDNA fragments containing the tracrRNA and repeats as an alternative approach.
+
+#### Build
+We annealed the oligos, performed PCR, and analyzed products by gel electrophoresis. dsDNA fragments were digested with NheI, purified, and ligated into NheI-digested pHERD30T-Cas9 (tCas9).
+
+#### Test
+PCR amplification did not yield visible bands. Using the dsDNA fragment method, one spacer was successfully cloned. This construct, targeting phage P2, was transformed into E. coli K12. However, P2 showed no difference in plating efficiency between the empty vector and spacer-containing strain.
+
+#### Learn
+Cloning was inefficient due to the absence of tracrRNA and repeat sequences on the backbone and the use of a single restriction site, which promoted self-ligation. The tested spacer did not confer resistance, suggesting that more spacers should be evaluated. To improve efficiency, we decided to test an alternative CRISPR plasmid in the next iteration.
+
+### Iteration 2
+#### Design
+As an alternative to tCas9, we selected the compact type I-C CRISPR plasmid pCas3cRh. This plasmid contains repeat sequences and does not require a tracrRNA. It uses BsaI for crRNA cloning, which cuts outside its recognition site, allowing simple insertion of annealed spacer oligos. We designed 2–3 spacers targeting each RBD in phages P2 and Mu.
+
+#### Build
+Oligos containing spacer sequences and compatible overhangs were annealed and ligated into BsaI-digested pCas3cRh.
+
+#### Test
+Six of seven spacers were successfully cloned. These constructs were transformed into E. coli K12 and tested against phages P2 and Mu. Contrary to expectations, both phages failed to infect any spacer-containing strain, but we observed that the bacterial lawns were weak and thin.
+
+#### Learn
+The weak growth indicated that pCas3cRh was toxic to K12, likely due to the nuclease and helicase activities of Cas3. Because phages infect less efficiently on unhealthy cultures, the observed resistance could not be conclusively attributed to CRISPR targeting. As our next step, we decided to test these spacers in Mu and P2 lysogens, where cell health and infection context are less relevant.
+
+### Iteration 3
+
+#### Design
+Since our ultimate goal is to swap the RBPs in Mu and P2 lysogens, we decided to test the type I-C spacers in these lysogenic backgrounds. We reasoned that if a spacer effectively targets the prophage, it would reduce transformation efficiency.
+
+#### Build
+Equal amounts of empty vector (EV) and spacer-expressing plasmids were transformed into Mu and P2 lysogens. Transformation efficiency was then quantified.
+
+#### Test
+No significant difference in transformation efficiency was observed between EV and spacer constructs.
+
+#### Learn
+These results indicate that the type I-C spacers did not target the prophages effectively. While pCas3cRh has been successfully applied in Pseudomonas aeruginosa, it appears less effective in E. coli K12. Although previous studies reported its use in E. coli for different purposes, our attempts did not yield functional targeting in this context.
+
+### Iteration 4
+
+#### Design
+After consulting a Davidson Lab member, we decided to test SpyCas9 on an alternative plasmid backbone, pCas9, which she had successfully used before. This plasmid also features a BsaI cloning site, simplifying crRNA insertion. For initial testing, we designed one spacer targeting the RBDs of phages Mu, P2, Lambda, and HK97.
+
+#### Build
+Spacers were cloned into pCas9 following the same BsaI-based workflow described in Iteration 2.
+
+#### Test
+The resulting pCas9-spacer constructs were transformed into E. coli K12 and tested against phages Mu, P2, Lambda, and HK97. None of the spacers conferred resistance to their target phages.
+
+#### Learn
+These spacers did not successfully target the phages. Upon further consultation, it was noted that although our approach was theoretically sound, it differed from the Davidson Lab member's original method. They typically cloned spacers into a different plasmid, pCRISPR, to facilitate testing multiple spacers simultaneously. They also provided two Mu-targeting spacers that had previously worked as positive controls and recommended testing additional spacers per RBD to improve success rates.
+
+### Iteration 5
+#### Design
+Following their suggestion, we cloned the crRNAs into the pCRISPR plasmid. pCRISPR does not encode Cas9 but includes a BsaI cloning site, allowing spacer insertion without ordering new oligos. In addition, we designed one new spacer for each RBD.
+
+#### Build
+Spacers were cloned into pCRISPR using the same BsaI-based workflow described in Iteration 2.
+
+#### Test
+The resulting pCRISPR constructs, along with the positive-control spacers provided by the Davidson Lab member, were co-transformed into E. coli K12. These strains will be tested against phages Mu, P2, Lambda, and HK97.
+
+#### Learn
+These spacers, along with both positive controls, did not successfully target the phages. We believe this could be due to issues with our experimental setup itself. In particular, we suspect that our K12 strain might be harbouring chloramphenicol resistance, which would interfere with the CmR selectable marker in pCas9. As such, we intend to revise our experimental design to overcome these issues.
+
+## Wet lab --  Wet lab validation of batch 1 and batch 2 RBDs
+
+### Iteration 1 (anticipation)
+
+#### Design
+Generated RBDs with 500 bp flanking homology arms will be cloned into pETDuet, a plasmid compatible with CRISPR constructs. These recombination and CRISPR plasmids will be co-transformed into the corresponding lysogens. The CRISPR system will eliminate cells that fail to recombine, enriching for successful recombinants. To identify recombinants, colony PCR will be performed using a forward primer upstream of the homology arm and a reverse primer within the inserted RBD, ensuring that only chimeric lysogens yield PCR products.
+
+#### Build
+Two P2 RBD constructs have been successfully cloned using Gibson Assembly. Additional RBD constructs will be cloned as they arrive.
+
+#### Test
+Recombination and CRISPR plasmids will be co-transformed into the corresponding lysogens. Successful recombinants identified by colony PCR will be induced to produce phages, which will then be tested on E. coli strains expressing the relevant receptors.
+
+#### Learn
+We anticipate obtaining recombinant lysogens that survive CRISPR selection. If no surviving colonies are observed, we will modify the workflow by transforming the recombination construct first, allowing it to replicate in the lysogen for several generations before introducing the CRISPR plasmid. This should increase the likelihood of successful recombination events.
+  
+## Hardware -- Pill Release Mechanism Design
+
+During the design process, we explored several mechanisms for on-demand phage release. Our first concept, inspired by published work, used a nichrome wire heating element to melt a fusible PCL thread that restrained a spring-loaded drug compartment. The system included a nichrome coil, tensile PCL filament, PDMS spring, elastic band, and a 3.7 V Li-Po battery. When triggered, the wire heated rapidly, melting the PCL (~60 °C) and releasing the stored tension to open the compartment for phage delivery. Ultimately, we shifted to an electromagnet-based release, which proved easier to prototype and more reliable over time, since magnetic force does not degrade like mechanical tension. From sketches to CAD models, we iteratively refined the capsule, repeatedly redesigning the release mechanism, component placement, and capsule size to shrink the device as much as possible (undertaking consistent DBTL cycles). Our current prototype remains too large to be swallowed due to manufacturing constraints; however, with further iterations, we intend to test a scaled-down version in the wet lab. We also intend to test our pill in a bacterial culture to observe whether it can sense H2 generated by E. coli.
+
+## Entrepreneurship -- Developing pitches and business plan
+Over the course of 4 months, the entrepreneurship team worked with the University of Toronto’s NEST Hatchery to craft many iterations of our business pitch and plan. With everybody’s combined efforts, as well as the expertise of our human practices division, we went over many different approaches to commercializing Mystiphage. Furthermore, we tested many different iterations of our pitch and business plan to investors and advisors, who were able to provide feedback on a weekly basis regarding the feasibility of our proposals. Hence, after 4 months of working and reworking multiple ideas, we executed numerous DBTL cycles (at times within a weekly timespan) and were able to eventually produce our business plan, pitch and cashflow projections that will allow Mystiphage to continue as a viable startup after the iGEM Jamboree.
