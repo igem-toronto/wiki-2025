@@ -1,0 +1,30 @@
+---
+import '@/styles/global.css'
+import { Content, getHeadings } from '@/content/human-practices/future-plans.mdx'
+import ThreeColumnLayout from '@/layouts/ThreeColumnLayout.astro'
+import Sidebar from '@/components/Sidebar.astro'
+import SubpageNavigation from '@/components/SubpageNavigation.astro'
+---
+
+<ThreeColumnLayout
+  headerIconSrc="https://static.igem.wiki/teams/5708/headericons/human-practices.webp">
+  <Sidebar headings={getHeadings()} slot="sidebar" />
+  <SubpageNavigation
+    links={[
+      { href: '/human-practices/introduction', text: 'Introduction' },
+      { href: '/human-practices/inclusivity', text: 'Commitment to Inclusivity' },
+      { href: '/human-practices/integrated-hp-public', text: 'Integrated HP - Public' },
+      { href: '/human-practices/education-and-outreach', text: 'Education & Outreach' },
+      { href: '/human-practices/stakeholder-framework', text: 'Stakeholder Framework' },
+      { href: '/human-practices/integrated-hp-technical', text: 'Integrated HP - Technical' },
+      { href: '/human-practices/risk-assessment', text: 'Risk Assessment' },
+      { href: '/human-practices/future-plans', text: 'Future Plans' },
+      { href: '/human-practices/conclusion', text: 'Acknowledgement and Conclusion' },
+    ]} 
+    current="Future Plans"
+    slot="extra-navigation"
+  />
+  <div slot="main">
+    <Content />
+  </div>
+</ThreeColumnLayout>

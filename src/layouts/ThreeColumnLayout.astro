@@ -11,11 +11,11 @@ const headerIconSrc = Astro.props['headerIconSrc']
       src="https://static.igem.wiki/teams/5708/headericons/header-background-cropped.webp"
       />
     { headerIconSrc &&
-      <div class="absolute w-[20vw] right-[8vw] -z-20 top-[8vw]">
+      <div class="absolute w-[20vw] right-[8vw] -z-20 top-[8vw] hidden lg:block">
         <img class="w-full" src={headerIconSrc} alt="Header Icon" />
       </div>
     }
-    <div class="w-full flex justify-center mt-32">
+    <div class="w-full flex justify-center mt-32 px-16">
       <div class="p-4 bg-white/70 rounded-lg">
         <slot name="extra-navigation" />
       </div>

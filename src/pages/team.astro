@@ -22,7 +22,7 @@ type TeamMember = {
 };
 
 async function csvToJson(): Promise<TeamMember[]> {
-  const csvPath = path.resolve("./src/data/team.csv");
+  const csvPath = path.resolve("./src/data/team_final.csv");
   const csv_data = fs.readFileSync(csvPath, "utf-8");
 
   const team = parse(csv_data, {
