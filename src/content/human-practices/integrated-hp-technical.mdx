@@ -201,6 +201,10 @@ Based on the feedback we received from experts, we made several key decisions to
 
 At this point, we were tackling the use and implementation of MCMC. Our MCMC setup allowed variable sequence lengths and de novo exploration too far from native RBDs, risking outputs with little biological relevance or proper folding/binding. To answer our questions, we consulted Michael (Jun Sub) Lee, an advisor from the Kim Lab, who greatly helped us with MCMC usage, including how to fix errors, improve the model, address low data issues, and when to make the decision of fine-tuning existing models or building new ones. We discussed the following questions with him across multiple meetings, which occurred from June to September:
 
+<Figure
+  src="https://static.igem.wiki/teams/5708/humanpracticesimg/adv-michael.avif"
+  alt="Michael Lee Photo" width="250" />
+
 #### Why is RF Diffusion not a suitable generative model for novel RBP structures?
 
 At the start of the Mystiphage project, we considered using RFdiffusion to design glycan-targeting RBPs but ran into major limitations. Michael provided key feedback that led us to reconsider this approach. He pointed out that RFdiffusion depends on having bound protein-ligand structures as training/finetuning data, yet there are fewer than ten glycan-bound solved RBP structures available. Fine-tuning unbound proteins would require significant computational resources, be GPU-intensive, and likely result in very low experimental hit rates (around 1–2 out of 200). Michael also highlighted that hallucination-based models like Boltz-1/2 or BindCraft not only achieve higher hit rates (15–20%) but also allow for co-designing sequence and structure, making validation easier and eliminating the need for docking. His advice on using conserved scaffolds, domain-specific constraints, and glycan-aware scoring was crucial in shifting our pipeline toward biologically relevant and experimentally practical designs. This guidance enabled us to focus on rapid in silico sampling and select high-confidence candidates, establishing the core of the PHORAGER workflow.
@@ -253,6 +257,10 @@ After our discussion with Michael, the core workflow issue we were grappling wit
 
 As a result, we turned to **Alston Lo,** a University of Toronto graduate who excelled in computer science and who is an advisor on the team, as well as **Amardeep Singh**, a mechanical engineering graduate with a Biomanufacturing emphasis who is currently also a team member.
 
+<img
+  src="https://static.igem.wiki/teams/5708/humanpracticesimg/dl-amardeep.avif"
+  alt="Dr. Amardeep Singh Dhingra Photo" caption="Amardeep" width="250" />
+
 #### Pipeline Design Concerns
 
 After introducing our timeline to them, Alston noted that the pipeline design was generally reasonable, but he cautioned that the main caveat with MCMC lies in its **mixing time.** Without confirming when the chain has converged to the proposal distribution, the generated sequences may not truly reflect the intended sampling space. **His advice was to integrate convergence diagnostics into the workflow to ensure the outputs are representative rather than prematurely assuming validity.**
@@ -298,6 +306,7 @@ Afterwards, we needed to ensure that our computationally designed phage tails we
 #### Dr. Sarah Otto
 
 To address this concern, we consulted with **Dr. Sarah Otto**, an expert on genetic variation, recombination, and host-parasite dynamics. A MacArthur Fellow and recipient of the Darwin-Wallace Medal, she has built a career at the University of British Columbia (though often collaborating with colleagues at Toronto), developing mathematical and computational models that explain how organisms adapt under constant selective pressure. Her expertise is directly relevant to phage therapy, immunology, and infectious disease because she studies the very principles that govern how bacteria evolve resistance and how viruses, including phages, adapt in response.
+
 <Figure src="https://static.igem.wiki/teams/5708/humanpracticesimg/sarah-p-otto-photo.webp" alt="Sarah P. Otto Photo" width="250" />
 
 
@@ -395,6 +404,10 @@ At the start of August, we learned that there is a disconnect between laboratory
 
 #### Pranav Johri
 To help us address this concern, we interviewed **Pranav Johri**, a pioneering patient‑advocate and entrepreneur whose personal journey with antibiotic‑resistant infection led him to become one of the most visible champions of phage therapy in India. After overcoming a life‑threatening, drug‑resistant condition through treatment at the Eliava Institute, he co‑founded **Vitalis Phage Therapy**, an organization dedicated to making phage treatment more accessible, affordable, and better integrated into healthcare systems. He understands the science and regulatory hurdles, but also the lived reality of patients navigating resistant infections. During this interview, we also learned about phage therapy in India, solidifying our mission in conducting global outreach. This gave us insight as to how relevant phage therapy is in other countries.
+
+<Figure
+  src="https://static.igem.wiki/teams/5708/humanpracticesimg/pranav-johri-photo.webp"
+  alt="Pranav Johri Photo" width="250" />
 
 #### Treatment Timelines and Patient Experience
 
@@ -1007,6 +1020,20 @@ At the start of October, we sought out **Dr. Adriaenssens’** expert perspectiv
 **Regulatory & Commercial Barriers**: She explained that while phage therapy is used in countries like Poland and ex-Soviet states under compassionate use, broader adoption requires standardized clinical trials with fixed cocktails. Regulatory hurdles and lack of pharma investment remain major obstacles.
     
 **AI & Future Potential**: Dr. Adriaenssens expressed cautious optimism about AI’s role in personalized phage design, provided it’s used responsibly. She sees potential in building scalable, low-cost production pipelines and integrating AI with clinical workflows but emphasized that commercial viability must be solved to unlock broader impact.
+
+### Professor Artem Babaian
+
+We also met with **Professor Babaian** to explore the scientific and computational foundations of Mystiphage’s AI-driven approach to phage therapy. The goal was to evaluate whether generative models could offer meaningful advantages over traditional bioinformatics and phylogenetic sampling in designing receptor-binding domains (RBDs) for phages.
+
+**Professor Artem Babaian** is a molecular biologist known for his work in viral genomics and computational biology. He brings a critical and evolutionary perspective to synthetic biology, with particular interest in how natural diversity can inform design strategies.
+
+<img src="https://static.igem.wiki/teams/5708/humanpracticesimg/artem.avif" alt="Prof. Artem Babaian Photo" width="100%" />
+
+### Key Insights from the Interview
+
+-   **Phage Therapy Challenges**: Professor Babaian acknowledged the promise of phage therapy but emphasized current barriers—high screening costs, regulatory complexity, and bacterial resistance. 
+-   **AI vs. Bioinformatics**: He questioned the need for AI, suggesting that large-scale bioinformatics and sequence similarity methods might suffice. We responded that AI could narrow down viable RBP candidates more efficiently than brute-force sequence comparisons.
+-   **Phylogenetic Sampling**: Babaian recommended sampling proteins from adjacent clades in the phage phylogenetic tree rather than designing new sequences from scratch. He argued that many useful proteins likely already exist in nature but remain undiscovered due to limited sequencing coverage.
 
 ### Last Insights
 
