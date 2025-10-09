@@ -176,66 +176,30 @@ experiments in the coming weeks.
 
 ## Immediate Future Experiments
 
-To characterize generated RBDs that enable successful phage targeting of
-the above bacterial receptors, we will employ adsorption and growth curve assays.
-These serve to characterize the results of the spotting assay in two ways:
-
-1. **Adsorption assay:** interrogates the binding efficiency of the native and designed RBDs to the bacterial receptor it targets.
-2. **Growth curve assay:** quantifies the phage spotting assay using phage titres, allowing for an objective assessment of lytic efficiency of the bacteriophage of interest.
-    
-
-A one-step growth curve is achieved by inoculating a sensitized bacterial
-culture with the phage of interest and sampling the culture at various time
-points to perform a plaque assay, through which the changes in phage titres
-can be quantified and plotted over the infection time [1].
+To characterize generated RBDs that enable successful phage targeting of the above bacterial receptors, we will employ adsorption and growth curve assays. These serve to characterize the results of the spotting assay in two ways. First, the adsorption assay interrogates the binding efficiency of the native and designed RBDs to the bacterial receptor it targets. The growth curve quantifies the phage spotting assay using phage titres, allowing for an objective assessment of lytic efficiency of the bacteriophage of interest. A one-step growth curve is achieved by inoculating a sensitized bacterial culture with the phage of interest and sampling the culture at various time-points to perform a plaque assay, through which the changes in phage titres can be quantified and plotted over the infection time @dominguez2024.
 
 ## Future Directions in Phage RBD Discovery and Optimization
 
-Advances in structural biology will be critical once a working AI-designed RBD
-is identified. **Cryo-electron microscopy (cryo-EM)** is especially well-suited
-to phage tail complexes because it requires no crystals and can image very large
-assemblies in a near-native state. Recent cryo-EM studies routinely achieve
-near-atomic resolution on whole phage particles and tail fibers [2].
-**X-ray crystallography**, by contrast, can deliver the highest atomic detail
-for isolated RBD domains (especially rigid tailspikes), yielding clear
-structures of the binding interface [2].
+Advances in structural biology will be critical once a working
+AI-designed RBD is identified. Cryo-electron microscopy (cryo-EM)
+is especially well-suited to phage tail complexes because it
+requires no crystals and can image very large assemblies in a
+near-native state. Recent cryo-EM studies routinely achieve
+near-atomic resolution on whole phage particles and tail
+fibers @dunne2023. X-ray crystallography, by contrast, can
+deliver the highest atomic detail for isolated RBP domains
+(especially rigid tailspikes), yielding clear structures of
+the binding interface @dunne2023. In practice one would use
+both: cryo-EM on the intact phage (or tail complex) to
+visualize overall architecture and cryo-electron tomography
+(cryo-ET) for in situ context, while X-ray diffraction of
+purified RBD or tailspike fragments provides high-resolution
+models of the receptor-binding site @dunne2023. Together
+these structures (“blueprints”) help explain how the RBD
+docks to its receptor and guide further model design and
+engineering.
 
-In practice, both methods are complementary: cryo-EM on the intact phage
-(or tail complex) to visualize overall architecture and cryo-electron tomography
-(cryo-ET) for in situ context, while X-ray diffraction of purified RBD or tailspike
-fragments provides high-resolution models of the receptor-binding site. Together
-these structures (“blueprints”) help explain how the RBD docks to its receptor
-and guide further model design and engineering.
 
-**High-throughput library screening** will let us rapidly test thousands or
-millions of AI-generated RBD variants. For example, one could build a phage-
-or yeast-display library of RBD sequences and perform iterative biopanning
-rounds against the target bacterium or purified receptor. Phage display
-leverages extremely diverse libraries (often >10⁹ variants) and enriches binders
-through repeated selection rounds, quickly winnowing a huge pool down to a few
-strong candidates [3]. Coupling this with deep sequencing or high-content sorting
-allows parallel measurement of many variants’ binding. Approaches like surface
-plasmon resonance, common in antibody engineering, would let us scan the
-AI-designed library at scale and pick out functional RBDs for further
-validation [4].
+High-throughput library screening will let us rapidly test thousands or millions of AI-generated RBD variants. For example, one could build a phage- or yeast-display library of RBD sequences and perform iterative “biopanning” rounds against the target bacterium or purified receptor. Phage display leverages extremely diverse libraries (often > 10⁹ variants) and enriches binders through repeated selection rounds, quickly winnowing a huge pool down to a few strong candidates @chris2015. Coupling this with deep sequencing or high-content sorting allows parallel measurement of many variants’ binding. Approaches like surface plasmon resonance (common in antibody engineering) would let us scan the AI-designed library at scale and pick out functional RBDs for further validation @douzi2017.
 
-Finally, **directed evolution** can refine any hits and generate data to
-improve the AI model. In practice, this might mean taking a promising AI-designed
-RBD, introducing diversity (e.g., by error-prone PCR, DNA shuffling, or mutagenesis
-plasmids), and then selecting for tighter binding or broader host range over
-multiple rounds. For example, phage-assisted continuous evolution (PACE) or
-cyclic error-prone phage propagation could iteratively improve binding affinity
-and specificity — analogous to antibody maturation — and have been used to expand
-phage host range by mutating tail fiber proteins [2]. Each round of selection
-generates new sequence–function data, which could be fed back to retrain the AI
-model. In this way, iterative cycles of **design → experimental selection →
-data-driven redesign** would converge on optimized RBDs that both work _in vitro_
-and enrich the training set for future predictions.
-
-## References
-
-1. Dominguez-Mirazo, M. _et al._ (2024). [_Study on bacteriophage one-step growth curves_](https://pmc.ncbi.nlm.nih.gov/articles/PMC11323501/). **PMC11323501**.
-2. [_Cryo-EM and X-ray structural studies on phage RBDs_](https://www.nature.com/articles/srep12913). **Nature Scientific Reports**.
-3. Smith, G. _et al._ (2017). [_Phage display and directed evolution of protein–ligand interactions_](https://pubmed.ncbi.nlm.nih.gov/28667619/). **PubMed 28667619**. 
-4. Liu, J. _et al._ (2015). [_Surface plasmon resonance screening in protein engineering_](https://pmc.ncbi.nlm.nih.gov/articles/PMC10163921/). **PMC10163921**.
-
+Finally, directed evolution can refine any hits and generate data to improve the AI model. In practice this might mean taking a promising AI-designed RBD, introducing diversity (e.g., by error-prone PCR, DNA shuffling or mutagenesis plasmids), and then selecting for tighter binding or broader host range over multiple rounds. For example, phage-assisted continuous evolution (PACE) or cyclic error-prone phage propagation could iteratively improve binding affinity and specificity. These methods are analogous to antibody maturation and have been used to expand phage host range by mutating tail fiber proteins @rauch2020. Each round of selection generates new sequence–function data (which RBD mutations enhance binding), which could be fed back to retrain the AI model. In this way, iterative cycles of design → experimental selection → data-driven re-design would converge on optimized RBDs that both work *in vitro* and enrich the training set for future predictions @dunne2023.
