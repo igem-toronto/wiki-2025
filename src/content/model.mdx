@@ -7,63 +7,51 @@ import Figure from "@/components/Figure.astro";
 Phage therapy offers a promising alternative to antibiotics, but clinical implementation is limited by the extensive screening required to identify suitable therapeutic phages. Here we present PHORAGER (Phage Host-Optimized Receptor-Activated Generative Engineering Repository), a computational pipeline that redesigns bacteriophage receptor-binding proteins to reprogram viral host specificity. PHORAGER integrates state-of-the-art protein and structural foundation models, statistical sampling-based optimization to navigate fitness landscapes and identify optimal variants. We experimentally validated PHORAGER by engineering four E. coli phages with altered host specificity. Two were designed to recognize truncated R1 lipopolysaccharide glycans instead of K12, and two were engineered to bind OmpC instead of LamB protein receptors. We further establish the first Generative Phage Bank with an intelligent routing strategy to streamline phage selection. The system retrieves pre-validated phages when bacterial receptors share high sequence identity with database entries. When no close match exists, the generative model designs novel receptor-binding proteins for the target. By conducting thousands of in silico binding simulations before experimental synthesis, PHORAGER reduces phage screening time from months to days, unlocking patient-specific antimicrobial design at clinically relevant timescales.
 
 ## Background
-
-Antibiotic resistance is one of humanity's largest global health issues,
-being projected to cause ~39 million cumulative deaths between now and 2050 @Lancet. Phage therapy is a promising solution and has had success in multiple
-high-profile cases @CNNHealth @CBCNews. However, the process of finding a phage with the correct binding receptor-binding protein (RBP) for its target bacterial receptor (a process called phage matching) is
-highly time consuming @Frontiers. Studies have shown that slow phage matching causes months-long
-wait times @OxfordAcademic and
-single-digit fulfillment rates @Nature for phage therapies – this prevents this treatment from effectively scaling and meeting the demands of millions of future cases where antibiotics might fail.
+Antibiotic resistance is one of humanity's largest global health issues. It is projected to cause approximately 39 million cumulative deaths between now and 2050 @naghavi2024global. Phage therapy is a promising solution and has had success in multiple high-profile cases @schooley2017development @olawade2024phage. However, the process of finding a phage with the correct receptor-binding protein (RBP) for its target bacterial receptor, a process called phage matching, is highly time consuming @doud2025optimizing. Studies have shown that slow phage matching causes months-long wait times @aslam2020lessons and single-digit fulfillment rates @pirnay2024personalized for phage therapies. This prevents this treatment from effectively scaling and meeting the demands of millions of future cases where antibiotics might fail.
 
 ### Phage Therapy: The Problems It Solves and the Problems It Poses
+Phages infect bacterial cells by first binding to either a glycan or protein structure on the outer membrane of the bacteria using structures called tail fibers. These tail fibers contain receptor-binding proteins (RBPs) that recognize and attach to specific bacterial surface receptors with exquisite molecular specificity. These glycan or protein receptors are unique between bacterial strains, limiting the host range of the phage. Following initial recognition, the tail fibers use their enzymatic activity to degrade bacterial capsules and facilitate tighter binding. The phage then injects its genome into the bacterial cell, which eventually leads to the production of new phage particles that are assembled within the cell. The bacterial cell is subsequently lysed and the new phages spread to new bacterial cells @ofir2018contemporary.
 
-Phages target either glycan or protein structures specific to a certain bacterial strain decreasing the risk of cross reactivity. Phages infect bacterial cells by first binding to a bacterial surface using structures called tail fibers. Some tail fibers have enzymatic activity that can degrade bacterial capsules to facilitate easier binding. Following surface binding, phages then inject their genome into the bacterial cell which eventually leads to the production of new phage particles which are assembled within the cell. The bacterial cell then gets lysed and the new phages
-spread to new bacterial cells @ofir2018contemporary. Phage therapy tries to harness this biological process to fight bacterial infections, but currently its clinical use has multiple limitations. The use of phage therapy has been mainly limited by phage screening - the process of identifying specific bacteriophages (viruses that infect bacteria) that can effectively target and destroy a patient's bacterial infection.
+Phage therapy harnesses this biological process to fight bacterial infections, but its clinical use faces multiple limitations. The use of phage therapy has been mainly limited by phage screening, the process of identifying specific bacteriophages that can effectively target and destroy a patient's bacterial infection. This challenge stems from the fundamental biology of phage-host recognition: the molecular compatibility between a phage's RBP and the target bacterium's surface receptor determines whether infection can occur.
 
-The phage screening process often involves searching through thousands of phages for a match to a specific bacterial target, making it a long and extensive process
-@ScienceDirect. One of the methods used currently to address these problems is the use of phage cocktails, which are mixtures of several different phages given at once in the hope that at least one will infect the target bacteria. The phage cocktail approach, however, risks increasing resistance and reducing phage selectivity, undermining their justification as a good solution
-to begin with @ScientificReport. Studies have shown that the most critical metric for determining whether a phage can bind to a bacteria is the RBP (receptor binding protein)
-of the phage @ScienceDirect2 @SpringerNature3. The development and use of recombinant phages that are engineered to bind to a custom bacterial target by genetically altering its RBP is a relatively novel concept and lacks sufficient data surrounding phage RBP-host interactions. This is another significant obstacle to the practical
-use of phage therapy @NatureMicrobiology. Overcoming these major obstacles to the use of phage therapy therefore requires the use of powerful AI-based computational models.
+The phage screening process often involves searching through thousands of phages for a match to a specific bacterial target, making it a long and extensive process @ng2021development. One method used currently to address these problems is the use of phage cocktails, which are mixtures of several different phages given at once in the hope that at least one will infect the target bacteria. The phage cocktail approach, however, risks increasing resistance and reducing phage selectivity, undermining their justification as a good solution to begin with @molina2022systematic. Studies have shown that the most critical metric for determining whether a phage can bind to a bacterium is the RBP of the phage @klumpp2023perfect @dowah2018review. 
+
+The development and use of recombinant phages that are engineered to bind to a custom bacterial target by genetically altering the RBP is a relatively novel concept. However, computational design of RBPs to retarget phage host specificity faces three fundamental challenges. First, bacterial receptors are incredibly diverse. Since each RBP is highly specific to its cognate receptor, generative models would need to encompass a vast range of sequence and structural diversity to generalize across necessary receptor classes. This makes de novo generation very difficult. Second, many bacterial receptors, such as flexible glycans like lipopolysaccharides and capsular polysaccharides, are extremely challenging to represent computationally, and current generative models struggle to design binders for them. Third, many receptors lack solved or annotated RBP-receptor complexes, leaving generative models with little data to train on or fine-tune. These challenges, combined with insufficient data surrounding phage RBP-host interactions, represent significant obstacles to the practical use of engineered phage therapy @gaborieau2024prediction. Overcoming these major obstacles therefore requires the development of powerful AI-based computational models.
 
 ### AI-Driven Protein Engineering and Structural Models
+The protein design challenge is like searching for a single golden key in an ocean of near-identical fakes. The ocean contains 20^300 possible sequences for a typical 300-residue protein, a combinatorial explosion that dwarfs the number of atoms in the observable universe @currin2015synthetic.
 
-The protein design challenge resembles searching for a single golden key in an ocean of near-identical fakes – except the ocean contains 20^300 possible sequences for a typical 300-residue protein, a combinatorial explosion that dwarfs the number of atoms in the
-observable universe @currin2015synthetic.
+Recent AI-driven tools like ESM, AlphaFold, and RoseTTAFold have revolutionized protein modeling and engineering. Despite their power, these methods have not been applied to the targeted design of synthetic receptor-binding proteins (RBPs) for redirecting phage host specificity. This represents a critical gap in phage therapy, where bacterial resistance patterns shift faster than traditional phage isolation methods can track @doud2025optimizing.
 
-Recent advances in AI-driven protein design, such as ESM, AlphaFold, and RoseTTAFold, have revolutionized our ability to model and engineer functional proteins. Yet for all their power, these methods have not been applied to the targeted design of synthetic receptor-binding proteins (RBPs) to redirect phage host specificity, a crucial unmet need in the phage therapy domain where bacterial resistance patterns shift faster than traditional phage
-isolation can follow @doud2025optimizing. The challenge proves particularly acute: phage RBPs across different families exhibit extreme sequence and structural variability—homology often vanishes entirely even between functionally analogous proteins binding similar bacterial
-receptors @dion2020phage. It's molecular convergent evolution at its most dramatic, where nature has discovered thousands of distinct solutions to the same recognition problem, leaving AI models trained on homology-rich protein families struggling to extract generalizable design principles.
+The challenge is compounded by the extreme sequence and structural variability of phage RBPs across different families. Even functionally analogous proteins binding similar bacterial receptors often share no detectable homology @dion2020phage. This represents molecular convergent evolution at its most dramatic: nature has discovered thousands of distinct solutions to the same recognition problem, leaving AI models trained on homology-rich protein families unable to extract generalizable design principles.
 
-AlphaFold3 represents the current apex of structure prediction, visualizing three-dimensional conformations with near-experimental accuracy from amino acid sequences alone. This capability has transformed protein engineering from blind groping in sequence space
-to informed navigation @Nature5. However, AlphaFold3's Achilles heel emerges precisely where phage RBPs operate: it lacks built-in modules for modeling protein-ligand or protein-glycan
-interactions @DeepOrigin. These binding modes prove critical for phage RBPs, which must recognize and engage highly variable bacterial surface receptors—lipopolysaccharides, teichoic acids, capsular polysaccharides—whose conformational flexibility and chemical diversity fall outside AlphaFold's protein-centric training regime.
+AlphaFold3 represents the current state-of-the-art of structure prediction, visualizing three-dimensional protein conformations with near-experimental accuracy from amino acid sequences alone. This capability has transformed protein engineering from blind exploration of sequence space to informed navigation @abramson2024accurate. However, AlphaFold3's limitation emerges precisely where phage RBPs operate: it lacks dedicated modules for modeling protein-ligand and protein-glycan interactions @DeepMind2023AlphaFold. These binding modes are critical for phage RBPs, which must recognize highly variable bacterial surface receptors such as lipopolysaccharides, teichoic acids, and capsular polysaccharides. Their conformational flexibility and chemical diversity fall outside AlphaFold's protein-centric training data.
 
-Boltz-2 pushes protein modeling further by coupling AlphaFold-like structural prediction with an affinity prediction module. It evaluates the strength of binding interactions between candidate proteins and their targets, including glycans
-and membrane proteins @PubMed5. This dual capability is novel and important for phage research as it allows us to predict how well a designed RBP will bind to a bacterial receptor, therefore linking structure and function within a single model.
+Boltz-2 advances protein modeling by coupling AlphaFold-like structural prediction with an affinity prediction module that evaluates binding strength between candidate proteins and their targets, including glycans and membrane proteins @Passaro2025Boltz2. This dual capability is particularly valuable for phage research, as it links structure and function within a single framework. It enables prediction of how well a designed RBP will bind to its bacterial receptor target.
+
 
 ## Where We Come In
-
-Phage therapy, synthetic biology, and AI-driven protein design are converging to create unprecedented opportunities for fighting AMR. PHORAGER harnesses these advances to pursue the following objectives:
+Phage therapy, synthetic biology, and AI-driven protein design are converging to create unprecedented opportunities for fighting ABR. PHORAGER harnesses these advances to pursue the following objectives:
 
 1. Curate all known Escherichia phages from GenBank, annotate their receptor-binding domains (RBDs), and pre-validate these sequences for inclusion in the Generative Phage Bank.
-
 2. Develop a generative model for novel receptor-binding protein (RBP) domains using state-of-the-art biomolecular foundation models, specifically ESM3 for protein design and Boltz-2 for structure prediction.
-
 3. Engineer novel RBPs for four Escherichia phages: Mu, P2, Lambda, and HK97, to reprogram their host specificity.
-
-- **Batch 1:** Sequences generated using ESM3 and Boltz-2 prototype workflow
-
-- **Batch 2:** Sequences generated using full MCMC with simulated annealing optimization
-
+  - **Batch 1:** Sequences generated using ESM3 and Boltz-2 prototype workflow
+  - **Batch 2:** Sequences generated using full MCMC with simulated annealing optimization
 4. Establish a Generative Phage Bank framework with intelligent routing that assesses bacterial receptor sequence similarity and either retrieves pre-validated phages or initiates de novo RBP design for novel bacterial targets, bypassing exhaustive phage screening.
 
 ## Design/Methods
 
-![fig1 workflow](https://static.igem.wiki/teams/5708/drylab/fig1-workflow.webp "**Figure 1. PHORAGER generative phage bank workflow.** Overview of the computational pipeline for generating and validating novel receptor-binding proteins. The workflow integrates a user-friendly interface for clinical applications, computational sequence generation through iterative MCMC refinement, and experimental validation of designed sequences.”)
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig1-workflow.webp"
+  alt="fig1 workflow"
+  caption="Figure 1. PHORAGER generative phage bank workflow.">
+  <div slot="extended-caption">
+    Overview of the computational pipeline for generating and validating novel receptor-binding proteins. The workflow integrates a user-friendly interface for clinical applications, computational sequence generation through iterative MCMC refinement, and experimental validation of designed sequences
+  </div>
+</Figure>
 
 ### Overview
-
 PHORAGER (Phage Host-Optimized Receptor-Activated Generative Engineering Repository) is a fully automated pipeline that engineers synthetic bacteriophage receptor-binding proteins (RBPs) to reprogram phage host specificity, bypassing the traditional months-long phage screening process. The pipeline comprises three main components: data curation, phage generation, and iterative optimization through Markov Chain Monte Carlo (MCMC) sampling.
 
 The workflow begins with ESM3, a state-of-the-art protein language model, which generates novel receptor-binding domain (RBD) candidates by masking wild-type RBD regions. Each candidate sequence is evaluated using Boltz-2, a biomolecular foundation model that co-folds the generated RBD with the target receptor and assesses binding interactions with bacterial surface glycans and proteins. Boltz-2 produces a combined "energy" score that quantifies binding affinity for each sequence.
@@ -84,19 +72,17 @@ To reduce redundancy while maintaining sequence diversity, we clustered the RBD 
 
 #### Annotating Escherichia Genomes with Receptor Types
 
-Accurate identification of bacterial surface receptors is critical for the Generative Phage Bank routing system. When a novel bacterial sequence is submitted, receptor annotation is the first computational step, determining whether pre-validated phages can be retrieved or if de novo RBP design must be initiated. We developed comprehensive annotation pipelines for both glycan and protein receptors.
+Accurate identification of bacterial surface receptors is critical for the Generative Phage Bank routing system. When a novel bacterial sequence is submitted, receptor annotation is the first computational step. It determines whether pre-validated phages can be retrieved or if de novo RBP design must be initiated. We developed comprehensive annotation pipelines for both glycan and protein receptors.
 
 #### Glycan Receptors (Lipopolysaccharide Outer Core Types)
 
-E. coli lipopolysaccharide (LPS) outer cores fall into five major types: R1, R2, R3, R4,
-and K12 @dissanayake2008distribution. Each type is encoded by highly conserved genomic regions containing 10-15 genes. We implemented a hybrid pipeline combining LPSTyper, a PCR-based in silico typing tool, with custom BLAST-based verification to handle genomes with poor sequencing quality in outer-core-encoding regions.
+E. coli lipopolysaccharide (LPS) outer cores fall into five major types: R1, R2, R3, R4, and K12 @dissanayake2008distribution. Each type is encoded by highly conserved genomic regions containing 10-15 genes. We implemented a hybrid pipeline combining LPSTyper, a PCR-based in silico typing tool, with custom BLAST-based verification to handle genomes with poor sequencing quality in outer-core-encoding regions.
 
 The workflow first applies LPSTyper, which simulates PCR amplification of signature genes by identifying primer binding sites and comparing product lengths. For genomes where LPSTyper fails to assign a type, we perform BLASTn and tBLASTn searches using curated representative sequences for each outer core type. Full-length genomic DNA sequences from untyped genomes are searched against representative outer core nucleotide sequences and signature protein sequences. Hits are filtered based on sequence similarity and coverage to assign outer core types. Results from both methods are combined to produce comprehensive LPS annotations.
 
 #### Protein Receptors
 
-Fourteen major protein receptors are known to serve as phage binding targets in E. coli: BamA, BtuB, FadL, FepA, FhuA, LamB, LptD, NfrA, OmpA, OmpC, OmpF, TolC, Tsx,
-and YncD @hantke2020compilation. We curated one to two representative amino acid sequences for each receptor and used DIAMOND, an accelerated BLAST implementation, to identify homologs across all genomes.
+Fourteen major protein receptors are known to serve as phage binding targets in E. coli: BamA, BtuB, FadL, FepA, FhuA, LamB, LptD, NfrA, OmpA, OmpC, OmpF, TolC, Tsx, and YncD @hantke2020compilation. We curated one to two representative amino acid sequences for each receptor and used DIAMOND, an accelerated BLAST implementation, to identify homologs across all genomes.
 
 Protein sequences from all genomes were extracted and concatenated into a unified database, with genome identifiers prefixed to each protein ID for downstream tracking. DIAMOND BLASTp searches were performed for each protein receptor query using stringent thresholds (e-value < 1e-5, identity > 60%, query coverage > 70%, subject coverage > 70%) in ultra-sensitive mode. Identified protein receptors were extracted and catalogued for each genome.
 
@@ -109,7 +95,6 @@ To enable Boltz-2 structural co-folding and molecular docking simulations with L
 #### RBP Collection and Clustering
 
 ```bash
-
 # Initial BLASTp search against NCBI RefSeq
 blastp -query P2_Mu_RBPs.fasta -db refseq_protein -evalue 1e-5 \
 -outfmt 6 -out initial_hits.tab
@@ -125,9 +110,8 @@ cd-hit -i RBD_sequences.fasta -o RBD_80.fasta -c 0.80 -aS 0.80
 ```
 
 #### Glycan Receptor Annotation
-
 ```bash
-# Convert .gbff to .fna for LPSTyper
+# Convert .gbff to .fna for LPSTyper 
 python gbff_to_fna.py
 
 # Run LPSTyper in batches
@@ -202,7 +186,7 @@ We initially validated the PHORAGER pipeline using two Escherichia phages availa
 
 Receptor-binding domains were expertly annotated in both phages (Data curation section) and masked for regeneration. We employed ESM3, a state-of-the-art generative protein language model, to generate novel RBD sequences. ESM3 is trained as a masked language model across the three data modalities of sequence, structure, and function. This training paradigm enables the model to generate biologically plausible protein sequences while maintaining structural and functional constraints.
 
-We systematically evaluated different ESM3 model configurations. Initial experiments using complete RBD regeneration with the ESM3-small (1.4B parameters) model yielded approximately 10% of sequences passing subsequent filtering criteria. Scaling to ESM3-large (98B parameters, accessed via the Forge API) improved the success rate to 20-25%. However, we found that ESM3-small with guided generation (an iterative resampling approach that optimizes toward a target metric) achieved comparable performance to ESM3-large. Since guided generation uses pTM (predicted Template Modeling score) as the optimization metric, sequences converge toward higher structural confidence. Given that ESM3-small is open-source and available under academic license without the generation limits imposed by the Forge API, we adopted ESM3-small with guided generation for all subsequent experiments.
+We systematically evaluated different ESM3 model configurations. Initial experiments using complete RBD regeneration with the ESM3-small (1.4B parameters) model yielded approximately 10% of sequences passing subsequent filtering criteria. Scaling to ESM3-large (98B parameters, accessed via the Forge API) improved the success rate to 20-25%. However, we found that ESM3-small with guided generation, an iterative resampling approach that optimizes toward a target metric, achieved comparable performance to ESM3-large. Since guided generation uses pTM (predicted Template Modeling score) as the optimization metric, sequences converge toward higher structural confidence. Given that ESM3-small is open-source and available under academic license without the generation limits imposed by the Forge API, we adopted ESM3-small with guided generation for all subsequent experiments.
 
 #### Structure Prediction and Binding Evaluation with Boltz-2
 
@@ -230,7 +214,7 @@ We defined a composite energy function for each candidate sequence as a linear c
 
 The sampling process begins at iteration 0 with the wild-type RBD sequence. The energy for this initial sequence is calculated and accepted into the Markov chain. At each subsequent iteration, a subset of residues is randomly masked from the previous sequence in the chain and regenerated using ESM3 with guided generation. The number of residues to mask is drawn from a Gaussian distribution with an initial mean of 40 residues.
 
-The newly generated sequence is evaluated with Boltz-2, and its energy is calculated. Acceptance into the Markov chain follows the Metropolis criterion, which compares the energy difference (ΔE) between the current and previous sequences. Sequences with improved energy are deterministically accepted, while sequences with worse energy are accepted probabilistically based on exp(−ΔE/T), where T is the temperature parameter. This stochastic acceptance enables exploration of the fitness landscape and prevents premature convergence to local maxima—a critical advantage over greedy best-sequence selection strategies.
+The newly generated sequence is evaluated with Boltz-2, and its energy is calculated. Acceptance into the Markov chain follows the Metropolis criterion, which compares the energy difference (ΔE) between the current and previous sequences. Sequences with improved energy are deterministically accepted, while sequences with worse energy are accepted probabilistically based on exp(−ΔE/T), where T is the temperature parameter. This stochastic acceptance enables exploration of the fitness landscape and prevents premature convergence to local maxima. This is a critical advantage over greedy best-sequence selection strategies.
 
 #### Simulated Annealing for Convergence
 
@@ -242,48 +226,52 @@ Sequences sampled throughout the MCMC trajectory undergo additional computationa
 
 ### Physics-Based Docking as Orthogonal Validation for Machine Learning Predictions
 
-Physics-based molecular docking provides essential orthogonal validation for machine learning-based binding affinity predictions in de novo protein design pipelines. The consensus across recent literature is that ML and physics-based approaches are complementary rather than competitive, with hybrid pipelines combining the speed of ML with the rigor of physics-based methods achieving the best results. ML models like AlphaFold3 and Boltz-2 excel at rapid initial predictions but exhibit critical limitations including stereochemistry violations, inability to model conformational changes, and susceptibility to generating adversarial sequences that appear valid computationally but fail experimentally. Physics-based docking tools like HADDOCK3 address these limitations through explicit physical modeling, providing confidence in predictions that pure ML approaches
-cannot guarantee @krokidis2025alphafold3.
+Physics-based molecular docking provides essential orthogonal validation for machine learning-based binding affinity predictions in de novo protein design pipelines. The consensus across recent literature is that ML and physics-based approaches are complementary rather than competitive. Hybrid pipelines combining the speed of ML with the rigor of physics-based methods achieve the best results. ML models like AlphaFold3 and Boltz-2 excel at rapid initial predictions but exhibit critical limitations including stereochemistry violations, inability to model conformational changes, and susceptibility to generating adversarial sequences that appear valid computationally but fail experimentally. Physics-based docking tools like HADDOCK3 address these limitations through explicit physical modeling, providing confidence in predictions that pure ML approaches cannot guarantee @krokidis2025alphafold3.
 
-Recent assessments of AlphaFold3 and similar ML models reveal fundamental limitations that necessitate physics-based validation. Abramson et al. demonstrated in their Nature 2024 paper that AlphaFold3 achieves only 95.6% stereochemical validity, exhibiting a 4.4% chirality violation rate and occasional production of overlapping atoms that violate basic physical chemistry. These artifacts arise because ML models learn statistical patterns from training data rather than enforcing physical constraints. Chen et al. found that while AlphaFold3 achieves good correlation (R=0.86) for predicting binding free energy changes upon mutation, some complex structures contain large errors not captured by internal confidence metrics like ipTM, leading them to conclude that independent validation of AlphaFold3 predictions is necessary.
+Recent assessments of AlphaFold3 and similar ML models reveal fundamental limitations that necessitate physics-based validation. Abramson et al. demonstrated in their Nature 2024 paper that AlphaFold3 achieves only 95.6% stereochemical validity, exhibiting a 4.4% chirality violation rate and occasional production of overlapping atoms that violate basic physical chemistry @abramson2024accurate. These artifacts arise because ML models learn statistical patterns from training data rather than enforcing physical constraints. Wee and Wei (2024) found that while AlphaFold3 achieves good correlation (R=0.86) for predicting binding free energy changes upon mutation, some complex structures contain large errors not captured by internal confidence metrics like ipTM. They concluded that independent validation of AlphaFold3 predictions is necessary @wee2024benchmarking.
 
-The challenge with ML models fundamentally stems from their optimization objectives. Notin et al. noted in their Nature Biotechnology 2024 review that in silico metrics such as native sequence recovery can be misleading, while Baker observed in his Cell 2024 perspective that the insensitivity of current protein structure prediction methods to amino acid point mutations that can be catastrophic in protein design necessitates orthogonal validation. ML models are optimized for structure prediction accuracy on natural sequences, not for distinguishing viable from non-viable designed sequences, creating a critical gap that physics-based validation fills.
+The challenge with ML models fundamentally stems from their optimization objectives. Notin et al. noted in their Nature Biotechnology 2024 review that in silico metrics such as native sequence recovery can be misleading @notin2024machine. ML models are optimized for structure prediction accuracy on natural sequences, not for distinguishing viable from non-viable designed sequences. This creates a critical gap that physics-based validation fills.
 
 #### HADDOCK3 Provides Modular Physics-Based Validation with Specialized Capabilities
 
-HADDOCK3 (Giulini et al., 2025) represents evolutionary thinking in molecular docking—breaking the original rigid pipeline into modular components that adapt to diverse validation scenarios. This architectural flexibility positions HADDOCK3 as the ideal physics-based complement to ML predictions in the post-AlphaFold era.
+HADDOCK3 (Giulini et al., 2025) represents evolutionary thinking in molecular docking. It breaks the original rigid pipeline into modular components that adapt to diverse validation scenarios. This architectural flexibility positions HADDOCK3 as the ideal physics-based complement to ML predictions in the post-AlphaFold era.
 
 The HADDOCK scoring function combines physics-based energy terms in stage-dependent weighted formulations:
 
-**HADDOCK Score** = w<sub>vdw</sub>E<sub>vdw</sub> + w<sub>elec</sub>E<sub>elec</sub> + w<sub>desolv</sub>E<sub>desolv</sub> − w<sub>BSA</sub> · BSA + w<sub>AIR</sub>E<sub>AIR</sub>
+**HADDOCK Score** =
+$$
+w_{vdw}E_{vdw} + w_{elec}E_{elec} + w_{desolv}E_{desolv} - w_{BSA} \cdot BSA + w_{AIR}E_{AIR}
+$$
 
-where E<sub>vdw</sub> and E<sub>elec</sub> capture van der Waals and Coulombic interactions through molecular mechanics force fields, E<sub>desolv</sub> approximates desolvation via empirical atomic solvation parameters, BSA (buried surface area) captures hydrophobic effects, and E<sub>AIR</sub> penalizes violations of ambiguous interaction restraints. The weights shift dramatically across refinement stages: rigid-body docking uses w<sub>vdw</sub>=0.01 to allow initial penetration, semi-flexible refinement increases to w<sub>vdw</sub>=1.0 for realistic contacts, while explicit solvent refinement damps electrostatics to w<sub>elec</sub>=0.2. This empirical dampening implicitly accounts for polarization and local rearrangement that simplified models miss, encoding decades of validation against experimental binding thermodynamics.
+Here, E<sub>vdw</sub> and E<sub>elec</sub> capture van der Waals and Coulombic interactions through molecular mechanics force fields. E<sub>desolv</sub> approximates desolvation via empirical atomic solvation parameters. BSA (buried surface area) captures hydrophobic effects, and E<sub>AIR</sub> penalizes violations of ambiguous interaction restraints. The weights shift dramatically across refinement stages: rigid-body docking uses w<sub>vdw</sub>=0.01 to allow initial penetration, semi-flexible refinement increases to w<sub>vdw</sub>=1.0 for realistic contacts, while explicit solvent refinement damps electrostatics to w<sub>elec</sub>=0.2. This empirical dampening implicitly accounts for polarization and local rearrangement that simplified models miss. It encodes decades of validation against experimental binding thermodynamics.
 
 These physics-based terms approximate the theoretical Gibbs free energy decomposition:
 
-**ΔG<sub>bind</sub>** = ΔG<sub>solvent</sub> + ΔG<sub>conf</sub> + ΔG<sub>int</sub> + ΔG<sub>motion</sub>
+$$
+\Delta G_{bind} = \Delta G_{solvent} + \Delta G_{conf} + \Delta G_{int} + \Delta G_{motion}
+$$
 
-capturing solvation changes, conformational penalties, direct intermolecular interactions, and entropy losses upon binding. While approximations (implicit solvation, fixed force fields, crude entropy estimates) limit absolute accuracy, the critical advantage is that these approximations encode known physical principles with predictable failure modes—unlike ML's opaque pattern-matching.
+This captures solvation changes, conformational penalties, direct intermolecular interactions, and entropy losses upon binding. While approximations (implicit solvation, fixed force fields, crude entropy estimates) limit absolute accuracy, the critical advantage is that these approximations encode known physical principles with predictable failure modes, unlike ML's opaque pattern-matching.
 
 #### Glycan-Protein Docking: Where ML Training Data Runs Dry
 
-HADDOCK3 demonstrates unique advantages for protein-glycan interactions—precisely where ML models trained predominantly on protein-protein interfaces stumble. Ranaudo et al. (2024) benchmarked HADDOCK across 89 high-resolution glycan complexes, achieving 70% success for bound docking and 40% for unbound when binding sites are known. The protocol handles diverse systems (antibodies, lectins, viral glycan-binding proteins, enzymes) that span the functional space of carbohydrate recognition.
+HADDOCK3 demonstrates unique advantages for protein-glycan interactions, precisely where ML models trained predominantly on protein-protein interfaces stumble. Ranaudo et al. (2024) @ranaudo2024modeling benchmarked HADDOCK across 89 high-resolution glycan complexes, achieving 70% success for bound docking and 40% for unbound when binding sites are known. The protocol handles diverse systems (antibodies, lectins, viral glycan-binding proteins, enzymes) that span the functional space of carbohydrate recognition.
 
-Glycans' conformational promiscuity—branched structures with 2-7 monosaccharides exploring vast configurational space—demands the flexible refinement and MD sampling that HADDOCK's modular architecture enables. Clustering between rigid-body and refinement stages increases diversity, crucial for exploring branched oligosaccharides' high-dimensional landscapes. The information-driven approach using ambiguous restraints to target known interface regions while permitting flexibility proves more effective than template-free methods where ML models lack carbohydrate training data.
+Glycans' conformational promiscuity, branched structures with 2-7 monosaccharides exploring vast configurational space, demands the flexible refinement and MD sampling that HADDOCK's modular architecture enables. Clustering between rigid-body and refinement stages increases diversity, crucial for exploring branched oligosaccharides' high-dimensional landscapes. The information-driven approach using ambiguous restraints to target known interface regions while permitting flexibility proves more effective than template-free methods where ML models lack carbohydrate training data.
 
 #### Parameter Sweeps with Latin Hypercube Sampling: Preliminary Benchmarks
 
-Systematic parameter exploration addresses a subtle but crucial weakness in docking: sensitivity to arbitrary parameter choices in rugged, non-convex energy landscapes. Bender et al.'s (2021) practical guide on large-scale docking emphasizes parameter evaluation before screening.
+Systematic parameter exploration addresses a subtle but crucial weakness in docking: sensitivity to arbitrary parameter choices in rugged, non-convex energy landscapes. Bender et al.'s (2021) @bender2021practical practical guide on large-scale docking emphasizes parameter evaluation before screening.
 
-Latin hypercube sampling (LHS) provides stratified coverage of parameter space by dividing each parameter's range into N equiprobable intervals and sampling once per interval, ensuring no two samples share the same interval for any parameter. For k parameters, this yields N samples with guaranteed coverage across all dimensions—versus N<sup>k</sup> samples required for equivalent full factorial coverage. This efficiency proves essential when each docking simulation costs substantial computational resources.
+Latin hypercube sampling (LHS) provides stratified coverage of parameter space by dividing each parameter's range into N equiprobable intervals and sampling once per interval. This ensures no two samples share the same interval for any parameter. For k parameters, this yields N samples with guaranteed coverage across all dimensions, versus N<sup>k</sup> samples required for equivalent full factorial coverage @renardy2021sobol. This efficiency proves essential when each docking simulation costs substantial computational resources @read2020strategies @sutthibutpong2024combining.
 
 #### Staged Validation Architecture: Marrying Speed with Rigor
 
-Successful pipelines adopt a cascade strategy: rapid ML-based exploration generates diverse candidates, physics-based filtering eliminates physically implausible designs, and parameter sweeps quantify confidence. Dauparas et al. (2022) demonstrated this with ProteinMPNN, where ML sequence design rescued 73 of 96 previously failed attempts, with 50 maintaining desired oligomeric states—but the authors emphasized that structure prediction evaluates purely in silico while design methods cannot, as computational metrics prove sensitive to architecture without correlating reliably with experimental success.
+Successful pipelines adopt a cascade strategy. Rapid ML-based exploration generates diverse candidates, physics-based filtering eliminates physically implausible designs, and parameter sweeps quantify confidence. Dauparas et al. (2022) @dauparas2022robust demonstrated this with ProteinMPNN, where ML sequence design rescued 73 of 96 previously failed attempts, with 50 maintaining desired oligomeric states. The authors emphasized that structure prediction evaluates purely in silico while design methods cannot, as computational metrics prove sensitive to architecture without correlating reliably with experimental success.
 
-The most sophisticated implementations employ parameter sweeps during physics-based validation to quantify robustness. Rather than accepting scores at face value, varying weights, solvation models, and sampling protocols through LHS identifies predictions robust across parameter space versus those sensitive to arbitrary choices. Wu et al.'s (2025) FDA (Folding-Docking-Affinity) framework found ColabFold-generated apo-structures surprisingly improved affinity predictions versus crystallized holo-structures—suggesting physics-based docking captures induced-fit effects ML structure prediction misses.
+The most sophisticated implementations employ parameter sweeps during physics-based validation to quantify robustness. Rather than accepting scores at face value, varying weights, solvation models, and sampling protocols through LHS identifies predictions robust across parameter space versus those sensitive to arbitrary choices. Wu et al.'s (2025) @wu2025folding FDA (Folding-Docking-Affinity) framework found ColabFold-generated apo-structures surprisingly improved affinity predictions versus crystallized holo-structures. This suggests physics-based docking captures induced-fit effects ML structure prediction misses.
 
-In our MCMC-driven RBP design pipeline, HADDOCK3 serves this critical validation role. After iterative ESM3 generation guided by Boltz-2's affinity oracle, final candidates undergo full physics-based docking simulations with both wild-type and target glycan receptors. The modular flexref protocol for glycan docking, combined with LHS parameter sweeps across scoring weights and solvation models, identifies designs that satisfy both ML pattern-matching and explicit physical constraints—candidates robust enough to warrant experimental synthesis.
+In our MCMC-driven RBP design pipeline, HADDOCK3 serves this critical validation role. After iterative ESM3 generation guided by Boltz-2's affinity oracle, final candidates undergo full physics-based docking simulations with both wild-type and target glycan receptors. The modular flexref protocol for glycan docking, combined with LHS parameter sweeps across scoring weights and solvation models, identifies designs that satisfy both ML pattern-matching and explicit physical constraints. These are candidates robust enough to warrant experimental synthesis.
 
 ### Codon Optimization
 
@@ -291,7 +279,7 @@ Following protein sequence generation and validation, candidate RBD sequences we
 
 ### Generative Phage Bank: Intelligent Routing and Workflow
 
-The Generative Phage Bank serves as the central orchestration system for PHORAGER, integrating receptor annotation, similarity-based routing, and phage recommendation workflows. The system accepts bacterial receptor information from clinicians or researchers and automatically determines whether pre-validated phages can be retrieved from the database or if de novo RBP design is required.
+The Generative Phage Bank serves as the central orchestration system for PHORAGER. It integrates receptor annotation, similarity-based routing, and phage recommendation workflows. The system accepts bacterial receptor information from clinicians or researchers and automatically determines whether pre-validated phages can be retrieved from the database or if de novo RBP design is required.
 
 #### Input Specifications
 
@@ -319,10 +307,6 @@ Upon completion of all queries, the system compiles results into a structured su
 
 Our systematic collection and curation pipeline identified 5,550 proteins containing receptor-binding domains similar to P2 and Mu phages from NCBI RefSeq. Clustering analysis at multiple similarity thresholds revealed the sequence diversity within this dataset: 95% identity/coverage clustering yielded 191 representative sequences, 90% thresholds produced 88 clusters, and 80% thresholds resulted in 45 clusters (Figure X). This hierarchical clustering demonstrates substantial sequence variation among Escherichia phage RBPs while identifying conserved sequence families suitable for template-based design.
 
----
-
-**[Note: 3 carousels, 1 for each batch of sequences. Whatever results are associated with that batch we will show]**
-
 ### Generative Phage Bank Architecture and Workflow
 
 We developed PHORAGER, a computational pipeline for de novo design of bacteriophage receptor-binding proteins with retargeted specificity. The workflow integrates generative protein design, structure prediction, and iterative optimization through Markov Chain Monte Carlo sampling to generate novel phage variants capable of binding user-specified bacterial surface receptors. The complete system encompasses both computational sequence generation and experimental validation pathways, enabling rapid iteration between in silico design and wet-lab characterization. (Figure 1)
@@ -335,69 +319,96 @@ BLASTp analysis against the NCBI nr database confirmed that all ten generated se
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig2.avif"
-  alt="fig2"
-  caption="Figure 2. Validation and structural characterization of glycan receptor-binding designs (Batch 1). (A) BLASTp analysis of top 10 generated sequences against the NCBI *nr* database confirms sequence novelty. (B) Structure of P2_gpH_2 RBD (blue) in complex with TFA chaperone (red) and truncated R1 glycan (black). (C) Structure of P2_gpH_8 RBD (blue) with TFA chaperone (red) and truncated R1 glycan (black). Both sequences passed all validation criteria and were experimentally synthesized."
-/>
+  alt="Figure 2. Validation and structural characterization of glycan receptor-binding designs (Batch 1)"
+  caption="Figure 2. Validation and structural characterization of glycan receptor-binding designs (Batch 1)">
+  <div slot="extended-caption">
+    **(A)** BLASTp analysis of top 10 generated sequences against the NCBI *nr* database confirms sequence novelty.
+    **(B)** Structure of P2_gpH_2 RBD (blue) in complex with TFA chaperone (red) and truncated R1 glycan (black).
+    **(C)** Structure of P2_gpH_8 RBD (blue) with TFA chaperone (red) and truncated R1 glycan (black).
+    Both sequences passed all validation criteria and were experimentally synthesized.
+  </div>
+</Figure>
 
 ### Batch 1: Protein Receptor-Targeting Designs
 
-Extending our generative approach to protein receptors, we designed bacteriophage tail fibers to target the outer membrane porin OmpC, instead of Wild-Type LamB. This second batch utilized HK97 and Lambda phage receptor-binding domains as structural scaffolds, generating 60 sequences, out of which the top eight novel sequences were chosen. The trimeric architecture of these designs, essential for functional phage tail fiber assembly, was preserved throughout the generation process.
+Extending our generative approach to protein receptors, we designed bacteriophage tail fibers to target the outer membrane porin OmpC instead of wild-type LamB. This second batch utilized HK97 and Lambda phage receptor-binding domains as structural scaffolds, generating 60 sequences, out of which the top eight novel sequences were chosen. The trimeric architecture of these designs, essential for functional phage tail fiber assembly, was preserved throughout the generation process.
 
 Structural modeling revealed that all eight candidates formed stable trimeric assemblies with appropriate geometry for engaging the OmpC trimer. The binding interfaces incorporated coordinated metal ions, consistent with known mechanisms of phage-host recognition involving divalent cations. BLASTp validation confirmed sequence novelty across all eight designs, with no significant matches to characterized proteins in public databases. The successful generation of multiple structurally plausible candidates targeting a protein receptor demonstrated the generalizability of our approach across different receptor types and phage scaffolds.
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig3.avif"
-  alt="fig3"
-  caption="Figure 3. Protein receptor-binding designs and structural models (Batch 1). (A) BLASTp validation of top 8 generated sequences against the NCBI *nr* database. (B) Structural models showing trimeric assemblies of HK97 and Lambda RBDs (blue) bound to trimeric OmpC protein receptor (orange), with coordinated ions (green)."
-/>
+  alt="Figure 3. Protein receptor-binding designs and structural models (Batch 1)"
+  caption="Figure 3. Protein receptor-binding designs and structural models (Batch 1).">
+  <div slot="extended-caption">
+    **(A)** BLASTp validation of top 8 generated sequences against the NCBI *nr* database. 
+    **(B)** Structural models showing trimeric assemblies of HK97 and Lambda RBDs (blue) bound to trimeric OmpC protein receptor (orange), with coordinated ions (green).
+  </div>
+</Figure>
 
 ### Batch 2: MCMC-Based Iterative Optimization for Enhanced Glycan Binding
 
 While Batch 1 demonstrated proof-of-concept for generative phage design, we hypothesized that iterative optimization through MCMC sampling would yield sequences with superior binding energetics. We applied this approach to three distinct receptor-binding proteins (Mu gp49, Mu gp52, and P2 gpH) initially evolved to bind E. coli K12 lipopolysaccharide, with the objective of retargeting them toward truncated R1 glycans. For each protein, we conducted three independent MCMC chains of 10,000 iterations each, using simulated annealing to balance exploration and exploitation of sequence space.
 
 The MCMC sampling dynamics revealed characteristic convergence behavior across all three proteins. Acceptance rates declined from initial values of 50-60% to stabilized rates of 20-30% by the end of sampling, consistent with progressive refinement toward local optima in the energy landscape. Mu gp49 exhibited a mean acceptance rate of 34.9% across the three chains, while Mu gp52 showed slightly higher acceptance at 40.3%, and P2 gpH demonstrated 33.9% acceptance. The gradual reduction in acceptance rates indicates that the algorithm successfully transitioned from broad exploration of sequence space to focused optimization around high-affinity binding solutions.
-
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig4-1.avif"
-  alt="fig4-1"
-  caption="Figure 4. MCMC sampling dynamics for Mu gp49 RBP optimization. (A) Acceptance rate decay across three independent MCMC chains over 10,000 iterations, indicating convergence toward optimal sequence space. (B) Overall acceptance statistics across chains, with mean acceptance rate of 34.9%."
-/>
+  alt="Figure 4. MCMC sampling dynamics for Mu gp49 RBP optimization"
+  caption="Figure 4. MCMC sampling dynamics for Mu gp49 RBP optimization.">
+  <div slot="extended-caption">
+    **(A)** Acceptance rate decay across three independent MCMC chains over 10,000 iterations, indicating convergence toward optimal sequence space. **(B)** Overall acceptance statistics across chains, with mean acceptance rate of 34.9%.
+  </div>
+</Figure>
 
 Energy trajectory analysis for Mu gp49 revealed convergence to stable, high-energy states representing enhanced binding to the truncated R1 target. Critically, all three independent chains achieved final binding energies to R1 that exceeded the initial wild-type binding energies to K12, demonstrating successful retargeting. The convergence of independent chains to similar energy ranges provides confidence that the optimization identified robust binding solutions rather than spurious local minima. This inversion of binding preferences, from K12 to R1, validates the capacity of MCMC-based optimization to fundamentally reshape receptor specificity.
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig4-2.avif"
-  alt="fig4-2"
-  caption="Figure 5. Energy landscape analysis for Mu gp49 target retargeting. (A) Energy trajectories for three independent MCMC chains showing convergence to stable high-affinity states. (B) Comparison of binding energies between wild-type K12 receptor and truncated R1 target receptor. All chains successfully optimized for target binding, achieving higher final energies for R1 compared to initial K12 binding energies."
-/>
+  alt="Figure 5. Energy landscape analysis for Mu gp49 target retargeting"
+  caption="Figure 5. Energy landscape analysis for Mu gp49 target retargeting.">
+  <div slot="extended-caption">
+    **(A)** Energy trajectories for three independent MCMC chains showing convergence to stable high-affinity states. **(B)** Comparison of binding energies between wild-type K12 receptor and truncated R1 target receptor. All chains successfully optimized for target binding, achieving higher final energies for R1 compared to initial K12 binding energies.
+  </div>
+</Figure>
 
 Similar patterns emerged for Mu gp52, with all three chains converging to high-energy states and achieving R1 binding energies that surpassed wild-type K12 values. The higher overall acceptance rate for Mu gp52 compared to Mu gp49 suggests a smoother energy landscape or greater mutational tolerance, potentially reflecting structural differences between the two receptor-binding domains. Nevertheless, the consistent retargeting across both proteins indicates that our MCMC approach is robust to variations in starting scaffold architecture.
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig5-1.avif"
-  alt="fig5-1"
-  caption="Figure 6. MCMC sampling dynamics for Mu gp52 RBP optimization. (A) Acceptance rate trajectories for three independent chains demonstrating convergence behavior. (B) Cumulative acceptance statistics showing mean acceptance rate of 40.3% across all chains."
-/>
+  alt="Figure 6. MCMC sampling dynamics for Mu gp52 RBP optimization"
+  caption="Figure 6. MCMC sampling dynamics for Mu gp52 RBP optimization.">
+  <div slot="extended-caption">
+    **(A)** Acceptance rate trajectories for three independent chains demonstrating convergence behavior. **(B)** Cumulative acceptance statistics showing mean acceptance rate of 40.3% across all chains.
+  </div>
+</Figure>
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig5-2.avif"
-  alt="fig5-2"
-  caption="Figure 7. Energy landscape analysis for Mu gp52 target retargeting. (A) Energy convergence profiles for three MCMC chains. **(B)** Wild-type K12 versus truncated R1 target binding energy comparison. Optimization successfully drives all chains toward enhanced R1 binding, with final target energies exceeding wild-type energies."
-/>
+  alt="Figure 7. Energy landscape analysis for Mu gp52 target retargeting"
+  caption="Figure 7. Energy landscape analysis for Mu gp52 target retargeting.">
+  <div slot="extended-caption">
+    **(A)** Energy convergence profiles for three MCMC chains. **(B)** Wild-type K12 versus truncated R1 target binding energy comparison. Optimization successfully drives all chains toward enhanced R1 binding, with final target energies exceeding wild-type energies.
+  </div>
+</Figure>
 
 The P2 gpH optimization recapitulated the successful retargeting observed for the Mu proteins, with acceptance dynamics and energy convergence profiles consistent with effective exploration and optimization. Across all three proteins (Mu gp49, Mu gp52, and P2 gpH), the MCMC sampling achieved the dual objectives of generating novel sequences with minimal homology to natural proteins while simultaneously enhancing binding affinity for the target glycan receptor.
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig6-1.avif"
-  alt="fig6-1"
-  caption="Figure 8. MCMC sampling dynamics for P2 gpH RBP optimization. (A) Acceptance rate evolution across three independent chains. (B) Overall acceptance rate of 33.9% across all sampling chains."
-/>
+  alt="Figure 8. MCMC sampling dynamics for P2 gpH RBP optimization"
+  caption="Figure 8. MCMC sampling dynamics for P2 gpH RBP optimization.">
+  <div slot="extended-caption">
+    **(A)** Acceptance rate evolution across three independent chains. **(B)** Overall acceptance rate of 33.9% across all sampling chains.
+  </div>
+</Figure>
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig6-2.avif"
-  alt="fig6-2"
-  caption="Figure 9. Energy landscape analysis for P2 gpH target retargeting. (A) Energy trajectories showing convergence across three independent chains. (B) Binding energy comparison between wild-type K12 and truncated R1 target. Consistent optimization toward enhanced R1 binding across all chains, with target energies surpassing wild-type values. "
-/>
+  alt="Figure 9. Energy landscape analysis for P2 gpH target retargeting"
+  caption="Figure 9. Energy landscape analysis for P2 gpH target retargeting.">
+  <div slot="extended-caption">
+    **(A)** Energy trajectories showing convergence across three independent chains. **(B)** Binding energy comparison between wild-type K12 and truncated R1 target. Consistent optimization toward enhanced R1 binding across all chains, with target energies surpassing wild-type values.
+  </div>
+</Figure>
 
 #### Clustering Analysis Reveals Progressive Energy Optimization
 
@@ -405,25 +416,34 @@ To identify the most promising candidate sequences from the MCMC trajectories, w
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig7.avif"
-  alt="fig7"
-  caption="Figure 10. Per-chain cluster analysis reveals energy-iteration relationship. (A) Mean cluster energy versus mean cluster iteration for individual chains across all RBPs. Later-sampled clusters exhibit higher binding energies, indicating progressive optimization. (B) Aggregate analysis across all chains and RBPs confirms positive correlation between iteration number and cluster energy."
-/>
+  alt="Figure 10. Per-chain cluster analysis reveals energy-iteration relationship"
+  caption="Figure 10. Per-chain cluster analysis reveals energy-iteration relationship.">
+  <div slot="extended-caption">
+    **(A)** Mean cluster energy versus mean cluster iteration for individual chains across all RBPs. Later-sampled clusters exhibit higher binding energies, indicating progressive optimization. **(B)** Aggregate analysis across all chains and RBPs confirms positive correlation between iteration number and cluster energy.
+  </div>
+</Figure>
 
 We extended this analysis by pooling all three chains for each protein and performing combined clustering. This approach increased statistical power and enabled identification of consensus binding solutions that emerged across independent sampling runs. The combined clustering analysis reinforced the positive relationship between iteration number and binding energy, with later clusters representing the most optimized sequences. The consistency of this trend across both per-chain and combined analyses validates the robustness of our clustering approach for candidate selection.
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig8.avif"
-  alt="fig8"
-  caption="Figure 11. Combined clustering analysis across MCMC chains. (A) Mean cluster energy versus iteration for pooled chains within each RBP. Later clusters correspond to higher-energy local maxima. (B) Global trend across all RBPs demonstrating that sampling progression correlates with improved binding energies."
-/>
+  alt="Figure 11. Combined clustering analysis across MCMC chains"
+  caption="Figure 11. Combined clustering analysis across MCMC chains.">
+  <div slot="extended-caption">
+    **(A)** Mean cluster energy versus iteration for pooled chains within each RBP. Later clusters correspond to higher-energy local maxima. **(B)** Global trend across all RBPs demonstrating that sampling progression correlates with improved binding energies.
+  </div>
+</Figure>
 
 From the combined clustering, we selected the top nine clusters based on mean binding energy and cluster size. Examination of the energy distributions within each cluster revealed varying degrees of sequence diversity, with some clusters tightly focused around a single binding solution and others encompassing a broader ensemble of related sequences. Importantly, all nine clusters preferentially contained high-energy sequences, confirming that our selection criteria successfully enriched for optimized binding candidates. The diversity of solutions across clusters suggests multiple distinct mechanisms for achieving enhanced R1 binding, providing a rich pool of sequences for experimental validation.
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig9.avif"
-  alt="fig9"
-  caption="Figure 12. Energy distributions of top candidate sequence clusters. Energy profiles for sequences within the top 9 clusters selected from combined clustering analysis. Each panel represents a distinct cluster, showing variation in sequence diversity and energy distributions. Higher-energy sequences are preferentially represented across clusters."
-/>
+  alt="Figure 12. Energy distributions of top candidate sequence clusters"
+  caption="Figure 12. Energy distributions of top candidate sequence clusters.">
+  <div slot="extended-caption">
+    Energy profiles for sequences within the top 9 clusters selected from combined clustering analysis. Each panel represents a distinct cluster, showing variation in sequence diversity and energy distributions. Higher-energy sequences are preferentially represented across clusters.
+  </div>
+</Figure>
 
 #### Validation of Sequence Novelty and Structural Diversity
 
@@ -431,41 +451,47 @@ To confirm that the optimized sequences represent genuinely novel phage designs 
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig10.avif"
-  alt="fig10"
-  caption="Figure 13. Sequence novelty validation via homology search. (A) BLASTp analysis of representative sequences from top 9 clusters against the NCBI nr database reveals minimal homology to known proteins, confirming sequence novelty. (B) Control BLASTp analysis of wild-type template sequences confirms expected homology to characterized proteins."
-/>
+  alt="Figure 13. Sequence novelty validation via homology search"
+  caption="Figure 13. Sequence novelty validation via homology search.">
+  <div slot="extended-caption">
+    **(A)** BLASTp analysis of representative sequences from top 9 clusters against the NCBI *nr* database reveals minimal homology to known proteins, confirming sequence novelty. **(B)** Control BLASTp analysis of wild-type template sequences confirms expected homology to characterized proteins.
+  </div>
+</Figure>
 
 Structural modeling of the nine representative sequences revealed substantial conformational diversity despite the shared objective of binding the truncated R1 glycan. The designs exhibited variations in loop conformations, side chain orientations, and overall binding pocket architecture, suggesting multiple structural strategies for glycan recognition. This structural diversity, combined with sequence novelty, positions these candidates as valuable starting points for experimental characterization and further optimization. The successful generation of multiple distinct binding solutions increases the likelihood that at least several candidates will exhibit functional activity in vitro.
 
 <Figure
   src="https://static.igem.wiki/teams/5708/drylab/fig11.avif"
-  alt="fig11"
-  caption="Figure 14. Structural models of top candidate sequences. Three-dimensional structures of representative sequences from each of the top 9 clusters, illustrating structural diversity of designed receptor-binding proteins."
-/>
+  alt="Figure 14. Structural models of top candidate sequences"
+  caption="Figure 14. Structural models of top candidate sequences.">
+  <div slot="extended-caption">
+    Three-dimensional structures of representative sequences from each of the top 9 clusters, illustrating structural diversity of designed receptor-binding proteins.
+  </div>
+</Figure>
 
 #### Summary of Results
 
 Our two-batch approach to generative phage design yielded complementary insights into computational retargeting strategies. Batch 1 demonstrated that direct generation using ESM3 can produce structurally plausible candidates for both glycan and protein receptors, with successful designs advancing to experimental synthesis. Batch 2 extended this foundation through MCMC-based iterative optimization, systematically enhancing binding energies while maintaining sequence novelty. The convergence of independent MCMC chains, progressive energy optimization revealed through clustering analysis, and structural diversity of final candidates collectively establish PHORAGER as a viable platform for de novo bacteriophage engineering. These computational designs now await experimental validation to assess binding affinity, specificity, and ultimately, the capacity to redirect phage infection toward designer-specified bacterial hosts.
 
-## Docking: Control-Driven Parameter Optimization
+### Docking: Control-Driven Parameter Optimization
 
-As previously described, we began with some benchmarking through positive and negative controls; the computational equivalent of calibrating a mass spectrometer before running precious samples. We deployed an automated sweep across the combinatorial space, testing restraint strategies (cmrest vs. surfrest), symmetry force constants (ksym: 50 vs. 100), hexamer body restraint scaling (unambig_scale: 100 vs. 200), and clustering thresholds (clust_cutoff: 2.0 vs. 2.5 Å).
+As previously described, we began with some benchmarking through positive and negative controls, the computational equivalent of calibrating a mass spectrometer before running precious samples. We deployed an automated sweep across the combinatorial space, testing restraint strategies (cmrest vs. surfrest), symmetry force constants (ksym: 50 vs. 100), hexamer body restraint scaling (unambig_scale: 100 vs. 200), and clustering thresholds (clust_cutoff: 2.0 vs. 2.5 Å).
 
 Wild-type Mu and P2 RBDs docked against their cognate K12 glycans delivered the expected overall favourable scores: HADDOCK scores ranging from -127.3 to -79.41 arbitrary units respectively. The physics worked, but could it discriminate?
 
-The negative control delivered validation and a warning. Docking Mu gp49 against mismatched R1 glycans produced mean scores of -68.4 ± 21.7 a.u.—clearly worse than positive controls. Yet the distributions overlapped: the best negative runs encroached upon the worst positive runs. This twilight zone, where the scoring function wavered between "binder" and "non-binder," made any single parameter set dangerously ambiguous.
+The negative control delivered validation and a warning. Docking Mu gp49 against mismatched R1 glycans produced mean scores of -68.4 ± 21.7 a.u., clearly worse than positive controls. Yet the distributions overlapped: the best negative runs encroached upon the worst positive runs. This twilight zone, where the scoring function wavered between "binder" and "non-binder," made any single parameter set dangerously ambiguous.
 
 This overlap transformed parameter selection from perfunctory validation into active optimization. The optimal regime emerged at the intersection of competing constraints: cmrest=true, cmtight=false, ksym=50, unambig_scale=100 for ab-initio positioning, combined with w_vdw=1.0, w_elec=0.2, w_desolv=1.0, w_bsa=-0.05 for scoring.
 
-The calibrated docking pipeline was then used to evaluate the top structures from MCMC, and decide which ones would be tested in Wet Lab.
+The calibrated docking pipeline was then used to evaluate the top structures from MCMC and decide which ones would be tested in Wet Lab.
 
 ## Discussion
 
-PHORAGER stands at the boundary between computational prediction and biological realization—a system built not only to model phage receptor-binding proteins (RBPs) but to engineer them. By combining structural prediction, generative design, and statistical optimization, PHORAGER reduces the timeline for phage retargeting from months to days. It demonstrates that machine learning and molecular biology need not operate in parallel lanes: when tightly coupled, they can navigate the staggering combinatorial complexity of protein sequence space with unprecedented purpose. Yet, in this synthesis of algorithms and evolution, PHORAGER also exposes the widening gap between computational potential and the biochemical subtleties of viral infection.
+PHORAGER stands at the boundary between computational prediction and biological realization. It is a system built not only to model phage receptor-binding proteins (RBPs) but to engineer them. By combining structural prediction, generative design, and statistical optimization, PHORAGER reduces the timeline for phage retargeting from months to days. It demonstrates that machine learning and molecular biology need not operate in parallel lanes. When tightly coupled, they can navigate the staggering combinatorial complexity of protein sequence space with unprecedented purpose. Yet, in this synthesis of algorithms and evolution, PHORAGER also exposes the widening gap between computational potential and the biochemical subtleties of viral infection.
 
 ### Bridging Computational Design and Biological Reality
 
-PHORAGER leverages foundation models for sequence and structure (ESM, AlphaFold3 and Boltz-2) coupled with Markov-chain Monte Carlo (MCMC) sampling to traverse the enormous combinatorial landscape of receptor-binding proteins (RBPs). These RBPs—typically tail fibers or tailspike proteins—dictate phage host range by recognizing bacterial glycan or protein receptors.
+PHORAGER leverages foundation models for sequence and structure (ESM, AlphaFold3 and Boltz-2) coupled with Markov-chain Monte Carlo (MCMC) sampling to traverse the enormous combinatorial landscape of receptor-binding proteins (RBPs). These RBPs, typically tail fibers or tailspike proteins, dictate phage host range by recognizing bacterial glycan or protein receptors.
 
 Our pipeline demonstrates that combining sequence-level generative models with structural prediction and in silico affinity estimation can identify plausible RBPs for new receptors. The use of AlphaFold3 and Boltz-2 enables rapid three-dimensional prediction of designed sequences, and Boltz-2's affinity module offers a thousand-fold speedup relative to free-energy perturbation (FEP) while approaching FEP accuracy. However, there are fundamental limitations that our current implementation cannot overcome.
 
@@ -473,40 +499,40 @@ Our pipeline demonstrates that combining sequence-level generative models with s
 
 The performed operations and trial runs encompass a robust implementation of analytical and predictive techniques towards the realm of phages. We do acknowledge limitations that help inform the development and augmentation process for these steps.
 
-**Data scarcity and RBP diversity.** RBPs diverge dramatically across phage families; even analogues binding similar receptors may lack detectable sequence homology. Protein language models trained on homology-rich datasets (ESM or other transformers) thus struggle to generalize across these families, limiting their ability to explore truly novel RBP designs. Existing phage matching models mainly infer host range at the genus level, often failing for major ESKAPE pathogens; resistance and receptor divergence also confound genome-based predictions.
+**Data scarcity and RBP diversity.** RBPs diverge dramatically across phage families. Even analogues binding similar receptors may lack detectable sequence homology. Protein language models trained on homology-rich datasets (ESM or other transformers) thus struggle to generalize across these families, limiting their ability to explore truly novel RBP designs. Existing phage matching models mainly infer host range at the genus level, often failing for major ESKAPE pathogens. Resistance and receptor divergence also confound genome-based predictions.
 
-**Structural prediction of glycans and membrane interactions.** AlphaFold3 treats ligands via a RDKit-based pipeline and often misassigns glycan conformations. It lacks meaningful metrics to penalize incorrect glycan torsions or linkage stereochemistry, and high-confidence scores can mask false glycan conformers, necessitating evaluation of both high- and low-ranked models. Thus, the structural models we rely on provide accurate protein folds but poor glycan recognition, which is critical for RBPs that bind lipopolysaccharide or capsular polysaccharide receptors.
+**Structural prediction of glycans and membrane interactions.** AlphaFold3 treats ligands via a RDKit-based pipeline and often misassigns glycan conformations. It lacks meaningful metrics to penalize incorrect glycan torsions or linkage stereochemistry, and high-confidence scores can mask false glycan conformers. This necessitates evaluation of both high- and low-ranked models. Thus, the structural models we rely on provide accurate protein folds but poor glycan recognition, which is critical for RBPs that bind lipopolysaccharide or capsular polysaccharide receptors.
 
 **Computational complexity and throughput.** Iterative MCMC sampling coupled with Boltz-2 scoring is computationally intensive. HADDOCK and similar physics-based docking tools provide valuable validation but are orders of magnitude slower and sensitive to starting poses, limiting high-throughput use. This slows the active-learning loop needed to refine the generative model with experimental feedback.
 
-**Limited host-range validation and resistance.** Our experimental validation focused on E. coli targets; yet clinical infections involve a broad spectrum of Gram-positive and Gram-negative bacteria. Furthermore, repeated use of engineered phages could select for resistance. Existing generative pipelines do not optimize for resistance avoidance, immunogenicity or fitness costs in bacteria, which could undermine long-term efficacy.
+**Limited host-range validation and resistance.** Our experimental validation focused on E. coli targets. Yet clinical infections involve a broad spectrum of Gram-positive and Gram-negative bacteria. Furthermore, repeated use of engineered phages could select for resistance. Existing generative pipelines do not optimize for resistance avoidance, immunogenicity or fitness costs in bacteria, which could undermine long-term efficacy.
 
-**Resistance concerns:** Overuse or repeated cycling of engineered phages risks bacterial resistance evolution, and current generative pipelines do not explicitly account for resistance avoidance.
+**Resistance concerns.** Overuse or repeated cycling of engineered phages risks bacterial resistance evolution, and current generative pipelines do not explicitly account for resistance avoidance.
 
-As PHORAGER advances, a deliberate choice was made not to incorporate RFdiffusion into its generative loop. While RFdiffusion has emerged as a state-of-the-art framework for unconditional protein backbone generation, its design paradigm is misaligned with the requirements of receptor-binding protein (RBP) retargeting. The model's diffusion prior assumes a smooth, low-dimensional energy landscape—an assumption that breaks down in the highly discontinuous and chemically diverse interfaces that define phage–host recognition, particularly in glycan-binding RBPs. Unlike enzyme active sites or antibody paratopes, RBP interfaces often arise from convergent evolutionary solutions that lack conserved geometric motifs, making RFdiffusion's motif-conditioned generation poorly transferable.
+As PHORAGER advances, a deliberate choice was made not to incorporate RFdiffusion into its generative loop. While RFdiffusion has emerged as a state-of-the-art framework for unconditional protein backbone generation, its design paradigm is misaligned with the requirements of receptor-binding protein (RBP) retargeting. The model's diffusion prior assumes a smooth, low-dimensional energy landscape. This assumption breaks down in the highly discontinuous and chemically diverse interfaces that define phage-host recognition, particularly in glycan-binding RBPs. Unlike enzyme active sites or antibody paratopes, RBP interfaces often arise from convergent evolutionary solutions that lack conserved geometric motifs, making RFdiffusion's motif-conditioned generation poorly transferable.
 
-Moreover, RFdiffusion requires explicit specification of binding sites or template backbones for conditioning, resources that are unavailable for most phage RBPs due to their extreme sequence and structural diversity. By contrast, PHORAGER's design architecture—anchored in Boltz-2's co-learning of structure and binding affinity—permits de novo interface exploration without pre-defined templates. This distinction is central: PHORAGER seeks not to reproduce known motifs but to invent plausible binding geometries compatible with evolving bacterial receptors.
+Moreover, RFdiffusion requires explicit specification of binding sites or template backbones for conditioning, resources that are unavailable for most phage RBPs due to their extreme sequence and structural diversity. By contrast, PHORAGER's design architecture, anchored in Boltz-2's co-learning of structure and binding affinity, permits de novo interface exploration without pre-defined templates. This distinction is central: PHORAGER seeks not to reproduce known motifs but to invent plausible binding geometries compatible with evolving bacterial receptors.
 
-From a computational perspective, RFdiffusion's diffusion-based generative process entails thousands of forward–reverse inference steps, producing high GPU memory overhead and slow convergence that hinder large-scale iterative sampling. In contrast, the probabilistic MCMC sampling employed by PHORAGER can efficiently traverse vast sequence spaces, integrating feedback from Boltz-2 affinity scores and ESM embeddings with tractable computational cost.
+From a computational perspective, RFdiffusion's diffusion-based generative process entails thousands of forward-reverse inference steps, producing high GPU memory overhead and slow convergence that hinder large-scale iterative sampling. In contrast, the probabilistic MCMC sampling employed by PHORAGER can efficiently traverse vast sequence spaces, integrating feedback from Boltz-2 affinity scores and ESM embeddings with tractable computational cost.
 
-Finally, preliminary trials revealed that RFdiffusion-generated backbones frequently failed to produce stable folds when adapted to multi-domain or glycan-bound RBP architectures, reflecting priors optimized for soluble monomeric proteins rather than flexible, surface-tethered viral attachment systems. For these reasons, PHORAGER adopts a sampling-centric framework that combines structure-aware scoring, adaptive refinement, and experimental feedback loops—trading unconditional generativity for biologically grounded precision.
+Finally, preliminary trials revealed that RFdiffusion-generated backbones frequently failed to produce stable folds when adapted to multi-domain or glycan-bound RBP architectures. This reflects priors optimized for soluble monomeric proteins rather than flexible, surface-tethered viral attachment systems. For these reasons, PHORAGER adopts a sampling-centric framework that combines structure-aware scoring, adaptive refinement, and experimental feedback loops. It trades unconditional generativity for biologically grounded precision.
 
 ### Future Directions and Broader Implications
 
-PHORAGER's ultimate promise lies in its adaptability: by iteratively integrating experimental data, expanding training datasets, and refining objective functions, it could generalize beyond E. coli and deliver truly personalized phage therapies. We outline several key directions:
+PHORAGER's ultimate promise lies in its adaptability. By iteratively integrating experimental data, expanding training datasets, and refining objective functions, it could generalize beyond E. coli and deliver truly personalized phage therapies. We outline several key directions:
 
-**Expand and diversify datasets.** Building a comprehensive database of RBP sequences, glycan receptors and measured affinities—including rare pathogens and multidrug-resistant strains—will reduce the out-of-distribution gap for language and structural models. Coupling synthetic data augmentation with curated experimental results will help models learn RBP–receptor determinants that are invisible to current training sets.
+**Expand and diversify datasets.** Building a comprehensive database of RBP sequences, glycan receptors and measured affinities, including rare pathogens and multidrug-resistant strains, will reduce the out-of-distribution gap for language and structural models. Coupling synthetic data augmentation with curated experimental results will help models learn RBP-receptor determinants that are invisible to current training sets.
 
-**Enhance the active-learning loop.** We plan to implement a Cross-Entropy Method (CEM) optimization strategy [The Cross-Entropy Method for Optimization - ScienceDirect]. CEM iteratively samples a batch of sequences, selects the top-performing "elite" candidates based on experimental or predicted scores, and updates the generative model to increase the probability of sampling high-function variants. By using multiple performance metrics—including wet-lab growth curves, binding assays, and Boltz-2 scores—we can guide the model toward near-optimal solutions. A continuously growing database of positive and negative experimental outcomes will allow us to perform multiple sequence alignments on successful RBPs to identify conserved residues for freezing, while BLAST can remove designs similar to known failures.
+**Enhance the active-learning loop.** We plan to implement a Cross-Entropy Method (CEM) optimization strategy. CEM iteratively samples a batch of sequences, selects the top-performing "elite" candidates based on experimental or predicted scores, and updates the generative model to increase the probability of sampling high-function variants. By using multiple performance metrics, including wet-lab growth curves, binding assays, and Boltz-2 scores, we can guide the model toward near-optimal solutions. A continuously growing database of positive and negative experimental outcomes will allow us to perform multiple sequence alignments on successful RBPs to identify conserved residues for freezing, while BLAST can remove designs similar to known failures.
 
-This method is useful when "the probability of locating an optimal or near-optimal solution using naive random search is a rare-event probability," which applies to AI-driven protein design given the very large sample space (for the standard 20 amino acids and up to n masked residues, the sample space includes 20<sup>n</sup> sequences). Since the sample space is finite, this is a combinatorial optimization problem, where we have a tunable mechanism, ESM, that generates sequences, an objective function (Wet-Lab Validation) that outputs whether the sequence is successful, and a noisy function (Boltz-2) that predicts whether the sequence will be successful. CEM is an iterative process that involves generating a batch of sequences, and then updating the generative mechanism to reduce the sample space, essentially guiding our model towards a near-optimal solution. To update the generative mechanism, we must determine which generated sequences are "elite samples," which we can determine from both Wet-Lab Validation and Boltz-2. Then, we can apply MSA to determine which residues were most common among these selected sequences, and update our generative function accordingly. The challenge with this method is that for MSA to return any useful information, it needs to be provided with a large number of sequences.
+This method is useful when "the probability of locating an optimal or near-optimal solution using naive random search is a rare-event probability," which applies to AI-driven protein design given the very large sample space. For the standard 20 amino acids and up to n masked residues, the sample space includes 20<sup>n</sup> sequences. Since the sample space is finite, this is a combinatorial optimization problem, where we have a tunable mechanism (ESM) that generates sequences, an objective function (Wet-Lab Validation) that outputs whether the sequence is successful, and a noisy function (Boltz-2) that predicts whether the sequence will be successful. CEM is an iterative process that involves generating a batch of sequences, and then updating the generative mechanism to reduce the sample space, essentially guiding our model towards a near-optimal solution. To update the generative mechanism, we must determine which generated sequences are "elite samples," which we can determine from both Wet-Lab Validation and Boltz-2. Then, we can apply MSA to determine which residues were most common among these selected sequences, and update our generative function accordingly. The challenge with this method is that for MSA to return any useful information, it needs to be provided with a large number of sequences.
 
-To overcome this challenge, we plan to implement a continuously growing database of wet-lab tested sequences. Sequences generated by the model are sent to the wet lab for validation, and once results are finalized, for each sequence we get a binary value, 0 for if the sequence was unsuccessful, and 1 for if the sequence was successful (phage spotting efficiency threshold to determine if it goes in positive or negative database). We store these results in a database. On the next iteration of generations, we will first apply MSA to successful sequences to obtain the most agreed upon residue values at each masked position, assigning a probability of freezing the residue based on how strong the agreeance was (high agreeance → high probability of freezing the residue). Then, based on the probabilities at each position, certain residues will be accepted into the MCMC. Next, proteins generated by this more constrained MCMC will be compared to the unsuccessful proteins from the wet lab database using BLAST, and if they have a high similarity they will be discarded. This effectively implements CEM, as each subsequent batch is generated from a smaller sample space that is more likely to approach a near-optimal solution.
+To overcome this challenge, we plan to implement a continuously growing database of wet-lab tested sequences. Sequences generated by the model are sent to the wet lab for validation, and once results are finalized, for each sequence we get a binary value: 0 if the sequence was unsuccessful, and 1 if the sequence was successful (phage spotting efficiency threshold to determine if it goes in positive or negative database). We store these results in a database. On the next iteration of generations, we will first apply MSA to successful sequences to obtain the most agreed upon residue values at each masked position, assigning a probability of freezing the residue based on how strong the agreeance was (high agreeance leads to high probability of freezing the residue). Then, based on the probabilities at each position, certain residues will be accepted into the MCMC. Next, proteins generated by this more constrained MCMC will be compared to the unsuccessful proteins from the wet lab database using BLAST, and if they have a high similarity they will be discarded. This effectively implements CEM, as each subsequent batch is generated from a smaller sample space that is more likely to approach a near-optimal solution.
 
-**Optimize sampling and multi-objective scoring.** Future iterations should adopt adaptive MCMC or reinforcement-learning strategies to navigate sequence space more efficiently, reducing computational cost. Fitness functions must evolve from simple binding affinity metrics to multi-objective optimization that balances binding strength, folding stability, immunogenicity and resistance potential. Fast stability predictors such as FoldX or Rosetta can pre-screen candidates before Boltz-2 evaluation, and machine-learning–accelerated docking surrogates may allow high-throughput estimation of binding modes.
+**Optimize sampling and multi-objective scoring.** Future iterations should adopt adaptive MCMC or reinforcement-learning strategies to navigate sequence space more efficiently, reducing computational cost. Fitness functions must evolve from simple binding affinity metrics to multi-objective optimization that balances binding strength, folding stability, immunogenicity and resistance potential. Fast stability predictors such as FoldX or Rosetta can pre-screen candidates before Boltz-2 evaluation, and machine-learning-accelerated docking surrogates may allow high-throughput estimation of binding modes.
 
-**Expand host validation and assess resistance.** Engineered RBPs must be tested in phages infecting diverse clinical isolates. Longitudinal studies should monitor whether repeated exposure to retargeted phages leads to receptor modifications or immunological responses. Combining PHORAGER designs with anti-resistance strategies—such as targeting essential receptors or alternating receptor targets—could mitigate resistance development.
+**Expand host validation and assess resistance.** Engineered RBPs must be tested in phages infecting diverse clinical isolates. Longitudinal studies should monitor whether repeated exposure to retargeted phages leads to receptor modifications or immunological responses. Combining PHORAGER designs with anti-resistance strategies, such as targeting essential receptors or alternating receptor targets, could mitigate resistance development.
 
-**Toward ethical and equitable deployment.** Computational phage design raises questions about access and oversight. Phage therapies, especially those designed via AI, must be accompanied by regulatory frameworks to ensure safety, prevent misuse, and make treatments available in regions most burdened by antimicrobial resistance. A global generative phage bank, shared openly with healthcare providers, could democratize access while enabling rapid response to emergent pathogens.
+**Toward ethical and equitable deployment.** Computational phage design raises questions about access and oversight. Phage therapies, especially those designed via AI, must be accompanied by regulatory frameworks to ensure safety, prevent misuse, and make treatments available in regions most burdened by antibacterial resistance (ABR). A global generative phage bank, shared openly with healthcare providers, could democratize access while enabling rapid response to emergent pathogens.
 
-In sum, PHORAGER does not simply predict – it proposes. It charts a map across the vast unknowns of viral-host recognition, where every designed sequence is both a hypothesis and a candidate therapy. By coupling generative design with continuous experimental feedback, PHORAGER moves phage engineering from empirical discovery toward predictive control—an essential leap as we confront a post-antibiotic world.
+In sum, PHORAGER does not simply predict. It proposes. It charts a map across the vast unknowns of viral-host recognition, where every designed sequence is both a hypothesis and a candidate therapy. By coupling generative design with continuous experimental feedback, PHORAGER moves phage engineering from empirical discovery toward predictive control. This is an essential leap as we confront a post-antibiotic world.
