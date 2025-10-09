@@ -4,10 +4,14 @@ author: Henrik S. Zimmermann
 import PdfEmbed from '@/components/PdfEmbed.astro';
 import Figure from '@/components/Figure.astro';
 
-# Entrepreneurship 
+# Entrepreneurship
 
-<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-logo.webp" alt="Mystiphage Logo" width="300" />
   
+
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-logo.webp" alt="Mystiphage Logo" caption="Mystiphage Logo" width="300" />
+
+  
+
 ## About Us
 
 Operating at the cutting edge of synthetic biology innovation, our Entrepreneurship team has developed a comprehensive 12-year business plan that guides our long-term growth trajectory. Having identified our competitive advantages and validated market-ready solutions, our team is now positioned to advance our pipeline through diversification into electroceuticals for targeted phage delivery. Our commitment to commercialization reflects our dedication to staying ahead of infectious disease threats while building a future-ready platform for personalized medicine.
@@ -26,21 +30,19 @@ This section outlines the criteria we followed for the iGEM entrepreneurship com
 
 We have identified potential customers across multiple market tiers. Tier 1 customers include clinical phage laboratories such as Davidson Lab and Maxwell Lab at the University of Toronto, plus prospects at UC San Diego's IPATH center and Georgia’s Eliava Institute. We have also identified strategic opportunities with biotech startups like BiomX, SNIPIR Biome, and Phiogen that currently lack internal AI capabilities. Additionally, our team has focused on critical unmet needs that existing solutions fail to address. The phage matching process currently takes a median of 171 days, with only 9.4% of requests resulting in treatment at Belgium's Queen Astrid Military Hospital. Major gaps include a lack of centralized phage libraries, unavailable lytic phages for specific pathogens, coordination delays between laboratories, and unstandardized screening protocols. Our stakeholder validation from leading phage research centers, including Eliava Institute and Queen Astrid Phage Center, confirmed strong market demand. No existing solution combines generative AI-powered receptor-binding protein design with wet-lab validation, positioning us to uniquely reduce development timelines from six months to hours.
 
-<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-pitch-slides-2.webp" alt="Competitor Analysis" />
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-pitch-slides-2.webp" alt="Market Size" caption="Market Size" />
 
 ### Has the team shown that their solution is possible, scalable, and inventive?
 
-Through our wetlab and drylab validation cycle, we have proven that our proprietary pipeline, which includes our generative model PHORAGER, can generate feasible results and validate them for biological function. Our solution becomes increasingly scalable through a generative RBP bank - a library of validated designs that can be recombined for future clinical needs. In vitro results fine-tune our models, lessening wet lab validation requirements over time as the AI learns from each successful design. Our dual-layer platform combines predictive bioinformatics with generative protein models to create receptor-binding proteins that enable phages to bind specific bacterial targets, reducing design time from months to hours. Academic literature and our interviews with academic stakeholders confirmed that our AI-driven phage sequence modification, alongside protein interaction validation, is a new arena in synthetic biology, especially phage therapy. We aim to be at the forefront of combining generative AI-powered receptor-binding protein design with wet-lab validation, enabling rapid custom phage design even when no natural match exists.
 
-  
+Through our wetlab and drylab validation cycle, we have proven that our proprietary pipeline, which includes our generative model PHORAGER, can generate feasible results and validate them for biological function. Our solution becomes increasingly scalable through a generative RBP bank - a library of validated designs that can be recombined for future clinical needs. In vitro results fine-tune our models, lessening wet lab validation requirements over time as the AI learns from each successful design. Our dual-layer platform combines predictive bioinformatics with generative protein models to create receptor-binding proteins that enable phages to bind specific bacterial targets, reducing design time from months to hours. Academic literature and our interviews with academic stakeholders confirmed that our AI-driven phage sequence modification, alongside protein interaction validation, is a new arena in synthetic biology, especially phage therapy. We aim to be at the forefront of combining generative AI-powered receptor-binding protein design with wet-lab validation, enabling rapid custom phage design even when no natural match exists.
 
 ### Do we have a comprehensive product development plan with realistic milestones, timelines, resource requirements, and risk assessments?
 
-  
 #### Structured Timeline and Milestones
 Our development follows a structured 12-year timeline with three distinct phases. Phase 1 focuses on building the alpha AI platform, securing biobank access, and establishing wet-lab protocols. Phase 2 advances to beta launch, seed funding, and initial customer agreements. By Phase 3, we target commercial rollout in compassionate-use countries with established regulatory partnerships. Key milestones include Q1-Q2 Year 1 core AI model training on E. coli phage-host datasets, Q2-Q3 wet lab pipeline setup, Q3 biobank agreements, and Q4 provisional patent filing. This progression demonstrates logical sequencing from technical development through regulatory preparation to market entry.
 
-<PdfEmbed src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-gantt-chart.pdf"/>
+<PdfEmbed src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-gantt-chart.pdf" title="Gantt Chart"/>
 
 #### Resource Requirements and Allocation
 Our resource requirements include phage-bacteria interaction datasets from Davidson and Maxwell Labs, cloud GPU access through AWS, University of Toronto BioZone lab space, and IP strategy support from The Hatchery accelerator. Year 1 upfront costs total approximately CAD 305,900-328,950, covering lab equipment (CAD 8,200), documentation costs (CAD 80,000), and operational expenses.
@@ -54,16 +56,13 @@ Aside from companies working purely on phage therapy, there are also a couple of
 1\. PhageAI (Poland): PhageAI offers an AI-powered platform for in silico characterization of bacteriophages. Their technology reduces the time required to analyze phage genomes from several days to under an hour, facilitating rapid identification of suitable phages for therapeutic applications. (https://phage.directory/, phage.ai)
 
 2\. Locus Biosciences (USA): Locus Biosciences employs machine learning to analyze high-throughput data on phage-bacteria interactions. This approach enables the prediction of effective phage cocktails, enhancing the development of CRISPR-enhanced bacteriophage therapies. (nexabiome.com)
-
 3\. PrecisionPhage (Finland): PrecisionPhage has developed "Phagenomics," a browser-based tool that streamlines phage genome analysis. This platform aids in the rapid assembly and annotation of phage genomes, expediting the discovery of therapeutic phages. (https://phage.directory/)
 
 Summary: Despite the competitors in the field, nobody currently has a reliable model for phage therapy (since no company can target the LPS bush accurately yet). Mystiphage, unlike many of these competitors, does not make a single protein. Instead, we are orchestrating a protein system to work by ensuring the phage binds to the bacteria. We don't want to generate single proteins; we want to design orchestrated protein systems. Hence, our advantage will be in the library of RBPs we create for customers to use.
 
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-pitch-slides.webp" alt="Competitor Analysis" caption="Competitor Analysis"/>
 
-<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-pitch-slides.webp" alt="Risk Management" />
-
-Does the team have the necessary skills, capabilities, and stakeholder relationships to execute their solution effectively?
-
+### Does the team have the necessary skills, capabilities, and stakeholder relationships to execute their solution 
 
 #### Core Team Skills and Expansion Plans
 Our founding team brings expertise in research development, operations oversight, business strategy, ethics, finance, and scientific translation. However, we have identified critical gaps requiring additional talent in AI and computational biology for proof of concept development, plus wet-lab operations for RBP validation and therapeutic testing. Following seed funding, we plan strategic personnel expansion across four key roles: AI Specialists (2 positions at CAD 70K-90K full-time), Operations Manager/Finance (CAD 60K-80K), Wet-Lab Technicians (4 positions at CAD 45K-60K each), and Marketing Development Lead (CAD 60K-85K). This hiring plan directly addresses our SWOT-identified weakness of limited AI expertise.
@@ -78,7 +77,7 @@ Our technical infrastructure encompasses comprehensive phage-bacteria interactio
 
 Our platform addresses antimicrobial resistance projected to cause 10 million deaths annually by 2050. By reducing phage therapy development from six months to hours, we democratize access to personalized treatments and transform phage therapy from a last resort to a frontline defence. Our modular RBP bank creates reusable therapeutic libraries that improve global health equity.
 
-We identified critical challenges, including bacterial evolution and resistance development, making long-term efficacy unpredictable. Regulatory uncertainty surrounding genetically modified phages creates market barriers. Healthcare provider resistance to AI-based approaches may slow adoption. High computational costs ($8,000-$15,000 per therapeutic candidate) could limit accessibility despite democratization goals. Integration challenges into existing clinical workflows require substantial training and infrastructure adaptation. Intellectual property vulnerabilities exist since naturally occurring phages are difficult to patent. Using artificial intelligence to design genetic codes raises definite concerns about affecting evolution and potentially contributing to natural selection pressures. We acknowledge increasing regulatory pressure on AI data collection, utilization, and generation. Identified risks include bacterial resistance evolution, regulatory uncertainty for genetically modified phages, high costs, and clinical integration challenges.
+We identified critical challenges, including bacterial evolution and resistance development, making long-term efficacy unpredictable. Regulatory uncertainty surrounding genetically modified phages creates market barriers. Healthcare provider resistance to AI-based approaches may slow adoption. High computational costs ($5,000-$8,000 per therapeutic candidate) could limit accessibility despite democratization goals. Integration challenges into existing clinical workflows require substantial training and infrastructure adaptation. Intellectual property vulnerabilities exist since naturally occurring phages are difficult to patent. Using artificial intelligence to design genetic codes raises definite concerns about affecting evolution and potentially contributing to natural selection pressures. We acknowledge increasing regulatory pressure on AI data collection, utilization, and generation. Identified risks include bacterial resistance evolution, regulatory uncertainty for genetically modified phages, high costs, and clinical integration challenges.
 
 We view artificial intelligence as a neutral tool that can be a public good or be detrimental to the well-being of humanity, depending heavily on the intentions. Given that many industries are transitioning for the better using artificial intelligence and that antibiotic resistance is an imminent danger to humanity, we consider AI-driven therapeutic development an inevitable advancement to save millions of lives.
 
@@ -86,103 +85,78 @@ We view artificial intelligence as a neutral tool that can be a public good or b
 
 Developed using the FEEL Methodology™ of Venture Creation, Mystiphage's comprehensive business plan addresses critical aspects of the start-up creation process. This strategic framework encompasses: problem identification and market analysis, customer segmentation and value proposition development, barrier assessment and go-to-market strategy, timeline optimization, scalable business model architecture, team composition and key resource allocation, strategic partnerships and supplier networks, and implementation timeline.
 
-<PdfEmbed
-  src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-bp-final-1.pdf"
-  title="Mystiphage Business Plan"
-/>
+<PdfEmbed src="https://static.igem.wiki/teams/5708/humanpracticesimg/mystiphage-bp-final.pdf" title="Business Plan"/>
 
 ## Pitch Deck
 Mystiphage's comprehensive pitch deck provides a strategic overview of our business model, developed in collaboration with advisors at the NEST Hatchery at the University of Toronto. This presentation synthesizes our core value proposition, market opportunity, and technical approach to phage therapy commercialization.
 
-<PdfEmbed
-  src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-deck-final-1.pdf"
-  title="Mystiphage Pitch Deck"
-/>
+<PdfEmbed src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-deck-final-1.pdf" title="Pitch Deck"/>
 
 ## One Pager for Investors
 Our executive summary provides a concise overview of Mystiphage's value proposition, market opportunity, and competitive advantages, designed to facilitate rapid investor assessment and engagement.
 
-<PdfEmbed
-  src="https://static.igem.wiki/teams/5708/entrepreneurship/one-pager-docx.pdf"
-  title="Mystiphage One Pager for Investors"
-/>
+<PdfEmbed src="https://static.igem.wiki/teams/5708/humanpracticesimg/one-pager-docx-1.pdf" title="One-Pager"/>
 
 ## Cashflow Projections
 
 Mystiphage's comprehensive 2-year financial projections detail operational cash flow requirements, revenue forecasts, and capital allocation strategies for sustainable company growth.
 
-<PdfEmbed
-  src="https://static.igem.wiki/teams/5708/entrepreneurship/cash-flow-deliverable-doc-xlsx.pdf"
-  title="Mystiphage Cashflow Projections"
-/>
+<PdfEmbed src="https://static.igem.wiki/teams/5708/entrepreneurship/cash-flow-deliverable-doc-xlsx.pdf" title="Cash Flow"/>
 
 ## 2025 Demo Day Pitch
 
 Mystiphage was selected after many rounds of evaluation from a pool of startups to advance into Demo Week. An initial pool of 20 startups were selected to the NEST Hatchery, where they continuously developed their startups in preparation for Nomination Pitch Day. Following nomination pitches, around half of the startups move onto Demo Week; where they prepare for a final round of pitching in front of the incubator’s board members and investors. Following Demo Day Pitches, the final batch of startups are selected by the NEST Hatchery to continue developing their ideas to become investor-ready in the Go-To-Market stage.
 
-Our Demo Day presentation showcased Mystiphage's core technology and business model through a focused 6-minute pitch to industry stakeholders. Following a successful evaluation, we advanced to the Go-To-Market stage, positioning Mystiphage for continued development and investor presentations. As of currently, our startup is on its way to becoming investor-ready, and we will continue to work with the NEST Hatchery and the University of Toronto to develop our deliverables. After 6 months, we will then present our business deliverables to an investor 
+Our Demo Day presentation showcased Mystiphage's core technology and business model through a focused 6-minute pitch to industry stakeholders. Following a successful evaluation, we advanced to the Go-To-Market stage, positioning Mystiphage for continued development and investor presentations. As of currently, our startup is on its way to becoming investor-ready, and we will continue to work with the NEST Hatchery and the University of Toronto to develop our deliverables. After 6 months, we will then present our business deliverables to an investor board to gauge interest for fundraising.
 
-<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/img-7931.avif" alt="Demo Day Team"/>
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/img-7931.avif" alt="Demo Day Team" caption="Demo Day Team"/>
 
 ## Advisory Board
 
-### NEST Hatchery Board 
+### NEST Hatchery Board
 
 Our advisory board had a wide range of mentors, all associated with the NEST Hatchery. Many of these mentors dedicated their time and efforts from May to September 2025, supporting the various teams selected for the NEST incubator, in which Mystiphage was a participant. Our advisors from the Hatchery were: Melanie Mah, Charles Boulakia, Raymond Chik, James MacIntosh, Amandeep Thind, and Joseph Orozco.
 
-<Figure
-  src={"https://static.igem.wiki/teams/5708/entrepreneurship/nest2021new.webp"}
-  alt="NEST Logo"
-  width="250"
-  caption="NEST Logo" />
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/nest2021new.webp" alt="NEST logo" caption="NEST logo" width="250" />
 
 ## Most Recent Status
 The company has completed UofT’s NEST 2025 incubator program. The company will be present in Paris, France, as part of iGEM Toronto. The company has been selected for the “Go-to-Market” stage of UofT’s incubator, unlocking non-dilutive funding, legal, accounting, and other business development resources.
 
 Employees: 11 (Entrepreneurship Team) As of October 1st, 2025.
 
-<Figure
-  src={"https://static.igem.wiki/teams/5708/entrepreneurship/entrepreneurship-business-card.webp"}
-  alt="Business card"
-  width="400"
-  caption="Business card" />
+  
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/entrepreneurship-business-card.webp" alt="Business Card" caption="Business Card"/>
 
-## Supporting Institutions 
+## Supporting Institutions
 
-### NEST Hatchery 
+### NEST Hatchery
 
-The NEST Hatchery has provided comprehensive support and strategic advisory services throughout our business development process, enabling the creation of a robust business plan, revenue model, cash flow projections, and investor pitch presentation.
+The NEST Hatchery has provided comprehensive support and strategic advisory services throughout our business development process, enabling the creation of a robust business plan, revenue model, cash flow projections, and investor pitch presentation.  
 
-<Figure
-  src={"https://static.igem.wiki/teams/5708/entrepreneurship/new-hatch-logo.webp"}
-  alt="NEST Hatchery Logo"
-  width="250"
-  caption="NEST Hatchery Logo" />
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/new-hatch-logo.webp" alt="NEST Hatchery logo" caption="NEST Hatchery logo" width="250"/>
 
 ### University of Toronto
 
 The University of Toronto has provided essential infrastructure support through laboratory space allocation, faculty advisory services, and institutional guidance for project feasibility assessment and technical development.
 
-<Figure
-  src={"https://static.igem.wiki/teams/5708/entrepreneurship/uoft.webp"}
-  alt="UofT Logo"
-  width="250"
-  caption="UofT Logo" />
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/uoft.webp" alt="UofT Logo" caption="UofT logo" width="250"/>
 
 ### University of Toronto Engineering Society (Skule)
 
 The University of Toronto's Engineering Society (Skule) has provided comprehensive project development support, with particular emphasis on faculty mentorship and specialized assistance for the iGEM Toronto team initiatives.
 
-<Figure
-  src={"https://static.igem.wiki/teams/5708/entrepreneurship/skule-5da8e01b.webp"}
-  alt="SKULE Logo"
-  width="250"
-  caption="SKULE Logo" />
+<Figure src="https://static.igem.wiki/teams/5708/entrepreneurship/skule-5da8e01b.webp" alt="Skule Logo" caption="Skule logo" width="250"/>
 
-## Current Team 
+  
+
+## Current Team
+
 The Mystiphage team comprises dedicated University of Toronto students who specialize in integrating entrepreneurial business development with cutting-edge scientific innovation and biotechnology research.
 
+  
+
 ### Entrepreneurship and Business Development Team
+
 <Figure
   src={"https://static.igem.wiki/teams/5708/headshot/lead-jasmine-final-crop.webp"}
   alt="Jasmine Jing"
@@ -265,10 +239,7 @@ The Mystiphage team comprises dedicated University of Toronto students who speci
 
 This is another business plan developed by the Mystiphage team, with the help of the iGEM Toronto Hardware team. This is Mystiphage's future business plan: to incorporate the electropill and electroceuticals aspect after we've established a stable level of revenue from our generative model.
 
-<PdfEmbed
-  src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-electroceuticals-final-bp.pdf"
-  title="Mystiphage Electroceuticals Business Plan"
-/>
+<PdfEmbed src="https://static.igem.wiki/teams/5708/entrepreneurship/mystiphage-electroceuticals-final-bp.pdf" title="Mystiphage Electroceuticals"/>
 
 ## Appendix
 
@@ -279,3 +250,4 @@ This is our demo video from the Hatchery, showcasing how exciting our project is
 ### Acknowledgements
 
 The Mystiphage and iGEM Toronto team would like to acknowledge that the format of this wiki page was inspired by the 2024 Toronto iGEM wiki page for Plasmid.AI
+
