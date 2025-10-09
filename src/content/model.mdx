@@ -34,13 +34,10 @@ Boltz-2 advances protein modeling by coupling AlphaFold-like structural predicti
 Phage therapy, synthetic biology, and AI-driven protein design are converging to create unprecedented opportunities for fighting ABR. PHORAGER harnesses these advances to pursue the following objectives:
 
 1. Curate all known Escherichia phages from GenBank, annotate their receptor-binding domains (RBDs), and pre-validate these sequences for inclusion in the Generative Phage Bank.
-
 2. Develop a generative model for novel receptor-binding protein (RBP) domains using state-of-the-art biomolecular foundation models, specifically ESM3 for protein design and Boltz-2 for structure prediction.
-
 3. Engineer novel RBPs for four Escherichia phages: Mu, P2, Lambda, and HK97, to reprogram their host specificity.
-   - **Batch 1:** Sequences generated using ESM3 and Boltz-2 prototype workflow
-   - **Batch 2:** Sequences generated using full MCMC with simulated annealing optimization
-
+  - **Batch 1:** Sequences generated using ESM3 and Boltz-2 prototype workflow
+  - **Batch 2:** Sequences generated using full MCMC with simulated annealing optimization
 4. Establish a Generative Phage Bank framework with intelligent routing that assesses bacterial receptor sequence similarity and either retrieves pre-validated phages or initiates de novo RBP design for novel bacterial targets, bypassing exhaustive phage screening.
 
 ## Design/Methods
@@ -320,7 +317,17 @@ Our initial design strategy employed ESM3 for sequence generation followed by Bo
 
 BLASTp analysis against the NCBI nr database confirmed that all ten generated sequences exhibited minimal homology to known proteins, with sequence identities below 40% to any characterized protein. This substantial divergence from natural sequences demonstrates the generative capacity of our approach to explore novel regions of sequence space beyond the boundaries of existing phage diversity. Among the ten candidates, two sequences (P2_gpH_2 and P2_gpH_8) exhibited favorable structural properties upon modeling with Boltz-2, including stable receptor-binding domain conformations and proper positioning of the truncated R1 glycan within the binding pocket. Both designs maintained the critical interface with the TFA chaperone protein, suggesting preserved assembly competence. These two candidates were selected for experimental synthesis and downstream validation.
 
-![fig2](https://static.igem.wiki/teams/5708/drylab/fig2.avif "**Figure 2. Validation and structural characterization of glycan receptor-binding designs (Batch 1).** **(A)** BLASTp analysis of top 10 generated sequences against the NCBI *nr* database confirms sequence novelty. **(B)** Structure of P2_gpH_2 RBD (blue) in complex with TFA chaperone (red) and truncated R1 glycan (black). **(C)** Structure of P2_gpH_8 RBD (blue) with TFA chaperone (red) and truncated R1 glycan (black). Both sequences passed all validation criteria and were experimentally synthesized.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig2.avif"
+  alt="Figure 2. Validation and structural characterization of glycan receptor-binding designs (Batch 1)"
+  caption="Figure 2. Validation and structural characterization of glycan receptor-binding designs (Batch 1)">
+  <div slot="extended-caption">
+    **(A)** BLASTp analysis of top 10 generated sequences against the NCBI *nr* database confirms sequence novelty.
+    **(B)** Structure of P2_gpH_2 RBD (blue) in complex with TFA chaperone (red) and truncated R1 glycan (black).
+    **(C)** Structure of P2_gpH_8 RBD (blue) with TFA chaperone (red) and truncated R1 glycan (black).
+    Both sequences passed all validation criteria and were experimentally synthesized.
+  </div>
+</Figure>
 
 ### Batch 1: Protein Receptor-Targeting Designs
 
@@ -328,55 +335,139 @@ Extending our generative approach to protein receptors, we designed bacteriophag
 
 Structural modeling revealed that all eight candidates formed stable trimeric assemblies with appropriate geometry for engaging the OmpC trimer. The binding interfaces incorporated coordinated metal ions, consistent with known mechanisms of phage-host recognition involving divalent cations. BLASTp validation confirmed sequence novelty across all eight designs, with no significant matches to characterized proteins in public databases. The successful generation of multiple structurally plausible candidates targeting a protein receptor demonstrated the generalizability of our approach across different receptor types and phage scaffolds.
 
-![fig3](https://static.igem.wiki/teams/5708/drylab/fig3.avif "**Figure 3. Protein receptor-binding designs and structural models (Batch 1).** **(A)** BLASTp validation of top 8 generated sequences against the NCBI *nr* database. **(B)** Structural models showing trimeric assemblies of HK97 and Lambda RBDs (blue) bound to trimeric OmpC protein receptor (orange), with coordinated ions (green).")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig3.avif"
+  alt="Figure 3. Protein receptor-binding designs and structural models (Batch 1)"
+  caption="Figure 3. Protein receptor-binding designs and structural models (Batch 1).">
+  <div slot="extended-caption">
+    **(A)** BLASTp validation of top 8 generated sequences against the NCBI *nr* database. 
+    **(B)** Structural models showing trimeric assemblies of HK97 and Lambda RBDs (blue) bound to trimeric OmpC protein receptor (orange), with coordinated ions (green).
+  </div>
+</Figure>
 
 ### Batch 2: MCMC-Based Iterative Optimization for Enhanced Glycan Binding
 
 While Batch 1 demonstrated proof-of-concept for generative phage design, we hypothesized that iterative optimization through MCMC sampling would yield sequences with superior binding energetics. We applied this approach to three distinct receptor-binding proteins (Mu gp49, Mu gp52, and P2 gpH) initially evolved to bind E. coli K12 lipopolysaccharide, with the objective of retargeting them toward truncated R1 glycans. For each protein, we conducted three independent MCMC chains of 10,000 iterations each, using simulated annealing to balance exploration and exploitation of sequence space.
 
 The MCMC sampling dynamics revealed characteristic convergence behavior across all three proteins. Acceptance rates declined from initial values of 50-60% to stabilized rates of 20-30% by the end of sampling, consistent with progressive refinement toward local optima in the energy landscape. Mu gp49 exhibited a mean acceptance rate of 34.9% across the three chains, while Mu gp52 showed slightly higher acceptance at 40.3%, and P2 gpH demonstrated 33.9% acceptance. The gradual reduction in acceptance rates indicates that the algorithm successfully transitioned from broad exploration of sequence space to focused optimization around high-affinity binding solutions.
-
-![fig4-1](https://static.igem.wiki/teams/5708/drylab/fig4-1.avif "**Figure 4. MCMC sampling dynamics for Mu gp49 RBP optimization.** **(A)** Acceptance rate decay across three independent MCMC chains over 10,000 iterations, indicating convergence toward optimal sequence space. **(B)** Overall acceptance statistics across chains, with mean acceptance rate of 34.9%.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig4-1.avif"
+  alt="Figure 4. MCMC sampling dynamics for Mu gp49 RBP optimization"
+  caption="Figure 4. MCMC sampling dynamics for Mu gp49 RBP optimization.">
+  <div slot="extended-caption">
+    **(A)** Acceptance rate decay across three independent MCMC chains over 10,000 iterations, indicating convergence toward optimal sequence space. **(B)** Overall acceptance statistics across chains, with mean acceptance rate of 34.9%.
+  </div>
+</Figure>
 
 Energy trajectory analysis for Mu gp49 revealed convergence to stable, high-energy states representing enhanced binding to the truncated R1 target. Critically, all three independent chains achieved final binding energies to R1 that exceeded the initial wild-type binding energies to K12, demonstrating successful retargeting. The convergence of independent chains to similar energy ranges provides confidence that the optimization identified robust binding solutions rather than spurious local minima. This inversion of binding preferences, from K12 to R1, validates the capacity of MCMC-based optimization to fundamentally reshape receptor specificity.
 
-![fig4-2](https://static.igem.wiki/teams/5708/drylab/fig4-2.avif "**Figure 5. Energy landscape analysis for Mu gp49 target retargeting.** **(A)** Energy trajectories for three independent MCMC chains showing convergence to stable high-affinity states. **(B)** Comparison of binding energies between wild-type K12 receptor and truncated R1 target receptor. All chains successfully optimized for target binding, achieving higher final energies for R1 compared to initial K12 binding energies.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig4-2.avif"
+  alt="Figure 5. Energy landscape analysis for Mu gp49 target retargeting"
+  caption="Figure 5. Energy landscape analysis for Mu gp49 target retargeting.">
+  <div slot="extended-caption">
+    **(A)** Energy trajectories for three independent MCMC chains showing convergence to stable high-affinity states. **(B)** Comparison of binding energies between wild-type K12 receptor and truncated R1 target receptor. All chains successfully optimized for target binding, achieving higher final energies for R1 compared to initial K12 binding energies.
+  </div>
+</Figure>
 
 Similar patterns emerged for Mu gp52, with all three chains converging to high-energy states and achieving R1 binding energies that surpassed wild-type K12 values. The higher overall acceptance rate for Mu gp52 compared to Mu gp49 suggests a smoother energy landscape or greater mutational tolerance, potentially reflecting structural differences between the two receptor-binding domains. Nevertheless, the consistent retargeting across both proteins indicates that our MCMC approach is robust to variations in starting scaffold architecture.
 
-![fig5-1](https://static.igem.wiki/teams/5708/drylab/fig5-1.avif "**Figure 6. MCMC sampling dynamics for Mu gp52 RBP optimization.** **(A)** Acceptance rate trajectories for three independent chains demonstrating convergence behavior. **(B)** Cumulative acceptance statistics showing mean acceptance rate of 40.3% across all chains.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig5-1.avif"
+  alt="Figure 6. MCMC sampling dynamics for Mu gp52 RBP optimization"
+  caption="Figure 6. MCMC sampling dynamics for Mu gp52 RBP optimization.">
+  <div slot="extended-caption">
+    **(A)** Acceptance rate trajectories for three independent chains demonstrating convergence behavior. **(B)** Cumulative acceptance statistics showing mean acceptance rate of 40.3% across all chains.
+  </div>
+</Figure>
 
-![fig5-2](https://static.igem.wiki/teams/5708/drylab/fig5-2.avif "**Figure 7. Energy landscape analysis for Mu gp52 target retargeting.** **(A)** Energy convergence profiles for three MCMC chains. **(B)** Wild-type K12 versus truncated R1 target binding energy comparison. Optimization successfully drives all chains toward enhanced R1 binding, with final target energies exceeding wild-type energies.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig5-2.avif"
+  alt="Figure 7. Energy landscape analysis for Mu gp52 target retargeting"
+  caption="Figure 7. Energy landscape analysis for Mu gp52 target retargeting.">
+  <div slot="extended-caption">
+    **(A)** Energy convergence profiles for three MCMC chains. **(B)** Wild-type K12 versus truncated R1 target binding energy comparison. Optimization successfully drives all chains toward enhanced R1 binding, with final target energies exceeding wild-type energies.
+  </div>
+</Figure>
 
 The P2 gpH optimization recapitulated the successful retargeting observed for the Mu proteins, with acceptance dynamics and energy convergence profiles consistent with effective exploration and optimization. Across all three proteins (Mu gp49, Mu gp52, and P2 gpH), the MCMC sampling achieved the dual objectives of generating novel sequences with minimal homology to natural proteins while simultaneously enhancing binding affinity for the target glycan receptor.
 
-![fig6-1](https://static.igem.wiki/teams/5708/drylab/fig6-1.avif "**Figure 8. MCMC sampling dynamics for P2 gpH RBP optimization.** **(A)** Acceptance rate evolution across three independent chains. **(B)** Overall acceptance rate of 33.9% across all sampling chains.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig6-1.avif"
+  alt="Figure 8. MCMC sampling dynamics for P2 gpH RBP optimization"
+  caption="Figure 8. MCMC sampling dynamics for P2 gpH RBP optimization.">
+  <div slot="extended-caption">
+    **(A)** Acceptance rate evolution across three independent chains. **(B)** Overall acceptance rate of 33.9% across all sampling chains.
+  </div>
+</Figure>
 
-![fig6-2](https://static.igem.wiki/teams/5708/drylab/fig6-2.avif "**Figure 9. Energy landscape analysis for P2 gpH target retargeting.** **(A)** Energy trajectories showing convergence across three independent chains. **(B)** Binding energy comparison between wild-type K12 and truncated R1 target. Consistent optimization toward enhanced R1 binding across all chains, with target energies surpassing wild-type values.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig6-2.avif"
+  alt="Figure 9. Energy landscape analysis for P2 gpH target retargeting"
+  caption="Figure 9. Energy landscape analysis for P2 gpH target retargeting.">
+  <div slot="extended-caption">
+    **(A)** Energy trajectories showing convergence across three independent chains. **(B)** Binding energy comparison between wild-type K12 and truncated R1 target. Consistent optimization toward enhanced R1 binding across all chains, with target energies surpassing wild-type values.
+  </div>
+</Figure>
 
 #### Clustering Analysis Reveals Progressive Energy Optimization
 
 To identify the most promising candidate sequences from the MCMC trajectories, we performed hierarchical clustering on the sampled sequences. Analyzing clusters on a per-chain basis revealed a clear positive correlation between mean cluster iteration number and mean cluster energy. Clusters formed from later-sampled sequences consistently exhibited higher binding energies compared to early-iteration clusters, confirming that the MCMC algorithm progressively discovered improved binding solutions throughout the sampling process. This trend held across all receptor-binding proteins and all independent chains, demonstrating the systematic optimization behavior of the algorithm.
 
-![fig7](https://static.igem.wiki/teams/5708/drylab/fig7.avif "**Figure 10. Per-chain cluster analysis reveals energy-iteration relationship.** **(A)** Mean cluster energy versus mean cluster iteration for individual chains across all RBPs. Later-sampled clusters exhibit higher binding energies, indicating progressive optimization. **(B)** Aggregate analysis across all chains and RBPs confirms positive correlation between iteration number and cluster energy.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig7.avif"
+  alt="Figure 10. Per-chain cluster analysis reveals energy-iteration relationship"
+  caption="Figure 10. Per-chain cluster analysis reveals energy-iteration relationship.">
+  <div slot="extended-caption">
+    **(A)** Mean cluster energy versus mean cluster iteration for individual chains across all RBPs. Later-sampled clusters exhibit higher binding energies, indicating progressive optimization. **(B)** Aggregate analysis across all chains and RBPs confirms positive correlation between iteration number and cluster energy.
+  </div>
+</Figure>
 
 We extended this analysis by pooling all three chains for each protein and performing combined clustering. This approach increased statistical power and enabled identification of consensus binding solutions that emerged across independent sampling runs. The combined clustering analysis reinforced the positive relationship between iteration number and binding energy, with later clusters representing the most optimized sequences. The consistency of this trend across both per-chain and combined analyses validates the robustness of our clustering approach for candidate selection.
 
-![fig8](https://static.igem.wiki/teams/5708/drylab/fig8.avif "**Figure 11. Combined clustering analysis across MCMC chains.** **(A)** Mean cluster energy versus iteration for pooled chains within each RBP. Later clusters correspond to higher-energy local maxima. **(B)** Global trend across all RBPs demonstrating that sampling progression correlates with improved binding energies.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig8.avif"
+  alt="Figure 11. Combined clustering analysis across MCMC chains"
+  caption="Figure 11. Combined clustering analysis across MCMC chains.">
+  <div slot="extended-caption">
+    **(A)** Mean cluster energy versus iteration for pooled chains within each RBP. Later clusters correspond to higher-energy local maxima. **(B)** Global trend across all RBPs demonstrating that sampling progression correlates with improved binding energies.
+  </div>
+</Figure>
 
 From the combined clustering, we selected the top nine clusters based on mean binding energy and cluster size. Examination of the energy distributions within each cluster revealed varying degrees of sequence diversity, with some clusters tightly focused around a single binding solution and others encompassing a broader ensemble of related sequences. Importantly, all nine clusters preferentially contained high-energy sequences, confirming that our selection criteria successfully enriched for optimized binding candidates. The diversity of solutions across clusters suggests multiple distinct mechanisms for achieving enhanced R1 binding, providing a rich pool of sequences for experimental validation.
 
-![fig9](https://static.igem.wiki/teams/5708/drylab/fig9.avif "**Figure 12. Energy distributions of top candidate sequence clusters.** Energy profiles for sequences within the top 9 clusters selected from combined clustering analysis. Each panel represents a distinct cluster, showing variation in sequence diversity and energy distributions. Higher-energy sequences are preferentially represented across clusters.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig9.avif"
+  alt="Figure 12. Energy distributions of top candidate sequence clusters"
+  caption="Figure 12. Energy distributions of top candidate sequence clusters.">
+  <div slot="extended-caption">
+    Energy profiles for sequences within the top 9 clusters selected from combined clustering analysis. Each panel represents a distinct cluster, showing variation in sequence diversity and energy distributions. Higher-energy sequences are preferentially represented across clusters.
+  </div>
+</Figure>
 
 #### Validation of Sequence Novelty and Structural Diversity
 
 To confirm that the optimized sequences represent genuinely novel phage designs rather than convergence toward known natural variants, we performed BLASTp analysis of the representative sequences from each of the top nine clusters. All representatives exhibited minimal homology to characterized proteins in the NCBI nr database, with no matches exceeding 60% sequence identity. This stark contrast to the control BLASTp analysis of wild-type template sequences, which showed high homology to known phage proteins as expected, demonstrates that our optimization process successfully generated novel sequence space while maintaining the structural constraints necessary for receptor binding.
 
-![fig10](https://static.igem.wiki/teams/5708/drylab/fig10.avif "**Figure 13. Sequence novelty validation via homology search.** **(A)** BLASTp analysis of representative sequences from top 9 clusters against the NCBI *nr* database reveals minimal homology to known proteins, confirming sequence novelty. **(B)** Control BLASTp analysis of wild-type template sequences confirms expected homology to characterized proteins.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig10.avif"
+  alt="Figure 13. Sequence novelty validation via homology search"
+  caption="Figure 13. Sequence novelty validation via homology search.">
+  <div slot="extended-caption">
+    **(A)** BLASTp analysis of representative sequences from top 9 clusters against the NCBI *nr* database reveals minimal homology to known proteins, confirming sequence novelty. **(B)** Control BLASTp analysis of wild-type template sequences confirms expected homology to characterized proteins.
+  </div>
+</Figure>
 
 Structural modeling of the nine representative sequences revealed substantial conformational diversity despite the shared objective of binding the truncated R1 glycan. The designs exhibited variations in loop conformations, side chain orientations, and overall binding pocket architecture, suggesting multiple structural strategies for glycan recognition. This structural diversity, combined with sequence novelty, positions these candidates as valuable starting points for experimental characterization and further optimization. The successful generation of multiple distinct binding solutions increases the likelihood that at least several candidates will exhibit functional activity in vitro.
 
-![fig11](https://static.igem.wiki/teams/5708/drylab/fig11.avif "**Figure 14. Structural models of top candidate sequences.** Three-dimensional structures of representative sequences from each of the top 9 clusters, illustrating structural diversity of designed receptor-binding proteins.")
+<Figure
+  src="https://static.igem.wiki/teams/5708/drylab/fig11.avif"
+  alt="Figure 14. Structural models of top candidate sequences"
+  caption="Figure 14. Structural models of top candidate sequences.">
+  <div slot="extended-caption">
+    Three-dimensional structures of representative sequences from each of the top 9 clusters, illustrating structural diversity of designed receptor-binding proteins.
+  </div>
+</Figure>
 
 #### Summary of Results
 
