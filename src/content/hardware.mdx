@@ -146,6 +146,12 @@ A build guide to assemble the device with the electromagnet can be accessed as a
 
 During the design process, we considered many options to release the phage therapy on demand. Our first idea was based on a published work using a nichrome wire heating element to control drug release through a fusible PCL thread mechanism. The system consisted of a nichrome wire coil, a tensile PCL filament that restrained the release mechanism, a PDMS spring and elastic band that stored mechanical energy, and a 3.7 V Li-Po battery that supplied power.
 
+<Figure
+  src="https://static.igem.wiki/teams/5708/hardware/hwbrainstorming.avif"
+  alt="Figure 6: Early conceptual designs of the eventual EVADE capsule."
+  caption="Figure 6: Early conceptual designs of the eventual EVADE capsule." />
+
+
 The operation of the device begins with the PCL thread intact, securing the spring and preventing drug release. When the pill detects target conditions, an electrical current is supplied to the nichrome wire, which rapidly heats due to the nichrome’s high innate resistivity. This heat melts the PCL thread (melting point ~60 °C), releasing the stored tension from the PDMS and elastic band and triggering the opening of the drug compartment for phage delivery.
 
 However, we decided that the electromagnet release mechanism described earlier would be easier to prototype and retain the phage cargo over a longer period of time (since the force between the electromagnet and permanent magnet does not decrease over time, unlike the tension in the PCL thread).
@@ -156,8 +162,8 @@ Due to limitations in manufacturing equipment available to our team, the final v
 
 <Figure
   src="https://static.igem.wiki/teams/5708/hardware/hw-fig6.avif"
-  alt="Figure 6: Early conceptual designs of the eventual EVADE capsule."
-  caption="Figure 6: Early conceptual designs of the eventual EVADE capsule." />
+  alt="Figure 7: Early conceptual designs of the eventual EVADE capsule."
+  caption="Figure 7: Early conceptual designs of the eventual EVADE capsule." />
 
 ## Planned GI Tract Simulation Protocols
 
@@ -172,6 +178,11 @@ The system is evaluated against three major benchmarks:
     
 To achieve this, we validate each of the three core components. These are the pill, bacteria, and H₂, and their interactions within the feedback loop.
 
+<Figure
+  src="https://static.igem.wiki/teams/5708/hardware/hw-fig7.avif"
+  alt="Figure 8: Mechanism of H₂ production, detection, and subsequent decline."
+  caption="Figure 8: Mechanism of H₂ production, detection, and subsequent decline." />
+
 ### 1.  H₂ ⇄ Bacteria
 
 In this experiment, E. coli is to be grown under simulated duodenum, jejunum, and ileum conditions using apple sauce medium adjusted with enzymes and pH modifiers. The cultures were maintained anaerobically and incubated at 37 °C. H₂ production was measured using an MQ-8 sensor every 15 minutes.
@@ -181,9 +192,9 @@ In this experiment, E. coli is to be grown under simulated duodenum, jejunum, an
 This combined test simulated the pill’s journey through the GI using a sequential beaker model representing the duodenum, jejunum, and ileum. The capsule is to be dropped into each compartment in order, and bacterial growth is to be tracked alongside phage release.
 
 <Figure
-  src="https://static.igem.wiki/teams/5708/hardware/hw-fig7.avif"
-  alt="Figure 7: Mechanism of H₂ production, detection, and subsequent decline."
-  caption="Figure 7: Mechanism of H₂ production, detection, and subsequent decline."
+  src="https://static.igem.wiki/teams/5708/hardware/beakermodel.avif"
+  alt="Figure 9: Sequential beaker model representing the gastrointestinal tract."
+  caption="Figure 9: Sequential beaker model representing the gastrointestinal tract."
 / >
 
 Exact details surrounding the protocols are broken down in the next sections.
@@ -295,8 +306,8 @@ The results of this experiment indicate the H₂ sensor and amplification circui
 
 
 <Figure  src="https://static.igem.wiki/teams/5708/hardware/hw-fig8.avif"
-  alt="Figure 8: Sensor readings in the H₂ environment transmitted wirelessly via the onboard MCU."
-  caption="Figure 8: Sensor readings in the H₂ environment transmitted wirelessly via the onboard MCU." />
+  alt="Figure 10: Sensor readings in the H₂ environment transmitted wirelessly via the onboard MCU."
+  caption="Figure 10: Sensor readings in the H₂ environment transmitted wirelessly via the onboard MCU." />
 
 Our second preliminary experiment tested the ability of the device to retain the phage therapy inside of the capsule prior to a drug release activation signal, and then the ability to release the therapy on demand when drug release is required. For the initial test, we used a blue dye as a phage substitute, as the leakage of a liquid out of the capsule before and after activation was the only variable of interest in this experiment.
 
@@ -307,8 +318,8 @@ When the release mechanism was triggered, there was an immediate noticeable sepa
 
 <Figure 
   src="https://static.igem.wiki/teams/5708/hardware/hw-fig9.avif"
-  alt="Figure 9: Percentage dye release from EVADE capsule prior to and after drug release mechanism activation."
-  caption="Figure 9: Percentage dye release from EVADE capsule prior to and after drug release mechanism activation." />
+  alt="Figure 11: Percentage dye release from EVADE capsule prior to and after drug release mechanism activation."
+  caption="Figure 11: Percentage dye release from EVADE capsule prior to and after drug release mechanism activation." />
 
 
 # Conclusion/Future Work
