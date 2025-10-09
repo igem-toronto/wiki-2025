@@ -1,55 +1,275 @@
 # Software
 
-## PHORAGER Computational Pipeline
+PHORAGER is the first open-source computational platform for engineering bacteriophage receptor-binding proteins through AI-driven design and physics-based validation. Created by the iGEM Toronto team, this project aims to revolutionize phage therapy by leveraging machine learning and computational biology to reprogram phage host specificity, reducing screening time from months to days.
 
-PHORAGER is a fully automated, open-source software pipeline that engineers bacteriophage receptor-binding proteins through AI-driven design and physics-based validation. The modular architecture integrates state-of-the-art foundation models with statistical optimization to reprogram phage host specificity.
+## Overview
 
-### Core Software Components
+PHORAGER provides a comprehensive set of tools and models for the computational design, validation, and optimization of phage receptor-binding proteins (RBPs). By utilizing state-of-the-art foundation models (ESM3, Boltz-2), statistical optimization (MCMC with simulated annealing), and physics-based docking (HADDOCK3), this pipeline enables researchers to engineer personalized therapeutic phages against antibiotic-resistant bacterial strains. The platform encompasses data curation, generative design, structural prediction and molecular docking.
 
-**Generative Design Module** (`mcmc/`)
+## Installation
 
--   ESM3 protein language model for novel RBD sequence generation
--   Boltz-2 biomolecular foundation model for structure prediction and binding affinity estimation
--   Markov Chain Monte Carlo sampling with simulated annealing for iterative optimization
+To install PHORAGER, you can clone the repository from either GitHub or the iGEM GitLab for development access.
 
-**Data Curation Pipeline** (`scripts/`)
+**From GitHub:**
 
--   Automated annotation of bacterial glycan receptors (LPS outer core types) using LPSTyper and BLAST
--   Protein receptor identification via DIAMOND high-throughput sequence alignment
--   RBP sequence collection through HMM-based iterative searches and CD-HIT clustering
-
-**Physics-Based Validation** (`docking/`)
-
--   HADDOCK3 modular docking framework for protein-glycan interactions
--   Latin hypercube sampling for systematic parameter optimization
--   Automated scoring and clustering of binding poses
-
-**Routing System** (`scripts/routing_script.py`)
-
--   Intelligent phage bank query interface with sequence similarity assessment
--   Automated decision logic for retrieving pre-validated phages vs. initiating de novo design
--   Batch processing capabilities for clinical-scale throughput
-
-### Repository Structure
-
-```
-├── data/              # Glycan structures, RBP complexes, processed datasets
-├── docking/           # HADDOCK3 parameter sweeps and validation runs
-├── MCMC/              # Iterative optimization scripts and sampling protocols
-├── notebooks/         # Analysis workflows and routing logic
-├── scripts/           # Data curation, annotation, and utility tools
-└── results/           # Generated sequences, structural predictions, docking scores
+```bash
+git clone https://github.com/igem-toronto/protein-design-sandbox.git
+cd protein-design-sandbox
+pip install -r requirements.txt
+pip install -e .
 ```
 
-### Availability
+**From iGEM GitLab (for submission purposes):**
 
-All code, protocols, and datasets are available under open-source licenses at our GitHub repository. The pipeline requires Python 3.8+, PyTorch, and standard bioinformatics tools (BLAST+, CD-HIT, DIAMOND). Detailed installation instructions and tutorials are provided in the repository documentation.
+```bash
+git clone https://gitlab.igem.org/2025/software-tools/toronto.git
+cd toronto
+pip install -r requirements.txt
+pip install -e .
+```
 
-**GitHub Repository:** [igem-toronto/protein-design-sandbox](https://github.com/igem-toronto/protein-design-sandbox)
+**CUDA-accelerated Installation (Linux):**
 
-----------
+```bash
+pip install -r requirements.txt
+pip install -e .[cuda]
+```
 
-_PHORAGER reduces phage screening time from months to days by conducting thousands of in silico binding simulations before experimental synthesis, enabling patient-specific antimicrobial design at clinically relevant timescales._
+## Repository Structure
 
-### License
+The PHORAGER project is organized into several key components, as outlined below:
+
+```
+scripts/                Main orchestration and analysis pipelines
+    main.py             Complete ESM3 → Boltz2 → Analysis workflow
+    esm3_hallucination*.py  ESM3-guided sequence generation
+    boltz2_generation.py    Boltz2 structure prediction
+    post_boltz_processing.py  Results processing and summary extraction
+    process_rbp_receptor_complexes.py  Complex characterization
+    routing_script.py   Intelligent phage bank query interface
+    BLASTn_LPS_typing.py  LPS typing and bacterial characterization
+    controls*.py        Control experiments and validation
+mcmc/                   Iterative optimization and sampling protocols
+    mcmc_rbp_phages_wild_esm3.py  Main MCMC optimization pipeline
+    boltz2_generation.py  Boltz2 integration for MCMC
+    extract_affinity_data.py  Affinity data extraction
+    MCMC_Analysis.ipynb Interactive analysis notebooks
+docking/                HADDOCK3 parameter sweeps and validation runs
+    haddock3_docking_prep_protein.py  Protein preparation
+    haddock3_docking_prep_glycan.py   Glycan preparation
+    parameter_optimization/  Parameter sweep utilities
+data/                   Glycan structures, RBP complexes, processed datasets
+    rbp_complexes/      Reference protein complex structures
+    glycans/            Glycan structure libraries (R1, R2, R3, R4, K12)
+    decomplexed/        Separated protein and glycan components
+    docking/            Docking input files and results
+notebooks/              Interactive analysis and visualization tools
+    ESM3 experiments    Parameter exploration
+    Boltz2 analysis     Structure visualization
+    Wiki figures        Documentation generation
+Hardware/               Custom PCB and CAD files for experimental validation
+    pcbGerberFiles.zip  Custom PCB layouts for protein detection
+    cadFiles.zip        3D models for laboratory equipment
+docs/                   Detailed methodology and scientific rationale
+    README_RBP_receptor_complexes.md  Complex analysis methods
+results/                Generated sequences, structural predictions, docking scores
+```
+
+This structure represents a clear development pipeline that facilitates data curation, generative design, physics-based validation, and experimental synthesis of engineered phages.
+
+## Repository Setup
+
+The PHORAGER repository can be found at [GitHub](https://github.com/igem-toronto/protein-design-sandbox), or the [iGEM GitLab](https://gitlab.igem.org/2025/software-tools/toronto) for the purposes of our submission.
+
+To clone the repository:
+
+```bash
+git clone https://github.com/igem-toronto/protein-design-sandbox.git
+```
+
+Or from iGEM GitLab:
+
+```bash
+git clone https://gitlab.igem.org/2025/software-tools/toronto.git
+```
+
+To set up the environment, install dependencies with:
+
+```bash
+# Using conda
+conda env create -f envs/environment.yaml
+conda activate protein-design-sandbox
+
+# Or using pip
+pip install -r requirements.txt
+pip install -e .
+```
+
+### Required Environment Variables
+
+```bash
+# ESM3 API access (required)
+export ESM3_TOKEN="your_esm3_token_here"
+
+# Optional: AWS credentials for cloud processing
+export AWS_ACCESS_KEY_ID="your_key"
+export AWS_SECRET_ACCESS_KEY="your_secret"
+```
+
+### External Tool Dependencies
+
+PHORAGER requires the following external bioinformatics tools:
+
+- **BLAST+** (v2.12.0+) - Sequence alignment and homology searches
+- **DIAMOND** (v2.0.15+) - High-throughput sequence alignment
+- **CD-HIT** (v4.8.1+) - Sequence clustering
+- **HMMER** (v3.3+) - HMM-based sequence searches
+- **HADDOCK3** (v3.0.0+) - Molecular docking (requires Docker)
+
+Install via conda:
+
+```bash
+conda install -c bioconda blast diamond-aligner cd-hit hmmer
+```
+
+## Quick Start
+
+### 1. Main Protein Design Pipeline
+
+Run the complete ESM3 → Boltz2 → Analysis workflow:
+
+```bash
+python -m scripts.main --csv-path data/esm-boltz-input.csv \
+  --structure-dir data/rbp_complexes \
+  --glycan-dir data/glycans \
+  --output-dir runs/design_run_1 \
+  --esm3-model esm3-large-2024-03 \
+  --num-sequences 10 \
+  --temperature 1.0 \
+  --boltz2-cache ~/.cache/boltz2
+```
+
+### 2. MCMC Parameter Optimization
+
+Run Markov Chain Monte Carlo sampling with simulated annealing:
+
+```bash
+python mcmc/mcmc_rbp_phages_wild_esm3.py \
+  --config configs/mcmc_config.yaml \
+  --output-dir results/mcmc_optimization
+```
+
+### 3. RBP-Receptor Complex Analysis
+
+Process and characterize protein complexes:
+
+```bash
+python scripts/process_rbp_receptor_complexes.py \
+  --input-dir data/rbp_complexes \
+  --output-dir results/complex_analysis
+```
+
+### 4. HADDOCK3 Docking Preparation
+
+Prepare structures for molecular docking:
+
+```bash
+# Protein preparation
+python docking/haddock3_docking_prep_protein.py \
+  --input protein.pdb --output prepared_protein.pdb
+
+# Glycan preparation  
+python docking/haddock3_docking_prep_glycan.py \
+  --input glycan.pdb --output prepared_glycan.pdb
+```
+
+### 5. Phage Bank Routing
+
+Query the intelligent phage bank for receptor matching:
+
+```bash
+python scripts/routing_script.py \
+  --query bacterial_sample.txt \
+  --database data/rbp_database/ \
+  --threshold 0.85 \
+  --output results/routing_output/
+```
+
+## Advanced Usage
+
+### Batch Processing
+
+Process multiple protein families in parallel:
+
+```bash
+python scripts/main_protein_receptors.py \
+  --config configs/batch_config.yaml \
+  --parallel-workers 4
+```
+
+### HADDOCK3 Parameter Sweep
+
+Systematic optimization of docking parameters:
+
+```bash
+cd docking/parameter_optimization/
+python full_sweep.py --lhs 100 --workers 4 --ncores 8
+```
+
+### Cloud Deployment
+
+AWS batch processing for large-scale runs:
+
+```bash
+python scripts/aws_batch_processing.py \
+  --s3-bucket your-bucket \
+  --instance-type g4dn.xlarge
+```
+
+## Core Dependencies
+
+### Python Packages
+
+- **Bioinformatics:** biopython, numpy, pandas, pyyaml
+- **ML/AI:** esm (3.x), boltz, torch (CPU/CUDA)
+- **Structure:** rdkit, parmed, pdb-tools, pyparsing
+- **Utilities:** python-dotenv, tqdm, psutil, filelock, boto3
+- **Visualization:** matplotlib, seaborn
+
+### Platform-Specific Notes
+
+- **RDKit:** Use conda-forge for better compatibility across platforms
+- **CUDA:** Install appropriate PyTorch CUDA builds for GPU acceleration
+- **DIAMOND:** Required for `routing_script.py` (fast sequence alignment)
+- **Docker:** Required for HADDOCK3 docking workflows
+
+**Note:** PyTorch is not pinned in requirements. Follow the [official install selector](https://pytorch.org/get-started/locally/) for your CUDA/CPU configuration.
+
+## Contributing
+
+We welcome contributions from the community! If you would like to contribute, please check out the repository on [GitHub](https://github.com/igem-toronto/protein-design-sandbox) and follow the contributing guidelines. Areas of particular interest include:
+
+1. Expansion to additional bacterial species and receptor types
+2. Integration of additional foundation models
+3. Optimization of MCMC sampling strategies
+4. Development of experimental validation protocols
+
+To contribute:
+
+1. Fork the repository
+2. Create a feature branch
+3. Add tests for new functionality
+4. Submit a pull request with detailed description
+
+## Citation
+
+If you use this platform in your research, please cite:
+
+```
+iGEM Toronto 2025: PHORAGER - Computational Platform for 
+Bacteriophage Receptor-Binding Protein Design
+```
+
+## License
+
 PHORAGER is licensed under the MIT License.
